@@ -223,7 +223,7 @@ public class GrievanceService {
 	 * When CSR files a complaint, this method captures the user information if the user exists otherwise creates the user.
 	 * 
 	 * @param serviceRequest
-	 * @param errorMap
+	 *
 	 */
 	private void validateAndCreateUser(ServiceRequest serviceRequest) {
 		RequestInfo requestInfo = serviceRequest.getRequestInfo();
@@ -569,7 +569,7 @@ public class GrievanceService {
 	 * 
 	 * @param requestInfo
 	 * @param tenantId
-	 * @param department
+	 * @param departments
 	 * @return Object
 	 * @author vishal
 	 */
