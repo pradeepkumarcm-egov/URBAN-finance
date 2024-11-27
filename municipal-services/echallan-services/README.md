@@ -58,3 +58,15 @@ All the details and configurations on the services are explained in the document
 `egov.collection.payment-create` : Service sends data to this topic when the payments is triggered.
 `egov.core.notification.sms` : This topic is used to send the sms notification
 `persist-user-events-async` : Service uses this topic to save the event notification
+
+
+***LTS UPGRADE***
+1. artifact id updated to 1.1.2-SNAPSHOT from 1.1.1-SNAPSHOT
+2. spring boot starter parent version upgraded from 2.2.6.RELEASE to 3.2.2
+3. tracer version updated to 2.9.0-SNAPSHOT from 2.0.0-SNAPSHOT.
+4. mdms client version updated to 2.9.0-SNAPSHOT from 0.0.2-SNAPSHOT.
+5. Junit dependency added and the version used is 4.13.2
+6. flyway-core version updated to 9.22.3 from 6.4.3.
+7. postgresql version updated to 42.7.1 from 42.2.11 .
+8. javax validation-api is removed
+9. hibernate-validator dependency is removed
