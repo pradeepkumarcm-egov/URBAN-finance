@@ -771,3 +771,20 @@ config:
         image-name: egov-finance
         dockerfile: finance/Dockerfile
 
+
+#LTS Upgrade 
+
+  - name: "builds/digit-dev/municipal-services/bpa-calculator"
+    build:
+      - work-dir: "municipal-services/bpa-calculator"
+        image-name: "bpa-calculator"
+        dockerfile: "build/maven-java17/Dockerfile"
+
+  - name: "builds/digit-dev/municipal-services/bpa-services"
+    build:
+      - work-dir: "municipal-services/bpa-services"
+        image-name: "bpa-services"
+        dockerfile: "build/maven-java17/Dockerfile"
+      - work-dir: "municipal-services/bpa-services/src/main/resources/db"
+        image-name: "bpa-services-db"         
+
