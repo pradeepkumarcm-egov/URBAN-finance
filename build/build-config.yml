@@ -517,20 +517,8 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/sw-calculator/src/main/resources/db"
         image-name: "sw-calculator-db"     
+       
 
-  - name: "builds/digit-dev/municipal-services/bpa-services"
-    build:
-      - work-dir: "municipal-services/bpa-services"
-        image-name: "bpa-services"
-        dockerfile: "build/maven/Dockerfile"
-      - work-dir: "municipal-services/bpa-services/src/main/resources/db"
-        image-name: "bpa-services-db"         
-
-  - name: "builds/digit-dev/municipal-services/bpa-calculator"
-    build:
-      - work-dir: "municipal-services/bpa-calculator"
-        image-name: "bpa-calculator"
-        dockerfile: "build/maven/Dockerfile"     
 
   - name: "builds/digit-dev/municipal-services/land-services"
     build:
