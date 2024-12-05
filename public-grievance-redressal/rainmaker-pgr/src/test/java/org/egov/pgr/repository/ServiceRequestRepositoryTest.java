@@ -9,15 +9,16 @@ import org.egov.mdms.model.MdmsCriteriaReq;
 import org.egov.pgr.contract.SearcherRequest;
 import org.egov.pgr.contract.ServiceReqSearchCriteria;
 import org.egov.tracer.model.ServiceCallException;
+
+import org.mockito.ArgumentMatchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.lenient;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -75,9 +76,9 @@ public class ServiceRequestRepositoryTest {
 		serviceRequestRepository.fetchResult(uri, searcherRequest);				
 				
         Mockito.verify(restTemplate).postForObject(
-        		Matchers.any(String.class),
-        		Matchers.any(SearcherRequest.class),
-                Matchers.any(Class.class));
+        		ArgumentMatchers.any(String.class),
+				ArgumentMatchers.any(SearcherRequest.class),
+				ArgumentMatchers.any(Class.class));
 		
 	}
 	

@@ -2,10 +2,10 @@ package org.egov.land.web.models;
 
 import java.util.Objects;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.SafeHtml;
+
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,21 +21,21 @@ import lombok.NoArgsConstructor;
  */
 @ApiModel(description = "minimal representation of the Roles in the system to be carried along in UserInfo with RequestInfo meta data. Actual authorization service to extend this to have more role related attributes ")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:54:07.373Z[GMT]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:54:07.373Z[GMT]")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role   {
 
-  @SafeHtml
+ 
   @JsonProperty("name")
   private String name = null;
 
-  @SafeHtml
+ 
   @JsonProperty("code")
   private String code = null;
 
-  @SafeHtml
+ 
   @JsonProperty("description")
   private String description = null;
 
