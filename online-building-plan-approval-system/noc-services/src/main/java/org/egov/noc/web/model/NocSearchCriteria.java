@@ -2,7 +2,7 @@ package org.egov.noc.web.model;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.SafeHtml;
+
 
 @Getter
 @Setter
@@ -22,34 +22,34 @@ import org.hibernate.validator.constraints.SafeHtml;
 public class NocSearchCriteria {
 
     @NotNull
-    @SafeHtml
+    
     @JsonProperty("tenantId")
     private String tenantId;
 
     @JsonProperty("ids")
     private List<String> ids;
 
-    @SafeHtml
+    
     @JsonProperty("applicationNo")
     private String applicationNo;
 
-    @SafeHtml
+    
     @JsonProperty("mobileNumber")
     private String mobileNumber;
 
-    @SafeHtml
+    
     @JsonProperty("nocNo")
     private String nocNo;
 
-    @SafeHtml
+    
     @JsonProperty("source")
     private String source;
 
-    @SafeHtml
+    
     @JsonProperty("nocType")
     private String nocType;
 
-    @SafeHtml
+    
     @JsonProperty("sourceRefId")
     private String sourceRefId;
 

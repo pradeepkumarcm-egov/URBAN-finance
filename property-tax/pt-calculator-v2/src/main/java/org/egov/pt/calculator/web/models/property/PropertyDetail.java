@@ -6,12 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -26,12 +24,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import jakarta.validation.constraints.NotNull;
+
 
 /**
  * PropertyDetail
  */
 @Validated
-@javax.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2018-05-11T14:12:44.497+05:30")
+@jakarta.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2018-05-11T14:12:44.497+05:30")
 
 @Getter
 @Setter
@@ -90,7 +90,7 @@ public class PropertyDetail   {
         private String usage;
 
         @NotNull
-        @Min(1)
+        @Size(min = 1)
         @JsonProperty("noOfFloors")
         private Long noOfFloors;
 

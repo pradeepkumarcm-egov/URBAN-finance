@@ -2,13 +2,15 @@ package org.egov.pt.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.listener.AbstractMessageListenerContainer;
+import org.springframework.kafka.listener.ContainerProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +24,12 @@ public class KafkaConfigBatch {
     @Autowired
     private PropertyConfiguration propertyConfiguration;
 
+
+
     @Bean("consumerConfigsBatch")
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>(
-                kafkaProperties.buildConsumerProperties()
+                kafkaProperties.getProperties()
         );
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, propertyConfiguration.getBatchSize());
         props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 900000);
@@ -39,13 +43,14 @@ public class KafkaConfigBatch {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
+    // TODO Need to check the setAckMode is correctly implemented or not
     @Bean("kafkaListenerContainerFactoryBatch")
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
-        factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.BATCH);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
 
         return factory;
     }
@@ -53,7 +58,7 @@ public class KafkaConfigBatch {
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>(
-                kafkaProperties.buildProducerProperties()
+                kafkaProperties.getProperties()
         );
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 org.apache.kafka.common.serialization.StringSerializer.class);
