@@ -15,7 +15,6 @@ do
            -password="$FLYWAY_PASSWORD" \
            -locations="$FLYWAY_LOCATIONS" \
            -baselineOnMigrate=true \
-           -ignoreMissingMigrations=true \
            -outOfOrder=true \
            migrate
 done
