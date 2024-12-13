@@ -58,9 +58,7 @@ public class PropertyValidator {
     
     @Autowired
     private MultiStateInstanceUtil centralInstanceUtil;
-    
-    @Autowired
-    private PropertyService service;
+
     
     @Autowired
     private ObjectMapper mapper;
@@ -71,9 +69,6 @@ public class PropertyValidator {
     
     @Autowired
     private WorkflowService workflowService;
-
-	@Autowired
-	EncryptionDecryptionUtil encryptionDecryptionUtil;
 
     /**
      * Validate the masterData and ctizenInfo of the given propertyRequest
