@@ -4,6 +4,19 @@
   "private": true,
   "homepage": "/digit-ui",
   "workspaces": [
+    "packages/libraries",
+    "packages/css",
+    "example",
+    "packages/react-components",
+    "packages/modules/common",
+    "packages/modules/core",
+    "packages/modules/dss",
+    "packages/modules/engagement",
+    "packages/modules/pgr",
+    "packages/modules/pt",
+    "packages/modules/tl",
+    "packages/modules/fsm",
+    "packages/modules/ws"  
   ],
   "engines": {
     "node": ">=14"
