@@ -4,8 +4,6 @@
   "private": true,
   "homepage": "/digit-ui",
   "workspaces": [
-    "micro-ui-internals/packages/libraries",
-    "micro-ui-internals/packages/react-components"
   ],
   "engines": {
     "node": ">=14"
