@@ -358,5 +358,9 @@ public class TLConfiguration {
     @Value("${egov.tl.calculator.billingSlab.endpoint}")
     private String billingSlabEndPoint;
 
+    @Value("${tl.event.inbox.kafka.topic}")
+    private String tlEventInboxKafkaTopic;
+
+
 
 }
