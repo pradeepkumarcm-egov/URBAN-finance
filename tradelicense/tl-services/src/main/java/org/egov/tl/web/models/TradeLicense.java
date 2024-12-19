@@ -10,6 +10,7 @@ import lombok.*;
 import org.egov.tl.util.TLConstants;
 import org.egov.tl.web.models.calculation.Calculation;
 
+import org.egov.tl.web.models.workflow.ProcessInstance;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -212,6 +213,10 @@ public class  TradeLicense   {
         
         @JsonProperty("fileStoreId")
         private String fileStoreId = null;
+
+        @JsonProperty("processInstance")
+        private ProcessInstance processInstance;
+
 
 }
 

@@ -138,6 +138,7 @@ public class TLRepository {
      */
     public void save(TradeLicenseRequest tradeLicenseRequest) {
         producer.push(tradeLicenseRequest.getLicenses().get(0).getTenantId(), config.getSaveTopic(), tradeLicenseRequest);
+        producer.push(tradeLicenseRequest.getLicenses().get(0).getTenantId(), config.getTlEventInboxKafkaTopic(), tradeLicenseRequest);
     }
     /**
      * Pushes the update request to update topic or on workflow topic depending on the status
@@ -164,14 +165,20 @@ public class TLRepository {
             }
         }
 
-        if (!CollectionUtils.isEmpty(licensesForUpdate))
+        if (!CollectionUtils.isEmpty(licensesForUpdate)) {
             producer.push(licensesForUpdate.get(0).getTenantId(), config.getUpdateTopic(), new TradeLicenseRequest(requestInfo, licensesForUpdate));
+            producer.push(licensesForUpdate.get(0).getTenantId(), config.getTlEventInboxKafkaTopic(), new TradeLicenseRequest(requestInfo, licensesForUpdate));
+        }
 
-        if (!CollectionUtils.isEmpty(licesnsesForStatusUpdate))
+        if (!CollectionUtils.isEmpty(licesnsesForStatusUpdate)) {
             producer.push(licesnsesForStatusUpdate.get(0).getTenantId(), config.getUpdateWorkflowTopic(), new TradeLicenseRequest(requestInfo, licesnsesForStatusUpdate));
+            producer.push(licesnsesForStatusUpdate.get(0).getTenantId(), config.getTlEventInboxKafkaTopic(), new TradeLicenseRequest(requestInfo, licesnsesForStatusUpdate));
+        }
 
-        if(!licensesForAdhocChargeUpdate.isEmpty())
+        if(!licensesForAdhocChargeUpdate.isEmpty()) {
             producer.push(licensesForAdhocChargeUpdate.get(0).getTenantId(), config.getUpdateAdhocTopic(),new TradeLicenseRequest(requestInfo,licensesForAdhocChargeUpdate));
+            producer.push(licensesForAdhocChargeUpdate.get(0).getTenantId(), config.getTlEventInboxKafkaTopic(),new TradeLicenseRequest(requestInfo,licensesForAdhocChargeUpdate));
+        }
 
     }
 
