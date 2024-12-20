@@ -32,7 +32,7 @@ public class PropertyNotificationConsumer {
     private PaymentNotificationService paymentNotificationService;
 
 
-    @KafkaListener(topics = {"${persister.save.property.topic}","${persister.update.property.topic}"},groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = {"${persister.save.property.topic}","${persister.update.property.topic}"})
     public void listen(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         ObjectMapper mapper = new ObjectMapper();
         PropertyRequest propertyRequest = new PropertyRequest();
@@ -51,7 +51,7 @@ public class PropertyNotificationConsumer {
     }
 
 
-    @KafkaListener(topics = {"${kafka.topics.notification.payment}","${kafka.topics.notification.pg.save.txns}"},groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = {"${kafka.topics.notification.payment}","${kafka.topics.notification.pg.save.txns}"})
     public void listenPayments(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         paymentNotificationService.process(record,topic);
     }

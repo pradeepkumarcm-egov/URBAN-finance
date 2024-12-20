@@ -43,7 +43,7 @@ public class DemandBasedConsumer {
      *
      * @param records The input bulk update requests
      */
-    @KafkaListener(topics = {"${persister.demand.based.topic}"}, containerFactory = "kafkaListenerContainerFactoryBatch",groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = {"${persister.demand.based.topic}"}, containerFactory = "kafkaListenerContainerFactoryBatch")
     public void listen(final List<Message<?>> records) {
 
         List<DemandBasedAssessment> demandBasedAssessments = new ArrayList<>();
@@ -75,7 +75,7 @@ public class DemandBasedConsumer {
      *
      * @param records Single update request
      */
-    @KafkaListener(topics = {"${persister.demand.based.dead.letter.topic.batch}"}, containerFactory = "kafkaListenerContainerFactory",groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = {"${persister.demand.based.dead.letter.topic.batch}"}, containerFactory = "kafkaListenerContainerFactory")
     public void listenDeadLetterTopic(final List<Message<?>> records) {
 
 
