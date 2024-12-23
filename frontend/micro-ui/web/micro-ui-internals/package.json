@@ -5,6 +5,7 @@
   "workspaces": [    
     "packages/libraries",
     "example",
+    "packages/modules/*",
     "packages/react-components"
     ],
     "author": "JaganKumar <jagan.kumar@egov.org.in>",
