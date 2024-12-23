@@ -5,7 +5,8 @@
   "workspaces": [    
     "packages/libraries",
     "example",
-    "packages/react-components"
+    "packages/react-components",
+    "packages/modules/*"
     ],
     "author": "JaganKumar <jagan.kumar@egov.org.in>",
     "license": "MIT",
