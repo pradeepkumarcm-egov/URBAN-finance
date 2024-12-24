@@ -9,6 +9,7 @@ import org.egov.bpa.config.BPAConfiguration;
 import org.egov.bpa.util.BPAErrorConstants;
 import org.egov.bpa.web.model.BPA;
 import org.egov.bpa.web.model.BPARequest;
+import org.egov.bpa.web.model.workflow.ProcessInstanceResponse;
 import org.egov.tracer.model.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,10 +105,10 @@ public class WorkflowIntegrator {
 		JSONObject workFlowRequest = new JSONObject();
 		workFlowRequest.put(REQUESTINFOKEY, bpaRequest.getRequestInfo());
 		workFlowRequest.put(WORKFLOWREQUESTARRAYKEY, array);
-		String response = null;
+		ProcessInstanceResponse processInstanceResponse = null;
 		try {
-			response = rest.postForObject(config.getWfHost().concat(config.getWfTransitionPath()), workFlowRequest,
-					String.class);
+			processInstanceResponse = rest.postForObject(config.getWfHost().concat(config.getWfTransitionPath()), workFlowRequest,
+					ProcessInstanceResponse.class);
 		} catch (HttpClientErrorException e) {
 
 			/*
@@ -133,16 +134,17 @@ public class WorkflowIntegrator {
 		 * on success result from work-flow read the data and set the status
 		 * back to BPA object
 		 */
-		DocumentContext responseContext = JsonPath.parse(response);
-		List<Map<String, Object>> responseArray = responseContext.read(PROCESSINSTANCESJOSNKEY);
-		Map<String, String> idStatusMap = new HashMap<>();
-		responseArray.forEach(object -> {
-
-			DocumentContext instanceContext = JsonPath.parse(object);
-			idStatusMap.put(instanceContext.read(BUSINESSIDJOSNKEY), instanceContext.read(STATUSJSONKEY));
-		});
+//		DocumentContext responseContext = JsonPath.parse(response);
+//		List<Map<String, Object>> responseArray = responseContext.read(PROCESSINSTANCESJOSNKEY);
+//		Map<String, String> idStatusMap = new HashMap<>();
+//		responseArray.forEach(object -> {
+//
+//			DocumentContext instanceContext = JsonPath.parse(object);
+//			idStatusMap.put(instanceContext.read(BUSINESSIDJOSNKEY), instanceContext.read(STATUSJSONKEY));
+//		});
 		// setting the status back to BPA object from wf response
-		bpa.setStatus(idStatusMap.get(bpa.getApplicationNo()));
+		bpa.setStatus(processInstanceResponse.getProcessInstances().get(0).getState().getApplicationStatus());
+		bpa.setProcessInstance(processInstanceResponse.getProcessInstances().get(0));
 
 	}
 }
