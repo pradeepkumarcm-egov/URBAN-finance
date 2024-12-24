@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 
 import org.egov.bpa.web.model.landInfo.LandInfo;
 
+import org.egov.bpa.web.model.workflow.ProcessInstance;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -92,6 +93,9 @@ public class BPA   {
   @JsonProperty("additionalDetails")
   private Object additionalDetails = null;
 
+  @JsonProperty("processInstance")
+  private ProcessInstance processInstance = null;
+
   public BPA id(String id) {
     this.id = id;
     return this;
@@ -115,7 +119,12 @@ public class BPA   {
     this.applicationNo = applicationNo;
     return this;
   }
-
+  public void setProcessInstance(ProcessInstance processInstance) {
+    this.processInstance = processInstance;
+  }
+  public ProcessInstance getProcessInstance() {
+    return processInstance;
+  }
   /**
    * Generate formatted Unique Identifier of the building permit application. Keep the format in mdms
    * @return applicationNo
