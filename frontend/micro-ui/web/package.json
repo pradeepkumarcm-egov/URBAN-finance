@@ -22,7 +22,7 @@
     "@egovernments/digit-ui-module-obps": "1.8.3-beta.7",
     "@egovernments/digit-ui-module-pgr": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-pt": "1.8.3-beta.3",
-    "@egovernments/digit-ui-module-receipts": "1.8.3-beta.3",
+    "@egovernments/digit-ui-module-receipts": "1.7.0-beta.2",
     "@egovernments/digit-ui-module-tl": "1.8.3-beta.6",
     "@egovernments/digit-ui-module-ws": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-bills": "1.8.3-beta.3",
