@@ -12,6 +12,8 @@
     "@egovernments/digit-ui-libraries": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-common": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-engagement": "1.8.3-beta.3",
+    "@egovernments/digit-ui-module-core": "1.8.3-beta.3",
+    "@egovernments/digit-ui-module-dss": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-fsm": "1.8.3-beta.7",
     "@egovernments/digit-ui-module-mcollect": "1.8.3-beta.3",
     "@egovernments/digit-ui-module-noc": "1.8.3-beta.3",
