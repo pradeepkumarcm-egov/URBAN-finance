@@ -91,10 +91,10 @@ config:
 
   - name: "builds/urban/ws-services"
     build:
-      - work-dir: "urban/water-connection/ws-services"
+      - work-dir: "water-connection/ws-services"
         image-name: "ws-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/water-connection/ws-services/src/main/resources/db"
+      - work-dir: "water-connection/ws-services/src/main/resources/db"
         image-name: "ws-services-db"
 
   - name: "builds/urban/ws-calculator"
