@@ -53,10 +53,10 @@ config:
 
   - name: "builds/urban/pgr-services"
     build:
-      - work-dir: "urban/public-grievance-redressal/pgr-services"
+      - work-dir: "public-grievance-redressal/pgr-services"
         image-name: "pgr-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/public-grievance-redressal/pgr-services/src/main/resources/db"
+      - work-dir: "public-grievance-redressal/pgr-services/src/main/resources/db"
         image-name: "pgr-services-db"
 
   - name: "builds/urban/tl-calculator"
