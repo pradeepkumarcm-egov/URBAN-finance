@@ -5,7 +5,6 @@ import { Redirect, useHistory, useLocation } from "react-router-dom";
 import BroadcastWhatsNewCard from "../../components/Messages/BroadcastWhatsNewCard";
 
 const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
-  console.log("hahahah");
   const { t } = useTranslation();
   const location = useLocation();
   const history = useHistory();
@@ -38,13 +37,11 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
 
   if (EventsDataLoading) return <Loader />;
 
-  console.log("EventsData", EventsData);
-
   if (EventsData?.length === 0) {
     return (
       <div className="CitizenEngagementNotificationWrapper">
         <Header>{`${t("CS_HEADER_NOTIFICATIONS")}`}</Header>
-        <h1>Nothing to show-1</h1>
+        <h1>Nothing to show</h1>
       </div>
     );
   }
@@ -81,7 +78,7 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
         )
       ) : (
         <Card>
-          <CardCaption>{t("COMMON_INBOX_NO_DATA-2")}</CardCaption>
+          <CardCaption>{t("COMMON_INBOX_NO_DATA")}</CardCaption>
         </Card>
       )}
     </div>

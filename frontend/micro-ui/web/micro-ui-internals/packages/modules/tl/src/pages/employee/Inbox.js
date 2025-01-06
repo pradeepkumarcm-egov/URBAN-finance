@@ -22,7 +22,7 @@ const Inbox = ({ parentRoute, businessService = "TL", initialStates = {}, filter
     ? { limit: 100, offset: 0, sortBy: sortParams?.[0]?.id, sortOrder: sortParams?.[0]?.desc ? "DESC" : "ASC" }
     : { limit: pageSize, offset: pageOffset, sortBy: sortParams?.[0]?.id, sortOrder: sortParams?.[0]?.desc ? "DESC" : "ASC" };
 
-  const { isFetching, isLoading: hookLoading, searchResponseKey, data, searchFields, ...rest } = Digit.Hooks.tl.useInboxV2({
+  const { isFetching, isLoading: hookLoading, searchResponseKey, data, searchFields, ...rest } = Digit.Hooks.tl.useInbox({
     tenantId,
     filters: { ...searchParams, ...paginationParams, sortParams },
     config: {},
@@ -46,7 +46,7 @@ const Inbox = ({ parentRoute, businessService = "TL", initialStates = {}, filter
     if (isMobile) {
       _new = { ...filterParam };
     } else {
-      window.scrollTo(0, 0);
+      window.scrollTo(0,0);
       _new = { ...searchParams, ...filterParam };
     }
     // let _new = { ...searchParams, ...filterParam };
@@ -129,12 +129,7 @@ const Inbox = ({ parentRoute, businessService = "TL", initialStates = {}, filter
   } else {
     return (
       <div>
-        {isInbox && (
-          <Header>
-            {t("ES_COMMON_INBOX")}
-            {data?.totalCount ? <p className="inbox-count">{data?.totalCount}</p> : null}
-          </Header>
-        )}
+        {isInbox && <Header>{t("ES_COMMON_INBOX")}{data?.totalCount ? <p className="inbox-count">{data?.totalCount}</p> : null}</Header>}
         <DesktopInbox
           businessService={businessService}
           data={data}

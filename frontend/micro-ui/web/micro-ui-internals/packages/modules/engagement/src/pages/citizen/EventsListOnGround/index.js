@@ -34,10 +34,10 @@ const EventsListOnGround = ({ variant, parentRoute }) => {
     <div className="CitizenEngagementNotificationWrapper">
       <Header>{`${t("EVENTS_EVENTS_HEADER")}(${EventsData?.length})`}</Header>
       {EventsData.length ? (
-        EventsData?.map((DataParamsInEvent) => <OnGroundEventCard onClick={onEventCardClick} {...DataParamsInEvent} />)
+        EventsData.map((DataParamsInEvent) => <OnGroundEventCard onClick={onEventCardClick} {...DataParamsInEvent} />)
       ) : (
         <Card>
-          <CardCaption>{t("COMMON_INBOX_NO_DATA-2")}</CardCaption>
+          <CardCaption>{t("COMMON_INBOX_NO_DATA")}</CardCaption>
         </Card>
       )}
     </div>

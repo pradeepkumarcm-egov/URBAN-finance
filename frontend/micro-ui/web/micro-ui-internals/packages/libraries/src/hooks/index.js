@@ -28,7 +28,6 @@ import useModuleTenants from "./useModuleTenants";
 import useStore from "./useStore";
 import { useTenants } from "./useTenants";
 import useInbox from "./useInbox";
-import useInboxV2 from "./useInboxV2";
 import { useEvents, useClearNotifications, useNotificationCount } from "./events";
 import useCreateEvent from "./events/useCreateEvent";
 import useUpdateEvent from "./events/useUpdateEvent";
@@ -371,7 +370,6 @@ const tl = {
   useTLGenderMDMS,
   useTradeLicenseBillingslab,
   useInbox: useTLInbox,
-  useInboxV2,
   useMDMS: useTLMDMS,
   useSearch: useTLSearch,
   useApplicationDetail: useTLApplicationDetail,
