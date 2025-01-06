@@ -89,7 +89,7 @@ const DocumentCategories = ({ t, parentRoute }) => {
               })
             ) : (
               <Card>
-                <CardCaption>{t("COMMON_INBOX_NO_DATA")}</CardCaption>
+                <CardCaption>{t("COMMON_INBOX_NO_DATA-2")}</CardCaption>
               </Card>
             )}
           </div>
