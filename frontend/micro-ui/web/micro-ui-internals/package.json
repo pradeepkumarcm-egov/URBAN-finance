@@ -1,21 +1,22 @@
+
 {
   "name": "egovernments",
   "version": "1.5.4",
   "main": "index.js",
-  "workspaces": [    
-    "packages/libraries",
-    "example",
-    "packages/react-components",
-    "packages/modules/*"
-    ],
-    "author": "JaganKumar <jagan.kumar@egov.org.in>",
-    "license": "MIT",
+  "workspaces": [  
+  "packages/libraries",
+  "packages/css",
+  "example",
+  "packages/modules/*"
+],
+  "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "start": "run-s build start:dev",
+    "start": "SKIP_PREFLIGHT_CHECK=true run-s build start:dev",
     "sprint": "SKIP_PREFLIGHT_CHECK=true run-s start:script",
     "start:dev": "run-p dev:**",
     "start:script": "./scripts/create.sh",
