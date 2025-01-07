@@ -5,7 +5,8 @@
   "homepage": "/digit-ui",
   "workspaces": [
     "micro-ui-internals/packages/libraries",
-    "micro-ui-internals/packages/css"
+    "micro-ui-internals/packages/css",
+    "micro-ui-internals/packages/react-components"
   ],
   "engines": {
     "node": ">=14"
@@ -28,7 +29,7 @@
     "@egovernments/digit-ui-module-hrms":"1.7.0-beta.2",
     "@egovernments/digit-ui-module-core":"1.7.0-beta.4",
     "@egovernments/digit-ui-module-dss":"1.7.0-beta.2",
-    "@egovernments/digit-ui-react-components":"1.7.0-beta.3",
+    "@egovernments/digit-ui-react-components":"1.7.0-beta.4",
     "babel-loader": "8.1.0",
     "clean-webpack-plugin": "4.0.0",
     "react": "17.0.2",
