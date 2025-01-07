@@ -309,7 +309,7 @@ config:
     build:
       - work-dir: financial-module-system/finance/egov
         image-name: egov-finance
-        dockerfile: finance/Dockerfile
+        dockerfile: financial-module-system/finance/Dockerfile
         
   - name: "builds/urban/business-services/egf-instrument"
     build:
