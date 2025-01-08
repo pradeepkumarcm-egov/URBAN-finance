@@ -6,10 +6,10 @@
     "packages/libraries",
     "example",
     "packages/react-components",
-    "packages/modules/*"
-    ],
-    "author": "JaganKumar <jagan.kumar@egov.org.in>",
-    "license": "MIT",
+     "packages/modules/*"
+  ],
+  "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=14"
