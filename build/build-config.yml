@@ -29,18 +29,18 @@ config:
 
   - name: "builds/urban/pt-services-v2"
     build:
-      - work-dir: "urban/property-tax/pt-services-v2"
+      - work-dir: "property-tax/pt-services-v2"
         image-name: "pt-services-v2"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/property-tax/pt-services-v2/src/main/resources/db"
+      - work-dir: "property-tax/pt-services-v2/src/main/resources/db"
         image-name: "pt-services-v2-db"
 
   - name: "builds/urban/property-services"
     build:
-      - work-dir: "urban/property-tax/property-services"
+      - work-dir: "property-tax/property-services"
         image-name: "property-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/property-tax/property-services/src/main/resources/db"
+      - work-dir: "property-tax/property-services/src/main/resources/db"
         image-name: "property-services-db"
         
   - name: "builds/urban/rainmaker-pgr"
