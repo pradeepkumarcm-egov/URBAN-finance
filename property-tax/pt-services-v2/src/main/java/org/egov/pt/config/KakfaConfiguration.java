@@ -19,13 +19,10 @@ public class KakfaConfiguration {
         @Autowired
         private KafkaProperties kafkaProperties;
 
-        @Autowired(required = false) // Inject SSL bundles
-        private SslBundles sslBundles;
-
         @Bean
         public Map<String, Object> consumerConfigs() {
             Map<String, Object> props = new HashMap<>(
-                    kafkaProperties.getConsumer().buildProperties(sslBundles)
+                    kafkaProperties.getProperties()
             );
             props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
             props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
