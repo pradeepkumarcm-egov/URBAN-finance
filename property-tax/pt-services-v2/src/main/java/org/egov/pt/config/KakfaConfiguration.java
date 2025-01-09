@@ -1,3 +1,4 @@
+/*
 package org.egov.pt.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -46,3 +47,4 @@ public class KakfaConfiguration {
 
 
 
+*/

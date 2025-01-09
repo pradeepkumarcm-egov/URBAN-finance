@@ -27,7 +27,7 @@ public class KafkaConfigBatch {
 
 
     @Bean("consumerConfigsBatch")
-    public Map<String, Object> consumerConfigs() {
+    public Map<String, Object> consumerConfigsBatch() {
         Map<String, Object> props = new HashMap<>(
                 kafkaProperties.getProperties()
         );
@@ -40,7 +40,21 @@ public class KafkaConfigBatch {
         return props;
     }
 
+    @Bean("consumerConfigs")
+    public Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>(
+                kafkaProperties.getProperties()
+        );
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
+        return props;
+    }
+
     @Bean("consumerFactoryBatch")
+    public ConsumerFactory<String, Object> consumerFactoryBatch() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigsBatch());
+    }
+    @Bean("consumerFactory")
     public ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
@@ -50,10 +64,17 @@ public class KafkaConfigBatch {
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(consumerFactoryBatch());
         factory.setBatchListener(true);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
 
+        return factory;
+    }
+
+    @Bean("kafkaListenerContainerFactory")
+    public ConcurrentKafkaListenerContainerFactory<String, Object> singleKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
