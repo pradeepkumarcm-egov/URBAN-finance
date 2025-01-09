@@ -36,7 +36,7 @@ public class KafkaConfigBatch {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
         props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 900000);
         props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 10000);
-
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         return props;
     }
 
@@ -47,6 +47,7 @@ public class KafkaConfigBatch {
         );
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         return props;
     }
 
@@ -90,6 +91,7 @@ public class KafkaConfigBatch {
         props.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 2080075);
         props.put(ProducerConfig.LINGER_MS_CONFIG, 500);
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, 1000);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         return props;
     }
 
