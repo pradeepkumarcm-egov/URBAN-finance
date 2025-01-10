@@ -19,7 +19,7 @@ const TLSelectAddress = ({ t, config, onSelect, userType, formData, setError, fo
       : allCities;
 
   const [selectedCity, setSelectedCity] = useState(() => formData?.address?.city || null);
-  const selectedCityCode = typeof selectedCity === "object" ? selectedCity.code : selectedCity;
+  const selectedCityCode = typeof selectedCity === "object" ? selectedCity?.code : selectedCity;
 
   const { data: fetchedLocalities } = Digit.Hooks.useBoundaryLocalities(
     selectedCityCode,
