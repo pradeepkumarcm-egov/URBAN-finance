@@ -383,4 +383,10 @@ public class PropertyConfiguration {
     @Value("${persister.update.property.audit.oldData.topic}")
     private String updatePropertyAuditEncTopic;
 
+    @Value("${elasticsearch.username}")
+    private String userName;
+
+    @Value("${elasticsearch.password}")
+    private String password;
+
 }
