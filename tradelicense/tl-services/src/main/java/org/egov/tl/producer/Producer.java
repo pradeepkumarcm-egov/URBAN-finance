@@ -27,7 +27,7 @@ public class Producer {
 				updatedTopic = tenants[1].concat("-").concat(topic);
 		}
 		log.info("The Kafka topic for the tenantId : " + tenantId + " is : " + updatedTopic);
-	    	log.info("object pushed to kafka topic : {}",value);
+	    	log.info("object pushed to kafka topic : {}",value.toString());
 		kafkaTemplate.send(updatedTopic, value);
 	}
 }
