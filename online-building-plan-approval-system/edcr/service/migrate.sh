@@ -11,8 +11,8 @@ do
     echo "the schema name : ${baseurl}${schemasetter}${schemaname}"
     flyway -url="${baseurl}${schemasetter}${schemaname}" \
            -table="$SCHEMA_TABLE" \
-           -user="$FLYWAY_USER" \
-           -password="$FLYWAY_PASSWORD" \
+           -user="$DB_USERNAME" \
+           -password="$DB_PASSWORD" \
            -locations="$FLYWAY_LOCATIONS" \
            -baselineOnMigrate=true \
            -outOfOrder=true \
