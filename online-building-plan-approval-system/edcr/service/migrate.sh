@@ -15,6 +15,6 @@ do
            -password="$DB_PASSWORD" \
            -locations="$FLYWAY_LOCATIONS" \
            -baselineOnMigrate=true \
-           -outOfOrder=true \
+           -outOfOrder=false \
            migrate
 done
