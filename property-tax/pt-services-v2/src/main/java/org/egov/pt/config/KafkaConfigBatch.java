@@ -24,22 +24,17 @@ public class KafkaConfigBatch {
     @Autowired
     private PropertyConfiguration propertyConfiguration;
 
-
-
     @Bean("consumerConfigsBatch")
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>(
                 kafkaProperties.getProperties()
         );
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, propertyConfiguration.getBatchSize());
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
         props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 900000);
         props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 10000);
 
         return props;
     }
-
     @Bean("consumerFactoryBatch")
     public ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
