@@ -249,7 +249,16 @@ config:
     build:
       - work-dir: "utilities/report"
         image-name: "report"
-        dockerfile: "build/maven/Dockerfile"        
+        dockerfile: "build/maven/Dockerfile"  
+        
+  - name: "builds/urban/utilities/egov-survey-services"
+    build:
+      - work-dir: "utilities/egov-survey-services"
+        image-name: "egov-survey-services"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "utilities/egov-survey-services/src/main/resources/db"
+        image-name: "egov-survey-services-db"
+                    
         
 
   # Frontend
