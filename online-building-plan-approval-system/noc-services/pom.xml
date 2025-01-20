@@ -15,7 +15,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<springfox-version>2.7.0</springfox-version>
-		<logback.version>1.2.0</logback.version>
+		<logback.version>1.4.11</logback.version>
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

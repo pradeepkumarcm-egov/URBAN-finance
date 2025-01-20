@@ -13,6 +13,7 @@ This doc contains changes done in the service related to LTS upgrade. As for LTS
 5. Junit dependency added and the version used is 4.13.2
 6. flyway-core version updated to 9.22.3 from 6.4.3.
 7. postgresql version updated to 42.7.1.
+8. Jackson databind dependency version updated to the compatible version i.e 2.15.2
 
 ***PGR v1.1***
 

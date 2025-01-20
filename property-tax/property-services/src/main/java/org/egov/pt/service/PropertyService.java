@@ -128,8 +128,11 @@ public class PropertyService {
 	 * @return List of updated properties
 	 */
 	public Property updateProperty(PropertyRequest request) {
-		
-		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request);
+
+		Property propertyFromRequest = request.getProperty();
+		PropertyCriteria criteria = propertyValidator.getPropertyCriteriaForSearch(request);
+		List<Property> propertiesFromSearchResponse = searchProperty(criteria, request.getRequestInfo());
+		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request,propertyFromRequest,propertiesFromSearchResponse);
 		propertyValidator.validateCommonUpdateInformation(request, propertyFromSearch);
 
 		boolean isRequestForOwnerMutation = CreationReason.MUTATION.equals(request.getProperty().getCreationReason());
@@ -487,8 +490,10 @@ public class PropertyService {
 	}
 
 	public Property addAlternateNumber(PropertyRequest request) {
-		
-		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request);
+		Property propertyFromRequest = request.getProperty();
+		PropertyCriteria criteria = propertyValidator.getPropertyCriteriaForSearch(request);
+		List<Property> propertiesFromSearchResponse = searchProperty(criteria, request.getRequestInfo());
+		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request,propertyFromRequest,propertiesFromSearchResponse);
 		propertyValidator.validateAlternateMobileNumberInformation(request, propertyFromSearch);
 		userService.createUserForAlternateNumber(request);
 		
