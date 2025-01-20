@@ -102,7 +102,7 @@ export const StoreService = {
     initData.revenue_localities = revenue_localities;
     initData.localities = localities;
     setTimeout(() => {
-      renderTenantLogos(stateInfo, initData?.tenants);
+      renderTenantLogos(stateInfo, initData.tenants);
     }, 0);
     return initData;
   },
