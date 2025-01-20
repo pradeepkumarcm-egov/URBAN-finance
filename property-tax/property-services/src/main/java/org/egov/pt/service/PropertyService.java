@@ -108,6 +108,7 @@ public class PropertyService {
 		}
 
 		producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+		producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(),request);
 		request.getProperty().setWorkflow(null);
 
 		/* decrypt here */

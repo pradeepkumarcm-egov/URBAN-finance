@@ -90,5 +90,7 @@ public class LandConfiguration {
 	
 //	@Value("#{${appSrvTypeBussSrvCode}}")
 //	private Map<String,Map<String,String>> appSrvTypeBussSrvCode;
-	
+
+	@Value("${land.event.inbox.kafka.topic}")
+	private String landEventInboxKafkaTopic;
 }
