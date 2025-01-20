@@ -195,6 +195,7 @@ public class PropertyService {
 				enrichmentService.enrichUpdateRequest(request, propertyFromSearch);
 				util.mergeAdditionalDetails(request, propertyFromSearch);
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);		
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);	
 	}
 
 	/**
@@ -237,8 +238,12 @@ public class PropertyService {
 
 				propertyFromSearch.setStatus(Status.INACTIVE);
 				producer.push(tenantId, config.getUpdatePropertyTopic(), OldPropertyRequest);
+				producer.push(tenantId, config.getPropertyEventInboxKafkaTopic(), OldPropertyRequest);
+
 				util.saveOldUuidToRequest(request, propertyFromSearch.getId());
 				producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 
 			} else if (state.getIsTerminateState()
 					&& !state.getApplicationStatus().equalsIgnoreCase(Status.ACTIVE.toString())) {
@@ -249,6 +254,7 @@ public class PropertyService {
 				 * If property is In Workflow then continue
 				 */
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 			}
 
 		} else {
@@ -257,6 +263,7 @@ public class PropertyService {
 			 * If no workflow then update property directly with mutation information
 			 */
 			producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+			producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 		}
 	}
 	
@@ -315,10 +322,14 @@ public class PropertyService {
 
 				propertyFromSearch.setStatus(Status.INACTIVE);
 				producer.push(tenantId, config.getUpdatePropertyTopic(), oldPropertyRequest);
+				producer.push(tenantId, config.getPropertyEventInboxKafkaTopic(),oldPropertyRequest);
+
 
 				util.saveOldUuidToRequest(request, propertyFromSearch.getId());
 				/* save new record */
 				producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 
 			} else if (state.getIsTerminateState()
 					&& !state.getApplicationStatus().equalsIgnoreCase(Status.ACTIVE.toString())) {
@@ -329,6 +340,7 @@ public class PropertyService {
 				 * If property is In Workflow then continue
 				 */
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 			}
 
 		} else {
@@ -337,6 +349,8 @@ public class PropertyService {
 			 * If no workflow then update property directly with mutation information
 			 */
 			producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+			producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 		}
 	}
 
@@ -365,6 +379,8 @@ public class PropertyService {
 		previousPropertyToBeReInstated.setStatus(Status.ACTIVE);
 		request.setProperty(previousPropertyToBeReInstated);
 		producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+		producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 	}
 
 	/**
@@ -519,6 +535,7 @@ public class PropertyService {
 		util.mergeAdditionalDetails(request, propertyFromSearch);
 		
 		producer.push(request.getProperty().getTenantId() , config.getUpdatePropertyTopic(), request);
+		
 		
 		request.getProperty().setWorkflow(null);
 		
