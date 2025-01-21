@@ -190,7 +190,7 @@
 		<mvn.resource.plugin.version>3.0.1</mvn.resource.plugin.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+		<maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
 		<javaVersion>17</javaVersion>
 	</properties>
 
