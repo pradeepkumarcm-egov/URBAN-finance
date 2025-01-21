@@ -3,12 +3,14 @@ FROM openjdk:17-alpine AS build
 ARG WORK_DIR
 WORKDIR /app
 
-# copy the project files
+# Install Maven
+RUN apk update && apk add maven
 
+# copy the project files
 COPY ${WORK_DIR} ./${WORK_DIR}
 RUN cd ${WORK_DIR} \
     && mvn clean package -DskipTests
-                                 
+
 
 # Create runtime image
 
