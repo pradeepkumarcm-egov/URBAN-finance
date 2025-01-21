@@ -186,9 +186,12 @@
 		<mvn.ear.plugin.version>2.10.1</mvn.ear.plugin.version>
 		<mvn.war.plugin.version>3.2.0</mvn.war.plugin.version>
 		<mvn.jar.plugin.version>3.0.2</mvn.jar.plugin.version>
-		<mvn.compiler.plugin.version>3.7.0</mvn.compiler.plugin.version>
 		<mvn.dependency.plugin.version>3.0.2</mvn.dependency.plugin.version>
 		<mvn.resource.plugin.version>3.0.1</mvn.resource.plugin.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+		<javaVersion>17</javaVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -1417,10 +1420,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${mvn.compiler.plugin.version}</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
 			<plugin>
