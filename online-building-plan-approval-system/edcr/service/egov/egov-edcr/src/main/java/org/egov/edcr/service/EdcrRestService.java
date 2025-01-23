@@ -1037,8 +1037,8 @@ public class EdcrRestService {
                 return new ErrorDetail(BPA_07, REQ_BODY_REQUIRED);
             else if (edcrRequest.getRequestInfo().getUserInfo() == null
                     || (edcrRequest.getRequestInfo().getUserInfo() != null
-							&& (isBlank(edcrRequest.getRequestInfo().getUserInfo().getUuid())
-									|| isBlank(edcrRequest.getRequestInfo().getUserInfo().getId()))))
+							&& isBlank(edcrRequest.getRequestInfo().getUserInfo().getUuid())
+									&& isBlank(edcrRequest.getRequestInfo().getUserInfo().getId())))
                 return new ErrorDetail(BPA_07, USER_ID_IS_MANDATORY);
 
             if (isBlank(edcrRequest.getTransactionNumber()))
@@ -1056,8 +1056,8 @@ public class EdcrRestService {
                 return new ErrorDetail(BPA_07, REQ_BODY_REQUIRED);
             else if (edcrRequest.getRequestInfo().getUserInfo() == null
                     || (edcrRequest.getRequestInfo().getUserInfo() != null
-							&& (isBlank(edcrRequest.getRequestInfo().getUserInfo().getUuid())
-									|| isBlank(edcrRequest.getRequestInfo().getUserInfo().getId()))))
+							&& isBlank(edcrRequest.getRequestInfo().getUserInfo().getUuid())
+									&& isBlank(edcrRequest.getRequestInfo().getUserInfo().getId())))
                 return new ErrorDetail(BPA_07, USER_ID_IS_MANDATORY);
 
             if (isBlank(edcrRequest.getTransactionNumber()))
