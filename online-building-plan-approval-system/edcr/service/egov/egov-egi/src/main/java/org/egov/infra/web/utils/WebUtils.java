@@ -130,7 +130,9 @@ public final class WebUtils {
         	String proto = "https";
         	if(protocol != null)
         		proto = protocol.split(",")[0];
-            String hostName = host.split(",")[0];
+        	String hostName = domainName;
+        	if(host != null)
+        		hostName = host.split(",")[0];
             if(isCentralInstance) {
             	proto = "https";
                 hostName = domainName;
