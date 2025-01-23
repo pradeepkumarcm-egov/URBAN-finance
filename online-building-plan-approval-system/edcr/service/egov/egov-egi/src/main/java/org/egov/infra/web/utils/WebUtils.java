@@ -88,6 +88,7 @@ public final class WebUtils {
                 domainName = commonDomainName;
             } else {
                 String host = httpRequest.getHeader("x-forwarded-host");
+                domainName = commonDomainName;
                 if (StringUtils.isNotBlank(host)) {
                     domainName = host.split(",")[0];
                 }
