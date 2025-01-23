@@ -68,3 +68,6 @@ cd "$BASEDIR/packages/modules/hrms" &&  rm -rf node_modules &&  rm -rf dist && y
 
 msg "Building and publishing ws module"
 cd "$BASEDIR/packages/modules/ws" &&  rm -rf node_modules &&  rm -rf dist && yarn &&  npm publish --tag urban-2.9-beta
+
+msg "Building and publishing mCollect module"
+cd "$BASEDIR/packages/modules/mCollect" &&  rm -rf node_modules &&  rm -rf dist && yarn   &&  npm publish --tag urban-2.9-beta
