@@ -347,4 +347,7 @@ public class BPAConfiguration {
 	@Value("${egov.bpa.application.details.link}")
 	private String applicationDetailsLink;
 
+	@Value("${bpa.event.inbox.kafka.topic}")
+	private String bpaEventInboxKafkaTopic;
+
 }
