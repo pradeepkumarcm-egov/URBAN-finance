@@ -238,6 +238,10 @@ config:
       - work-dir: "utilities/demo-utility"
         image-name: "demo-utility"
         dockerfile: "build/maven/Dockerfile"
+  - name: "builds/urban/utilities/egov-pdf"
+    build:
+      - work-dir: "utilities/egov-pdf"
+        image-name: "egov-pdf"
 
   - name: "builds/urban/utilities/egov-searcher"
     build:
@@ -330,7 +334,7 @@ config:
     build:
       - work-dir: financial-module-system/finance/egov
         image-name: egov-finance
-        dockerfile: finance/Dockerfile
+        dockerfile: financial-module-system/finance/Dockerfile
         
   - name: "builds/urban/business-services/egf-instrument"
     build:
