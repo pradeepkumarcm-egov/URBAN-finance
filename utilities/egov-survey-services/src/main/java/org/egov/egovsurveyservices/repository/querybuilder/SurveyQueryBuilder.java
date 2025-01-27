@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.egov.egovsurveyservices.utils.SurveyServiceConstants.ACTIVE;
@@ -154,10 +155,10 @@ public class SurveyQueryBuilder {
         StringBuilder query = new StringBuilder(SELECT + " DISTINCT(survey.uuid), survey.createdtime ");
         query.append(" FROM eg_ss_survey survey ");
 
-        if(!CollectionUtils.isEmpty(criteria.getTenantIds())){
+        if(!ObjectUtils.isEmpty(criteria.getTenantId())){
             addClauseIfRequired(query, preparedStmtList);
-            query.append(" survey.tenantid IN ( ").append(createQuery(criteria.getTenantIds())).append(" )");
-            addToPreparedStatement(preparedStmtList, criteria.getTenantIds());
+            query.append(" survey.tenantid IN ( ").append(createQuery(Arrays.asList(criteria.getTenantId()))).append(" )");
+            addToPreparedStatement(preparedStmtList, Arrays.asList(criteria.getTenantId()));
         }
         if(!ObjectUtils.isEmpty(criteria.getTitle())){
             addClauseIfRequired(query, preparedStmtList);
