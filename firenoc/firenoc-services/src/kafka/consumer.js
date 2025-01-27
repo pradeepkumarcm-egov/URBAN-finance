@@ -16,7 +16,7 @@ const kafka = new Kafka({
   ssl: false,
   clientId: 'example-consumer',
 });
-
+console.log(envVariables.KAFKA_BROKER_HOST);
 const consumer = kafka.consumer({ groupId: 'firenoc-consumer-grp' });
 
 console.log("Consumer ");
