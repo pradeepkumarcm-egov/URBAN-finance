@@ -159,6 +159,11 @@ public class SurveyQueryBuilder {
             query.append(" survey.tenantid IN ( ").append(createQuery(criteria.getTenantIds())).append(" )");
             addToPreparedStatement(preparedStmtList, criteria.getTenantIds());
         }
+        if(!ObjectUtils.isEmpty(criteria.getTenantId())){
+            addClauseIfRequired(query, preparedStmtList);
+            query.append(" survey.tenantid ILIKE ? ");
+            preparedStmtList.add("%" + criteria.getTenantId() + "%");
+        }
         if(!ObjectUtils.isEmpty(criteria.getTitle())){
             addClauseIfRequired(query, preparedStmtList);
             query.append(" survey.title ILIKE ? ");

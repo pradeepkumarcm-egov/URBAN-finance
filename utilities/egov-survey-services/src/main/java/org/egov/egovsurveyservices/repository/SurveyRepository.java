@@ -100,7 +100,7 @@ public class SurveyRepository {
     public List<String> fetchSurveyUuids(SurveySearchCriteria criteria) {
         List<Object> preparedStmtList = new ArrayList<>();
 
-        if(CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
+        if((CollectionUtils.isEmpty(criteria.getTenantIds()) || ObjectUtils.isEmpty(criteria.getTenantId())) && ObjectUtils.isEmpty(criteria.getUuid()))
             return new ArrayList<>();
 
         criteria.setIsCountCall(Boolean.FALSE);
