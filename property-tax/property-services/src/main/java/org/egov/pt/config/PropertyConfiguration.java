@@ -389,4 +389,7 @@ public class PropertyConfiguration {
     @Value("${elasticsearch.password}")
     private String password;
 
+    @Value("${property.event.inbox.kafka.topic}")
+    private String propertyEventInboxKafkaTopic;
+
 }

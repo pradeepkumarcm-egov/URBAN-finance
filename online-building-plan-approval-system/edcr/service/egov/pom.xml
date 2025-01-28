@@ -59,8 +59,13 @@
 		</repository>
 		<repository>
 			<id>javaxt.com</id>
-			<url>http://www.javaxt.com/maven</url>
+			<url>https://www.javaxt.com/maven</url>
 		</repository>
+		 <repository>
+            <id>repo.digit.org</id>
+            <name>eGov DIGIT Releases Repository</name>
+            <url>https://nexus-repo.digit.org/nexus/content/repositories/snapshots/</url>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
