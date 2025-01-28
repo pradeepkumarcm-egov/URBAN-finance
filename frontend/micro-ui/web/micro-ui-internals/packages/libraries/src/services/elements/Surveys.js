@@ -39,7 +39,7 @@ export const Surveys = {
       method: "POST",
       auth: true,
     }),
-  submitResponse: (details) =>
+  submitResponse: (details, params) =>
     Request({
       url: Urls.engagement.surveys.submitResponse,
       data: details,
@@ -47,6 +47,7 @@ export const Surveys = {
       userService: true,
       method: "POST",
       auth: true,
+      params: params,
     }),
   showResults: (details, params) =>
     Request({
