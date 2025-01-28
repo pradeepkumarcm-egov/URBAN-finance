@@ -49,7 +49,7 @@ export const Surveys = {
       auth: true,
       params: params,
     }),
-  showResults: (details) =>
+  showResults: (details, params) =>
     Request({
       url: Urls.engagement.surveys.showResults,
       // data: details,
@@ -57,6 +57,6 @@ export const Surveys = {
       userService: true,
       method: "POST",
       auth: true,
-      params: { surveyId: details.surveyId },
+      params: { ...params, surveyId: details.surveyId },
     }),
 };
