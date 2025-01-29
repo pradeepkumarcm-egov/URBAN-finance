@@ -143,12 +143,10 @@ public class EnrichmentService {
 			});
 		}
 
-		// TODO Need to verify why we are manually setting plumber id as null
-		
 		if (applicationType.equalsIgnoreCase(MODIFY_SEWERAGE_CONNECTION) || applicationType.equalsIgnoreCase(DISCONNECT_SEWERAGE_CONNECTION)) {
 			if (!CollectionUtils.isEmpty(connection.getPlumberInfo())) {
 				connection.getPlumberInfo().forEach(plumberInfo -> {
-					//plumberInfo.setId(null);
+					plumberInfo.setId(null);
 					plumberInfo.setAuditDetails(auditDetails);
 				});
 			}
