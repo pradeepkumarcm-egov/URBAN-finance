@@ -7,11 +7,11 @@ import useInboxTableConfig from "./useInboxTableConfig";
 import useInboxMobileCardsData from "./useInboxMobileCardsData";
 import { Link } from "react-router-dom";
 
-const Inbox = ({ parentRoute }) => {
+const Inbox = ({ parentRoute, userType }) => {
   window.scroll(0, 0);
   const { t } = useTranslation();
 
-  const tenantId = Digit.ULBService.getCitizenCurrentTenant();
+  const tenantId = userType === "citizen" ? Digit.ULBService.getCitizenCurrentTenant() : Digit.ULBService.getCurrentTenantId();
 
   const searchFormDefaultValues = {};
 
@@ -120,9 +120,6 @@ const Inbox = ({ parentRoute }) => {
     tenantId,
     filters: { ...formState },
   });
-
-  console.log("table", table);
-  console.log("statuses", status);
 
   const PropsForInboxLinks = {
     logoIcon: <CaseIcon />,
