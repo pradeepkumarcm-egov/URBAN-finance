@@ -47,9 +47,7 @@ const useBPAInbox = ({ tenantId, filters, config = {} }) => {
     limit,
   };
 
-  // if (!applicationNo) {
-  //   _filters = { ..._filters, offset };
-  // }
+  _filters = { ..._filters, offset };
 
   return useInbox({
     tenantId,
