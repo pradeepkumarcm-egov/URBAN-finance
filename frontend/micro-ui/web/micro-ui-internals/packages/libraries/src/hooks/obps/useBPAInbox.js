@@ -1,7 +1,6 @@
 import useInbox from "../useInboxV2";
 
 const useBPAInbox = ({ tenantId, filters, config = {} }) => {
-  console.log("filters--", filters);
   const { filterForm, searchForm, tableForm } = filters;
   const user = Digit.UserService.getUser();
   let { moduleName, businessService, applicationStatus, locality, assignee, applicationType } = filterForm;
