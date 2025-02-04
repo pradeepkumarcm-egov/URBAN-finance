@@ -105,6 +105,9 @@ public class Property extends PropertyInfo {
 	
 	@JsonProperty("AlternateUpdated")
 	private boolean AlternateUpdated;
+	
+	@JsonProperty("processInstance")
+    private ProcessInstance processInstance;
 
 
 	@Builder

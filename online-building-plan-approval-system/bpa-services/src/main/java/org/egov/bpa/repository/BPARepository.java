@@ -47,6 +47,7 @@ public class BPARepository {
 	 */
 	public void save(BPARequest bpaRequest) {
 		producer.push(bpaRequest.getBPA().getTenantId(),config.getSaveTopic(), bpaRequest);
+		producer.push(bpaRequest.getBPA().getTenantId(),config.getBpaEventInboxKafkaTopic(), bpaRequest);
 	}
 
 	/**
@@ -67,11 +68,15 @@ public class BPARepository {
 		} else {
 			bpaForStatusUpdate = bpa;
 		}
-		if (bpaForUpdate != null)
+		if (bpaForUpdate != null) {
 			producer.push(bpaRequest.getBPA().getTenantId(),config.getUpdateTopic(), new BPARequest(requestInfo, bpaForUpdate));
+			producer.push(bpaRequest.getBPA().getTenantId(),config.getBpaEventInboxKafkaTopic(), new BPARequest(requestInfo, bpaForUpdate));
+		}
 
-		if (bpaForStatusUpdate != null)
+		if (bpaForStatusUpdate != null) {
 			producer.push(bpaRequest.getBPA().getTenantId(),config.getUpdateWorkflowTopic(), new BPARequest(requestInfo, bpaForStatusUpdate));
+			producer.push(bpaRequest.getBPA().getTenantId(),config.getBpaEventInboxKafkaTopic(), new BPARequest(requestInfo, bpaForStatusUpdate));
+		}
 
 	}
 

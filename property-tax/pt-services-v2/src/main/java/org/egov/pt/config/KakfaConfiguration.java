@@ -1,3 +1,4 @@
+/*
 package org.egov.pt.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -25,7 +26,8 @@ public class KakfaConfiguration {
         @Bean
         public Map<String, Object> consumerConfigs() {
             Map<String, Object> props = new HashMap<>(
-                    kafkaProperties.getConsumer().buildProperties(sslBundles)
+                    kafkaProperties.getProperties()
+
             );
             props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
             props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
@@ -49,3 +51,4 @@ public class KakfaConfiguration {
 
 
 
+*/
