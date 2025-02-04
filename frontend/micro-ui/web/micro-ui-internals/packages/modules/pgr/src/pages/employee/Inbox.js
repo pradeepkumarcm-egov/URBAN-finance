@@ -69,7 +69,7 @@ const Inbox = () => {
             onPageSizeChange={handlePageSizeChange}
             currentPage={Math.floor(pageOffset / pageSize)}
             totalRecords={totalRecords}
-            pageSizeLimit={pageSize}
+            pageSizeLimit={parseInt(pageSize)}
           />
         </div>
       );
