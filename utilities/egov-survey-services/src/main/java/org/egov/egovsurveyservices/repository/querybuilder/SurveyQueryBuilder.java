@@ -146,8 +146,8 @@ public class SurveyQueryBuilder {
     }
 
     public String getSurveyCountQuery(SurveySearchCriteria criteria, List<Object> preparedStmtList) {
-        String query = getSurveyUuidsQuery(criteria, preparedStmtList);
-        return SURVEY_COUNT_WRAPPER.replace("{INTERNAL_QUERY}", query);
+        String query = "select count(*) from eg_ss_survey where isactive = true";
+        return query;
     }
 
     public String getSurveyUuidsQuery(SurveySearchCriteria criteria, List<Object> preparedStmtList) {
