@@ -249,6 +249,7 @@ import { usePrivacyContext } from "./usePrivacyContext";
 import useToCheckPrivacyEnablement from "./ws/useToCheckPrivacyEnablement";
 import useWSConfigMDMS from "./ws/useWSConfigMDMS";
 import useFeedBackSearch from "./useFeedBackSearch";
+import useBPAInboxV1 from "./obps/useBPAInboxV1";
 
 const pgr = {
   useComplaintDetails,
@@ -405,6 +406,7 @@ const obps = {
   useBPADetailsPage,
   useEmpBPAREGSearch,
   useBPAInbox,
+  useBPAInboxV1,
   useEDCRInbox,
   useArchitectInbox,
   SearchMdmsTypes,
