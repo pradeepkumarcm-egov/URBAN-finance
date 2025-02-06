@@ -17,15 +17,14 @@ const DownloadBillInbox = () => {
   const [pageSize, setPageSize] = useState(10);
 
   const filters = {
-    // offset: 0,
-    // limit: 100,
+    tenantId: Digit.ULBService.getCurrentTenantId(),
   };
 
   const { data, isLoading, isError, error } = Digit.Hooks.useBulkPdfDetails({ filters: filters });
   const showingToastMessage = (message) => {
     setShowToast(message);
   };
-  const columns = useSearchApplicationTableConfig(showingToastMessage,data,isLoading,isMobile);
+  const columns = useSearchApplicationTableConfig(showingToastMessage, data, isLoading, isMobile);
 
   useEffect(() => {
     setTotalRecords(data?.groupBillrecords.length);
@@ -41,9 +40,6 @@ const DownloadBillInbox = () => {
     setPageOffset((prevState) => prevState - pageSize);
   };
 
-
-  
-
   const TableComponent = useCallback(() => {
     if (isLoading) {
       return <Loader />;
@@ -58,16 +54,16 @@ const DownloadBillInbox = () => {
               </p>
             ))}
         </Card>
-      ) :
-      isMobile ? ( <DetailsCard
-        {...{
+      ) : isMobile ? (
+        <DetailsCard
+          {...{
             handleSelect: (e) => {},
-            handleDetailCardClick : (e) => {},
+            handleDetailCardClick: (e) => {},
             data: [...columns],
             serviceRequestIdKey: t("TL_DATE_LABEL"),
-        }}
-    />) :
-      (
+          }}
+        />
+      ) : (
         <>
           <Table
             t={t}

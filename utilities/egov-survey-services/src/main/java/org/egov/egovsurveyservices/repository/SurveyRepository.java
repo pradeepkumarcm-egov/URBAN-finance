@@ -42,7 +42,7 @@ public class SurveyRepository {
 
         List<Object> preparedStmtList = new ArrayList<>();
 
-        if(CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
+        if(ObjectUtils.isEmpty(criteria.getTenantId()) && CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
             return new ArrayList<>();
 
         String query = surveyQueryBuilder.getSurveySearchQuery(criteria, preparedStmtList);
@@ -100,8 +100,9 @@ public class SurveyRepository {
     public List<String> fetchSurveyUuids(SurveySearchCriteria criteria) {
         List<Object> preparedStmtList = new ArrayList<>();
 
-        if(CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
+        if(ObjectUtils.isEmpty(criteria.getTenantId()) && CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
             return new ArrayList<>();
+     
 
         criteria.setIsCountCall(Boolean.FALSE);
 

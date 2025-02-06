@@ -1,6 +1,6 @@
-import useInbox from "../useInboxV2";
+import useInbox from "../useInbox";
 
-const useBPAInbox = ({ tenantId, filters, config = {} }) => {
+const useBPAInboxV1 = ({ tenantId, filters, config = {} }) => {
   const { filterForm, searchForm, tableForm } = filters;
   const user = Digit.UserService.getUser();
   let { moduleName, businessService, applicationStatus, locality, assignee, applicationType } = filterForm;
@@ -47,8 +47,9 @@ const useBPAInbox = ({ tenantId, filters, config = {} }) => {
     limit,
   };
 
-  _filters = { ..._filters, offset };
-
+  if (!applicationNo) {
+    _filters = { ..._filters, offset };
+  }
   return useInbox({
     tenantId,
     filters: _filters,
@@ -81,4 +82,4 @@ const useBPAInbox = ({ tenantId, filters, config = {} }) => {
   });
 };
 
-export default useBPAInbox;
+export default useBPAInboxV1;

@@ -33,6 +33,9 @@ public class SurveySearchCriteria {
     @JsonProperty("limit")
     private Integer limit;
 
+    @JsonProperty("tenantId")
+    private String tenantId;
+
     @JsonIgnore
     private String uuid;
 
