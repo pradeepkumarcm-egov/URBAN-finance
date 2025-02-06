@@ -146,7 +146,7 @@ public class SurveyQueryBuilder {
     }
 
     public String getSurveyCountQuery(SurveySearchCriteria criteria, List<Object> preparedStmtList) {
-        String query = "select count(*) from eg_ss_survey where isactive = true";
+        String query = "select count(*) from eg_ss_survey where isactive = true ;";
         return query;
     }
 
