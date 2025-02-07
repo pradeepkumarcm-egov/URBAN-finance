@@ -251,7 +251,8 @@ public class CreateContractorBillController extends BaseBillController {
 		validateBillNumber(egBillregister, resultBinder);
 		removeEmptyRows(egBillregister);
 		validateLedgerAndSubledger(egBillregister, resultBinder);
-		validateCuttofDate(egBillregister, resultBinder);
+		if (workFlowAction.equals(FinancialConstants.CREATEANDAPPROVE))
+			validateCuttofDate(egBillregister, resultBinder);
 
 		if (resultBinder.hasErrors()) {
 			return populateDataOnErrors(egBillregister, model, request);
