@@ -102,7 +102,7 @@ public class PropertyConfiguration {
     @Value("${kafka.topics.notification.pg.save.txns}")
     private String pgTopic;
 
-   @Value("${ kafka.config.bootstrap_server_config}")
+   @Value("${kafka.config.bootstrap_server_config}")
     private String kafkBootStrapServer;
 
     @Value("${egov.localization.statelevel}")
