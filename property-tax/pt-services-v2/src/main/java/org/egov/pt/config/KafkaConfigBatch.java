@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
-import org.springframework.kafka.listener.AbstractMessageListenerContainer;
 import org.springframework.kafka.listener.ContainerProperties;
 
 import java.util.HashMap;
@@ -34,7 +33,7 @@ public class KafkaConfigBatch {
         );
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, propertyConfiguration.getBatchSize());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.springframework.kafka.support.serializer.JsonDeserializer.class);  
         props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 900000);
         props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 10000);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
@@ -48,9 +47,9 @@ public class KafkaConfigBatch {
                 kafkaProperties.getProperties()
         );
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.egov.tracer.kafka.deserializer.HashMapDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.springframework.kafka.support.serializer.JsonDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of("release-name-kafka-controller-headless.kafka-kraft:9092"));
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
         return props;
     }
 
@@ -95,7 +94,7 @@ public class KafkaConfigBatch {
         props.put(ProducerConfig.LINGER_MS_CONFIG, 500);
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, 1000);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of("release-name-kafka-controller-headless.kafka-kraft:9092"));
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
         return props;
     }
 
