@@ -4,7 +4,7 @@
     <artifactId>pgr-services</artifactId>
     <packaging>jar</packaging>
     <name>pgr-services</name>
-    <version>1.1.9</version>
+    <version>1.2.0</version>
     <properties>
         <log4j2.version>2.17.1</log4j2.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
