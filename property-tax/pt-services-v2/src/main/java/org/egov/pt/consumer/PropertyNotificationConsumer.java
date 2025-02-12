@@ -62,7 +62,7 @@ public class PropertyNotificationConsumer {
     }
 
 
-    @KafkaListener(topics = {"${kafka.topics.notification.payment}"})
+    @KafkaListener(topics = {"${kafka.topics.notification.payment}"}, containerFactory="kafkaListenerPaymentContainerFactory")
     public void listenPayments(final PaymentRequest paymentRequest, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         paymentNotificationService.process(null,topic,paymentRequest,null,paymentRequest.getRequestInfo());
     }
