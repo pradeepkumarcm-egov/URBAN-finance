@@ -189,8 +189,12 @@ const TLSelectAddress = ({ t, config, onSelect, userType, formData, setError, fo
               <Dropdown
                 className="form-field"
                 selected={
-                  checkingLocationForRenew || formData?.cpt?.details
-                    ? { ...formData?.cpt?.details?.address?.locality, i18nkey: formData?.cpt?.details?.address?.locality?.name }
+                  checkingLocationForRenew 
+                    ? (
+                      formData?.cpt?.details
+                        ? { ...formData?.cpt?.details?.address?.locality, i18nkey: formData?.cpt?.details?.address?.locality?.name }
+                        : { ...formData?.address?.locality, i18nkey: formData?.address?.locality?.name }
+                    )
                     : props.value || { ...formData?.cpt?.details?.address?.locality, i18nkey: formData?.cpt?.details?.address?.locality?.name }
                 }
                 option={localities}

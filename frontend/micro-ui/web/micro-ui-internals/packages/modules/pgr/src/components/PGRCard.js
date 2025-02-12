@@ -6,7 +6,9 @@ import { EmployeeModuleCard } from "@egovernments/digit-ui-react-components";
 
 const PGRCard = () => {
   const { t } = useTranslation();
-
+  const [count, setCount] = useState(0);
+  const tenantId = Digit.ULBService.getCurrentTenantId();
+  
   const allLinks = [
     { text: t("ES_PGR_INBOX"), link: "/digit-ui/employee/pgr/inbox" },
     { text: t("ES_PGR_NEW_COMPLAINT"), link: "/digit-ui/employee/pgr/complaint/create", accessTo: ["CSR"] },
@@ -29,13 +31,27 @@ const PGRCard = () => {
     }
   ]
 
+  // let response = await Digit.PGRService.count(tenantId, applicationStatus?.length > 0  ? {applicationStatus} : {} );4
+
+  useEffect(() => {
+    (async () => {
+      let response = await Digit.PGRService.count(tenantId, {} );
+      if (response?.count) {
+        setCount(response.count);
+      }
+    })();
+  });
+
+
   propsForCSR = propsForCSR.filter(link => link.role && Digit.Utils.didEmployeeHasRole(link.role) );
+
 
   const propsForModuleCard = {
     Icon: <Icon />,
     moduleName: t("ES_PGR_HEADER_COMPLAINT"),
     kpis: [
         {
+            count: count && count,
             label: t("TOTAL_PGR"),
             link: `/digit-ui/employee/pgr/inbox`
         },

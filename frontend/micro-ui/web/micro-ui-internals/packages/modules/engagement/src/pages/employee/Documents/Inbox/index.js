@@ -110,8 +110,7 @@ const Inbox = ({ tenants }) => {
                 pageSizeLimit={searchParams?.limit}
                 totalRecords={response?.totalCount}
                 title={"DOCUMENTS_DOCUMENT_HEADER"}
-                iconName={"document"}
-                links={links}
+                iconName={"document"}                
                 currentPage={parseInt(searchParams.offset / searchParams.limit)}
                 onNextPage={fetchNextPage}
                 onPrevPage={fetchPrevPage}
