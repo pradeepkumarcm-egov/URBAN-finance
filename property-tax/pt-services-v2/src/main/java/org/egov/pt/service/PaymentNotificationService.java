@@ -29,7 +29,6 @@ import org.egov.pt.web.models.collection.PaymentRequest;
 import org.egov.tracer.model.CustomException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -69,11 +68,12 @@ public class PaymentNotificationService {
 	 * queue
 	 * 
 	 * @param record
-	 *            The Object received from kafka topic
+	 *               The Object received from kafka topic
 	 * @param topic
-	 *            The topic name from which Object is received
+	 *               The topic name from which Object is received
 	 */
-	public void process(HashMap<String, Object> record, String topic) {
+	public void process(HashMap<String, Object> record, String topic, PaymentRequest paymentRequest,
+			DocumentContext documentContext, RequestInfo requestInfo) {
 
 		if (null == propertyConfiguration.getIsSMSNotificationEnabled())
 			propertyConfiguration.setIsSMSNotificationEnabled(true);
@@ -81,32 +81,30 @@ public class PaymentNotificationService {
 		if (propertyConfiguration.getIsSMSNotificationEnabled()) {
 
 			try {
-				String jsonString = new JSONObject(record).toString();
-				DocumentContext documentContext = JsonPath.parse(jsonString);
-				RequestInfo requestInfo = mapper.convertValue(record.get("RequestInfo"), RequestInfo.class);
 
 				List<Map<String, String>> valMaps = new LinkedList<>();
 
 				if (topic.equalsIgnoreCase(propertyConfiguration.getPaymentTopic())) {
-					valMaps.addAll(getValuesFromPayment(record));
-				}
-				else {
+					valMaps.addAll(getValuesFromPayment(paymentRequest));
+				} else {
 					valMaps.add(getValuesFromTransaction(documentContext));
 				}
-				
-				if(!CollectionUtils.isEmpty(valMaps)) {
-					if(topic.equalsIgnoreCase(propertyConfiguration.getPaymentTopic()) && null != valMaps.get(0).get("module")) {
-						if(!valMaps.get(0).get("module").equals(BUSINESSSERVICE_CODE)) {
+
+				if (!CollectionUtils.isEmpty(valMaps)) {
+					if (topic.equalsIgnoreCase(propertyConfiguration.getPaymentTopic())
+							&& null != valMaps.get(0).get("module")) {
+						if (!valMaps.get(0).get("module").equals(BUSINESSSERVICE_CODE)) {
 							return;
 						}
-					}else if(topic.equalsIgnoreCase(propertyConfiguration.getPgTopic()) && null != valMaps.get(0).get("moduleId")) {
-						if(!valMaps.get(0).get("moduleId").contains(BUSINESSSERVICE_CODE)) {
+					} else if (topic.equalsIgnoreCase(propertyConfiguration.getPgTopic())
+							&& null != valMaps.get(0).get("moduleId")) {
+						if (!valMaps.get(0).get("moduleId").contains(BUSINESSSERVICE_CODE)) {
 							return;
 						}
-					}else {
+					} else {
 						return;
 					}
-				}else {
+				} else {
 					return;
 				}
 
@@ -133,9 +131,12 @@ public class PaymentNotificationService {
 						customMessage = getCustomizedMessage(valMap, message, path);
 						smsRequests = getSMSRequests(mobileNumbers, customMessage, valMap);
 					}
-					/*if (valMap.get("oldPropertyId") == null
-							&& topic.equalsIgnoreCase(propertyConfiguration.getPaymentTopic()))
-						smsRequests.addAll(addOldpropertyIdAbsentSMS(messagejson, valMap, mobileNumbers));*/
+					/*
+					 * if (valMap.get("oldPropertyId") == null
+					 * && topic.equalsIgnoreCase(propertyConfiguration.getPaymentTopic()))
+					 * smsRequests.addAll(addOldpropertyIdAbsentSMS(messagejson, valMap,
+					 * mobileNumbers));
+					 */
 					if (!CollectionUtils.isEmpty(smsRequests)) {
 						sendSMS(smsRequests);
 						if (null == propertyConfiguration.getIsUserEventsNotificationEnabled())
@@ -199,11 +200,11 @@ public class PaymentNotificationService {
 	 * Generate and returns SMSRequest if oldPropertyId is not present
 	 * 
 	 * @param messagejson
-	 *            The list of messages received from localization
+	 *                      The list of messages received from localization
 	 * @param valMap
-	 *            The map containing all the values as key,value pairs
+	 *                      The map containing all the values as key,value pairs
 	 * @param mobileNumbers
-	 *            The list of mobileNumbers to which sms are to be sent
+	 *                      The list of mobileNumbers to which sms are to be sent
 	 * @return List of SMS request to be sent
 	 */
 	private List<SMSRequest> addOldpropertyIdAbsentSMS(String messagejson, Map<String, String> valMap,
@@ -220,7 +221,7 @@ public class PaymentNotificationService {
 	 * Returns the map of the values required from the record
 	 * 
 	 * @param documentContext
-	 *            The DocumentContext of the record Object
+	 *                        The DocumentContext of the record Object
 	 * @return The required values as key,value pair
 	 */
 	private Map<String, String> getValuesFromReceipt(DocumentContext documentContext) {
@@ -268,11 +269,11 @@ public class PaymentNotificationService {
 	 * 
 	 * @return The required values as key,value pair
 	 */
-	private List<Map<String, String>> getValuesFromPayment(HashMap<String, Object> record) {
+	private List<Map<String, String>> getValuesFromPayment(PaymentRequest paymentRequest) {
 		BigDecimal totalAmount, amountPaid;
 		String consumerCode, transactionId, paymentMode, tenantId, mobileNumber, module;
 		Map<String, String> valMap = new HashMap<>();
-		PaymentRequest paymentRequest = mapper.convertValue(record, PaymentRequest.class);
+		//PaymentRequest paymentRequest = mapper.convertValue(record, PaymentRequest.class);
 		Payment payment = paymentRequest.getPayment();
 
 		List<Map<String, String>> listOfValMap = new LinkedList<>();
@@ -318,7 +319,7 @@ public class PaymentNotificationService {
 	 * Returns the map of the values required from the record
 	 * 
 	 * @param documentContext
-	 *            The DocumentContext of the record Object
+	 *                        The DocumentContext of the record Object
 	 * @return The required values as key,value pair
 	 */
 	private Map<String, String> getValuesFromTransaction(DocumentContext documentContext) {
@@ -358,9 +359,9 @@ public class PaymentNotificationService {
 	 * Searches the property and extracts the needed values in map
 	 * 
 	 * @param valMap
-	 *            The map of the required values
+	 *                    The map of the required values
 	 * @param requestInfo
-	 *            The requestInfo of the propertyRequest
+	 *                    The requestInfo of the propertyRequest
 	 * @return Map of required values fetched from the property
 	 */
 	private Map<String, List<String>> getPropertyAttributes(Map<String, String> valMap, RequestInfo requestInfo) {
@@ -398,13 +399,13 @@ public class PaymentNotificationService {
 	 * Adds MobileNumber of logged in user
 	 * 
 	 * @param topic
-	 *            topic from which listening
+	 *                      topic from which listening
 	 * @param requestInfo
-	 *            RequestInfo of the request
+	 *                      RequestInfo of the request
 	 * @param valMap
-	 *            The map of the required values
+	 *                      The map of the required values
 	 * @param mobileNumbers
-	 *            The list of mobileNumbers of owner of properties
+	 *                      The list of mobileNumbers of owner of properties
 	 */
 	private void addUserNumber(String topic, RequestInfo requestInfo, Map<String, String> valMap,
 			List<String> mobileNumbers) {
@@ -419,9 +420,9 @@ public class PaymentNotificationService {
 	 * Returns the jsonPath
 	 * 
 	 * @param topic
-	 *            The topic name from which object is received
+	 *               The topic name from which object is received
 	 * @param valMap
-	 *            The map of the required values
+	 *               The map of the required values
 	 * @return The jsonPath
 	 */
 	private String getJsonPath(String topic, Map<String, String> valMap) {
@@ -443,11 +444,11 @@ public class PaymentNotificationService {
 	 * Returns customized message for
 	 * 
 	 * @param valMap
-	 *            The map of the required values
+	 *                The map of the required values
 	 * @param message
-	 *            The message template from localization
+	 *                The message template from localization
 	 * @param path
-	 *            The json path used to fetch message
+	 *                The json path used to fetch message
 	 * @return Customized message depending on values in valMap
 	 */
 	private String getCustomizedMessage(Map<String, String> valMap, String message, String path) {
@@ -465,9 +466,9 @@ public class PaymentNotificationService {
 
 	/**
 	 * @param message
-	 *            The message template from localization
+	 *                The message template from localization
 	 * @param valMap
-	 *            The map of the required values
+	 *                The map of the required values
 	 * @return Customized message depending on values in valMap
 	 */
 	private String getCustomizedOnlinePaymentMessage(String message, Map<String, String> valMap) {
@@ -482,9 +483,9 @@ public class PaymentNotificationService {
 
 	/**
 	 * @param message
-	 *            The message template from localization
+	 *                The message template from localization
 	 * @param valMap
-	 *            The map of the required values
+	 *                The map of the required values
 	 * @return Customized message depending on values in valMap
 	 */
 	private String getCustomizedOfflinePaymentMessage(String message, Map<String, String> valMap) {
@@ -498,9 +499,9 @@ public class PaymentNotificationService {
 
 	/**
 	 * @param message
-	 *            The message template from localization
+	 *                The message template from localization
 	 * @param valMap
-	 *            The map of the required values
+	 *                The map of the required values
 	 * @return Customized message depending on values in valMap
 	 */
 	private String getCustomizedPaymentFailMessage(String message, Map<String, String> valMap) {
@@ -512,9 +513,9 @@ public class PaymentNotificationService {
 
 	/**
 	 * @param message
-	 *            The message template from localization
+	 *                The message template from localization
 	 * @param valMap
-	 *            The map of the required values
+	 *                The map of the required values
 	 * @return Customized message depending on values in valMap
 	 */
 	private String getCustomizedOldPropertyIdAbsentMessage(String message, Map<String, String> valMap) {
@@ -527,9 +528,10 @@ public class PaymentNotificationService {
 	 * Creates SMSRequest for the given mobileNumber with the given message
 	 * 
 	 * @param mobileNumbers
-	 *            The set of mobileNumber for which SMSRequest has to be created
+	 *                          The set of mobileNumber for which SMSRequest has to
+	 *                          be created
 	 * @param customizedMessage
-	 *            The message to sent
+	 *                          The message to sent
 	 * @return List of SMSRequest
 	 */
 	private List<SMSRequest> getSMSRequests(List<String> mobileNumbers, String customizedMessage,
@@ -565,7 +567,7 @@ public class PaymentNotificationService {
 	 * Send the SMSRequest on the SMSNotification kafka topic
 	 * 
 	 * @param smsRequestList
-	 *            The list of SMSRequest to be sent
+	 *                       The list of SMSRequest to be sent
 	 */
 	private void sendSMS(List<SMSRequest> smsRequestList) {
 		log.info("Sending SMS.....");
