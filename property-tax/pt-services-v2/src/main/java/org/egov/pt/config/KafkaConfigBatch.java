@@ -38,6 +38,8 @@ public class KafkaConfigBatch {
         props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 10000);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
+        props.put("spring.kafka.consumer.properties.spring.json.trusted.packages", "org.egov.collection.model");
+
         return props;
     }
 
@@ -50,6 +52,8 @@ public class KafkaConfigBatch {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.springframework.kafka.support.serializer.JsonDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
+        props.put("spring.kafka.consumer.properties.spring.json.trusted.packages", "org.egov.collection.model");
+
         return props;
     }
 
