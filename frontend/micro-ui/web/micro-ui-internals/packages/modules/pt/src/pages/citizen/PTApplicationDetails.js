@@ -33,7 +33,6 @@ const PTApplicationDetails = () => {
   const [popup, setpopup] = useState(false);
   const [showToast, setShowToast] = useState(null);
 
-  console.log("Popup", popup);
   // const tenantId = Digit.ULBService.getCurrentTenantId();
   const { data: storeData } = Digit.Hooks.useStore.getInitData();
   const { tenants } = storeData || {};
