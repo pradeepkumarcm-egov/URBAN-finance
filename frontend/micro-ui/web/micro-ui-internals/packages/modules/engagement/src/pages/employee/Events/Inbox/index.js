@@ -127,8 +127,7 @@ const Inbox = ({ tenants, parentRoute }) => {
         pageSizeLimit={pageSize}
         totalRecords={data?.totalCount}
         title={"EVENTS_EVENTS_HEADER"}
-        iconName={"calender"}
-        links={links}
+        iconName={"calender"}        
         currentPage={parseInt(pageOffset / pageSize)}
         onNextPage={fetchNextPage}
         onPrevPage={fetchPrevPage}

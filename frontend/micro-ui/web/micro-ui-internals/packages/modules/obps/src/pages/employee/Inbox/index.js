@@ -115,11 +115,11 @@ const Inbox = ({ parentRoute, userType }) => {
     {},
     t
   );
+  const isEmployee = userType === "employee";
 
-  const { isLoading: isInboxLoading, data: { table, statuses, totalCount } = {} } = Digit.Hooks.obps.useBPAInbox({
-    tenantId,
-    filters: { ...formState },
-  });
+  const { isLoading: isInboxLoading, data: { table, statuses, totalCount } = {} } = isEmployee
+    ? Digit.Hooks.obps.useBPAInbox({ tenantId, filters: { ...formState } })
+    : Digit.Hooks.obps.useBPAInboxV1({ tenantId, filters: { ...formState } });
 
   const PropsForInboxLinks = {
     logoIcon: <CaseIcon />,
