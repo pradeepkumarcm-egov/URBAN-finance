@@ -2,64 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
-import { PGRReducers } from "@egovernments/digit-ui-module-pgr";
-import { PTModule, PTLinks, PTComponents } from "@egovernments/digit-ui-module-pt";
-import { MCollectModule, MCollectLinks } from "@egovernments/digit-ui-module-mcollect";
-// import { TLModule, TLLinks } from "@egovernments/digit-ui-module-tl";
-import { initFSMComponents } from "@egovernments/digit-ui-module-fsm";
-import { initPGRComponents } from "@egovernments/digit-ui-module-pgr";
-import { initDSSComponents } from "@egovernments/digit-ui-module-dss";
-import { initHRMSComponents } from "@egovernments/digit-ui-module-hrms";
-import { initReceiptsComponents, ReceiptsModule } from "@egovernments/digit-ui-module-receipts";
-// import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
-import { initMCollectComponents } from "@egovernments/digit-ui-module-mcollect";
-// import { initTLComponents } from "@egovernments/digit-ui-module-tl";
-import { PaymentModule, PaymentLinks, paymentConfigs } from "@egovernments/digit-ui-module-common";
-import { HRMSModule } from "@egovernments/digit-ui-module-hrms";
-import { initOBPSComponents } from "@egovernments/digit-ui-module-obps";
-import { initEngagementComponents } from "@egovernments/digit-ui-module-engagement";
-import { initNOCComponents } from "@egovernments/digit-ui-module-noc";
-import { initWSComponents } from "@egovernments/digit-ui-module-ws";
+import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
-import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
-import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-bills";
-
-// import {initCustomisationComponents} from "./customisations";
-
-// import { PGRModule, PGRLinks } from "@egovernments/digit-ui-module-pgr";
-// import { Body, TopBar } from "@egovernments/digit-ui-react-components";
-// import "@egovernments/digit-ui-css/example/index.css";
-
-// import * as comps from "@egovernments/digit-ui-react-components";
-
-// import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
 import { pgrCustomizations, pgrComponents } from "./pgr";
 
 var Digit = window.Digit || {};
 
-const enabledModules = [
-  "PGR",
-  "FSM",
-  "Payment",
-  "PT",
-  "QuickPayLinks",
-  "DSS",
-  "MCollect",
-  "HRMS",
-  "TL",
-  "Receipts",
-  "Reports",
-  "OBPS",
-  "Engagement",
-  "NOC",
-  "WS",
-  "CommonPT",
-  "NDSS",
-  "Bills",
-  "SW",
-  "BillAmendment",
-];
+const enabledModules = ["TL"];
 
 const initTokens = (stateCode) => {
   const userType = window.sessionStorage.getItem("userType") || process.env.REACT_APP_USER_TYPE || "CITIZEN";
@@ -91,38 +41,9 @@ const initTokens = (stateCode) => {
 const initDigitUI = () => {
   window?.Digit.ComponentRegistryService.setupRegistry({
     ...pgrComponents,
-    PaymentModule,
-    ...paymentConfigs,
-    PaymentLinks,
-    PTModule,
-    PTLinks,
-    ...PTComponents,
-    MCollectLinks,
-    MCollectModule,
-    HRMSModule,
-    ReceiptsModule,
-    BillsModule,
-
-    // TLModule,
-    // TLLinks,
   });
 
-  initFSMComponents();
-  initPGRComponents();
-  initDSSComponents();
-  initMCollectComponents();
-  initHRMSComponents();
   initTLComponents();
-  initReceiptsComponents();
-  // initReportsComponents();
-  initOBPSComponents();
-  initEngagementComponents();
-  initNOCComponents();
-  initWSComponents();
-  initCommonPTComponents();
-  initBillsComponents();
-
-  // initCustomisationComponents();
 
   const moduleReducers = (initData) => ({
     pgr: PGRReducers(initData),

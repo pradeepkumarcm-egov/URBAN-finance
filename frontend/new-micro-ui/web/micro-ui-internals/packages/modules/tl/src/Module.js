@@ -1,4 +1,3 @@
-import { Loader } from "@egovernments/digit-ui-react-components";
 import React from "react";
 
 export const TLModule = ({ stateCode, userType, tenants }) => {
@@ -6,9 +5,9 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
   const moduleCode = ["sample", "common", "workflow"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
-    stateCode,
+    // stateCode,
     moduleCode,
-    language,
+    // language,/
   });
 
   if (isLoading) {
@@ -21,15 +20,13 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
       </AppContainer>
     </Switch>
   );
-
-  const componentsToRegister = {
-    SampleModule,
-  };
 };
 
-export const initSampleComponents = () => {
-  overrideHooks();
-  updateCustomConfigs();
+const componentsToRegister = {
+  SampleModule,
+};
+
+export const initTLComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);
   });
