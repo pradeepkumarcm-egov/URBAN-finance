@@ -1,9 +1,9 @@
-# digit-ui-module-commonpt
+# digit-ui-module-mcollect
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-commonpt
+npm install --save @egovernments/digit-ui-module-mcollect
 ```
 
 ## Limitation
