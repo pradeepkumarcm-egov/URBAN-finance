@@ -56,7 +56,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// import java.nio.file.OpenOption;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -69,8 +71,8 @@ public class ActionService {
         return actionRepository.findByName(name);
     }
 
-    public Action getActionById(Long id) {
-        return actionRepository.findOne(id);
+    public Optional<Action> getActionById(Long id) {
+        return actionRepository.findById(id);
     }
 
     @Transactional

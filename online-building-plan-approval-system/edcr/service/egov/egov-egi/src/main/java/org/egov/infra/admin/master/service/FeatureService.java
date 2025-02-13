@@ -57,6 +57,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly=true)
@@ -73,8 +74,8 @@ public class FeatureService {
         return featureRepository.findByModuleId(moduleId);
     }
 
-    public Feature getFeatureById(Long id) {
-        return featureRepository.findOne(id);
+    public Optional<Feature> getFeatureById(Long id) {
+        return featureRepository.findById(id);
     }
 
     @Transactional

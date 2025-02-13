@@ -56,6 +56,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.egov.infra.admin.master.entity.AppConfig.FETCH_WITH_VALUES;
 import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
@@ -66,7 +67,7 @@ public interface AppConfigRepository extends JpaRepository<AppConfig, Long> {
     @EntityGraph(value = FETCH_WITH_VALUES, type = FETCH)
     AppConfig findByModuleNameAndKeyName(String moduleName, String keyName);
 
-    AppConfig findById(Long id);
+    Optional findById(Long id);
 
     @EntityGraph(value = FETCH_WITH_VALUES, type = FETCH)
     AppConfig findByKeyName(final String keyName);

@@ -56,6 +56,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author subhash
@@ -82,8 +83,8 @@ public class DepartmentService {
         departmentRepository.save(department);
     }
 
-    public Department getDepartmentById(final Long id) {
-        return departmentRepository.findOne(id);
+    public Optional<Department> getDepartmentById(final Long id) {
+        return departmentRepository.findById(id);
     }
 
     public Department getDepartmentByName(final String name) {
@@ -91,7 +92,7 @@ public class DepartmentService {
     }
 
     public List<Department> getAllDepartments() {
-        return departmentRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
+        return departmentRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public Department getDepartmentByCode(final String code) {

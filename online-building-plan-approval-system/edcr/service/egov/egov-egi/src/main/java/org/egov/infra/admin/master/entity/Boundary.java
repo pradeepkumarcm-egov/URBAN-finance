@@ -59,7 +59,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
@@ -97,12 +97,12 @@ public class Boundary extends AbstractAuditable {
     private Long id;
 
     @Length(max = 512)
-    @SafeHtml
+    
     @NotBlank
     private String name;
 
     @Length(max = 25)
-    @SafeHtml
+    
     @NotBlank
     private String code;
 
@@ -133,7 +133,7 @@ public class Boundary extends AbstractAuditable {
 
     private Long bndryId;
 
-    @SafeHtml
+    
     private String localName;
 
     private Float longitude;

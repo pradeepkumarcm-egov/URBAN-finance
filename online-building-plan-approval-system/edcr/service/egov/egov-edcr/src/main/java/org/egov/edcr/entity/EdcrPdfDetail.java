@@ -17,7 +17,7 @@ import javax.persistence.Transient;
 
 import org.egov.infra.filestore.entity.FileStoreMapper;
 import org.egov.infra.persistence.entity.AbstractAuditable;
-import org.hibernate.validator.constraints.SafeHtml;
+
 
 
 @Entity
@@ -50,7 +50,7 @@ public class EdcrPdfDetail extends AbstractAuditable {
     @Transient
     private List<String> violations;
     
-    @SafeHtml
+    
     private String tenantId;
 
     @Override

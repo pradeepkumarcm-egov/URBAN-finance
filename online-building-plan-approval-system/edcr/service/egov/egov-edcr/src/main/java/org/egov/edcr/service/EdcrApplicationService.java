@@ -156,11 +156,11 @@ public class EdcrApplicationService {
     }
 
     public List<EdcrApplication> findAll() {
-        return edcrApplicationRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
+        return edcrApplicationRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public EdcrApplication findOne(Long id) {
-        return edcrApplicationRepository.findOne(id);
+        return edcrApplicationRepository.findById(id).orElse(null);
     }
 
     public EdcrApplication findByApplicationNo(String appNo) {
@@ -192,14 +192,14 @@ public class EdcrApplicationService {
     }
 
     public List<EdcrApplication> getEdcrApplications() {
-        Pageable pageable = new PageRequest(0, 25, Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(0, 25, Sort.Direction.DESC, "id");
         Page<EdcrApplication> edcrApplications = edcrApplicationRepository.findAll(pageable);
         return edcrApplications.getContent();
     }
 
     @ReadOnly
     public Page<SearchBuildingPlanScrutinyForm> planScrutinyPagedSearch(SearchBuildingPlanScrutinyForm searchRequest) {
-        final Pageable pageable = new PageRequest(searchRequest.pageNumber(), searchRequest.pageSize(),
+        final Pageable pageable = PageRequest.of(searchRequest.pageNumber(), searchRequest.pageSize(),
                 searchRequest.orderDir(), searchRequest.orderBy());
         List<SearchBuildingPlanScrutinyForm> searchResults = new ArrayList<>();
         Page<EdcrApplicationDetail> dcrApplications = edcrApplicationDetailRepository

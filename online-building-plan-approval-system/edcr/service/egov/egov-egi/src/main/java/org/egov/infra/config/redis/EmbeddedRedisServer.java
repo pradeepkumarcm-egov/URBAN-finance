@@ -48,10 +48,15 @@
 
 package org.egov.infra.config.redis;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+// import java.io.IOException;
+// import java.net.URISyntaxException;
 
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+
+// import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -69,22 +74,30 @@ public class EmbeddedRedisServer implements InitializingBean, DisposableBean, Be
     private RedisServer redisServer;
 
     @Override
-    public void afterPropertiesSet() {
-        try {
-            redisServer = new RedisServer(Protocol.DEFAULT_PORT);
-            redisServer.start();
-        } catch (IOException | URISyntaxException e) {
-            LOG.error("Error occurred when starting redis server", e);
-        }
-    }
+public void afterPropertiesSet() throws IOException {
+    redisServer = new RedisServer(Protocol.DEFAULT_PORT);
+    redisServer.start();
+}
+
+    // @Override
+    // public void afterPropertiesSet() {
+    //     try {
+    //         redisServer = new RedisServer(Protocol.DEFAULT_PORT);
+    //         redisServer.start();
+    //     } catch (RuntimeException e) {
+    //         LOG.error("Error occurred when starting redis server", e);
+    //     }
+    // }
 
     @Override
     public void destroy() {
             try {
                 if (redisServer != null)
                     redisServer.stop();
-            } catch (InterruptedException e) {
-                LOG.error("Error occurred when stoping redis server", e);
+            } catch (RuntimeException e) {
+                LOG.error("Runtime error occurred when stopping Redis server", e);
+            } catch (Exception e) {
+                LOG.error("Unexpected error occurred when stopping Redis server", e);
             }
     }
 

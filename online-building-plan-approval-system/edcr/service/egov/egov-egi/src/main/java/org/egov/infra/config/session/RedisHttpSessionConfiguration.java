@@ -55,9 +55,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
-import org.springframework.session.web.http.CookieHttpSessionStrategy;
+import org.springframework.session.web.http.CookieHttpSessionIdResolver;
+// import org.springframework.session.web.http.CookieHttpSessionStrategy;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
+import org.springframework.session.web.http.HttpSessionIdResolver;
 
 import static org.egov.infra.security.utils.SecurityConstants.SESSION_COOKIE_NAME;
 import static org.egov.infra.security.utils.SecurityConstants.SESSION_COOKIE_PATH;
@@ -82,13 +84,21 @@ public class RedisHttpSessionConfiguration {
         return serializer;
     }
 
-    @Bean
-    public CookieHttpSessionStrategy cookieHttpSessionStrategy(CookieSerializer cookieSerializer) {
-        CookieHttpSessionStrategy cookieHttpSession = new CookieHttpSessionStrategy();
-        cookieHttpSession.setCookieSerializer(cookieSerializer);
-        return cookieHttpSession;
-    }
+    // @Bean
+    // public CookieHttpSessionStrategy cookieHttpSessionStrategy(CookieSerializer cookieSerializer) {
+    //     CookieHttpSessionStrategy cookieHttpSession = new CookieHttpSessionStrategy();
+    //     cookieHttpSession.setCookieSerializer(cookieSerializer);
+    //     return cookieHttpSession;
+    // }
 
+@Bean
+public HttpSessionIdResolver httpSessionIdResolver(CookieSerializer cookieSerializer) {
+    CookieHttpSessionIdResolver sessionIdResolver = new CookieHttpSessionIdResolver();
+    sessionIdResolver.setCookieSerializer(cookieSerializer);
+    return sessionIdResolver;
+}
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public SpringSessionBackedSessionRegistry springSessionBackedSessionRegistry(
             FindByIndexNameSessionRepository sessionRepository) {

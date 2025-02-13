@@ -51,7 +51,7 @@ package org.egov.infra.security.audit.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.egov.infra.admin.master.entity.User;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,6 +66,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.egov.infra.config.core.LocalizationSettings.DEFAULT_DATE_TIME_PATTERN;
 import static org.egov.infra.config.core.LocalizationSettings.DEFAULT_TIME_ZONE;
@@ -84,13 +85,13 @@ public class LoginAudit implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userid")
-    private User user;
+    private Optional<User> user;
 
-    @SafeHtml
+    
     @NotBlank
     private String ipAddress;
 
-    @SafeHtml
+    
     @NotBlank
     private String userAgent;
 
@@ -110,11 +111,11 @@ public class LoginAudit implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
+    public Optional<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Optional<User> user) {
         this.user = user;
     }
 

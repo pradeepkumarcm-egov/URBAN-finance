@@ -56,7 +56,7 @@ import javax.persistence.Table;
 import org.egov.infra.persistence.entity.AbstractAuditable;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.SafeHtml;
+
 
 @Entity
 @Table(name = "EGDCR_LAYERNAME", schema = "state")
@@ -70,11 +70,11 @@ public class LayerName extends AbstractAuditable {
 	@Id
 	@GeneratedValue(generator = SEQ_LAYERNAME, strategy = GenerationType.SEQUENCE)
 	private Long id;
-	@SafeHtml
+	
 	@NotEmpty
 	@Length(min = 1, max = 250)
 	private String key;
-	@SafeHtml
+	
 	@NotEmpty
 	@Length(min = 1, max = 250)
 	private String value;

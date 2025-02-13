@@ -48,6 +48,8 @@
 
 package org.egov.infra.admin.master.service.es;
 
+import java.util.Optional;
+
 import org.egov.infra.admin.master.entity.es.CityIndex;
 import org.egov.infra.admin.master.repository.es.CityIndexRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,8 @@ public class CityIndexService {
 	@Autowired
 	private CityIndexRepository cityIndexRepository;
 	
-	public CityIndex findOne(String id){
-		return cityIndexRepository.findOne(id);
+	public Optional<CityIndex> findOne(String id){
+		return cityIndexRepository.findById(id);
 	}
 	
 	public Iterable<CityIndex> findAll(){		

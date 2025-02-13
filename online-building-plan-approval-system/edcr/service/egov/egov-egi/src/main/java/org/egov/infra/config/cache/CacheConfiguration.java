@@ -59,10 +59,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.core.RedisTemplate;
+
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.time.Duration;
 
 @Configuration
 @EnableCaching(proxyTargetClass = true)
@@ -70,7 +77,7 @@ import java.util.List;
 public class CacheConfiguration extends CachingConfigurerSupport {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    // private RedisTemplate redisTemplate;
     private List<String> cities;
 
     @Bean
@@ -94,15 +101,26 @@ public class CacheConfiguration extends CachingConfigurerSupport {
     }
 
     @Bean
-    @Override
-    public CacheManager cacheManager() {
-        RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
-        redisCacheManager.setTransactionAware(true);
-        redisCacheManager.setCacheNames(cities);
-        redisCacheManager.setUsePrefix(true);
-        redisCacheManager.setDefaultExpiration(60 * 60L);
-        return redisCacheManager;
-    }
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+            .entryTtl(Duration.ofHours(1))  // Equivalent to setDefaultExpiration(60 * 60L)
+            .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
+
+        return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
+            .cacheDefaults(cacheConfig)
+            .transactionAware()
+            .build();
+}
+    // @Bean
+    // @Override
+    // public CacheManager cacheManager() {
+    //     RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
+    //     redisCacheManager.setTransactionAware(true);
+    //     redisCacheManager.setCacheNames(cities);
+    //     redisCacheManager.setUsePrefix(true);
+    //     redisCacheManager.setDefaultExpiration(60 * 60L);
+    //     return redisCacheManager;
+    // }
 
     @Resource(name = "cities")
     public void setCities(List<String> cities) {

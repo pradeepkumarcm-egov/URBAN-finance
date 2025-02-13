@@ -54,9 +54,12 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisPooled;
 
 import java.util.List;
 
@@ -87,24 +90,34 @@ public class RedisServerConfiguration {
         return new EmbeddedRedisServer();
     }
 
-    @Bean
-    public JedisConnectionFactory redisConnectionFactory() {
+    JedisPooled jedis = new JedisPooled(redisHost, redisPort);
 
-        if (!usingEmbeddedRedis && sentinelEnabled) {
-            RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration();
-            sentinelConfig.master(sentinelMasterName);
-            for (String host : sentinelHosts) {
-                String[] hostConfig = host.split(":");
-                sentinelConfig.sentinel(hostConfig[0].trim(), Integer.valueOf(hostConfig[1].trim()));
-            }
-            return new JedisConnectionFactory(sentinelConfig, redisPoolConfig());
-        } else {
-            final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisPoolConfig());
-            jedisConnectionFactory.setHostName(redisHost);
-            jedisConnectionFactory.setPort(redisPort);
-            return jedisConnectionFactory;
-        }
-    }
+    @Bean
+public JedisConnectionFactory redisConnectionFactory() {
+    RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
+    JedisClientConfiguration clientConfig = JedisClientConfiguration.builder().usePooling().build();
+    return new JedisConnectionFactory(config, clientConfig);
+}
+
+
+    // @Bean
+    // public JedisConnectionFactory redisConnectionFactory() {
+
+    //     if (!usingEmbeddedRedis && sentinelEnabled) {
+    //         RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration();
+    //         sentinelConfig.master(sentinelMasterName);
+    //         for (String host : sentinelHosts) {
+    //             String[] hostConfig = host.split(":");
+    //             sentinelConfig.sentinel(hostConfig[0].trim(), Integer.valueOf(hostConfig[1].trim()));
+    //         }
+    //         return new JedisConnectionFactory(sentinelConfig, redisPoolConfig());
+    //     } else {
+    //         final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisPoolConfig());
+    //         jedisConnectionFactory.setHostName(redisHost);
+    //         jedisConnectionFactory.setPort(redisPort);
+    //         return jedisConnectionFactory;
+    //     }
+    // }
 
     @Bean
     public JedisPoolConfig redisPoolConfig() {

@@ -86,16 +86,20 @@ public class UserService {
         return userRepository.findUserRolesByUserNameAndTenantId(userName, ApplicationThreadLocals.getTenantID());
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findOne(id);
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     public User getUserRefById(Long id) {
         return userRepository.getOne(id);
     }
 
-    public User getCurrentUser() {
-        return userRepository.findOne(ApplicationThreadLocals.getUserId());
+    // public User getCurrentUser() {
+    //     return userRepository.findOne(ApplicationThreadLocals.getUserId());
+    // }
+
+    public Optional<User> getCurrentUser() {
+        return userRepository.findById(ApplicationThreadLocals.getUserId());
     }
 
     public User getUserByUsername(String userName) {

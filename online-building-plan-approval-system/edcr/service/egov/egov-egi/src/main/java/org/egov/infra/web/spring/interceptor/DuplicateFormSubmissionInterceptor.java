@@ -64,17 +64,17 @@ import org.apache.commons.lang.StringUtils;
 import org.egov.infra.exception.ApplicationRuntimeException;
 import org.egov.infra.web.spring.annotation.DuplicateRequestToken;
 import org.egov.infra.web.spring.annotation.ValidateToken;
-import org.owasp.esapi.ESAPI;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
-public class DuplicateFormSubmissionInterceptor extends HandlerInterceptorAdapter {
+public class DuplicateFormSubmissionInterceptor implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DuplicateFormSubmissionInterceptor.class);
     private static final String TOKEN_NAME = "tokenName";
     private static final String ERROR_PAGE = "/error/409";
@@ -84,18 +84,18 @@ public class DuplicateFormSubmissionInterceptor extends HandlerInterceptorAdapte
         this.errorPage = errorPage;
     }
 
-    @Override
+    // @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
-        if (handler != null && handler instanceof HandlerMethod
+        if (handler instanceof HandlerMethod
                 && ((HandlerMethod) handler).getMethodAnnotation(ValidateToken.class) != null) {
             final HttpSession session = request.getSession();
             synchronized (session) {
-                if (havingValidToken(request, session))
+                if (havingValidToken(request, session)) {
                     removeToken(request, session);
-                else {
-                    if (Arrays.asList(new String[] { "edcr", "egi" }).contains(request.getContextPath())) {
-                        ESAPI.httpUtilities().sendRedirect(request.getContextPath() + errorPage);
+                } else {
+                    if (Arrays.asList("edcr", "egi").contains(request.getContextPath())) {
+                        response.sendRedirect(request.getContextPath() + errorPage);
                         return false;
                     } else {
                         throw new ApplicationRuntimeException("Invalid URL!!!");
@@ -103,10 +103,10 @@ public class DuplicateFormSubmissionInterceptor extends HandlerInterceptorAdapte
                 }
             }
         }
-        return super.preHandle(request, response, handler);
+        return true;
     }
 
-    @Override
+    // @Override
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
             final ModelAndView modelAndView) throws Exception {
         if (handler != null && handler instanceof HandlerMethod) {

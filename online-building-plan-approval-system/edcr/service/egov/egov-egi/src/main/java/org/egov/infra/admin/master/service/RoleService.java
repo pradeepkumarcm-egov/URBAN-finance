@@ -56,6 +56,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -84,15 +85,15 @@ public class RoleService {
     }
 
     public List<Role> getAllRoles() {
-        return roleRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
+        return roleRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public List<Role> getNonInternalRoles() {
-        return roleRepository.findByInternalIsFalse(new Sort(Sort.Direction.ASC, "name"));
+        return roleRepository.findByInternalIsFalse(Sort.by(Sort.Direction.ASC, "name"));
     }
 
-    public Role getRoleById(final Long roleID) {
-        return roleRepository.findOne(roleID);
+    public Optional<Role> getRoleById(final Long roleID) {
+        return roleRepository.findById(roleID);
     }
 
     public Role getRoleByName(final String name) {

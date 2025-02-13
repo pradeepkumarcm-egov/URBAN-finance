@@ -60,6 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.egov.infra.utils.ApplicationConstant.HYPHEN;
@@ -92,7 +93,7 @@ public class CrossHierarchyService {
         for (Boundary existingBoundary : existingBoundaries) {
             List<CrossHierarchy> existingCrossHierarchy = getAllByParentAndChildBoundaryId(boundary.getId(), existingBoundary.getId());
             if (!existingCrossHierarchy.isEmpty())
-                crossHierarchyRepository.delete(existingCrossHierarchy);
+                crossHierarchyRepository.deleteAll(existingCrossHierarchy);
         }
         for (Boundary mappedBoundary : new HashSet<>(mappedBoundaries)) {
             List<CrossHierarchy> existingCrossHierarchy = getAllByParentAndChildBoundaryId(boundary.getId(), mappedBoundary.getId());
@@ -128,8 +129,8 @@ public class CrossHierarchyService {
         return crossHierarchyRepository.findChildBoundariesByActiveParentBoundaryId(parentId);
     }
 
-    public CrossHierarchy findById(Long id) {
-        return crossHierarchyRepository.findOne(id);
+    public Optional<CrossHierarchy> findById(Long id) {
+        return crossHierarchyRepository.findById(id);
     }
 
     public List<Boundary> findChildBoundariesByParentBoundary(String boundaryTypeName, String hierarchyTypeName,

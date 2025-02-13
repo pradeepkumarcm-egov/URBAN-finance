@@ -56,6 +56,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -79,8 +80,8 @@ public class BoundaryTypeService {
         boundaryTypeRepository.save(boundaryType);
     }
 
-    public BoundaryType getBoundaryTypeById(final Long id) {
-        return boundaryTypeRepository.findOne(id);
+    public Optional<BoundaryType> getBoundaryTypeById(final Long id) {
+        return boundaryTypeRepository.findById(id);
     }
 
     public BoundaryType getBoundaryTypeByName(final String name) {

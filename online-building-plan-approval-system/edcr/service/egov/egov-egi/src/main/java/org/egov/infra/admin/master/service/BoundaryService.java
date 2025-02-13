@@ -119,8 +119,8 @@ public class BoundaryService {
         boundaryRepository.save(boundary);
     }
 
-    public Boundary getBoundaryById(final Long id) {
-        return boundaryRepository.findOne(id);
+    public Optional<Boundary> getBoundaryById(final Long id) {
+        return boundaryRepository.findById(id);
     }
 
     public List<Boundary> getAllBoundariesOrderByBoundaryNumAsc(BoundaryType boundaryType) {
@@ -132,7 +132,7 @@ public class BoundaryService {
     }
 
     public Page<Boundary> getPageOfBoundaries(BoundarySearchRequest searchRequest) {
-        Pageable pageable = new PageRequest(searchRequest.pageNumber(), searchRequest.pageSize(),
+        Pageable pageable = PageRequest.of(searchRequest.pageNumber(), searchRequest.pageSize(),
                 searchRequest.orderDir(), searchRequest.orderBy());
         return boundaryRepository.findByBoundaryTypeId(searchRequest.getBoundaryTypeId(), pageable);
     }
@@ -143,7 +143,7 @@ public class BoundaryService {
 
     public List<Boundary> getParentBoundariesByBoundaryId(final Long boundaryId) {
         List<Boundary> boundaryList = new ArrayList<>();
-        final Boundary bndry = getBoundaryById(boundaryId);
+        final Boundary bndry = getBoundaryById(boundaryId).orElse(null);
         if (bndry != null) {
             boundaryList.add(bndry);
             if (bndry.getParent() != null)

@@ -49,14 +49,14 @@
 package org.egov.infra.web.spring.interceptor;
 
 import org.owasp.esapi.ESAPI;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CacheControlInterceptor extends HandlerInterceptorAdapter {
+public class CacheControlInterceptor implements HandlerInterceptor {
 
-    @Override
+    // @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
         if (response != null) {
@@ -65,6 +65,6 @@ public class CacheControlInterceptor extends HandlerInterceptorAdapter {
             ESAPI.httpUtilities().addHeader(response, "Expires", "-1");
             ESAPI.httpUtilities().addHeader(response, "Vary", "*");
         }
-        return super.preHandle(request, response, handler);
+        return true;
     }
 }
