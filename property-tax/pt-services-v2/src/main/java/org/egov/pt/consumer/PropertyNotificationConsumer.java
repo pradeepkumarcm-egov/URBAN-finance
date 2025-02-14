@@ -1,13 +1,20 @@
 package org.egov.pt.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+
 import lombok.extern.slf4j.Slf4j;
+
+import org.egov.common.contract.request.RequestInfo;
 import org.egov.pt.config.PropertyConfiguration;
 import org.egov.pt.service.NotificationService;
 import org.egov.pt.service.PaymentNotificationService;
 import org.egov.pt.web.models.Property;
 import org.egov.pt.web.models.PropertyDetail;
 import org.egov.pt.web.models.PropertyRequest;
+import org.egov.pt.web.models.collection.PaymentRequest;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -32,6 +39,10 @@ public class PropertyNotificationConsumer {
     private PaymentNotificationService paymentNotificationService;
 
 
+	@Autowired
+	private ObjectMapper mapper;
+
+
     @KafkaListener(topics = {"${persister.save.property.topic}","${persister.update.property.topic}"})
     public void listen(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         ObjectMapper mapper = new ObjectMapper();
@@ -51,9 +62,17 @@ public class PropertyNotificationConsumer {
     }
 
 
-    @KafkaListener(topics = {"${kafka.topics.notification.payment}","${kafka.topics.notification.pg.save.txns}"})
-    public void listenPayments(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        paymentNotificationService.process(record,topic);
+    @KafkaListener(topics = {"${kafka.topics.notification.payment}"}, containerFactory="kafkaListenerPaymentContainerFactory")
+    public void listenPayments(final PaymentRequest paymentRequest, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+        paymentNotificationService.process(null,topic,paymentRequest,null,paymentRequest.getRequestInfo());
+    }
+
+    @KafkaListener(topics = {"${kafka.topics.notification.pg.save.txns}"})
+    public void listenUpdatePgTxn(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+        String jsonString = new JSONObject(record).toString();
+		DocumentContext documentContext = JsonPath.parse(jsonString);
+		RequestInfo requestInfo = mapper.convertValue(record.get("RequestInfo"), RequestInfo.class);
+        paymentNotificationService.process(record,topic, null,documentContext,requestInfo);
     }
 
 
