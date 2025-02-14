@@ -1346,14 +1346,30 @@ public class BudgetDetailsHibernateDAO implements BudgetDetailsDAO {
 				deptCode = paramMap.get(Constants.DEPTID).toString();
 			if (paramMap.get(Constants.FUNCTIONID) != null)
 				functionid = (Long) paramMap.get(Constants.FUNCTIONID);
-			if (paramMap.get(Constants.FUNCTIONARYID) != null)
-				functionaryid = (Integer) paramMap.get(Constants.FUNCTIONARYID);
-			if (paramMap.get(Constants.SCHEMEID) != null)
-				schemeid = (Integer) paramMap.get(Constants.SCHEMEID);
-			if (paramMap.get(Constants.SUBSCHEMEID) != null)
-				subschemeid = (Integer) paramMap.get(Constants.SUBSCHEMEID);
-			if (paramMap.get(Constants.FUNDID) != null)
-				fundid = (Integer) paramMap.get(Constants.FUNDID);
+			if (paramMap.get(Constants.FUNCTIONARYID) != null) {
+				if (paramMap.get(Constants.FUNCTIONARYID) instanceof Integer)
+					functionaryid = (Integer) paramMap.get(Constants.FUNCTIONARYID);
+				else if (paramMap.get(Constants.FUNCTIONARYID) instanceof Long)
+					functionaryid = ((Long) paramMap.get(Constants.FUNCTIONARYID)).intValue();
+			}
+			if (paramMap.get(Constants.SCHEMEID) != null) {
+				if (paramMap.get(Constants.SCHEMEID) instanceof Integer)
+					schemeid = (Integer) paramMap.get(Constants.SCHEMEID);
+				else if (paramMap.get(Constants.SCHEMEID) instanceof Long)
+					schemeid = ((Long) paramMap.get(Constants.SCHEMEID)).intValue();
+			}
+			if (paramMap.get(Constants.SUBSCHEMEID) != null) {
+				if (paramMap.get(Constants.SUBSCHEMEID) instanceof Integer)
+					subschemeid = (Integer) paramMap.get(Constants.SUBSCHEMEID);
+				else if (paramMap.get(Constants.SUBSCHEMEID) instanceof Long)
+					subschemeid = ((Long) paramMap.get(Constants.SUBSCHEMEID)).intValue();
+			}
+			if (paramMap.get(Constants.FUNDID) != null) {
+				if (paramMap.get(Constants.FUNDID) instanceof Integer)
+					fundid = (Integer) paramMap.get(Constants.FUNDID);
+				else if (paramMap.get(Constants.FUNDID) instanceof Long)
+					fundid = ((Long) paramMap.get(Constants.FUNDID)).intValue();
+			}
 			if (paramMap.get(Constants.BOUNDARYID) != null)
 				boundaryid = (Long) paramMap.get(Constants.BOUNDARYID);
 			if (paramMap.get(BUDGETHEADID) != null)
