@@ -1,13 +1,15 @@
 import React from "react";
+import NewApplication from "./pages/employee/NewApplication";
 
 export const TLModule = ({ stateCode, userType, tenants }) => {
+  console.log("module");
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["sample", "common", "workflow"];
+  // const moduleCode = ["tl", "common", "workflow"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
-    // stateCode,
+    stateCode,
     moduleCode,
-    // language,/
+    language,
   });
 
   if (isLoading) {
@@ -23,7 +25,8 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
 };
 
 const componentsToRegister = {
-  SampleModule,
+  TLNewApplication: NewApplication,
+  TLModule,
 };
 
 export const initTLComponents = () => {

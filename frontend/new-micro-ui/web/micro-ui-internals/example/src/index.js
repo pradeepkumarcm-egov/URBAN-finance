@@ -12,6 +12,7 @@ var Digit = window.Digit || {};
 const enabledModules = ["TL"];
 
 const initTokens = (stateCode) => {
+  console.log("inittokens");
   const userType = window.sessionStorage.getItem("userType") || process.env.REACT_APP_USER_TYPE || "CITIZEN";
 
   const token = window.localStorage.getItem("token") || process.env[`REACT_APP_${userType}_TOKEN`];
@@ -45,9 +46,9 @@ const initDigitUI = () => {
 
   initTLComponents();
 
-  const moduleReducers = (initData) => ({
-    pgr: PGRReducers(initData),
-  });
+  // const moduleReducers = (initData) => ({
+  //   pgr: PGRReducers(initData),
+  // });
 
   window.Digit.Customizations = {
     PGR: pgrCustomizations,
@@ -61,8 +62,18 @@ const initDigitUI = () => {
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
   initTokens(stateCode);
 
+  console.log("checkl2");
+
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
-  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
+  ReactDOM.render(
+    <DigitUI
+      stateCode={stateCode}
+      enabledModules={enabledModules}
+      // moduleReducers={moduleReducers}
+    />,
+    document.getElementById("root")
+  );
+  console.log("checkl3");
 };
 
 initLibraries().then(() => {
