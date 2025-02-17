@@ -23,7 +23,7 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
 };
 
 const componentsToRegister = {
-  SampleModule,
+  TLModule,
 };
 
 export const initTLComponents = () => {

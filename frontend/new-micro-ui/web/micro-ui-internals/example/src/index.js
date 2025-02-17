@@ -45,9 +45,9 @@ const initDigitUI = () => {
 
   initTLComponents();
 
-  const moduleReducers = (initData) => ({
-    pgr: PGRReducers(initData),
-  });
+  // const moduleReducers = (initData) => ({
+  //   pgr: PGRReducers(initData),
+  // });
 
   window.Digit.Customizations = {
     PGR: pgrCustomizations,
@@ -62,7 +62,7 @@ const initDigitUI = () => {
   initTokens(stateCode);
 
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
-  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
+  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules}/>, document.getElementById("root"));
 };
 
 initLibraries().then(() => {

@@ -4,7 +4,8 @@
   "main": "index.js",
   "workspaces": [
     "example",
-    "packages/modules/tl"
+    "packages/modules/tl",
+    "packages/modules/commonPt"
   ],
   "author": "Mukund Tripathi <mukund.tripathi@egovernments.org>",
   "license": "MIT",
