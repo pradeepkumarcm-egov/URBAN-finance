@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
+import { PGRReducers } from "@egovernments/digit-ui-module-pgr";
+
 import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
 
@@ -12,7 +14,6 @@ var Digit = window.Digit || {};
 const enabledModules = ["TL"];
 
 const initTokens = (stateCode) => {
-  console.log("inittokens");
   const userType = window.sessionStorage.getItem("userType") || process.env.REACT_APP_USER_TYPE || "CITIZEN";
 
   const token = window.localStorage.getItem("token") || process.env[`REACT_APP_${userType}_TOKEN`];
@@ -46,12 +47,11 @@ const initDigitUI = () => {
 
   initTLComponents();
 
-  // const moduleReducers = (initData) => ({
-  //   pgr: PGRReducers(initData),
-  // });
+  const moduleReducers = (initData) => ({
+    pgr: PGRReducers(initData),
+  });
 
   window.Digit.Customizations = {
-    PGR: pgrCustomizations,
     TL: {
       customiseCreateFormData: (formData, licenceObject) => licenceObject,
       customiseRenewalCreateFormData: (formData, licenceObject) => licenceObject,
@@ -62,18 +62,8 @@ const initDigitUI = () => {
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
   initTokens(stateCode);
 
-  console.log("checkl2");
-
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
-  ReactDOM.render(
-    <DigitUI
-      stateCode={stateCode}
-      enabledModules={enabledModules}
-      // moduleReducers={moduleReducers}
-    />,
-    document.getElementById("root")
-  );
-  console.log("checkl3");
+  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
 };
 
 initLibraries().then(() => {

@@ -2,9 +2,8 @@ import React from "react";
 import NewApplication from "./pages/employee/NewApplication";
 
 export const TLModule = ({ stateCode, userType, tenants }) => {
-  console.log("module");
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  // const moduleCode = ["tl", "common", "workflow"];
+  const moduleCode = ["tl", "common", "workflow"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,
@@ -18,19 +17,22 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
   return (
     <Switch>
       <AppContainer className="ground-container">
-        <div>Sample Module </div>
+        <div>TL Module </div>
       </AppContainer>
     </Switch>
   );
 };
 
 const componentsToRegister = {
-  TLNewApplication: NewApplication,
   TLModule,
+  TLNewApplication: NewApplication,
 };
 
 export const initTLComponents = () => {
+  console.log("function triggered");
+
   Object.entries(componentsToRegister).forEach(([key, value]) => {
+    console.log("key:", key, "value:", value);
     Digit.ComponentRegistryService.setComponent(key, value);
   });
 };
