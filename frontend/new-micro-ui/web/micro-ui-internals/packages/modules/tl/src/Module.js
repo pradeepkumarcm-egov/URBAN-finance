@@ -1,5 +1,6 @@
 import React from "react";
 import NewApplication from "./pages/employee/NewApplication";
+import TLCard from "./components/TLCard";
 
 export const TLModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -24,6 +25,7 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
 };
 
 const componentsToRegister = {
+  TLCard,
   TLModule,
   TLNewApplication: NewApplication,
 };

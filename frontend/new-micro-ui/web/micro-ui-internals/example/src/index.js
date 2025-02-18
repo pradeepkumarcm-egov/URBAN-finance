@@ -2,20 +2,34 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
-import { PGRReducers } from "@egovernments/digit-ui-module-pgr";
-
-import { initTLComponents } from "@egovernments/digit-ui-module-tl";
+// import { paymentConfigs, PaymentLinks, PaymentModule } from "@egovernments/digit-ui-module-common";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
+// import "@egovernments/digit-ui-sample-css/example/index.css";
 
-import { pgrCustomizations, pgrComponents } from "./pgr";
+import { pgrCustomizations } from "./pgr";
+// import { UICustomizations } from "./UICustomizations";
+// import { initUtilitiesComponents } from "@egovernments/digit-ui-module-utilities";
+import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 
 var Digit = window.Digit || {};
 
-const enabledModules = ["TL"];
+const enabledModules = [
+  "DSS",
+  "HRMS",
+  "Workbench",
+  "HCMWORKBENCH",
+  "TL",
+  //  "Engagement", "NDSS","QuickPayLinks", "Payment",
+  "Utilities",
+  "Microplanning",
+  "Sample",
+  //added to check fsm
+  // "FSM"
+];
 
 const initTokens = (stateCode) => {
+  console.log("init");
   const userType = window.sessionStorage.getItem("userType") || process.env.REACT_APP_USER_TYPE || "CITIZEN";
-
   const token = window.localStorage.getItem("token") || process.env[`REACT_APP_${userType}_TOKEN`];
 
   const citizenInfo = window.localStorage.getItem("Citizen.user-info");
@@ -41,29 +55,29 @@ const initTokens = (stateCode) => {
 };
 
 const initDigitUI = () => {
-  window?.Digit.ComponentRegistryService.setupRegistry({
-    ...pgrComponents,
-  });
-
-  initTLComponents();
-
-  const moduleReducers = (initData) => ({
-    pgr: PGRReducers(initData),
-  });
-
+  window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH") || "digit-ui";
   window.Digit.Customizations = {
-    TL: {
-      customiseCreateFormData: (formData, licenceObject) => licenceObject,
-      customiseRenewalCreateFormData: (formData, licenceObject) => licenceObject,
-      customiseSendbackFormData: (formData, licenceObject) => licenceObject,
-    },
+    PGR: pgrCustomizations,
+    // commonUiConfig: UICustomizations,
   };
+  window?.Digit.ComponentRegistryService.setupRegistry({
+    // PaymentModule,
+    // ...paymentConfigs,
+    // PaymentLinks,
+  });
+
+  // initUtilitiesComponents();
+  // initSampleComponents();
+  initTLComponents();
+  const moduleReducers = (initData) => initData;
 
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
   initTokens(stateCode);
 
-  const registry = window?.Digit.ComponentRegistryService.getRegistry();
-  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
+  ReactDOM.render(
+    <DigitUI stateCode={stateCode} enabledModules={enabledModules} defaultLanding="employee" moduleReducers={moduleReducers} />,
+    document.getElementById("root")
+  );
 };
 
 initLibraries().then(() => {

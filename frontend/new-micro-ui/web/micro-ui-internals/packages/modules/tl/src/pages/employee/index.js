@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Switch, useLocation, Link } from "react-router-dom";
 import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import Inbox from "./Inbox";
+// import Inbox from "./Inbox";
 // import NewApplication from "./NewApplication";
 // import Search from "./Search";
 // import Response from "../Response";
-import ApplicationDetails from "./ApplicationDetails";
+// import ApplicationDetails from "./ApplicationDetails";
 //import ReNewApplication from "./ReNewApplication";
 
 const TLBreadCrumb = ({ location }) => {
@@ -144,6 +144,7 @@ const TLBreadCrumb = ({ location }) => {
 };
 
 const EmployeeApp = ({ path, url, userType }) => {
+  console.log("employee app");
   const { t } = useTranslation();
   const location = useLocation();
   const mobileView = innerWidth <= 640;
