@@ -24,10 +24,12 @@ const NewApplication = () => {
   const [error, setError] = useState(null);
   const stateId = Digit.ULBService.getStateId();
   let { data: newConfig, isLoading } = Digit.Hooks.tl.useMDMS.getFormConfig(stateId, {});
-  const { data: propertyDetails } = Digit.Hooks.pt.usePropertySearch(
+  const { data: propertyDetails } = Digit.Hooks.tl.usePropertySearch(
     { filters: { propertyIds: propertyId }, tenantId: tenantId },
     { filters: { propertyIds: propertyId }, tenantId: tenantId, enabled: propertyId ? true : false }
   );
+
+  console.log("propertyDetails", propertyDetails);
 
   useEffect(() => {
     !propertyId && setPropertyId(sessionFormData?.cpt?.details?.propertyId);

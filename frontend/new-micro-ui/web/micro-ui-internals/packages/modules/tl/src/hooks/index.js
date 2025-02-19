@@ -6,6 +6,11 @@ import useApplicationDetail from "./useApplicationDetail";
 import useSearch from "./useSearch";
 import useApplicationActions from "./useApplicationActions";
 import useTLWorkflowData from "./useTLWorkflowData";
+import usePropertySearch from "./usePropertySearch";
+import useTLSearchApplication from "./useTLsearchApplication";
+import { useTLApplicationDetails } from "./useTLsearchApplication";
+import useTLPaymentHistory from "./userPaymentHistory";
+import useTLDocumentSearch from "./useTLDocumentSearch";
 
 const tl = {
   useInbox: useTLInbox,
@@ -16,6 +21,11 @@ const tl = {
   useApplicationActions,
   useSearch,
   useTLWorkflowData,
+  usePropertySearch,
+  useTLSearchApplication,
+  useTLApplicationDetails,
+  useTLPaymentHistory,
+  useTLDocumentSearch,
 };
 
 const Hooks = {

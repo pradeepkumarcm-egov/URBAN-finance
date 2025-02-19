@@ -1,6 +1,4 @@
-import React from "react";
 import { useQuery } from "react-query";
-import { Digit } from "@egovernments/digit-ui-libraries";
 
 const useSearch = ({ tenantId, filters, config = {} }) =>
   useQuery(

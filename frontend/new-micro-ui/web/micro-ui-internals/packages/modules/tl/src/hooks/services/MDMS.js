@@ -1,10 +1,8 @@
-import { Digit } from "@egovernments/digit-ui-module-core";
-
 export const MdmsService = {
   getDataByCriteria: async (tenantId, moduleCode, type, filter = {}) => {
-    const mdms_context_path = "mdms-v2";
+    const mdms_context_path = "egov-mdms-service";
     const res = await Digit.CustomService.getResponse({
-      url: `/${mdms_context_path}/v2/_search`,
+      url: `/${mdms_context_path}/v1/_search`,
       params: { tenantId },
       body: {
         MdmsCriteria: {
