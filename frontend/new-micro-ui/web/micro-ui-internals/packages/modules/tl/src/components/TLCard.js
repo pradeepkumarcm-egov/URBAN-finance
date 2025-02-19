@@ -11,13 +11,14 @@ const TLCard = () => {
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const inboxSearchParams = { limit: 10, offset: 0 };
-  //   const { isLoading, data: inboxData } = Digit.Hooks.tl.useInbox({
-  //     tenantId,
-  //     filters: { ...inboxSearchParams },
-  //     config: {},
-  //   });
 
-  const inboxData = null;
+  const { isLoading, data: inboxData } = Digit.Hooks.tl.useInbox({
+    tenantId,
+    filters: { ...inboxSearchParams },
+    config: {},
+  });
+
+  console.log("InboxData", inboxData);
 
   const [isStateLocalisation, setIsStateLocalisation] = useState(true);
 
@@ -34,7 +35,7 @@ const TLCard = () => {
 
   let links = [
     {
-      //   count: isLoading ? "-" : inboxData?.totalCount,
+      count: isLoading ? "-" : inboxData?.totalCount,
       label: t("ES_COMMON_INBOX"),
       link: `/digit-ui/employee/tl/inbox`,
     },
@@ -61,12 +62,12 @@ const TLCard = () => {
     moduleName: t("TL_COMMON_TL"),
     kpis: [
       {
-        // count: isLoading ? "-" : inboxData?.totalCount,
+        count: isLoading ? "-" : inboxData?.totalCount,
         label: t("TOTAL_TL"),
         link: `/digit-ui/employee/tl/inbox`,
       },
       {
-        // count: isLoading ? "-" : inboxData?.nearingSlaCount,
+        count: isLoading ? "-" : inboxData?.nearingSlaCount,
         label: t("TOTAL_NEARING_SLA"),
         link: `/digit-ui/employee/tl/inbox`,
       },
