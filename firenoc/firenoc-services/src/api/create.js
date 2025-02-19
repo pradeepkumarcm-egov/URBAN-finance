@@ -78,6 +78,7 @@ export const createApiResponse = async (request, res, next) => {
   body.FireNOCs = updateStatus(FireNOCs, workflowResponse);
   
   let topic = envVariables.KAFKA_TOPICS_FIRENOC_CREATE;
+  let inboxTopic = envVariables.KAFKA_TOPICS_FIRENOC_INBOX;
   let tenantId = body.FireNOCs[0].tenantId;
   
   var isCentralInstance  = envVariables.IS_ENVIRONMENT_CENTRAL_INSTANCE;
@@ -89,6 +90,11 @@ export const createApiResponse = async (request, res, next) => {
 
   payloads.push({
     topic: topic,
+    messages: JSON.stringify(body)
+  });
+
+  payloads.push({
+    topic: inboxTopic,
     messages: JSON.stringify(body)
   });
   

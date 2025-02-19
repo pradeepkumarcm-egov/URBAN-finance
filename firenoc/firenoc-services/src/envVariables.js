@@ -21,6 +21,8 @@ const envVariables = {
     process.env.KAFKA_TOPICS_FIRENOC_UPDATE || "update-fn-firenoc",
   KAFKA_TOPICS_FIRENOC_WORKFLOW:
     process.env.KAFKA_TOPICS_FIRENOC_WORKFLOW || "update-fn-workflow",
+  KAFKA_TOPICS_FIRENOC_INBOX:
+    process.env.KAFKA_TOPICS_FIRENOC_INBOX || "inbox-fn-events",
   KAFKA_TOPICS_RECEIPT_CREATE_REGEX:
     process.env.KAFKA_TOPICS_RECEIPT_CREATE_REGEX || /egov.collection.payment-create$/i,
   KAFKA_TOPICS_NOTIFICATION:

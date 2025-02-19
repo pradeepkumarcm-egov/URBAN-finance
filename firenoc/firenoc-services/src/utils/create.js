@@ -233,21 +233,30 @@ const addDefaultUserDetails = (tenantId, owner) => {
 };
 
 export const updateStatus = (FireNOCs, workflowResponse) => {
-  let workflowStatus = {};
+  let workflowData = {};
+
+  // Map workflow responses by businessId for easy lookup
   for (let i = 0; i < workflowResponse.ProcessInstances.length; i++) {
-    workflowStatus = {
-      ...workflowStatus,
-      [workflowResponse.ProcessInstances[i].businessId]:
-        workflowResponse.ProcessInstances[i].state.state
+    let instance = workflowResponse.ProcessInstances[i];
+    workflowData[instance.businessId] = {
+      status: instance.state.state,
+      processInstance: instance // Store the full process instance
     };
   }
+
+  // Update FireNOCs with status and processInstance
   FireNOCs = FireNOCs.map(firenoc => {
-    firenoc.fireNOCDetails.status =
-      workflowStatus[firenoc.fireNOCDetails.applicationNumber];
+    let applicationNumber = firenoc.fireNOCDetails.applicationNumber;
+    if (workflowData[applicationNumber]) {
+      firenoc.fireNOCDetails.status = workflowData[applicationNumber].status;
+      firenoc.fireNOCDetails.processInstance = workflowData[applicationNumber].processInstance; // Add processInstance
+    }
     return firenoc;
   });
+
   return FireNOCs;
 };
+
 
 export const enrichAssignees = async (FireNOCs, RequestInfo, header) => {
 
