@@ -1,9 +1,9 @@
-# digit-ui-module-commonpt
+# digit-ui-module-ws
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-commonpt
+npm install --save @egovernments/digit-ui-module-ws
 ```
 
 ## Limitation

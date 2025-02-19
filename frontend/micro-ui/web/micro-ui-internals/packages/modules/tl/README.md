@@ -1,9 +1,9 @@
-# digit-ui-module-commonpt
+# digit-ui-module-tl
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-commonpt
+npm install --save @egovernments/digit-ui-module-tl
 ```
 
 ## Limitation
@@ -24,7 +24,7 @@ frontend/micro-ui/web/package.json
 
 ### Summary for Version [1.7.10] - 2025-02-13
 
-No specific change. Version matched as used in URBAN.
+Changed Inbox apis from v1 to v2
 
 ### Contributors
 

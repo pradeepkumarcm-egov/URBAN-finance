@@ -207,7 +207,8 @@ public class CreateExpenseBillController extends BaseBillController {
 		populateBillDetails(egBillregister);
 		validateBillNumber(egBillregister, resultBinder);
 		validateLedgerAndSubledger(egBillregister, resultBinder);
-		validateCuttofDate(egBillregister, resultBinder);
+		if (workFlowAction.equals(FinancialConstants.CREATEANDAPPROVE))
+			validateCuttofDate(egBillregister, resultBinder);
 		if (resultBinder.hasErrors()) {
 			populateDataOnErrors(egBillregister, model, request);
 			return EXPENSEBILL_FORM;
