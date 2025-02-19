@@ -253,4 +253,7 @@ public class WSConfiguration {
     @Value("${egov.url.shortner.host}")
     private String urlShortnerHost;
 
+    @Value("${ws.event.inbox.kafka.topic}")
+    private String wsEventInboxKafkaTopic;
+
 }

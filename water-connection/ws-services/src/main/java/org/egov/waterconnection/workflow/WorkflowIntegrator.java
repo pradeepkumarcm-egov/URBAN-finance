@@ -128,6 +128,7 @@ public class WorkflowIntegrator {
 			if (waterConnectionRequest.getWaterConnection().getApplicationNo().equals(pInstance.getBusinessId())) {
 				waterConnectionRequest.getWaterConnection()
 						.setApplicationStatus(pInstance.getState().getApplicationStatus());
+				waterConnectionRequest.getWaterConnection().setProcessInstance(pInstance);
 			}
 		});
 	}

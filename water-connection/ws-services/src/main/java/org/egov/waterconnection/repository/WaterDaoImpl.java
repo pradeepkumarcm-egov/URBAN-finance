@@ -78,6 +78,7 @@ public class WaterDaoImpl implements WaterDao {
 	@Override
     public void saveWaterConnection(WaterConnectionRequest waterConnectionRequest) {
         waterConnectionProducer.push(waterConnectionRequest.getWaterConnection().getTenantId(), createWaterConnection, waterConnectionRequest);
+        waterConnectionProducer.push(waterConnectionRequest.getWaterConnection().getTenantId(), wsConfiguration.getWsEventInboxKafkaTopic(), waterConnectionRequest);
     }
 
     @Override

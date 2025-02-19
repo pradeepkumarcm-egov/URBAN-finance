@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import lombok.*;
 
+import org.egov.waterconnection.web.models.workflow.ProcessInstance;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -54,5 +55,8 @@ public class WaterConnection extends Connection {
 
 	@JsonProperty("disconnectionReason")
 	private String disconnectionReason = null;
+
+	@JsonProperty("processInstance")
+	private ProcessInstance processInstance;
 
 }
