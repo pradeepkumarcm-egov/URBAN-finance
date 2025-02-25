@@ -13,10 +13,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.ReadListener;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Logger;
@@ -30,8 +30,8 @@ public class MultiReadRequestWrapper extends HttpServletRequestWrapper {
     private ByteArrayOutputStream cachedBytes;
     private final Map<String, String> customHeaders;
 
-    public MultiReadRequestWrapper(HttpServletRequest request) {
-        super(request);
+    public MultiReadRequestWrapper(jakarta.servlet.http.HttpServletRequest req) {
+        super(req);
         this.customHeaders = new HashMap<>();
     }
 

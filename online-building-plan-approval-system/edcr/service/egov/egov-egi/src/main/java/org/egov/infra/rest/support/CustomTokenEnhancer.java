@@ -47,13 +47,9 @@
  */
 package org.egov.infra.rest.support;
 
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 
-/**
- *
- * @author subhash
- *
- */
-public interface CustomTokenEnhancer extends TokenEnhancer {
+public interface CustomTokenEnhancer extends OAuth2TokenCustomizer<JwtEncodingContext> {
 
 }

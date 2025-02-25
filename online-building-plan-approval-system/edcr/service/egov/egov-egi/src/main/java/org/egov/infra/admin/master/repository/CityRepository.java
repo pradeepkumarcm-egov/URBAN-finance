@@ -54,23 +54,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.QueryHint;
 import java.util.List;
 
-import static org.hibernate.jpa.QueryHints.HINT_CACHEABLE;
+// import static org.hibernate.jpa.QueryHints.HINT_CACHEABLE;
+import jakarta.persistence.QueryHint;
+import static org.hibernate.annotations.QueryHints.CACHEABLE;
+
 
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
-    @QueryHints({ @QueryHint(name = HINT_CACHEABLE, value = "true") })
+    @QueryHints({ @QueryHint(name = CACHEABLE, value = "true") })
     City findByCode(String code);
 
-    @QueryHints({ @QueryHint(name = HINT_CACHEABLE, value = "true") })
+    @QueryHints({ @QueryHint(name = CACHEABLE, value = "true") })
     City findByName(String name);
 
     List<City> findByNameContainingIgnoreCase(String name);
 
-    @QueryHints({ @QueryHint(name = HINT_CACHEABLE, value = "true") })
+    @QueryHints({ @QueryHint(name = CACHEABLE, value = "true") })
     City findByDomainURL(String url);
     
     @Query(value="select * from state.eg_city", nativeQuery = true)

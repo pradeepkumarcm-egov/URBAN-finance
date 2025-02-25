@@ -67,7 +67,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -77,7 +77,6 @@ import org.egov.infra.filestore.entity.FileStoreMapper;
 import org.egov.infra.filestore.repository.FileStoreMapperRepository;
 import org.egov.infra.filestore.service.FileStoreService;
 
-import org.owasp.esapi.ESAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,24 +133,58 @@ public class FileStoreUtils {
         }
     }
 
+    // public void writeToHttpResponseStream(String fileStoreId, String moduleName, HttpServletResponse response) {
+    //     try {
+    //         fileStoreId = normalizeString(fileStoreId);
+    //         moduleName = normalizeString(moduleName);
+    //         FileStoreMapper fileStoreMapper = this.fileStoreMapperRepository.findByFileStoreId(fileStoreId);
+    //         if (fileStoreMapper != null) {
+    //             File file = this.fileStoreService.fetch(fileStoreMapper, moduleName);
+    //             ESAPI.httpUtilities().addHeader(response, CONTENT_DISPOSITION, StringUtils.sanitize(format(CONTENT_DISPOSITION_INLINE, fileStoreMapper.getFileName())));
+    //             ESAPI.httpUtilities().addHeader(response, "content-type", StringUtils.sanitize(fileStoreMapper.getContentType()));
+    //             ESAPI.httpUtilities().setContentType(response);
+    //             OutputStream out = response.getOutputStream();
+    //             IOUtils.write(FileUtils.readFileToByteArray(file), out);
+    //         }
+    //     } catch (IOException e) {
+    //         LOGGER.error("Error occurred while writing file to response stream", e);
+    //     }
+    // }
+
     public void writeToHttpResponseStream(String fileStoreId, String moduleName, HttpServletResponse response) {
         try {
             fileStoreId = normalizeString(fileStoreId);
             moduleName = normalizeString(moduleName);
             FileStoreMapper fileStoreMapper = this.fileStoreMapperRepository.findByFileStoreId(fileStoreId);
+    
             if (fileStoreMapper != null) {
                 File file = this.fileStoreService.fetch(fileStoreMapper, moduleName);
-                ESAPI.httpUtilities().addHeader(response, CONTENT_DISPOSITION, StringUtils.sanitize(format(CONTENT_DISPOSITION_INLINE, fileStoreMapper.getFileName())));
-                ESAPI.httpUtilities().addHeader(response, "content-type", StringUtils.sanitize(fileStoreMapper.getContentType()));
-                ESAPI.httpUtilities().setContentType(response);
-                OutputStream out = response.getOutputStream();
-                IOUtils.write(FileUtils.readFileToByteArray(file), out);
+                if (file == null) {
+                    LOGGER.error("File not found for fileStoreId: {}", fileStoreId);
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+                    return;
+                }
+    
+                response.setHeader(CONTENT_DISPOSITION, String.format(CONTENT_DISPOSITION_INLINE, fileStoreMapper.getFileName()));
+                response.setHeader("Content-Type", fileStoreMapper.getContentType());
+                response.setContentType(fileStoreMapper.getContentType());
+    
+                try (OutputStream out = response.getOutputStream()) {
+                    IOUtils.write(FileUtils.readFileToByteArray(file), out);
+                }
+            } else {
+                LOGGER.error("FileStoreMapper not found for fileStoreId: {}", fileStoreId);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
             }
         } catch (IOException e) {
             LOGGER.error("Error occurred while writing file to response stream", e);
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error writing file to response");
+            } catch (IOException ignored) {
+            }
         }
     }
-
+    
     public Set<FileStoreMapper> addToFileStore(MultipartFile[] files, String moduleName) {
         return this.addToFileStore(files, moduleName, false);
     }

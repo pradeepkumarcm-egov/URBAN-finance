@@ -48,20 +48,21 @@
 
 package org.egov.infra.persistence.validator;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.egov.infra.persistence.validator.annotation.CompositeUnique;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 public class CompositeUniqueCheckValidator implements ConstraintValidator<CompositeUnique, Object> {
 
@@ -82,34 +83,53 @@ public class CompositeUniqueCheckValidator implements ConstraintValidator<Compos
         try {
             final Number id = (Number) FieldUtils.readField(arg0, unique.id(), true);
             final boolean isValid = checkCompositeUniqueKey(arg0, id);
-            if (!isValid && unique.enableDfltMsg())
-                for (final String fieldName : unique.fields())
-                    constraintValidatorContext.buildConstraintViolationWithTemplate(unique.message()).addPropertyNode(fieldName)
+            
+            if (!isValid && unique.enableDfltMsg()) {
+                for (final String fieldName : unique.fields()) {
+                    constraintValidatorContext.buildConstraintViolationWithTemplate(unique.message())
+                            .addPropertyNode(fieldName)
                             .addConstraintViolation();
+                }
+            }
+            
             return isValid;
         } catch (final IllegalAccessException e) {
             LOG.error("Error while validating composite unique key", e);
         }
         return false;
-
     }
 
     private boolean checkCompositeUniqueKey(final Object arg0, final Number id) throws IllegalAccessException {
-        final Criteria criteria = entityManager.unwrap(Session.class)
-                .createCriteria(unique.isSuperclass() ? arg0.getClass().getSuperclass() : arg0.getClass()).setReadOnly(true);
-        final Conjunction conjunction = Restrictions.conjunction();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> query = cb.createQuery(Long.class);
+        
+        // Determine the entity class (supports superclass check)
+        Class<?> entityClass = unique.isSuperclass() ? arg0.getClass().getSuperclass() : arg0.getClass();
+        Root<?> root = query.from(entityClass);
+
+        List<Predicate> predicates = new ArrayList<>();
+
         for (final String fieldName : unique.fields()) {
             final Object fieldValue = FieldUtils.readField(arg0, fieldName, true);
-            if (unique.checkForNull() && fieldValue == null)
-                conjunction.add(Restrictions.isNull(fieldName));
-            else if (fieldValue instanceof String)
-                conjunction.add(Restrictions.eq(fieldName, fieldValue).ignoreCase());
-            else
-                conjunction.add(Restrictions.eq(fieldName, fieldValue));
+            if (unique.checkForNull() && fieldValue == null) {
+                predicates.add(cb.isNull(root.get(fieldName)));
+            } else if (fieldValue instanceof String) {
+                predicates.add(cb.equal(cb.lower(root.get(fieldName)), ((String) fieldValue).toLowerCase()));
+            } else {
+                predicates.add(cb.equal(root.get(fieldName), fieldValue));
+            }
         }
-        if (id != null)
-            conjunction.add(Restrictions.ne(unique.id(), id));
-        return criteria.add(conjunction).setProjection(Projections.id()).setMaxResults(1).uniqueResult() == null;
-    }
 
+        // Exclude the current record if updating
+        if (id != null) {
+            predicates.add(cb.notEqual(root.get(unique.id()), id));
+        }
+
+        // Construct query
+        query.select(cb.count(root)).where(predicates.toArray(new Predicate[0]));
+        
+        // Execute query
+        Long count = entityManager.createQuery(query).getSingleResult();
+        return count == 0; // Returns true if no duplicate exists
+    }
 }

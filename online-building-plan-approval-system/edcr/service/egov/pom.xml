@@ -103,16 +103,9 @@
 
 
 		<!-- Application server provided dependency versions -->
-		<hibernate-version>5.6.15.Final</hibernate-version>
+		<hibernate-version>6.2.7.Final</hibernate-version>
     	<hibernate-search-version>6.2.0.Final</hibernate-search-version>
-    	<hibernate-validator-version>6.2.5.Final</hibernate-validator-version>
-		<javax-validation-version>2.0.1.Final</javax-validation-version>
-    	<javax-servlet-api-version>1.0.2.Final</javax-servlet-api-version>
-    	<javax-servlet-jstl-version>1.2.6-RC1</javax-servlet-jstl-version>
-    	<javax-servlet-jsp-version>2.0.1.Final</javax-servlet-jsp-version>
-    	<javax-jms-version>1.0.2.Final</javax-jms-version>
-    	<javax-mail-version>1.6.2</javax-mail-version>
-		<javax-el-version>3.0.1-b08</javax-el-version>
+    	<hibernate-validator-version>8.0.1.Final</hibernate-validator-version>
 		<xerces-version>2.11.0.SP5</xerces-version>
 		<postgres-version>42.7.1</postgres-version>
 
@@ -120,11 +113,11 @@
 		<struts2-version>2.5.14.1</struts2-version>
 		<struts2-jquery-version>4.0.2</struts2-jquery-version>
 		<xstream-version>1.4.10</xstream-version>
-		<spring-version>5.3.30</spring-version>
+		<spring-version>6.0.13</spring-version>
 		<spring-session-version>2.7.1</spring-session-version>
 		<spring-data-jpa-version>2.7.14</spring-data-jpa-version>
 		<spring-data-jpa-envers-version>1.0.6.RELEASE</spring-data-jpa-envers-version>
-		<spring-security-version>4.2.3.RELEASE</spring-security-version>
+		<spring-security-version>6.1.2</spring-security-version>
 		<spring-security-oauth2-version>2.2.0.RELEASE</spring-security-oauth2-version>
 		<spring-data-elasticsearch>2.0.6.RELEASE</spring-data-elasticsearch>
 		<elastic-search-version>2.4.6</elastic-search-version>
@@ -133,7 +126,7 @@
 		<quartz-version>2.3.0</quartz-version>
 		<jasper-report-version>6.1.0</jasper-report-version>
 		<json-simple-version>1.1.1</json-simple-version>
-		<jackson-version>2.9.2</jackson-version>
+		<jackson-version>2.15.3</jackson-version>
 		<orika-core.version>1.5.2</orika-core.version>
 		<gson-version>2.8.2</gson-version>
 		<antisamy-version>1.5.6</antisamy-version>
@@ -192,19 +185,112 @@
 		<mvn.jar.plugin.version>3.0.2</mvn.jar.plugin.version>
 		<mvn.dependency.plugin.version>3.0.2</mvn.dependency.plugin.version>
 		<mvn.resource.plugin.version>3.0.1</mvn.resource.plugin.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
 		<java.version>17</java.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-		    <!-- <dependency>
+		    <dependency>
+    			<groupId>org.infinispan</groupId>
+    			<artifactId>infinispan-core</artifactId>
+    			<version>14.0.14.Final</version> <!-- Adjust based on your WildFly version -->
+			</dependency>
+
+		    <dependency>
     			<groupId>org.springframework</groupId>
     			<artifactId>spring-webmvc</artifactId>
     			<version>6.0.13</version>
-			</dependency> -->
+			</dependency>
+			<dependency>
+    			<groupId>jakarta.servlet</groupId>
+    			<artifactId>jakarta.servlet-api</artifactId>
+				<version>6.0.0</version>
+    			<scope>provided</scope>
+			</dependency>
+			<dependency>
+    			<groupId>jakarta.servlet.jsp.jstl</groupId>
+    			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    			<version>2.0.0</version>
+			</dependency>
+			<dependency>
+    			<groupId>org.glassfish.web</groupId>
+    			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    			<version>2.0.0</version>
+    			<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+    			<groupId>jakarta.servlet.jsp</groupId>
+    			<artifactId>jakarta.servlet.jsp-api</artifactId>
+    			<version>3.1.0</version>
+    			<scope>provided</scope>
+			</dependency>
+			<dependency>
+    			<groupId>org.glassfish.jakarta</groupId>
+    			<artifactId>jakartaee-api</artifactId>
+    			<version>10.0.0</version>
+    			<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+    			<groupId>jakarta.validation</groupId>
+    			<artifactId>jakarta.validation-api</artifactId>
+    			<version>3.0.2</version>
+    			<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+			    <groupId>jakarta.persistence</groupId>
+			    <artifactId>jakarta.persistence-api</artifactId>
+			    <version>3.1.0</version>
+			    <scope>provided</scope>
+			</dependency>
+
+			<!-- Use Jakarta Transaction API -->
+			<dependency>
+			    <groupId>jakarta.transaction</groupId>
+			    <artifactId>jakarta.transaction-api</artifactId>
+			    <version>2.0.0</version>
+			    <scope>provided</scope>
+			</dependency>
+			<dependency>
+        		<groupId>com.zaxxer</groupId>
+        		<artifactId>HikariCP</artifactId>
+        		<version>5.1.0</version>
+    		</dependency>
+
+			<!-- Use Jakarta Activation -->
+			<dependency>
+			    <groupId>jakarta.activation</groupId>
+			    <artifactId>jakarta.activation-api</artifactId>
+			    <version>2.1.1</version>
+			    <scope>provided</scope>
+			</dependency>
+
+			<!-- Use Jakarta XML Binding (JAXB) -->
+			<dependency>
+			    <groupId>jakarta.xml.bind</groupId>
+			    <artifactId>jakarta.xml.bind-api</artifactId>
+			    <version>4.0.0</version>
+			    <scope>provided</scope>
+			</dependency>
+
+			<!-- Use Jakarta Annotations -->
+			<dependency>
+			    <groupId>jakarta.annotation</groupId>
+			    <artifactId>jakarta.annotation-api</artifactId>
+			    <version>2.1.1</version>
+			    <scope>compile</scope>
+			</dependency>
+			<dependency>
+    			<groupId>jakarta.platform</groupId>
+    			<artifactId>jakarta.jakartaee-api</artifactId>
+    			<version>10.0.0</version>
+    			<scope>provided</scope>
+			</dependency>
+
+
 		    <dependency>
     			<groupId>redis.clients</groupId>
     			<artifactId>jedis</artifactId>
@@ -242,9 +328,6 @@
 				<artifactId>egov-commons</artifactId>
 				<version>2.1.2-SNAPSHOT</version>
 			</dependency>
-			<!--dependency> <groupId>org.egov.edcr</groupId> <artifactId>egov-eis</artifactId> 
-				<version>1.0.5-SNAPSHOT</version> </dependency> <dependency> <groupId>org.egov.edcr</groupId> 
-				<artifactId>egov-portal</artifactId> <version>1.0.5-SNAPSHOT</version> </dependency -->
 			<dependency>
 				<groupId>org.egov.edcr</groupId>
 				<artifactId>egov-edcr-extract</artifactId>
@@ -255,18 +338,10 @@
 				<artifactId>egov-edcr</artifactId>
 				<version>2.1.2-SNAPSHOT</version>
 			</dependency>
-			<!-- HIBERNATE DEPENDENCIES START -->
 			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-core</artifactId>
-				<version>${hibernate-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>${hibernate-version}</version>
-				<scope>provided</scope>
+			    <groupId>org.hibernate</groupId>
+			    <artifactId>hibernate-core</artifactId>
+			    <version>6.3.1.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -276,74 +351,8 @@
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-infinispan</artifactId>
-				<version>${hibernate-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate-validator-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${javax-validation-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<!-- <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.core</artifactId> 
-				<version>4.0.0.GA</version> </dependency> <dependency> <groupId>org.jadira.usertype</groupId> 
-				<artifactId>usertype.spi</artifactId> <version>4.0.0.GA</version> </dependency> -->
-			<!-- HIBERNATE DEPENDENCIES END -->
-
-			<!-- SERVLET SPEC JBOSS DEPENDENCIES START -->
-			<dependency>
-				<groupId>org.jboss.spec.javax.servlet</groupId>
-				<artifactId>jboss-servlet-api_3.1_spec</artifactId>
-				<version>${javax-servlet-api-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.taglibs</groupId>
-				<artifactId>taglibs-standard-compat</artifactId>
-				<version>${javax-servlet-jstl-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.taglibs</groupId>
-				<artifactId>taglibs-standard-spec</artifactId>
-				<version>${javax-servlet-jstl-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.taglibs</groupId>
-				<artifactId>taglibs-standard-impl</artifactId>
-				<version>${javax-servlet-jstl-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.spec.javax.servlet.jsp</groupId>
-				<artifactId>jboss-jsp-api_2.3_spec</artifactId>
-				<version>${javax-servlet-jsp-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.spec.javax.jms</groupId>
-				<artifactId>jboss-jms-api_2.0_spec</artifactId>
-				<version>${javax-jms-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.glassfish</groupId>
-				<artifactId>javax.el</artifactId>
-				<version>${javax-el-version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>javax.mail-api</artifactId>
-				<version>${javax-mail-version}</version>
+				<version>8.0.1.Final</version>
 				<scope>provided</scope>
 			</dependency>
 			<!-- SERVLET SPEC JBOSS DEPENDENCIES END -->
@@ -483,7 +492,7 @@
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-jpa</artifactId>
-				<version>${spring-data-jpa-version}</version>
+				<version>3.1.6</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.springframework.data</groupId>
@@ -491,11 +500,16 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<dependency>
+    			<groupId>org.springframework.data</groupId>
+    			<artifactId>spring-data-commons</artifactId>
+    			<version>3.1.6</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-envers</artifactId>
-				<version>${spring-data-jpa-envers-version}</version>
+				<version>3.1.6</version>
 			</dependency>
 
 			<dependency>
@@ -545,10 +559,22 @@
 				<version>${spring-security-version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.security.oauth</groupId>
-				<artifactId>spring-security-oauth2</artifactId>
-				<version>${spring-security-oauth2-version}</version>
+    			<groupId>org.springframework.security</groupId>
+    			<artifactId>spring-security-oauth2-authorization-server</artifactId>
+    			<version>1.1.2</version>
 			</dependency>
+			<dependency>
+			    <groupId>org.springframework.security</groupId>
+			    <artifactId>spring-security-oauth2-client</artifactId>
+			    <version>${spring-security-version}</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>org.springframework.security</groupId>
+			    <artifactId>spring-security-oauth2-resource-server</artifactId>
+			    <version>${spring-security-version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.owasp.antisamy</groupId>
 				<artifactId>antisamy</artifactId>
@@ -573,13 +599,6 @@
 				<scope>compile</scope>
 			</dependency>
 			<!-- SECURITY END -->
-
-			<!-- EMBEDDED REDIS STARTS -->
-			<!-- <dependency>
-				<groupId>it.ozimov</groupId>
-				<artifactId>embedded-redis</artifactId>
-				<version>${embedded-redis-version}</version>
-			</dependency> -->
 			<dependency>
     			<groupId>com.github.codemonstur</groupId>
     			<artifactId>embedded-redis</artifactId>
@@ -715,17 +734,6 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-email</artifactId>
-				<version>${commons-email-version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>javax.activation</groupId>
-						<artifactId>activation</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>commons-collections</groupId>
@@ -945,24 +953,11 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j-version}</version>
 			</dependency>
-			<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-nop</artifactId> 
-				<version>${slf4j-version}</version> <scope>test</scope> </dependency> -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j-version}</version>
 			</dependency>
-			<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-slf4j-impl</artifactId> 
-				<version>2.17.1</version> </dependency> -->
-
-
-			<!-- <dependency> -->
-			<!-- <groupId>org.apache.logging.log4j</groupId> -->
-			<!-- <artifactId>log4j-1.2-api</artifactId> -->
-			<!-- <version>2.17.1</version> -->
-			<!-- </dependency> -->
-			<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-to-slf4j</artifactId> 
-				<version>2.17.1</version> </dependency> -->
 
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
@@ -1039,12 +1034,6 @@
 				<version>2.5.4</version>
 			</dependency>
 			<dependency>
-				<groupId>javax.media</groupId>
-				<artifactId>jai_core</artifactId>
-				<version>1.1.3-alpha</version>
-				<classifier>alpha</classifier>
-			</dependency>
-			<dependency>
 				<groupId>net.java.dev.jsr-275</groupId>
 				<artifactId>jsr-275</artifactId>
 				<version>1.0-beta-2</version>
@@ -1100,36 +1089,19 @@
 
 		<!-- SERVLET SPEC JBOSS DEPENDENCIES START -->
 		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-compat</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-spec</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec.javax.servlet.jsp</groupId>
-			<artifactId>jboss-jsp-api_2.3_spec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec.javax.jms</groupId>
-			<artifactId>jboss-jms-api_2.0_spec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.el</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 		<!-- SERVLET SPEC JBOSS DEPENDENCIES END -->
 
@@ -1210,10 +1182,6 @@
 			<artifactId>spring-jms</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
@@ -1285,9 +1253,6 @@
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.core</artifactId> 
-			</dependency> <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.spi</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.jasypt</groupId>
 			<artifactId>jasypt</artifactId>
@@ -1371,8 +1336,6 @@
 		<!-- TESTING END -->
 
 		<!-- LOGGING END -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-nop</artifactId> 
-			</dependency> -->
 
 		<!-- LOGGING END -->
 

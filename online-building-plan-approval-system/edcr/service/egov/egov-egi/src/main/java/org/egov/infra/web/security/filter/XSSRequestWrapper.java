@@ -48,8 +48,12 @@
 
 package org.egov.infra.web.security.filter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
+
+import jakarta.servlet.AsyncContext;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import static org.egov.infra.security.utils.VirtualSanitizer.sanitize;
 
@@ -58,8 +62,8 @@ import static org.egov.infra.security.utils.VirtualSanitizer.sanitize;
  **/
 public final class XSSRequestWrapper extends HttpServletRequestWrapper {
 
-	public XSSRequestWrapper(final HttpServletRequest request) {
-		super(request);
+	public XSSRequestWrapper(final jakarta.servlet.http.HttpServletRequest request) {
+		super((HttpServletRequest) request);
 	}
 
 	@Override
@@ -84,5 +88,12 @@ public final class XSSRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getHeader(final String headerName) {
 		return sanitize(super.getHeader(headerName));
+	}
+
+	@Override
+	public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse)
+			throws IllegalStateException {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'startAsync'");
 	}
 }

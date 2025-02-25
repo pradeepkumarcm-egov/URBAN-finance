@@ -71,10 +71,10 @@ import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.displaytag.Messages;
-import org.displaytag.exception.BaseNestableJspTagException;
+import org.displaytag.exception.DecoratorException;
+import org.displaytag.exception.ObjectLookupException;
 import org.displaytag.exception.SeverityEnum;
 import org.displaytag.export.BinaryExportView;
-import org.displaytag.export.PdfView;
 import org.displaytag.model.Column;
 import org.displaytag.model.ColumnIterator;
 import org.displaytag.model.HeaderCell;
@@ -84,7 +84,7 @@ import org.displaytag.model.TableModel;
 import org.displaytag.util.TagConstants;
 import org.egov.infra.exception.ApplicationRuntimeException;
 
-import javax.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspException;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -138,7 +138,7 @@ public class EGovPdfView implements BinaryExportView {
 
 	@Override
 	public String getMimeType() {
-		return "application/pdf"; //$NON-NLS-1$
+		return "application/pdf"; //-NLS-1$
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class EGovPdfView implements BinaryExportView {
 
 	}
 
-	protected void generatePDFTable() throws JspException, BadElementException {
+	protected void generatePDFTable() throws JspException, BadElementException, ObjectLookupException, DecoratorException {
 		if (this.header) {
 			generateCaption();
 			generateHeaders();
@@ -174,8 +174,10 @@ public class EGovPdfView implements BinaryExportView {
 	 * Generates all the row cells.
 	 * @throws JspException for errors during value retrieving from the table model
 	 * @throws BadElementException errors while generating content
+	 * @throws DecoratorException 
+	 * @throws ObjectLookupException 
 	 */
-	protected void generateRows() throws JspException, BadElementException {
+	protected void generateRows() throws JspException, BadElementException, ObjectLookupException, DecoratorException {
 		// get the correct iterator (full or partial list according to the exportFull field)
 		final RowIterator rowIterator = this.model.getRowIterator(this.exportFull);
 		// iterator on rows
@@ -204,6 +206,7 @@ public class EGovPdfView implements BinaryExportView {
 	 * @throws BadElementException IText exception
 	 */
 	protected void generateHeaders() throws BadElementException {
+		@SuppressWarnings("rawtypes")
 		final Iterator iterator = this.model.getHeaderCellList().iterator();
 
 		while (iterator.hasNext()) {
@@ -232,7 +235,7 @@ public class EGovPdfView implements BinaryExportView {
 	}
 
 	@Override
-	public void doExport(final OutputStream out) throws JspException {
+	public void doExport(final OutputStream out) throws PdfGenerationException {
 
 		try {
 			// Initialize the table with the appropriate number of columns
@@ -312,7 +315,7 @@ public class EGovPdfView implements BinaryExportView {
 	 * @author Fabrizio Giustina
 	 * @version $Revision: 1.7 $ ($Author: fgiust $)
 	 */
-	static class PdfGenerationException extends BaseNestableJspTagException {
+	static class PdfGenerationException extends RuntimeException {
 
 		/**
 		 * D1597A17A6.
@@ -324,13 +327,13 @@ public class EGovPdfView implements BinaryExportView {
 		 * @param cause Previous exception
 		 */
 		public PdfGenerationException(final Throwable cause) {
-			super(PdfView.class, Messages.getString("PdfView.errorexporting"), cause); //$NON-NLS-1$
+			super(Messages.getString("PdfView.errorexporting"), cause); //$NON-NLS-1$
 		}
 
 		/**
 		 * @see org.displaytag.exception.BaseNestableJspTagException#getSeverity()
 		 */
-		@Override
+		// @Override
 		public SeverityEnum getSeverity() {
 			return SeverityEnum.ERROR;
 		}

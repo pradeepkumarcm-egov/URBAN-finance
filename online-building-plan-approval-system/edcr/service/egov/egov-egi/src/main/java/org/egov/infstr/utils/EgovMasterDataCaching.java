@@ -60,21 +60,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PreDestroy;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import org.egov.infra.config.core.ApplicationThreadLocals;
 import org.egov.infra.exception.ApplicationRuntimeException;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.annotation.PreDestroy;
 
 /**
  * @deprecated no longer supported
@@ -397,7 +399,7 @@ public class EgovMasterDataCaching {
         List resultlist = null;
         List returnList = null;
         try {
-            resultlist = getCurrentSession().createSQLQuery(query).list();
+            resultlist = getCurrentSession().createNativeQuery(query).list();
             if (resultlist != null)
                 returnList = resultSetToArrayList(resultlist);
         } catch (final HibernateException e) {

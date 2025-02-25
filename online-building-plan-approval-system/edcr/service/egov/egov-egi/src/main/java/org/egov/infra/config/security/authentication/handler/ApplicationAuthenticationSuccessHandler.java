@@ -60,10 +60,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -113,17 +113,22 @@ public class ApplicationAuthenticationSuccessHandler extends SimpleUrlAuthentica
                 return;
             }
 
-            clearAuthenticationAttributes(request);
-            String targetUrl = savedRequest.getRedirectUrl();
-            if (excludedUrls.matcher(targetUrl).find())
-                targetUrl = getDefaultTargetUrl();
-            getRedirectStrategy().sendRedirect(request, response, targetUrl);
-        } catch (IOException | ServletException e) {
-            LOG.error("Error occurred on redirect to success page", e);
-        }
-    }
-
-    private void auditLoginDetails(HttpServletRequest request, Authentication authentication) {
+            clearAuthenticationAttributes((jakarta.servlet.http.HttpServletRequest) request);
+                        String targetUrl = savedRequest.getRedirectUrl();
+                        if (excludedUrls.matcher(targetUrl).find())
+                            targetUrl = getDefaultTargetUrl();
+                        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+                    } catch (IOException | ServletException e) {
+                        LOG.error("Error occurred on redirect to success page", e);
+                    }
+                }
+            
+                // private void clearAuthenticationAttributes(HttpServletRequest request) {
+                    // TODO Auto-generated method stub
+                //     throw new UnsupportedOperationException("Unimplemented method 'clearAuthenticationAttributes'");
+                // }
+            
+                private void auditLoginDetails(HttpServletRequest request, Authentication authentication) {
         HashMap<String, String> credentials = (HashMap<String, String>) authentication.getCredentials();
         HttpSession session = request.getSession(false);
         session.setAttribute(LOGIN_TIME, new Date());

@@ -56,7 +56,7 @@ import static org.egov.infra.security.utils.SecurityConstants.MAX_LOGIN_ATTEMPT_
 import java.util.HashMap;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.egov.infra.security.audit.entity.LoginAttempt;
 import org.egov.infra.security.audit.service.LoginAttemptService;
@@ -78,7 +78,7 @@ public class ApplicationAuthenticationProvider extends DaoAuthenticationProvider
     private static final String ACCOUNT_LOCKED_MSG_KEY = "AbstractUserDetailsAuthenticationProvider.locked";
     private static final String ACCOUNT_LOCKED_DEFAULT_MSG = "User account is locked";
     private static final String TOO_MANY_ATTEMPTS_MSG_FORMAT = "Too many attempts [%d]";
-    private static final String INVALID_CAPTCHA_MSG_FORMAT = "%s - Recaptcha Invalid";
+    // private static final String INVALID_CAPTCHA_MSG_FORMAT = "%s - Recaptcha Invalid";
     private static final String CAPTCHA_FIELD = "j_captcha_response";
     private static final String RECAPTCHA_FIELD = "g-recaptcha-response";
 
@@ -102,7 +102,7 @@ public class ApplicationAuthenticationProvider extends DaoAuthenticationProvider
 
     private Authentication unlockAccount(Authentication authentication, LockedException le) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = (HttpServletRequest) attributes.getRequest();
         if (isNotBlank(request.getParameter(RECAPTCHA_FIELD)) || isNotBlank(request.getParameter(CAPTCHA_FIELD))) {
             /*
              * if (recaptchaUtils.captchaIsValid(request)) { loginAttemptService.resetFailedAttempt(authentication.getName());
@@ -129,6 +129,7 @@ public class ApplicationAuthenticationProvider extends DaoAuthenticationProvider
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) {
+        @SuppressWarnings("unchecked")
         HashMap<String, String> authenticationCredentials = (HashMap<String, String>) authentication.getCredentials();
         if (authenticationCredentials == null ||
                 !passwordEncoder.matches(authenticationCredentials.get(LOGIN_PASS_FIELD), userDetails.getPassword())) {

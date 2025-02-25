@@ -62,15 +62,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.Resource;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.annotation.Resource;
+import jakarta.servlet.Filter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.egov.infra.admin.master.entity.City;
 import org.egov.infra.admin.master.entity.CityPreferences;
@@ -235,8 +236,15 @@ public class ApplicationCoreFilter implements Filter {
         // Nothing to be destroyed
     }
 
-    @Override
+    // @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // Nothing to be initialized
     }
+
+    // @Override
+    // public void doFilter(jakarta.servlet.ServletRequest request, jakarta.servlet.ServletResponse response,
+    //         jakarta.servlet.FilterChain chain) throws IOException, jakarta.servlet.ServletException {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'doFilter'");
+    // }
 }

@@ -48,10 +48,11 @@
 
 package org.egov.infra.persistence.utils;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-
-import javax.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.List;
 
 public class Page<T> {
@@ -61,52 +62,13 @@ public class Page<T> {
     private final int pageNumber;
     private int recordTotal;
 
-    public Page(Query query, int pageNumber, int pageSize, int recordTotal) {
-        this(query, ++pageNumber, pageSize);
+    public Page(TypedQuery<T> query, int pageNumber, int pageSize, int recordTotal) {
+        this(query, pageNumber, pageSize);
         this.recordTotal = recordTotal;
     }
 
-    public Page(Query query, int pageNumber, int pageSize) {
-        int currentPageNo = pageNumber;
-        if (pageNumber < 1) {
-            currentPageNo = 1;
-        }
-
-        this.pageNumber = currentPageNo;
-        if (pageSize > 0) {
-            query.setFirstResult((currentPageNo - 1) * pageSize);
-            query.setMaxResults(pageSize + 1);
-            this.pageSize = pageSize;
-        } else {
-            this.pageSize = -1;
-        }
-        this.results = query.list();
-    }
-
-    public Page(Criteria criteria, int pageNumber, int pageSize) {
-        int currentPageNo = pageNumber;
-        if (pageNumber < 1) {
-            currentPageNo = 1;
-        }
-
-        this.pageNumber = currentPageNo;
-
-        if (pageSize > 0) {
-            criteria.setFirstResult((currentPageNo - 1) * pageSize);
-            criteria.setMaxResults(pageSize + 1);
-            this.pageSize = pageSize;
-        } else {
-            this.pageSize = -1;
-        }
-        this.results = criteria.list();
-    }
-
-    public Page(TypedQuery<T> query, int pageNumber, int pageSize, int recordTotal) {
-        int currentPageNo = pageNumber;
-        if (pageNumber < 1) {
-            currentPageNo = 1;
-        }
-
+    public Page(TypedQuery<T> query, int pageNumber, int pageSize) {
+        int currentPageNo = Math.max(pageNumber, 1);
         this.pageNumber = currentPageNo;
 
         if (pageSize > 0) {
@@ -117,7 +79,27 @@ public class Page<T> {
             this.pageSize = -1;
         }
         this.results = query.getResultList();
-        this.recordTotal = recordTotal;
+    }
+
+    public Page(EntityManager entityManager, Class<T> entityClass, int pageNumber, int pageSize) {
+        int currentPageNo = Math.max(pageNumber, 1);
+        this.pageNumber = currentPageNo;
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(entityClass);
+        Root<T> root = query.from(entityClass);
+        query.select(root);
+
+        TypedQuery<T> typedQuery = entityManager.createQuery(query);
+
+        if (pageSize > 0) {
+            typedQuery.setFirstResult((currentPageNo - 1) * pageSize);
+            typedQuery.setMaxResults(pageSize + 1);
+            this.pageSize = pageSize;
+        } else {
+            this.pageSize = -1;
+        }
+        this.results = typedQuery.getResultList();
     }
 
     public boolean isNextPage() {

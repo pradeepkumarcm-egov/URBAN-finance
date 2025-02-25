@@ -57,14 +57,22 @@
 		<dependency>
 			<groupId>org.egov.edcr</groupId>
 			<artifactId>egov-config</artifactId>
- 			<version>2.1.2-SNAPSHOT</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
+ 			<!-- <version>2.1.2-SNAPSHOT</version> -->
+			<!-- <classifier>tests</classifier> -->
+			<!-- <scope>test</scope> -->
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
 		</dependency>
 
 		<dependency>

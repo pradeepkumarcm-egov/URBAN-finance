@@ -53,10 +53,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.QueryHint;
+import jakarta.persistence.QueryHint;
 
 @Repository
 public interface FileStoreMapperRepository extends JpaRepository<FileStoreMapper,Long>{
-    @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value = "true") })
+    // @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value = "true") })
     FileStoreMapper findByFileStoreId(String fileStoreId);
 }

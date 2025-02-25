@@ -52,11 +52,9 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.egov.infra.utils.ApplicationConstant.COLON;
 import static org.egov.infra.utils.ApplicationConstant.SLASH;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-// import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.egov.infra.admin.master.entity.User;
 import org.egov.infra.utils.StringUtils;
@@ -156,7 +154,7 @@ public final class WebUtils {
         return url.substring(0, url.indexOf(QUESTION_MARK));
     }
 
-    public static String currentContextPath(ServletRequest request) {
+    public static String currentContextPath(jakarta.servlet.ServletRequest request) {
         return request.getServletContext().getContextPath().replace(SLASH, EMPTY);
     }
 

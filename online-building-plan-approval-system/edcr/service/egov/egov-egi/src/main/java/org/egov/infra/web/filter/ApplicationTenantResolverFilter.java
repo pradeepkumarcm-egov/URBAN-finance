@@ -49,8 +49,6 @@
 package org.egov.infra.web.filter;
 
 import static org.egov.infra.utils.ApplicationConstant.CITY_CODE_KEY;
-import static org.egov.infra.web.utils.WebUtils.extractRequestDomainURL;
-import static org.egov.infra.web.utils.WebUtils.extractRequestedDomainName;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -61,15 +59,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.annotation.Resource;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -109,24 +107,36 @@ public class ApplicationTenantResolverFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         MultiReadRequestWrapper customRequest = new MultiReadRequestWrapper(req);
-        HttpSession session = customRequest.getSession();
+        HttpSession session = (HttpSession) customRequest.getSession();
         LOG.info("Request URL--> {}", customRequest.getRequestURL());
         LOG.info("Request URI--> {}", customRequest.getRequestURI());
         boolean isEnvironmentCentralInstance = environmentSettings.getProperty("is.environment.central.instance", Boolean.class);
         String commonDomainName = environmentSettings.getProperty("common.domain.name");
         LOG.info("####isEnvironmentCentralInstance--> {} #### domain name-->> {}", isEnvironmentCentralInstance, commonDomainName);
         String domainURL = extractRequestDomainURL(customRequest, false, isEnvironmentCentralInstance, commonDomainName);
-        LOG.info("domainURL-->>>>>>" + domainURL);
-        String domainName = extractRequestedDomainName(customRequest, isEnvironmentCentralInstance, commonDomainName);
-        ApplicationThreadLocals.setTenantID(environmentSettings.schemaName(domainName));
-        ApplicationThreadLocals.setDomainName(domainName);
-        ApplicationThreadLocals.setDomainURL(domainURL);
-        prepareRestService(customRequest, session);
-        LOG.info("***Tenant ID--> {}", ApplicationThreadLocals.getTenantID());
-        chain.doFilter(customRequest, response);
-    }
-
-    @Override
+                LOG.info("domainURL-->>>>>>" + domainURL);
+                String domainName = extractRequestedDomainName(customRequest, isEnvironmentCentralInstance, commonDomainName);
+                                ApplicationThreadLocals.setTenantID(environmentSettings.schemaName(domainName));
+                                ApplicationThreadLocals.setDomainName(domainName);
+                                ApplicationThreadLocals.setDomainURL(domainURL);
+                                prepareRestService(customRequest, session);
+                                LOG.info("***Tenant ID--> {}", ApplicationThreadLocals.getTenantID());
+                                chain.doFilter((ServletRequest) customRequest, response);
+                            }
+                        
+                            private String extractRequestedDomainName(MultiReadRequestWrapper customRequest,
+                            boolean isEnvironmentCentralInstance, String commonDomainName) {
+                        // TODO Auto-generated method stub
+                        throw new UnsupportedOperationException("Unimplemented method 'extractRequestedDomainName'");
+                    }
+                
+                            private String extractRequestDomainURL(MultiReadRequestWrapper customRequest, boolean withContext,
+                    boolean isEnvironmentCentralInstance, String commonDomainName) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'extractRequestDomainURL'");
+            }
+        
+            @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
         // Nothing to be initialized
     }

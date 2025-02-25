@@ -53,6 +53,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CityIndexRepository extends ElasticsearchRepository<CityIndex, String>,CityIndexCustomRepository {
@@ -60,4 +61,8 @@ public interface CityIndexRepository extends ElasticsearchRepository<CityIndex, 
 	CityIndex findByCitycode(String code);
 	
 	List<CityIndex> findByDistrictcode(String districtCode);
+
+    Iterable<CityIndex> findAll();
+
+	Optional<CityIndex> findById(String id);
 }

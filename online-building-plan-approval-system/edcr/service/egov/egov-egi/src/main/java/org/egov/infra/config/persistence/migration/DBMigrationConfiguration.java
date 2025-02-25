@@ -48,7 +48,7 @@
 
 package org.egov.infra.config.persistence.migration;
 
-import static java.lang.String.format;
+// import static java.lang.String.format;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Autowire;
+// import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -183,7 +183,7 @@ public class DBMigrationConfiguration {
 //        flyway.migrate();
 //    }
 
-    @Bean(name = "tenants", autowire = Autowire.BY_NAME)
+    // @Bean(name = "tenants", autowire = Autowire.BY_NAME)
 	public List<String> tenants() {
 		List<String> tenants = new ArrayList<>();
 		environment.getPropertySources().iterator().forEachRemaining(propertySource -> {

@@ -54,14 +54,13 @@ import static org.egov.infra.utils.ApplicationConstant.CONTENT_TYPE;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.egov.infra.reporting.engine.ReportConstants;
 import org.egov.infra.reporting.engine.ReportFormat;
 import org.egov.infra.reporting.engine.ReportOutput;
-import org.egov.infra.utils.StringUtils;
-import org.owasp.esapi.ESAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +75,8 @@ public class ReportViewer implements HttpRequestHandler {
     @Autowired
     private ReportViewerUtil reportViewerUtil;
 
-    @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
+    // @Override
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String reportId = request.getParameter(ReportConstants.REQ_PARAM_REPORT_ID);
         try {
             ReportOutput reportOutput = reportViewerUtil.getReportOutputFormCache(reportId);
@@ -113,13 +112,14 @@ public class ReportViewer implements HttpRequestHandler {
 
     private void renderReport(HttpServletResponse resp, byte[] reportData, ReportFormat reportFormat) {
         try (BufferedOutputStream outputStream = new BufferedOutputStream(resp.getOutputStream())) {
-            ESAPI.httpUtilities().addHeader(resp, CONTENT_DISPOSITION, StringUtils.sanitize(ReportViewerUtil.getContentDisposition(reportFormat)));
-            ESAPI.httpUtilities().addHeader(resp, CONTENT_TYPE, StringUtils.sanitize(ReportViewerUtil.getContentType(reportFormat)));
+            resp.setHeader(CONTENT_DISPOSITION, ReportViewerUtil.getContentDisposition(reportFormat));
+            resp.setHeader(CONTENT_TYPE, ReportViewerUtil.getContentType(reportFormat));
             resp.setContentLength(reportData.length);
-            ESAPI.httpUtilities().setContentType(resp);
+            resp.setContentType(ReportViewerUtil.getContentType(reportFormat));
+            
             outputStream.write(reportData);
         } catch (IOException e) {
-            LOGGER.error("Exception in rendering report with format [{}]!", e);
+            LOGGER.error("Exception in rendering report with format [{}]!", reportFormat, e);
         }
     }
 }

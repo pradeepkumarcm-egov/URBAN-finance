@@ -52,4 +52,6 @@ import org.egov.infra.elasticsearch.entity.es.ApplicationDocument;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 public interface ApplicationDocumentRepository extends ElasticsearchRepository<ApplicationDocument, String> {
+
+    ApplicationDocument save(ApplicationDocument applicationDocument);
 }

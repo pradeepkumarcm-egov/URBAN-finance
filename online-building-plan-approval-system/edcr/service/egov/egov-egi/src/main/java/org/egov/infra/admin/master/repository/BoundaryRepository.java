@@ -59,17 +59,17 @@ import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.QueryHint;
+import jakarta.persistence.QueryHint;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import static org.hibernate.jpa.QueryHints.HINT_CACHEABLE;
+// import static org.hibernate.jpa.QueryHints.HINT_CACHEABLE;
 
 @Repository
 public interface BoundaryRepository extends JpaRepository<Boundary, Long> {
 
-    @QueryHints({@QueryHint(name = HINT_CACHEABLE, value = "true")})
+//     @QueryHints({@QueryHint(name = HINT_CACHEABLE, value = "true")})
     Boundary findByName(String name);
 
     List<Boundary> findByNameContainingIgnoreCase(String name);
