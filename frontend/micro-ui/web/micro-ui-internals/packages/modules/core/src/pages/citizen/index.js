@@ -68,7 +68,7 @@ const Home = ({
     }
   );
 
-  const classname = Digit.Hooks.fsm.useRouteSubscription(pathname);
+  const classname = Digit.Hooks.useRouteSubscription(pathname);
   const { t } = useTranslation();
   const { path } = useRouteMatch();
   const history = useHistory();
