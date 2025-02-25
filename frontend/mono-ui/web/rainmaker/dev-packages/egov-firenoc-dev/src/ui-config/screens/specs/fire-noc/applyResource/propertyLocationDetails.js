@@ -4,12 +4,12 @@ import {
   getCommonTitle,
   getPattern,
   getSelectField,
-  getTextField
+  getTextField,
 } from "egov-ui-framework/ui-config/screens/specs/utils";
 import {
   handleScreenConfigurationFieldChange as handleField,
   prepareFinalObject,
-  toggleSnackbar
+  toggleSnackbar,
 } from "egov-ui-framework/ui-redux/screen-configuration/actions";
 import { getTenantId } from "egov-ui-kit/utils/localStorageUtils";
 import get from "lodash/get";
@@ -17,7 +17,7 @@ import { httpRequest } from "../../../../../ui-utils/api";
 import { getLocale } from "egov-ui-kit/utils/localStorageUtils";
 import { fetchLocalizationLabel } from "egov-ui-kit/redux/app/actions";
 import "./index.css";
-export const onchangeOfTenant=async(action, state, dispatch)=>{
+export const onchangeOfTenant = async (action, state, dispatch) => {
   dispatch(
     prepareFinalObject(
       "FireNOCs[0].fireNOCDetails.propertyDetails.address.city",
@@ -42,21 +42,15 @@ export const onchangeOfTenant=async(action, state, dispatch)=>{
           ...item,
           name: `${action.value
             .toUpperCase()
-            .replace(
-              /[.]/g,
-              "_"
-            )}_REVENUE_${item.code
+            .replace(/[.]/g, "_")}_REVENUE_${item.code
             .toUpperCase()
-            .replace(/[._:-\s\/]/g, "_")}`
+            .replace(/[._:-\s\/]/g, "_")}`,
         });
         return result;
       }, []);
 
     dispatch(
-      prepareFinalObject(
-        "applyScreenMdmsData.tenant.localities",
-        mohallaData
-      )
+      prepareFinalObject("applyScreenMdmsData.tenant.localities", mohallaData)
     );
     dispatch(
       handleField(
@@ -68,7 +62,7 @@ export const onchangeOfTenant=async(action, state, dispatch)=>{
     );
     const mohallaLocalePrefix = {
       moduleName: action.value,
-      masterName: "REVENUE"
+      masterName: "REVENUE",
     };
     dispatch(
       handleField(
@@ -78,7 +72,6 @@ export const onchangeOfTenant=async(action, state, dispatch)=>{
         mohallaLocalePrefix
       )
     );
-
   } catch (e) {
     console.log(e);
   }
@@ -88,7 +81,7 @@ export const onchangeOfTenant=async(action, state, dispatch)=>{
     "screenConfiguration.preparedFinalObject.applyScreenMdmsData.firenoc.FireStations",
     []
   );
-  let fireStations = fireStationsList.filter(firestation => {
+  let fireStations = fireStationsList.filter((firestation) => {
     return firestation.baseTenantId === action.value;
   });
   dispatch(
@@ -99,7 +92,7 @@ export const onchangeOfTenant=async(action, state, dispatch)=>{
       fireStations
     )
   );
-}
+};
 const showHideMapPopup = (state, dispatch) => {
   let toggle = get(
     state.screenConfiguration.screenConfig["apply"],
@@ -116,12 +109,12 @@ const showHideMapPopup = (state, dispatch) => {
   );
 };
 
-const getMapLocator = textSchema => {
+const getMapLocator = (textSchema) => {
   return {
     uiFramework: "custom-molecules-local",
     moduleName: "egov-firenoc",
     componentPath: "MapLocator",
-    props: {}
+    props: {},
   };
 };
 
@@ -140,7 +133,7 @@ const getDetailsFromProperty = async (state, dispatch) => {
           true,
           {
             labelName: "Please select city to search by property id !!",
-            labelKey: "ERR_SELECT_CITY_TO_SEARCH_PROPERTY_ID"
+            labelKey: "ERR_SELECT_CITY_TO_SEARCH_PROPERTY_ID",
           },
           "warning"
         )
@@ -150,7 +143,7 @@ const getDetailsFromProperty = async (state, dispatch) => {
     if (propertyId) {
       let payload = await httpRequest(
         "post",
-        `/pt-services-v2/property/_search?tenantId=${tenantId}&ids=${propertyId}`,
+        `/property-services/property/_search?tenantId=${tenantId}&propertyIds=${propertyId}`,
         "_search",
         [],
         {}
@@ -166,7 +159,7 @@ const getDetailsFromProperty = async (state, dispatch) => {
               true,
               {
                 labelName: "Property is not found with this Property Id",
-                labelKey: "ERR_PROPERTY_NOT_FOUND_WITH_PROPERTY_ID"
+                labelKey: "ERR_PROPERTY_NOT_FOUND_WITH_PROPERTY_ID",
               },
               "info"
             )
@@ -187,7 +180,7 @@ const getDetailsFromProperty = async (state, dispatch) => {
               "props.value",
               {
                 value: payload.Properties[0].address.locality.code,
-                label: payload.Properties[0].address.locality.name
+                label: payload.Properties[0].address.locality.name,
               }
             )
           );
@@ -218,12 +211,12 @@ export const propertyLocationDetails = getCommonCard(
     header: getCommonTitle(
       {
         labelName: "Property Location Details",
-        labelKey: "NOC_PROPERTY_LOCATION_DETAILS_HEADER"
+        labelKey: "NOC_PROPERTY_LOCATION_DETAILS_HEADER",
       },
       {
         style: {
-          marginBottom: 18
-        }
+          marginBottom: 18,
+        },
       }
     ),
 
@@ -231,11 +224,11 @@ export const propertyLocationDetails = getCommonCard(
       propertyId: getTextField({
         label: {
           labelName: "Property ID",
-          labelKey: "NOC_PROPERTY_ID_LABEL"
+          labelKey: "NOC_PROPERTY_ID_LABEL",
         },
         placeholder: {
           labelName: "Enter Property ID",
-          labelKey: "NOC_PROPERTY_ID_PLACEHOLDER"
+          labelKey: "NOC_PROPERTY_ID_PLACEHOLDER",
         },
         iconObj: {
           iconName: "search",
@@ -245,8 +238,8 @@ export const propertyLocationDetails = getCommonCard(
             action: "condition",
             callBack: (state, dispatch) => {
               getDetailsFromProperty(state, dispatch);
-            }
-          }
+            },
+          },
         },
         // title: {
         //   value:
@@ -254,7 +247,7 @@ export const propertyLocationDetails = getCommonCard(
         //   key: "NOC_PROPERTY_ID_TOOLTIP_MESSAGE"
         // },
         // infoIcon: "info_circle",
-        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.propertyId"
+        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.propertyId",
       }),
       propertyCity: {
         uiFramework: "custom-containers-local",
@@ -262,102 +255,103 @@ export const propertyLocationDetails = getCommonCard(
         componentPath: "AutosuggestContainer",
         jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.city",
         props: {
-          label: { 
-            labelName: "City", 
-            labelKey: "NOC_PROPERTY_CITY_LABEL" 
+          label: {
+            labelName: "City",
+            labelKey: "NOC_PROPERTY_CITY_LABEL",
           },
           localePrefix: {
             moduleName: "TENANT",
-            masterName: "TENANTS"
+            masterName: "TENANTS",
           },
           optionLabel: "name",
           placeholder: {
             labelName: "Select City",
-            labelKey: "NOC_PROPERTY_CITY_PLACEHOLDER"
+            labelKey: "NOC_PROPERTY_CITY_PLACEHOLDER",
           },
           jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.city",
           sourceJsonPath: "applyScreenMdmsData.tenant.tenants",
-          className:"applicant-details-error autocomplete-dropdown",
+          className: "applicant-details-error autocomplete-dropdown",
           required: true,
         },
         required: true,
         gridDefination: {
           xs: 12,
           sm: 12,
-          md: 6
+          md: 6,
         },
         beforeFieldChange: async (action, state, dispatch) => {
           //Below only runs for citizen - not required here in employee
-         await onchangeOfTenant(action, state, dispatch);
-        }
+          await onchangeOfTenant(action, state, dispatch);
+        },
       },
       propertyPlotSurveyNo: getTextField({
         label: {
           labelName: "Plot/Survey No.",
-          labelKey: "NOC_PROPERTY_PLOT_NO_LABEL"
+          labelKey: "NOC_PROPERTY_PLOT_NO_LABEL",
         },
-        props:{
-          className:"applicant-details-error"
+        props: {
+          className: "applicant-details-error",
         },
         placeholder: {
           labelName: "Enter Plot/Survey No.",
-          labelKey: "NOC_PROPERTY_PLOT_NO_PLACEHOLDER"
+          labelKey: "NOC_PROPERTY_PLOT_NO_PLACEHOLDER",
         },
         pattern: getPattern("DoorHouseNo"),
         errorMessage: "ERR_DEFAULT_INPUT_FIELD_MSG",
-        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.doorNo"
+        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.doorNo",
       }),
       propertyBuilidingName: getTextField({
         label: {
           labelName: "Building/Colony Name",
-          labelKey: "NOC_PROPERTY_DETAILS_BLDG_NAME_LABEL"
+          labelKey: "NOC_PROPERTY_DETAILS_BLDG_NAME_LABEL",
         },
-        props:{
-          className:"applicant-details-error"
+        props: {
+          className: "applicant-details-error",
         },
         placeholder: {
           labelName: "Enter Building/Colony Name",
-          labelKey: "NOC_PROPERTY_DETAILS_BLDG_NAME_PLACEHOLDER"
+          labelKey: "NOC_PROPERTY_DETAILS_BLDG_NAME_PLACEHOLDER",
         },
         pattern: getPattern("BuildingStreet"),
         errorMessage: "ERR_DEFAULT_INPUT_FIELD_MSG",
 
         jsonPath:
-          "FireNOCs[0].fireNOCDetails.propertyDetails.address.buildingName"
+          "FireNOCs[0].fireNOCDetails.propertyDetails.address.buildingName",
       }),
       propertyStreetName: getTextField({
         label: {
           labelName: "Street Name",
-          labelKey: "NOC_PROPERTY_DETAILS_SRT_NAME_LABEL"
+          labelKey: "NOC_PROPERTY_DETAILS_SRT_NAME_LABEL",
         },
-        props:{
-          className:"applicant-details-error"
+        props: {
+          className: "applicant-details-error",
         },
         placeholder: {
           labelName: "Enter Street Name",
-          labelKey: "NOC_PROPERTY_DETAILS_SRT_NAME_PLACEHOLDER"
+          labelKey: "NOC_PROPERTY_DETAILS_SRT_NAME_PLACEHOLDER",
         },
         pattern: getPattern("BuildingStreet"),
         errorMessage: "ERR_DEFAULT_INPUT_FIELD_MSG",
-        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.street"
+        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.street",
       }),
       propertyMohalla: {
         uiFramework: "custom-containers",
         componentPath: "AutosuggestContainer",
-        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.locality.code",
+        jsonPath:
+          "FireNOCs[0].fireNOCDetails.propertyDetails.address.locality.code",
         required: true,
-        props: { 
+        props: {
           style: {
             width: "100%",
-            cursor: "pointer"
+            cursor: "pointer",
           },
           label: {
             labelName: "Mohalla",
-            labelKey: "NOC_PROPERTY_DETAILS_MOHALLA_LABEL"
+            labelKey: "NOC_PROPERTY_DETAILS_MOHALLA_LABEL",
           },
           placeholder: {
             labelName: "Select Mohalla",
-            labelKey: "NOC_PROPERTY_DETAILS_MOHALLA_PLACEHOLDER"
+            labelKey: "NOC_PROPERTY_DETAILS_MOHALLA_PLACEHOLDER",
           },
           jsonPath:
             "FireNOCs[0].fireNOCDetails.propertyDetails.address.locality.code",
@@ -368,8 +362,8 @@ export const propertyLocationDetails = getCommonCard(
           fullwidth: true,
           required: true,
           inputLabelProps: {
-            shrink: true
-          }
+            shrink: true,
+          },
           // className: "tradelicense-mohalla-apply"
         },
         beforeFieldChange: async (action, state, dispatch) => {
@@ -382,24 +376,24 @@ export const propertyLocationDetails = getCommonCard(
         },
         gridDefination: {
           xs: 12,
-          sm: 6
-        }
+          sm: 6,
+        },
       },
       propertyPincode: getTextField({
         label: {
           labelName: "Pincode",
-          labelKey: "NOC_PROPERTY_DETAILS_PIN_LABEL"
+          labelKey: "NOC_PROPERTY_DETAILS_PIN_LABEL",
         },
-        props:{
-          className:"applicant-details-error"
+        props: {
+          className: "applicant-details-error",
         },
         placeholder: {
           labelName: "Enter Pincode",
-          labelKey: "NOC_PROPERTY_DETAILS_PIN_PLACEHOLDER"
+          labelKey: "NOC_PROPERTY_DETAILS_PIN_PLACEHOLDER",
         },
         pattern: getPattern("Pincode"),
         errorMessage: "ERR_DEFAULT_INPUT_FIELD_MSG",
-        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.pincode"
+        jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.pincode",
         // required: true
       }),
       propertyGisCoordinates: {
@@ -409,70 +403,70 @@ export const propertyLocationDetails = getCommonCard(
           className: "gis-div-css",
           style: {
             width: "100%",
-            cursor: "pointer"
+            cursor: "pointer",
           },
           jsonPath:
-            "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude"
+            "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude",
         },
         jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude",
         onClickDefination: {
           action: "condition",
-          callBack: showHideMapPopup
+          callBack: showHideMapPopup,
         },
         gridDefination: {
           xs: 12,
-          sm: 6
+          sm: 6,
         },
         children: {
           gisTextField: {
             ...getTextField({
               label: {
                 labelName: "Locate on Map",
-                labelKey: "NOC_PROPERTY_DETAILS_GIS_CORD_LABEL"
+                labelKey: "NOC_PROPERTY_DETAILS_GIS_CORD_LABEL",
               },
               placeholder: {
                 labelName: "Select your property location on map",
-                labelKey: "NOC_PROPERTY_DETAILS_GIS_CORD_PLACEHOLDER"
+                labelKey: "NOC_PROPERTY_DETAILS_GIS_CORD_PLACEHOLDER",
               },
               jsonPath:
                 "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude",
               iconObj: {
                 iconName: "gps_fixed",
-                position: "end"
+                position: "end",
               },
               gridDefination: {
                 xs: 12,
-                sm: 12
+                sm: 12,
               },
               props: {
                 disabled: true,
                 cursor: "pointer",
                 jsonPath:
-                  "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude"
-              }
-            })
-          }
-        }
+                  "FireNOCs[0].fireNOCDetails.propertyDetails.address.latitude",
+              },
+            }),
+          },
+        },
       },
       propertyFirestation: {
         uiFramework: "custom-containers-local",
         moduleName: "egov-firenoc",
         componentPath: "AutosuggestContainer",
-        props:{
-          className:"applicant-details-error autocomplete-dropdown",
+        props: {
+          className: "applicant-details-error autocomplete-dropdown",
           label: {
             labelName: "Applicable Fire Station",
-            labelKey: "NOC_PROPERTY_DETAILS_FIRESTATION_LABEL"
+            labelKey: "NOC_PROPERTY_DETAILS_FIRESTATION_LABEL",
           },
           placeholder: {
             labelName: "Select Applicable Fire Station",
-            labelKey: "NOC_PROPERTY_DETAILS_FIRESTATION_PLACEHOLDER"
+            labelKey: "NOC_PROPERTY_DETAILS_FIRESTATION_PLACEHOLDER",
           },
           required: true,
           labelsFromLocalisation: true,
           localePrefix: {
             moduleName: "firenoc",
-            masterName: "FireStations"
+            masterName: "FireStations",
           },
           jsonPath: "FireNOCs[0].fireNOCDetails.firestationId",
         },
@@ -481,26 +475,26 @@ export const propertyLocationDetails = getCommonCard(
         gridDefination: {
           xs: 12,
           sm: 12,
-          md: 6
+          md: 6,
         },
       },
     }),
     mapsDialog: {
       componentPath: "Dialog",
       props: {
-        open: false
+        open: false,
       },
       children: {
         dialogContent: {
           componentPath: "DialogContent",
           children: {
-            popup: getMapLocator()
-          }
-        }
-      }
-    }
+            popup: getMapLocator(),
+          },
+        },
+      },
+    },
   },
   {
-    style: { overflow: "visible" }
+    style: { overflow: "visible" },
   }
 );
