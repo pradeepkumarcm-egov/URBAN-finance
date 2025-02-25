@@ -56,7 +56,6 @@ const ApplicationDetails = (props) => {
   }, [showToast]);
 
   function onActionSelect(action) {
-    console.log("onactionselect");
     if (action) {
       if (action?.isToast) {
         setShowToast({ key: "error", error: { message: action?.toastMessage } });

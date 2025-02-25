@@ -35,6 +35,9 @@ export const MdmsService = {
   getTradeUnitsData: (tenantId, moduleCode, type, filter) => {
     return MdmsService.getDataByCriteria(tenantId, moduleCode, "TradeType", { masterDetailsFilter: filter });
   },
+  getDocumentRequiredScreen: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getDocumentRequiredScreenCategory(tenantId, moduleCode), moduleCode);
+  },
 
   GetTradeOwnerShipCategory: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, "common-masters", "OwnerShipCategory");
@@ -51,9 +54,6 @@ export const MdmsService = {
   getMultipleTypes: (tenantId, moduleCode, types) => {
     return MdmsService.getDataByCriteria(tenantId, moduleCode, types);
   },
-  // TLGenderType: (tenantId, moduleCode, type) => {
-  //   return MdmsService.getDataByCriteria(tenantId, getGenderTypeList(tenantId, moduleCode, type), moduleCode);
-  // },
 };
 
 const getGenderTypeList = (tenantId, moduleCode, type) => ({
@@ -66,6 +66,31 @@ const getGenderTypeList = (tenantId, moduleCode, type) => ({
         masterDetails: [
           {
             name: "GenderType",
+          },
+        ],
+      },
+    ],
+  },
+});
+
+const getDocumentRequiredScreen = (MdmsRes) => {
+  MdmsRes["PropertyTax"].Documents.filter((Documents) => Documents.active).map((dropdownData) => {
+    return {
+      ...Documents,
+      i18nKey: `${dropdownData.code}`,
+    };
+  });
+};
+
+const getDocumentRequiredScreenCategory = (tenantId, moduleCode) => ({
+  details: {
+    tenantId: tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "Documents",
           },
         ],
       },

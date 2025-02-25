@@ -18,7 +18,6 @@ import { useTranslation } from "react-i18next";
 
 const Search = ({ path }) => {
   const { variant } = useParams();
-  console.log("variant", variant);
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [payload, setPayload] = useState({});

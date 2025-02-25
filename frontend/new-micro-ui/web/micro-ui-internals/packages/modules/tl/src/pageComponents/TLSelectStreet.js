@@ -115,8 +115,6 @@ const TLSelectStreet = ({ t, config, onSelect, userType, formData, formState, se
     }
   }, [formData?.cpt?.details]);
 
-  console.log("config", config);
-
   if (userType === "employee") {
     return inputs?.map((input, index) => {
       return (

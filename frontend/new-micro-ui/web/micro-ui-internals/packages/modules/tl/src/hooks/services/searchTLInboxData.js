@@ -19,7 +19,6 @@ export const searchTLInboxData = async ({ tenantId, filters, USER_UUID }) => {
     limit,
     offset,
   };
-  console.log("_filters", _filters);
 
   const response = await Digit.CustomService.getResponse({
     url: "/inbox/v2/_search",
@@ -28,8 +27,6 @@ export const searchTLInboxData = async ({ tenantId, filters, USER_UUID }) => {
     userService: true,
     body: { inbox: { ..._filters } },
   });
-
-  console.log("response", response);
 
   return {
     statuses: response.statusMap,

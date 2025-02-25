@@ -4,8 +4,6 @@ import { useQueryClient } from "react-query";
 import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { newConfig as newConfigTL } from "../../../config/config";
 import { filteredConfig } from "../../../config/filteredConfig";
-// import CheckPage from "./CheckPage";
-// import TLAcknowledgement from "./TLAcknowledgement";
 
 const CreateTradeLicence = ({ parentRoute }) => {
   const queryClient = useQueryClient();
@@ -109,7 +107,6 @@ const CreateTradeLicence = ({ parentRoute }) => {
         goNext(skipStep, index, isAddMultiple, key);
       }
     }
-    console.log("data", data);
   }
 
   const handleSkip = () => {};
@@ -134,25 +131,14 @@ const CreateTradeLicence = ({ parentRoute }) => {
   sessionStorage.setItem("skipenabled", skipenabled);
   config.indexRoute = "info";
 
-  // console.log("config", JSON.stringify(config));
-
-  // const filteredConfig = config?.filter((routeObj) => {
-  //   const { component } = routeObj;
-  //   return !component || component.slice(0, 3) !== "CPT";
-  // });
   const filteredRoutes = filteredConfig?.filter((routeObj) => !routeObj.component.startsWith("CPT"));
-  console.log("filteredconfig", filteredRoutes);
   const CheckPage = Digit?.ComponentRegistryService?.getComponent("TLCheckPage");
   const TLAcknowledgement = Digit?.ComponentRegistryService?.getComponent("TLAcknowledgement");
   return (
     <Switch>
       {filteredRoutes?.map((routeObj, index) => {
         const { component, texts, inputs, key, isSkipEnabled } = routeObj;
-
-        console.log("neXtStep", component, routeObj.nextStep);
-
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
-        // console.log("component:", component);
         return (
           <Route path={`${match.path}/${routeObj.route}`} key={index}>
             <Component

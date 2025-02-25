@@ -18,8 +18,6 @@ const TLCard = () => {
     config: {},
   });
 
-  console.log("InboxData", inboxData);
-
   const [isStateLocalisation, setIsStateLocalisation] = useState(true);
 
   useEffect(() => {

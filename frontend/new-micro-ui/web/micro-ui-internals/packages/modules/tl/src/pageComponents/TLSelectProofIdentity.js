@@ -14,11 +14,11 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
   //let dropdownData = [];
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const stateId = Digit.ULBService.getStateId();
-  // const { data: Documentsob = { } } = Digit.Hooks.pt.usePropertyMDMS(stateId, "PropertyTax", "Documents");
+  // const { data: Documentsob = {} } = Digit.Hooks.pt.usePropertyMDMS(stateId, "PropertyTax", "Documents");
   const { data: Documentsob = {} } = Digit.Hooks.useCustomMDMS(stateId, "PropertyTax", [{ name: "Documents" }], {});
-  console.log("documentsobj", Documentsob);
 
   const docs = Documentsob?.PropertyTax?.Documents;
+
   const proofOfIdentity = Array.isArray(docs) && docs.filter((doc) => doc.code.includes("ADDRESSPROOF"));
   // if (proofOfIdentity.length > 0) {
   //   dropdownData = proofOfIdentity[0]?.dropdownData;
@@ -87,10 +87,11 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
   return (
     <React.Fragment>
       {window.location.href.includes("/citizen") ? <Timeline currentStep={3} /> : null}
-      <FormStep config={config} onSelect={handleSubmit} onSkip={onSkip} t={t} isDisabled={error}>
+      <FormStep config={config} onSelect={handleSubmit} onSkip={onSkip} t={t} isDisabled={!uploadedFile || error}>
         <CardLabelDesc style={{ fontWeight: "unset" }}>{t(`TL_UPLOAD_RESTRICTIONS_TYPES`)}</CardLabelDesc>
         <CardLabelDesc style={{ fontWeight: "unset" }}> {t(`TL_UPLOAD_RESTRICTIONS_SIZE`)}</CardLabelDesc>
         <CardLabel>{`${t("TL_CATEGORY_DOCUMENT_TYPE")}`}</CardLabel>
+
         <UploadFile
           id={"tl-doc"}
           extraStyleName={"propertyCreate"}
@@ -101,7 +102,6 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
           }}
           message={uploadedFile ? `1 ${t(`TL_ACTION_FILEUPLOADED`)}` : t(`TL_ACTION_NO_FILEUPLOADED`)}
           error={error}
-          uploadedFiles={[]}
         />
         {error ? <div style={{ height: "20px", width: "100%", fontSize: "20px", color: "red", marginTop: "5px" }}>{error}</div> : ""}
         <div style={{ disabled: "true", height: "20px", width: "100%" }}></div>

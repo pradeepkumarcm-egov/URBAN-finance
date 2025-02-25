@@ -14,6 +14,7 @@ import useTradeLicenseBillingslab from "./useTradeLicenseBillingslab";
 import useTLDocumentSearch from "./useTLDocumentSearch";
 import useTLGenderMDMS from "./useTLGenderMDMS";
 import useTradeLicenseAPI from "./useTradeLicenseAPI";
+import usePropertyMDMS from "./usePropertyMDMS";
 
 const tl = {
   useInbox: useTLInbox,
@@ -31,6 +32,7 @@ const tl = {
   useTLDocumentSearch,
   useTradeLicenseBillingslab,
   useTLGenderMDMS,
+  usePropertyMDMS,
   useTradeLicenseAPI,
 };
 

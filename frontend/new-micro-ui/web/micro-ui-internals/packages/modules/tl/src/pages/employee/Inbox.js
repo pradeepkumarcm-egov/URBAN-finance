@@ -5,7 +5,6 @@ import DesktopInbox from "../../components/inbox/DesktopInbox";
 import MobileInbox from "../../components/inbox/MobileInbox";
 
 const Inbox = ({ parentRoute, businessService = "TL", initialStates = {}, filterComponent, isInbox }) => {
-  console.log("inbox");
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [enableSarch, setEnableSearch] = useState(() => (isInbox ? {} : { enabled: false }));
 

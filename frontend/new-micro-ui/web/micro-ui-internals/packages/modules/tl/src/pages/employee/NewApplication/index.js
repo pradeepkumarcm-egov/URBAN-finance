@@ -29,8 +29,6 @@ const NewApplication = () => {
     { filters: { propertyIds: propertyId }, tenantId: tenantId, enabled: propertyId ? true : false }
   );
 
-  console.log("propertyDetails", propertyDetails);
-
   useEffect(() => {
     !propertyId && setPropertyId(sessionFormData?.cpt?.details?.propertyId);
   }, [sessionFormData?.cpt]);
@@ -277,8 +275,6 @@ const NewApplication = () => {
       return head;
     }
   }
-
-  console.log("configs", configs);
 
   return (
     <div>

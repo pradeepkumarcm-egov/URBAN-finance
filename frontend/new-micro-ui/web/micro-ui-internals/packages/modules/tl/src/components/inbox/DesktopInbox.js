@@ -17,7 +17,6 @@ const DesktopInbox = ({
   setSetSearchFieldsBackToOriginalState,
   ...props
 }) => {
-  console.log("loading", isLoading);
   const { data } = props;
   const { t } = useTranslation();
   const [FilterComponent, setComp] = useState(() => Digit.ComponentRegistryService?.getComponent(filterComponent));
@@ -94,7 +93,6 @@ const DesktopInbox = ({
   ];
 
   let result;
-  console.log("props", props);
 
   if (props.isLoading) {
     result = <Loader />;
@@ -137,8 +135,6 @@ const DesktopInbox = ({
       />
     );
   }
-
-  console.log("result", result);
 
   return (
     <div className="inbox-container">

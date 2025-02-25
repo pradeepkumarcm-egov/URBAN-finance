@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Timeline from "../components/TLTimeline";
 
 const SelectOtherTradeDetails = ({ t, config, onSelect, value, userType, formData }) => {
-  console.log("hahaha");
   let validation = {};
   const onSkip = () => onSelect();
   const [TradeGSTNumber, setTradeGSTNumber] = useState(formData.TradeDetails?.TradeGSTNumber);
@@ -25,7 +24,6 @@ const SelectOtherTradeDetails = ({ t, config, onSelect, value, userType, formDat
   function selectNumberOfEmployees(e) {
     setNumberOfEmployees(e.target.value);
   }
-  console.log("config--", config);
   const goNext = () => {
     //sessionStorage.setItem("CurrentFinancialYear", FY);
 
