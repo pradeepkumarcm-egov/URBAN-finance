@@ -10,7 +10,10 @@ import usePropertySearch from "./usePropertySearch";
 import useTLSearchApplication from "./useTLsearchApplication";
 import { useTLApplicationDetails } from "./useTLsearchApplication";
 import useTLPaymentHistory from "./userPaymentHistory";
+import useTradeLicenseBillingslab from "./useTradeLicenseBillingslab";
 import useTLDocumentSearch from "./useTLDocumentSearch";
+import useTLGenderMDMS from "./useTLGenderMDMS";
+import useTradeLicenseAPI from "./useTradeLicenseAPI";
 
 const tl = {
   useInbox: useTLInbox,
@@ -26,6 +29,9 @@ const tl = {
   useTLApplicationDetails,
   useTLPaymentHistory,
   useTLDocumentSearch,
+  useTradeLicenseBillingslab,
+  useTLGenderMDMS,
+  useTradeLicenseAPI,
 };
 
 const Hooks = {

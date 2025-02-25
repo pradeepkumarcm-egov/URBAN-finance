@@ -8,13 +8,16 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
   const [file, setFile] = useState(formData?.owners?.documents?.ProofOfIdentity);
   const [error, setError] = useState(null);
   const cityDetails = Digit.ULBService.getCurrentUlb();
-  let acceptFormat = ".jpg,.png,.pdf,.jpeg"
+  let acceptFormat = ".jpg,.png,.pdf,.jpeg";
 
   const [dropdownValue, setDropdownValue] = useState(formData?.owners?.documents?.ProofOfIdentity?.documentType || null);
   //let dropdownData = [];
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const stateId = Digit.ULBService.getStateId();
-  const { data: Documentsob = { } } = Digit.Hooks.pt.usePropertyMDMS(stateId, "PropertyTax", "Documents");
+  // const { data: Documentsob = { } } = Digit.Hooks.pt.usePropertyMDMS(stateId, "PropertyTax", "Documents");
+  const { data: Documentsob = {} } = Digit.Hooks.useCustomMDMS(stateId, "PropertyTax", [{ name: "Documents" }], {});
+  console.log("documentsobj", Documentsob);
+
   const docs = Documentsob?.PropertyTax?.Documents;
   const proofOfIdentity = Array.isArray(docs) && docs.filter((doc) => doc.code.includes("ADDRESSPROOF"));
   // if (proofOfIdentity.length > 0) {
@@ -40,9 +43,15 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
       owners["documents"] = [];
       owners.documents["ProofOfIdentity"] = fileDetails;
     }
-    if(window.location.href.includes("/citizen/tl") && (formData?.ownershipCategory?.isSameAsPropertyOwner == true || formData?.ownershipCategory?.isSameAsPropertyOwner === "true"))
-    {
-      owners = {...owners, owners : getOwnersfromProperty(formData), permanentAddress: formData?.cpt?.details?.owners?.[0]?.permanentAddress || formData?.cpt?.details?.owners?.[0]?.correspondenceAddress}
+    if (
+      window.location.href.includes("/citizen/tl") &&
+      (formData?.ownershipCategory?.isSameAsPropertyOwner == true || formData?.ownershipCategory?.isSameAsPropertyOwner === "true")
+    ) {
+      owners = {
+        ...owners,
+        owners: getOwnersfromProperty(formData),
+        permanentAddress: formData?.cpt?.details?.owners?.[0]?.permanentAddress || formData?.cpt?.details?.owners?.[0]?.correspondenceAddress,
+      };
     }
     onSelect(config.key, owners);
   };
@@ -57,11 +66,9 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
     (async () => {
       setError(null);
       if (file && file?.type) {
-        if(!(acceptFormat?.split(",")?.includes(`.${file?.type?.split("/")?.pop()}`)))
-        {
+        if (!acceptFormat?.split(",")?.includes(`.${file?.type?.split("/")?.pop()}`)) {
           setError(t("PT_UPLOAD_FORMAT_NOT_SUPPORTED"));
-        }
-        else if (file.size >= 2000000) {
+        } else if (file.size >= 2000000) {
           setError(t("PT_MAXIMUM_UPLOAD_SIZE_EXCEEDED"));
         } else {
           try {
@@ -71,9 +78,7 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
             } else {
               setError(t("PT_FILE_UPLOAD_ERROR"));
             }
-          } catch (err) {
-            
-          }
+          } catch (err) {}
         }
       }
     })();
@@ -81,34 +86,26 @@ const TLSelectProofIdentity = ({ t, config, onSelect, userType, formData }) => {
 
   return (
     <React.Fragment>
-    {window.location.href.includes("/citizen") ? <Timeline currentStep={3}/> : null}
-    <FormStep config={config} onSelect={handleSubmit} onSkip={onSkip} t={t} isDisabled={!uploadedFile || error}>
-      <CardLabelDesc style={{ fontWeight: "unset" }}>{t(`TL_UPLOAD_RESTRICTIONS_TYPES`)}</CardLabelDesc>
-      <CardLabelDesc style={{ fontWeight: "unset" }}> {t(`TL_UPLOAD_RESTRICTIONS_SIZE`)}</CardLabelDesc>
-      <CardLabel>{`${t("TL_CATEGORY_DOCUMENT_TYPE")}`}</CardLabel>
-      {/* <Dropdown
-        t={t}
-        isMandatory={false}
-        option={dropdownData}
-        selected={dropdownValue}
-        optionKey="i18nKey"
-        select={setTypeOfDropdownValue}
-        //placeholder={t(`PT_MUTATION_SELECT_DOC_LABEL`)}
-      /> */}
-      <UploadFile
-        id={"tl-doc"}
-        extraStyleName={"propertyCreate"}
-        accept=".jpg,.png,.pdf,.jpeg"
-        onUpload={selectfile}
-        onDelete={() => {
-          setUploadedFile(null);
-        }}
-        message={uploadedFile ? `1 ${t(`TL_ACTION_FILEUPLOADED`)}` : t(`TL_ACTION_NO_FILEUPLOADED`)}
-        error={error}
-      />
-      {error ? <div style={{ height: "20px", width: "100%", fontSize: "20px", color: "red", marginTop: "5px" }}>{error}</div> : ""}
-      <div style={{ disabled: "true", height: "20px", width: "100%" }}></div>
-    </FormStep>
+      {window.location.href.includes("/citizen") ? <Timeline currentStep={3} /> : null}
+      <FormStep config={config} onSelect={handleSubmit} onSkip={onSkip} t={t} isDisabled={error}>
+        <CardLabelDesc style={{ fontWeight: "unset" }}>{t(`TL_UPLOAD_RESTRICTIONS_TYPES`)}</CardLabelDesc>
+        <CardLabelDesc style={{ fontWeight: "unset" }}> {t(`TL_UPLOAD_RESTRICTIONS_SIZE`)}</CardLabelDesc>
+        <CardLabel>{`${t("TL_CATEGORY_DOCUMENT_TYPE")}`}</CardLabel>
+        <UploadFile
+          id={"tl-doc"}
+          extraStyleName={"propertyCreate"}
+          accept=".jpg,.png,.pdf,.jpeg"
+          onUpload={selectfile}
+          onDelete={() => {
+            setUploadedFile(null);
+          }}
+          message={uploadedFile ? `1 ${t(`TL_ACTION_FILEUPLOADED`)}` : t(`TL_ACTION_NO_FILEUPLOADED`)}
+          error={error}
+          uploadedFiles={[]}
+        />
+        {error ? <div style={{ height: "20px", width: "100%", fontSize: "20px", color: "red", marginTop: "5px" }}>{error}</div> : ""}
+        <div style={{ disabled: "true", height: "20px", width: "100%" }}></div>
+      </FormStep>
     </React.Fragment>
   );
 };

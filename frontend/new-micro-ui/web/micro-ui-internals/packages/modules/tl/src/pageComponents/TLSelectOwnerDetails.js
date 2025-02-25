@@ -140,7 +140,11 @@ const TLSelectOwnerDetails = ({ t, config, onSelect, userType, formData }) => {
   const stateId = Digit.ULBService.getStateId();
   const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("/renew-trade/");
 
-  const { data: Menu, isLoading: isGenderLoading } = Digit.Hooks.tl.useTLGenderMDMS(stateId, "common-masters", "GenderType");
+  const { data: Menu, isLoading: isGenderLoading } = Digit.Hooks.useCustomMDMS(stateId, "common-masters", [{ name: "GenderType" }], {
+    select: (data) => {
+      return data?.["common-masters"]?.["GenderType"];
+    },
+  });
   if (isEdit) keyToSearchOwnershipSubtype = keyToSearchOwnershipSubtype.split(".")[0];
   const { data: institutionOwnershipTypeOptions } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "common-masters", "TradeOwnershipSubType", {
     keyToSearchOwnershipSubtype,
@@ -371,9 +375,7 @@ const TLSelectOwnerDetails = ({ t, config, onSelect, userType, formData }) => {
                     : {}
                 }
               >
-                <CardLabel style={{}}>{`${t(
-                  "TL_NEW_OWNER_DETAILS_NAME_LABEL"
-                )}*`}</CardLabel>
+                <CardLabel style={{}}>{`${t("TL_NEW_OWNER_DETAILS_NAME_LABEL")}*`}</CardLabel>
                 {typeOfOwner === "MULTIOWNER" && (
                   <LinkButton
                     label={
@@ -441,7 +443,7 @@ const TLSelectOwnerDetails = ({ t, config, onSelect, userType, formData }) => {
                     +91
                   </span>
                   <TextInput
-                    style={typeOfOwner === "MULTIOWNER" ? { background: "#FAFAFA",maxWidth:"500px" } : {maxWidth:"500px"}}
+                    style={typeOfOwner === "MULTIOWNER" ? { background: "#FAFAFA", maxWidth: "500px" } : { maxWidth: "500px" }}
                     type={"text"}
                     t={t}
                     isMandatory={false}

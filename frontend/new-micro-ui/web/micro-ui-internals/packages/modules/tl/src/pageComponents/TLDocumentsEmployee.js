@@ -16,23 +16,24 @@ const TLDocumentsEmployee = ({ t, config, onSelect, userType, formData, setError
 
   if (isEditScreen) action = "update";
 
-  const { isLoading, data: documentsData } = Digit.Hooks.pt.usePropertyMDMS(stateId, "TradeLicense", ["documentObj"]);
+  // const { isLoading, data: documentsData } = Digit.Hooks.pt.usePropertyMDMS(stateId, "TradeLicense", ["documentObj"]);
+
+  const { isLoading, data: documentsData } = Digit.Hooks.useCustomMDMS(stateId, "TradeLicense", [{ name: "documentObj" }]);
 
   const ckeckingLocation = window.location.href.includes("renew-application-details");
-
 
   const tlDocuments = documentsData?.TradeLicense?.documentObj;
   const tlDocumentsList = tlDocuments?.["0"]?.allowedDocs;
 
   let finalTlDocumentsList = [];
-  if (tlDocumentsList && tlDocumentsList.length > 0) {
-    tlDocumentsList?.map(data => {
+  if (tlDocumentsList && tlDocumentsList?.length > 0) {
+    tlDocumentsList?.map((data) => {
       if ((!ckeckingLocation || previousLicenseDetails?.action == "SENDBACKTOCITIZEN") && data?.applicationType?.includes("NEW")) {
         finalTlDocumentsList.push(data);
       } else if (ckeckingLocation && previousLicenseDetails?.action != "SENDBACKTOCITIZEN" && data?.applicationType?.includes("RENEWAL")) {
         finalTlDocumentsList.push(data);
       }
-    })
+    });
   }
 
   const goNext = () => {
@@ -89,14 +90,14 @@ function SelectDocument({
   formState,
   fromRawData,
   key,
-  id
+  id,
 }) {
   const filteredDocument = documents?.filter((item) => item?.documentType);
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [selectedDocument, setSelectedDocument] = useState("");
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(() => filteredDocument?.fileStoreId || null);
-  const acceptFormat = doc?.documentType === "OWNERPHOTO"?".jpg,.png,.jpeg":".jpg,.png,.pdf,.jpeg"
+  const acceptFormat = doc?.documentType === "OWNERPHOTO" ? ".jpg,.png,.jpeg" : ".jpg,.png,.pdf,.jpeg";
 
   function selectfile(e, key) {
     e.target.files[0].documentType = key;
@@ -120,7 +121,7 @@ function SelectDocument({
     if (!Array.isArray(type)) type = [];
     if (type.includes(doc?.documentType)) {
       type = type.filter((e) => e != doc?.documentType);
-      if (!type.length) {
+      if (!type?.length) {
         clearFormErrors(config.key);
       } else {
         setFormError(config.key, { type });
@@ -145,7 +146,7 @@ function SelectDocument({
               documentType: selectedDocument?.documentType,
               fileStoreId: uploadedFile,
               tenantId: tenantId,
-              id: selectedDocument?.id
+              id: selectedDocument?.id,
             },
           ];
         } else {
@@ -154,7 +155,7 @@ function SelectDocument({
             {
               documentType: selectedDocument?.documentType,
               fileStoreId: uploadedFile,
-              tenantId: tenantId
+              tenantId: tenantId,
             },
           ];
         }
@@ -179,11 +180,9 @@ function SelectDocument({
     (async () => {
       setError(null);
       if (file) {
-        if(!(acceptFormat?.split(",")?.includes(`.${file?.type?.split("/")?.pop()}`)))
-        {
+        if (!acceptFormat?.split(",")?.includes(`.${file?.type?.split("/")?.pop()}`)) {
           setError(t("PT_UPLOAD_FORMAT_NOT_SUPPORTED"));
-        }
-        else if (file.size >= 5242880) {
+        } else if (file.size >= 5242880) {
           setError(t("CS_MAXIMUM_UPLOAD_SIZE_EXCEEDED"));
           // if (!formState.errors[config.key]) setFormError(config.key, { type: doc?.code });
         } else {
@@ -212,22 +211,24 @@ function SelectDocument({
         }
       }
     }
-  }, [doc])
+  }, [doc]);
   return (
     <div style={{ marginBottom: "24px" }}>
       <LabelFieldPair>
         <CardLabel className="card-label-smaller">
-          {doc?.documentType != "OLDLICENCENO" ?
-            `${t(`TL_NEW_${doc?.documentType.replaceAll(".", "_")}`)} * ` :
-            `${t(`TL_NEW_${doc?.documentType.replaceAll(".", "_")}`)} `}
+          {doc?.documentType != "OLDLICENCENO"
+            ? `${t(`TL_NEW_${doc?.documentType.replaceAll(".", "_")}`)} * `
+            : `${t(`TL_NEW_${doc?.documentType.replaceAll(".", "_")}`)} `}
         </CardLabel>
         <div className="field">
           <UploadFile
             id={id}
-            onUpload={(e) => { selectfile(e, doc?.documentType.replaceAll(".", "_")) }}
-            onDelete={() => {
-              setUploadedFile(null);
+            onUpload={(e) => {
+              selectfile(e, doc?.documentType.replaceAll(".", "_"));
             }}
+            // onDelete={() => {
+            //   setUploadedFile(null);
+            // }}
             message={uploadedFile ? `1 ${t(`CS_ACTION_FILEUPLOADED`)}` : t(`CS_ACTION_NO_FILEUPLOADED`)}
             textStyles={{ width: "100%" }}
             inputStyles={{ width: "280px" }}

@@ -3,7 +3,13 @@ import { Controller, useWatch } from "react-hook-form";
 import { TextInput, SubmitBar, DatePicker, SearchField, Dropdown, Loader } from "@egovernments/digit-ui-react-components";
 
 const SearchFields = ({ register, control, reset, tenantId, t, previousPage }) => {
-  const { data: applicationTypes, isLoading: applicationTypesLoading } = Digit.Hooks.tl.useMDMS.applicationTypes(tenantId);
+  let { data: applicationTypes, applicationTypesLoading } = Digit.Hooks.useCustomMDMS(tenantId, "TradeLicense", [{ name: "ApplicationType" }], {
+    select: (data) =>
+      data.TradeLicense.ApplicationType?.map((type) => ({
+        code: type.code.split(".")[1],
+        i18nKey: `TL_APPLICATIONTYPE.${type.code.split(".")[1]}`,
+      })),
+  });
 
   const applicationType = useWatch({ control, name: "applicationType" });
 

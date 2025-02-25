@@ -51,6 +51,24 @@ export const MdmsService = {
   getMultipleTypes: (tenantId, moduleCode, types) => {
     return MdmsService.getDataByCriteria(tenantId, moduleCode, types);
   },
+  // TLGenderType: (tenantId, moduleCode, type) => {
+  //   return MdmsService.getDataByCriteria(tenantId, getGenderTypeList(tenantId, moduleCode, type), moduleCode);
+  // },
 };
 
-export default MdmsService;
+const getGenderTypeList = (tenantId, moduleCode, type) => ({
+  type,
+  details: {
+    tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "GenderType",
+          },
+        ],
+      },
+    ],
+  },
+});

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { newConfig as newConfigTL } from "../../../config/config";
+import { filteredConfig } from "../../../config/filteredConfig";
 // import CheckPage from "./CheckPage";
 // import TLAcknowledgement from "./TLAcknowledgement";
 
@@ -17,18 +18,21 @@ const CreateTradeLicence = ({ parentRoute }) => {
   let isReneworEditTrade = window.location.href.includes("/renew-trade/") || window.location.href.includes("/edit-application/");
 
   const stateId = Digit.ULBService.getStateId();
-  let { data: newConfig, isLoading } = Digit.Hooks.tl.useMDMS.getFormConfig(stateId, {});
+
+  let { data: newConfig, isLoading } = Digit.Hooks.useCustomMDMS(stateId, "TradeLicense", [{ name: "CommonFieldsConfig" }], {
+    select: (d) => d.TradeLicense.CommonFieldsConfig,
+  });
 
   const goNext = (skipStep, index, isAddMultiple, key, isPTCreateSkip) => {
     let currentPath = pathname.split("/").pop(),
       nextPage;
-    let { nextStep = {} } = config.find((routeObj) => routeObj.route === currentPath);
+    let { nextStep = {} } = filteredConfig.find((routeObj) => routeObj.route === currentPath);
     let { isCreateEnabled: enableCreate = true } = config.find((routeObj) => routeObj.route === currentPath);
     if (typeof nextStep == "object" && nextStep != null) {
       if (
         (params?.cptId?.id || params?.cpt?.details?.propertyId || (isReneworEditTrade && params?.cpt?.details?.propertyId)) &&
         nextStep[sessionStorage.getItem("isAccessories")] &&
-        nextStep[sessionStorage.getItem("isAccessories")] === "know-your-property"
+        nextStep[sessionStorage.getItem("isAccessories")] === "other-trade-details"
       ) {
         nextStep = "property-details";
       }
@@ -58,7 +62,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
         }
       }
     }
-    if (nextStep === "know-your-property" && params?.TradeDetails?.StructureType?.code === "MOVABLE") {
+    if (nextStep === "owner-ship-details" && params?.TradeDetails?.StructureType?.code === "MOVABLE") {
       nextStep = "map";
     }
     if (nextStep === "landmark" && params?.TradeDetails?.StructureType?.code === "MOVABLE") {
@@ -69,7 +73,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
     }
     if (
       (params?.cptId?.id || params?.cpt?.details?.propertyId || (isReneworEditTrade && params?.cpt?.details?.propertyId)) &&
-      nextStep === "know-your-property"
+      nextStep === "other-trade-details"
     ) {
       nextStep = "property-details";
     }
@@ -105,6 +109,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
         goNext(skipStep, index, isAddMultiple, key);
       }
     }
+    console.log("data", data);
   }
 
   const handleSkip = () => {};
@@ -129,16 +134,28 @@ const CreateTradeLicence = ({ parentRoute }) => {
   sessionStorage.setItem("skipenabled", skipenabled);
   config.indexRoute = "info";
 
+  // console.log("config", JSON.stringify(config));
+
+  // const filteredConfig = config?.filter((routeObj) => {
+  //   const { component } = routeObj;
+  //   return !component || component.slice(0, 3) !== "CPT";
+  // });
+  const filteredRoutes = filteredConfig?.filter((routeObj) => !routeObj.component.startsWith("CPT"));
+  console.log("filteredconfig", filteredRoutes);
   const CheckPage = Digit?.ComponentRegistryService?.getComponent("TLCheckPage");
   const TLAcknowledgement = Digit?.ComponentRegistryService?.getComponent("TLAcknowledgement");
   return (
     <Switch>
-      {config?.map((routeObj, index) => {
+      {filteredRoutes?.map((routeObj, index) => {
         const { component, texts, inputs, key, isSkipEnabled } = routeObj;
+
+        console.log("neXtStep", component, routeObj.nextStep);
+
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
+        // console.log("component:", component);
         return (
           <Route path={`${match.path}/${routeObj.route}`} key={index}>
-            {/* <Component
+            <Component
               config={{ texts, inputs, key, isSkipEnabled }}
               onSelect={handleSelect}
               onSkip={handleSkip}
@@ -146,7 +163,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
               formData={params}
               onAdd={handleMultiple}
               userType="citizen"
-            /> */}
+            />
           </Route>
         );
       })}

@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "react-query";
 
 const useTLWorkflowData = ({ tenantId, filters, config = {} }) => {
-  console.log("filters", filters);
   return useQuery(
     ["WORKFLOW_BY_GET_ALL_APPLICATION", tenantId, ...Object.keys(filters)?.map((e) => filters?.[e])],
     () =>

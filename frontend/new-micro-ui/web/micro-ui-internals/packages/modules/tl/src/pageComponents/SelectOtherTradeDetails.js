@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Timeline from "../components/TLTimeline";
 
 const SelectOtherTradeDetails = ({ t, config, onSelect, value, userType, formData }) => {
+  console.log("hahaha");
   let validation = {};
   const onSkip = () => onSelect();
   const [TradeGSTNumber, setTradeGSTNumber] = useState(formData.TradeDetails?.TradeGSTNumber);
@@ -13,8 +14,8 @@ const SelectOtherTradeDetails = ({ t, config, onSelect, value, userType, formDat
   const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
   const { isLoading, data: fydata = {} } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "egf-master", "FinancialYear");
 
- // let mdmsFinancialYear = fydata["egf-master"] ? fydata["egf-master"].FinancialYear.filter(y => y.module === "TL") : [];
- // let FY = mdmsFinancialYear && mdmsFinancialYear.length > 0 && mdmsFinancialYear.sort((x, y) => y.endingDate - x.endingDate)[0]?.code;
+  // let mdmsFinancialYear = fydata["egf-master"] ? fydata["egf-master"].FinancialYear.filter(y => y.module === "TL") : [];
+  // let FY = mdmsFinancialYear && mdmsFinancialYear.length > 0 && mdmsFinancialYear.sort((x, y) => y.endingDate - x.endingDate)[0]?.code;
   function selectTradeGSTNumber(e) {
     setTradeGSTNumber(e.target.value);
   }
@@ -24,13 +25,14 @@ const SelectOtherTradeDetails = ({ t, config, onSelect, value, userType, formDat
   function selectNumberOfEmployees(e) {
     setNumberOfEmployees(e.target.value);
   }
-
+  console.log("config--", config);
   const goNext = () => {
     //sessionStorage.setItem("CurrentFinancialYear", FY);
+
     onSelect(config.key, { TradeGSTNumber, OperationalSqFtArea, NumberOfEmployees });
   };
   if (isLoading) {
-    return <Loader></Loader>
+    return <Loader></Loader>;
   }
 
   return (

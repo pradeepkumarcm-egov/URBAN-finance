@@ -278,6 +278,8 @@ const NewApplication = () => {
     }
   }
 
+  console.log("configs", configs);
+
   return (
     <div>
       <div style={{ marginLeft: "15px" }}>
