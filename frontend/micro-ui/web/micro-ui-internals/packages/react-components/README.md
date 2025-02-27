@@ -27,12 +27,6 @@ class Example extends Component {
 }
 ```
 
-## Changelog
-
-### Summary for Version [1.7.10] - 2025-02-13
-
-Matched the version to that of other modules of URBAN
-
 ## License
 
 MIT © [abhinav-egov](https://github.com/abhinav-egov)
