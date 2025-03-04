@@ -62,7 +62,19 @@ const TLApplicationDetails = () => {
     setMutationHappened(false);
   }, []);
 
-  const { data: paymentsHistory } = Digit.Hooks.tl.useTLPaymentHistory(tenantId, id);
+  const paymentHistoryReqCriteria = {
+    url: `/collection-services/payments/_search`,
+    params: { tenantId, consumerCodes: id },
+    config: {
+      enabled: true,
+      select: (data) => {
+        return data?.Payments;
+      },
+    },
+  };
+
+  const { data: paymentsHistory } = Digit.Hooks.useCustomAPIHook(paymentHistoryReqCriteria);
+
   useEffect(() => {
     if (application) {
       Digit.PaymentService.fetchBill(tenantId, {
