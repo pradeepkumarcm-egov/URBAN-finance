@@ -77,25 +77,26 @@ const Search = ({ path }) => {
     enabled: !!(payload && Object.keys(payload).length > 0),
   };
 
-  const { data: { Licenses: searchReult, Count: count } = {}, isLoading, isSuccess } = Digit.Hooks.tl.useSearch({
-    tenantId,
-    filters: payload,
-    config,
-  });
+  const reqCriteria = {
+    url: `/tl-services/v1/_search`,
+    params: { tenantId, ...payload },
+  };
+  const { data: { Licenses: searchReult, Count: count } = {}, isLoading, isSuccess } = Digit.Hooks.useCustomAPIHook(reqCriteria);
 
   const workFlowConfig = {
     enabled: payload && Object.keys(payload).length > 0 && !isLoading && isSuccess,
   };
 
+  let filters = { businessIds: searchReult?.map((license) => license?.applicationNumber).join(",") };
+  const TLworkflowCriteria = {
+    url: `/egov-workflow-v2/egov-wf/process/_search`,
+    params: { tenantId, ...filters },
+  };
   const {
     data: { ProcessInstances: assigneeResults } = {},
     isLoading: isWorkflowLoading,
     isSuccess: isWorkflowSuccess,
-  } = Digit.Hooks.tl.useTLWorkflowData({
-    tenantId,
-    filters: { businessIds: searchReult?.map((license) => license?.applicationNumber).join(",") },
-    config: { ...workFlowConfig },
-  });
+  } = Digit.Hooks.useCustomAPIHook(TLworkflowCriteria);
 
   return (
     <Search

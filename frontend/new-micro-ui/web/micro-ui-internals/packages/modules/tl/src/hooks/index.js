@@ -3,7 +3,6 @@ import useMDMS from "./useMDMS";
 import useTenants from "./useTenants";
 import useTradeLicenseMDMS from "./useTradeLicenseMDMS";
 import useApplicationDetail from "./useApplicationDetail";
-import useSearch from "./useSearch";
 import useApplicationActions from "./useApplicationActions";
 import usePropertySearch from "./usePropertySearch";
 import useTLSearchApplication from "./useTLsearchApplication";
@@ -20,7 +19,6 @@ const tl = {
   useTradeLicenseMDMS,
   useApplicationDetail,
   useApplicationActions,
-  useSearch,
   usePropertySearch,
   useTLSearchApplication,
   useTLApplicationDetails,
