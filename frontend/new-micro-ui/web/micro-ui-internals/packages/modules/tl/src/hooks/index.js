@@ -5,7 +5,6 @@ import useTradeLicenseMDMS from "./useTradeLicenseMDMS";
 import useApplicationDetail from "./useApplicationDetail";
 import useSearch from "./useSearch";
 import useApplicationActions from "./useApplicationActions";
-import useTLWorkflowData from "./useTLWorkflowData";
 import usePropertySearch from "./usePropertySearch";
 import useTLSearchApplication from "./useTLsearchApplication";
 import { useTLApplicationDetails } from "./useTLsearchApplication";
@@ -22,7 +21,6 @@ const tl = {
   useApplicationDetail,
   useApplicationActions,
   useSearch,
-  useTLWorkflowData,
   usePropertySearch,
   useTLSearchApplication,
   useTLApplicationDetails,
