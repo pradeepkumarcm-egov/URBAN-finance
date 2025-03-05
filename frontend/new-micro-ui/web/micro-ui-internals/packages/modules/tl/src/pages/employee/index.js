@@ -3,12 +3,8 @@ import { Switch, useLocation, Link } from "react-router-dom";
 import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import Inbox from "./Inbox";
-// import NewApplication from "./NewApplication";
-// import Search from "./Search";
-// import Response from "../Response";
-import ApplicationDetails from "./ApplicationDetails";
+// import ApplicationDetails from "./ApplicationDetails";
 import Search from "./Search";
-//import ReNewApplication from "./ReNewApplication";
 
 const TLBreadCrumb = ({ location }) => {
   const { t } = useTranslation();
@@ -155,10 +151,6 @@ const EmployeeApp = ({ path, url, userType }) => {
     window.location.href.includes("employee/tl/edit-application-details") ||
     window.location.href.includes("employee/tl/renew-application-details");
 
-  const NewApplication = Digit?.ComponentRegistryService?.getComponent("TLNewApplication");
-  const ReNewApplication = Digit?.ComponentRegistryService?.getComponent("TLReNewApplication");
-  const Response = Digit?.ComponentRegistryService?.getComponent("TLResponse");
-  // const Search = Digit?.ComponentRegistryService?.getComponent("TLSearch");
 
   return (
     <Switch>
@@ -186,14 +178,14 @@ const EmployeeApp = ({ path, url, userType }) => {
             <span>{location.pathname.includes("/digit-ui/employee/tl/edit-application-details") ? `/ ${t("ES_TITLE_RE_NEW_TRADE_LICESE_APPLICATION") }`  : null}</span>
           </p> */}
           <PrivateRoute path={`${path}/inbox`} component={() => <Inbox />}/>
-          <PrivateRoute path={`${path}/new-application`} component={() => <NewApplication parentUrl={url} />} />
-          <PrivateRoute path={`${path}/application-details/:id`} component={() => <ApplicationDetails parentRoute={path} />} />
-          <PrivateRoute path={`${path}/renew-application-details/:id`} component={(props) => <ReNewApplication {...props} parentRoute={path} />} />
-          <PrivateRoute
+          {/* <PrivateRoute path={`${path}/new-application`} component={() => <NewApplication parentUrl={url} />} /> */}
+          {/* <PrivateRoute path={`${path}/application-details/:id`} component={() => <ApplicationDetails parentRoute={path} />} /> */}
+          {/* <PrivateRoute path={`${path}/renew-application-details/:id`} component={(props) => <ReNewApplication {...props} parentRoute={path} />} /> */}
+          {/* <PrivateRoute
             path={`${path}/edit-application-details/:id`}
             component={(props) => <ReNewApplication {...props} header={t("TL_ACTION_RESUBMIT")} parentRoute={path} />}
-          />
-          <PrivateRoute path={`${path}/response`} component={(props) => <Response {...props} parentRoute={path} />} />
+          /> */}
+          {/* <PrivateRoute path={`${path}/response`} component={(props) => <Response {...props} parentRoute={path} />} /> */}
           <PrivateRoute path={`${path}/search/:variant`} component={(props) => <Search {...props} parentRoute={path} />} />
         </div>
       </React.Fragment>

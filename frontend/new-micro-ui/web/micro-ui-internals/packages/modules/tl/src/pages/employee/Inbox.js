@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Header, InboxSearchComposer, Loader } from "@egovernments/digit-ui-react-components";
 import { TLInboxConfig } from "../../config/TLInboxConfig";
-import preProcessMDMSConfigInboxSearch from "../../hooks/services/preProcessMDMSConfigInboxSearch";
 
 const Inbox = () => {
   const { t } = useTranslation();
@@ -29,7 +28,7 @@ const Inbox = () => {
   //   }
   // );
 
-  const updatedConfig = useMemo(() => preProcessMDMSConfigInboxSearch(t, pageConfig, "sections.search.uiConfig.fields", {}), [data, pageConfig]);
+  const updatedConfig = useMemo(() => Digit.Utils.preProcessMDMSConfigInboxSearch(t, pageConfig, "sections.search.uiConfig.fields", {}), [data, pageConfig]);
   
   useEffect(() => {
     setPageConfig(_.cloneDeep(data?.["commonUiConfig"]?.TLInboxConfig?.[0]));

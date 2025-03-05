@@ -116,9 +116,9 @@ export const TLSearchConfig = () => {
         uiConfig: {
           columns: [
             {
-              key: "applicationNumber",
+              key: "licenseNumber",
               label: "TL_TRADE_LICENSE_LABEL",
-              jsonPath: "applicationNumber",
+              jsonPath: "licenseNumber",
               additionalCustomization: true,
             },
             {

@@ -1,7 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import _ from "lodash";
 import React from "react";
-import { TLSearch } from "../hooks/services/TLService";
 import { stringReplaceAll } from "../utils";
 
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
@@ -115,7 +114,6 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      console.log(row, key, value);
       const tenantId = Digit.ULBService.getCurrentTenantId();
 
       switch (key) {
@@ -207,16 +205,13 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      console.log(row, key, value);
-      console.log(row.tradeLicenseDetail);
-      console.log(row.tradeLicenseDetail?.address);
       const tenantId = Digit.ULBService.getCurrentTenantId();
 
       switch (key) {
         case "TL_TRADE_LICENSE_LABEL":
           return (
             <span className="link">
-              <Link to={`/${window.contextPath}/employee/tl/application-details/${value}`}>{value}</Link>
+              <Link to={`/${window.contextPath}/employee/tl/application-details/${row?.applicationNumber}`}>{value}</Link>
             </span>
           );
         case "ES_APPLICATION_SEARCH_ISSUED_DATE":
