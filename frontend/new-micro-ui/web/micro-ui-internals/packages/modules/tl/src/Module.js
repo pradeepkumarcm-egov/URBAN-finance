@@ -37,7 +37,6 @@ import TLAccessoriesEmployee from "./pageComponents/TLAccessoriesEmployee";
 import TLDocumentsEmployee from "./pageComponents/TLDocumentsEmployee";
 import TLCard from "./components/TLCard";
 import TLInfoLabel from "./pageComponents/TLInfoLabel";
-import TL_INBOX_FILTER from "./components/inbox/InboxFilter";
 import NewApplication from "./pages/employee/NewApplication";
 import ReNewApplication from "./pages/employee/ReNewApplication";
 import CPTPropertySearchNSummary from "./pageComponents/PropertySearchNSummary";
@@ -101,7 +100,6 @@ const componentsToRegister = {
   TLLinks,
   TLModule,
   TLNewApplication: NewApplication,
-  TL_INBOX_FILTER,
   TLMyApplications,
   TLApplicationDetails,
   TLCreateTradeLicence: CreateTradeLicence,
