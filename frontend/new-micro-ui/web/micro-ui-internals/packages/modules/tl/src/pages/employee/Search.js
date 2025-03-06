@@ -1,129 +1,46 @@
-import React, { useEffect, useState } from "react";
-import {
-  TextInput,
-  Label,
-  SubmitBar,
-  LinkLabel,
-  ActionBar,
-  CloseSvg,
-  DatePicker,
-  CardLabelError,
-  SearchForm,
-  SearchField,
-  Dropdown,
-} from "@egovernments/digit-ui-react-components";
-import { useForm, Controller } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Header, Loader } from "@egovernments/digit-ui-react-components";
+import { InboxSearchComposer } from "@egovernments/digit-ui-react-components";
+import { TLSearchConfig } from "../../config/TLSearchConfig";
+import { TLSearchApplicationConfig } from "../../config/TLSearchApplicationConfig";
+import { useParams } from "react-router-dom";
 
-const Search = ({ path }) => {
+const Search = () => {
   const { variant } = useParams();
   const { t } = useTranslation();
-  const tenantId = Digit.ULBService.getCurrentTenantId();
-  const [payload, setPayload] = useState({});
 
-  const Search = Digit.ComponentRegistryService.getComponent(variant === "license" ? "SearchLicense" : "SearchLicenseApplication");
+  //   const configModuleName = Digit.Utils.getConfigModuleName();
+  const tenant = Digit.ULBService.getStateId();
+  const data = variant === "license" ? TLSearchConfig() : TLSearchApplicationConfig();
+  // const configs = Digit.Utils.configUpdater(searchConfigMuktaFuzzy())
 
-  function onSubmit(_data) {
-    Digit.SessionStorage.set("SEARCH_APPLICATION_DETAIL", {
-      applicationNumber: _data?.applicationNumber,
-      licenseNumbers: _data?.licenseNumbers,
-      applicationType: _data?.applicationType,
-      tradeName: _data?.tradeName,
-      fromDate: _data?.fromDate,
-      toDate: _data?.toDate,
-      limit: 10,
-      sortBy: "commencementDate",
-      sortOrder: "DESC",
-      status: _data.status,
-    });
-    var fromDate = new Date(_data?.fromDate);
-    fromDate?.setSeconds(fromDate?.getSeconds() - 19800);
-    var toDate = new Date(_data?.toDate);
-    toDate?.setSeconds(toDate?.getSeconds() + 86399 - 19800);
-    const data = {
-      ..._data,
-      ...(_data.toDate ? { toDate: toDate?.getTime() } : {}),
-      ...(_data.fromDate ? { fromDate: fromDate?.getTime() } : {}),
-    };
+  // const configs = data?.[configModuleName].SearchEstimateWMSConfig?.[0]
+  let configs = useMemo(
+    () =>
+      Digit.Utils.preProcessMDMSConfigInboxSearch(t, data, "sections.search.uiConfig.fields", {
+        updateDependent: [
+          {
+            key: "fromProposalDate",
+            value: [new Date().toISOString().split("T")[0]],
+          },
+          {
+            key: "toProposalDate",
+            value: [new Date().toISOString().split("T")[0]],
+          },
+        ],
+      }),
+    [data]
+  );
 
-    setPayload(
-      Object.keys(data)
-        .filter((k) => data[k])
-        .reduce((acc, key) => ({ ...acc, [key]: typeof data[key] === "object" ? data[key].code : data[key] }), {})
-    );
-  }
-  useEffect(() => {
-    const storedPayload = Digit.SessionStorage.get("SEARCH_APPLICATION_DETAIL") || {};
-    if (storedPayload) {
-      var fromDate = new Date(storedPayload?.fromDate);
-      fromDate?.setSeconds(fromDate?.getSeconds() - 19800);
-      var toDate = new Date(storedPayload?.toDate);
-      toDate?.setSeconds(toDate?.getSeconds() + 86399 - 19800);
-      const data = {
-        ...storedPayload,
-        ...(storedPayload.toDate ? { toDate: toDate?.getTime() } : {}),
-        ...(storedPayload.fromDate ? { fromDate: fromDate?.getTime() } : {}),
-      };
-
-      setPayload(
-        Object.keys(data)
-          .filter((k) => data[k])
-          .reduce((acc, key) => ({ ...acc, [key]: typeof data[key] === "object" ? data[key].code : data[key] }), {})
-      );
-    }
-  }, []);
-  const config = {
-    enabled: !!(payload && Object.keys(payload).length > 0),
-  };
-
-  const reqCriteria = {
-    url: `/tl-services/v1/_search`,
-    params: { tenantId, ...payload },
-  };
-  const { data: { Licenses: searchReult, Count: count } = {}, isLoading, isSuccess } = Digit.Hooks.useCustomAPIHook(reqCriteria);
-
-  const workFlowConfig = {
-    enabled: payload && Object.keys(payload).length > 0 && !isLoading && isSuccess,
-  };
-
-  let filters = { businessIds: searchReult?.map((license) => license?.applicationNumber).join(",") };
-  const TLworkflowCriteria = {
-    url: `/egov-workflow-v2/egov-wf/process/_search`,
-    params: { tenantId, ...filters },
-  };
-  const {
-    data: { ProcessInstances: assigneeResults } = {},
-    isLoading: isWorkflowLoading,
-    isSuccess: isWorkflowSuccess,
-  } = Digit.Hooks.useCustomAPIHook(TLworkflowCriteria);
-
+  if (!data) return <Loader />;
   return (
-    <Search
-      t={t}
-      tenantId={tenantId}
-      onSubmit={onSubmit}
-      data={
-        !isLoading && isSuccess && !isWorkflowLoading && isWorkflowSuccess
-          ? searchReult?.length > 0
-            ? searchReult?.map((obj) => ({
-                ...obj,
-                CurrentOwners:
-                  assigneeResults?.length > 0
-                    ? assigneeResults
-                        .filter((elem) => elem.businessId === obj.applicationNumber)
-                        ?.map((item) => ({
-                          currentOwner: item.assignes !== null && item.assignes[0].name !== null ? item.assignes[0].name : "NA",
-                        }))
-                    : {
-                        currentOwner: "NA",
-                      },
-              }))
-            : { display: "ES_COMMON_NO_DATA" }
-          : ""
-      }
-      count={count}
-    />
+    <React.Fragment>
+      <Header className="works-header-search">{t(configs?.label)}</Header>
+      <div className="inbox-search-wrapper">
+        <InboxSearchComposer configs={configs}></InboxSearchComposer>
+      </div>
+    </React.Fragment>
   );
 };
 
