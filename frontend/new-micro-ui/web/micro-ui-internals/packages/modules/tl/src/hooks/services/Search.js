@@ -1,35 +1,5 @@
 import cloneDeep from "lodash/cloneDeep";
 
-const stringReplaceAll = (str = "", searcher = "", replaceWith = "") => {
-  if (searcher == "") return str;
-  while (str.includes(searcher)) {
-    str = str.replace(searcher, replaceWith);
-  }
-  return str;
-};
-
-/* methid to get date from epoch */
-const convertEpochToDate = (dateEpoch) => {
-  // Returning null in else case because new Date(null) returns initial date from calender
-  if (dateEpoch) {
-    const dateFromApi = new Date(dateEpoch);
-    let month = dateFromApi.getMonth() + 1;
-    let day = dateFromApi.getDate();
-    let year = dateFromApi.getFullYear();
-    month = (month > 9 ? "" : "0") + month;
-    day = (day > 9 ? "" : "0") + day;
-    return `${day}/${month}/${year}`;
-  } else {
-    return null;
-  }
-};
-const getAddress = (address, t) => {
-  return `${address?.doorNo ? `${address?.doorNo}, ` : ""} ${address?.street ? `${address?.street}, ` : ""}${
-    address?.landmark ? `${address?.landmark}, ` : ""
-  }${t(Digit.Utils.pt.getMohallaLocale(address?.locality.code, address?.tenantId))}, ${t(Digit.Utils.pt.getCityLocale(address?.tenantId))}${
-    address?.pincode && t(address?.pincode) ? `, ${address.pincode}` : " "
-  }`;
-};
 export const TLSearch = {
   all: async (tenantId, filters = {}) => {
     const response = await Digit.CustomService.getResponse({
