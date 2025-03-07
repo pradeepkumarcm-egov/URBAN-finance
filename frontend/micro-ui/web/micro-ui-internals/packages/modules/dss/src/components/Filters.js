@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import DateRange from "./DateRange";
 import FilterContext from "./FilterContext";
 import Switch from "./Switch";
-import { useLocation } from "react-router-dom";
 
 
 const Filters = ({
@@ -21,9 +20,6 @@ const Filters = ({
 }) => {
   const { value, setValue } = useContext(FilterContext);
 
-const location = useLocation();
-
-
   const [selected, setSelected] = useState(() =>
     ulbTenants?.ulb.filter((tenant) => value?.filters?.tenantId?.find((selectedTenant) => selectedTenant === tenant?.code))
   );
@@ -31,8 +27,10 @@ const location = useLocation();
   useEffect(() => {
     setSelected(ulbTenants?.ulb?.filter((tenant) => value?.filters?.tenantId?.find((selectedTenant) => selectedTenant === tenant?.code)));
   }, [value?.filters?.tenantId]);
-  
 
+  const [selectService, setSelectedService] = useState(() => 
+    services?.filter((module) => value?.moduleLevel === module?.code)
+  )
 
   useEffect(() => {
     setSelectedService(services?.filter((module) => value?.moduleLevel === module?.code));
@@ -44,6 +42,10 @@ const location = useLocation();
 
   const selectFilters = (e, data) => {
     setValue({ ...value, filters: { tenantId: e.map((allPropsData) => allPropsData?.[1]?.code) } });
+  };
+
+  const selectServicesFilters = (e, data) => {
+    setValue({ ...value, moduleLevel: e?.code });
   };
 
   const selectDDR = (e, data) => {
@@ -69,35 +71,6 @@ const location = useLocation();
       range: Digit.Utils.dss.getInitialRange(),
     });
   };
-
-
-  const [selectService, setSelectedService] = useState(() => 
-    services?.filter((module) => value?.moduleLevel === module?.code)
-  );  
-  // Pseudo state to trigger a reset when `value?.moduleLevel` changes
-  const [serviceKey, setServiceKey] = useState(0);
-  
-  useEffect(() => {
-    setServiceKey((prevKey) => prevKey + 1); // Force re-render when moduleLevel changes
-    setSelectedService(services?.filter((module) => value?.moduleLevel === module?.code));
-  }, [value?.moduleLevel]);
-  
-  const selectServicesFilters = (e, data) => {
-    setValue({ ...value, moduleLevel: e?.code });
-    setSelectedService([e]); // Ensure selected service updates correctly
-  };
-
-
-  useEffect(() => {
-    setValue({
-      denomination: "Unit",
-      range: Digit.Utils.dss.getInitialRange(),
-      filters: { tenantId: [] },
-      moduleLevel: null,
-    });
-  }, [location.pathname]);
-
-
   return (
     <div className={`filters-wrapper ${isOpen ? "filters-modal" : ""}`} style={{
       justifyContent: window.location.href.includes("dss/dashboard/finance") && !isOpen ? "space-between" : "unset",

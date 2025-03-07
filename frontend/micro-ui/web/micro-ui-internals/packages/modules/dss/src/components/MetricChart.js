@@ -30,12 +30,10 @@ const MetricData = ({ t, data, code, indexValuesWithStar }) => {
         >
           {data?.insight?.indicator === "upper_green" ? ArrowUpwardElement("10px") : ArrowDownwardElement("10px")}
           <p className={`${data?.insight.colorCode}`} style={{ whiteSpace: "pre" }}>
-                    {insight?.[0] !== undefined && insight?.[0] !== ""
-          ? (isNaN(insight[0]) 
-              ? `${insight[0]}`
-              : `${Digit.Utils.dss.formatter(insight[0], "number", value?.denomination, true, t)}%`
-            )
-          : ""}  
+            {insight?.[0] &&
+              `${Digit.Utils.dss.formatter(insight[0], "number", value?.denomination, true, t)}% ${t(
+                Digit.Utils.locale.getTransformedLocale("DSS" + insight?.[1] || "")
+              )}`}
           </p>
         </div>
       )}
