@@ -186,7 +186,7 @@ const EmployeeApp = ({ path, url, userType }) => {
             component={(props) => <ReNewApplication {...props} header={t("TL_ACTION_RESUBMIT")} parentRoute={path} />}
           /> */}
           {/* <PrivateRoute path={`${path}/response`} component={(props) => <Response {...props} parentRoute={path} />} /> */}
-          <PrivateRoute path={`${path}/search/:variant`} component={(props) => <Search {...props} parentRoute={path} />} />
+          <PrivateRoute path={`${path}/search/:variant-v2`} component={(props) => <Search {...props} parentRoute={path} />} />
         </div>
       </React.Fragment>
     </Switch>

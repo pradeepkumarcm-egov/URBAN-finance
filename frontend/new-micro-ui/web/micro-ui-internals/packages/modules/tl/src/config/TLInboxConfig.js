@@ -38,6 +38,7 @@ export const TLInboxConfig = () => {
                 type:"search",
                 secondaryLabel: "Clear Search",
                 minReqFields: 1,
+                formClassName: "inbox-search-container",
                 defaultValues: {
                   applicationNos: "",
                   mobileNumber: "",

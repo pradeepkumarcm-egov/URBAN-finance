@@ -71,7 +71,7 @@ export const UICustomizations = {
         case "WF_INBOX_HEADER_LOCALITY":
           return value ? <span>{t(Digit.Utils.locale.getRevenueLocalityCode(value, tenantId))}</span> : <span>{t("NA")}</span>;
         case "WF_INBOX_HEADER_STATUS":
-          return <span>{value ? t(`WF_${row?.ProcessInstance?.businessService}_${value}`) : t("CS_COMMON_NA")}</span>;
+          return <span>{row?.ProcessInstance?.state?.state ? t(`CS_COMMON_INBOX_${row?.ProcessInstance?.businessService.toUpperCase()}_STATE_${row?.ProcessInstance?.state?.state}`) : t("CS_COMMON_NA")}</span>;
         case "WF_INBOX_HEADER_SLA_DAYS_REMAINING":
           return GetSlaCell(value);
         default:
@@ -140,22 +140,36 @@ export const UICustomizations = {
           return t("ES_COMMON_NA");
       }
     },
-    // getApplicationType: () => {
-    //   const tenantId = Digit.ULBService.getCurrentTenantId();
-    //   return {
-    //     url: "/egov-workflow-v2/egov-wf/businessservice/_search",
-    //     params: { tenantId: tenantId, businessServices: "TL" },
-    //     body: {},
-    //     config: {
-    //       enabled: true,
-    //       select: (data) => 
-    //         data.TradeLicense.ApplicationType?.map((type) => ({
-    //           code: type.code.split(".")[1],
-    //           i18nKey: `TL_APPLICATIONTYPE.${type.code.split(".")[1]}`,
-    //         })),
-    //     },
-    //   };
-    // },
+    getApplicationType: (props) => {
+      const tenantId = Digit.ULBService.getCurrentTenantId();
+      return {
+        url: "/egov-mdms-service/v1/_search",
+        params: { tenantId: tenantId },
+        body: {
+          "MdmsCriteria": {
+            "tenantId": tenantId,
+            "moduleDetails": [
+              {
+                "moduleName": "TradeLicense",
+                "masterDetails": [
+                  {
+                    "name": "ApplicationType"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        config: {
+          enabled: true,
+          select: (data) => 
+            data.MdmsRes.TradeLicense.ApplicationType?.map((type) => ({
+              code: type.code.split(".")[1],
+              i18nKey: `TL_APPLICATIONTYPE.${type.code.split(".")[1]}`,
+            })),
+        },
+      };
+    },
     getApplicationStatus: () => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
       return {
@@ -166,13 +180,13 @@ export const UICustomizations = {
           enabled: true,
           select: (data) => {
             let applicationStatuses = [];
-            const filteredData = data.filter((e) => ["EDITRENEWAL", "DIRECTRENEWAL", "NewTL"].includes(e.businessService));
+            const filteredData = data?.BusinessServices;
             filteredData.forEach((service) => {
               service?.states.forEach((state) => {
                 applicationStatuses?.some((el) => el?.code === state.applicationStatus) ? false : applicationStatuses.push({ code: state.applicationStatus, i18nKey: `WF_NEWTL_${state.applicationStatus}` });
               })
             })
-            return applicationStatuses;
+            return applicationStatuses.filter((state) => state.code !== null);
           }
         },
       };

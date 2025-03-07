@@ -48,18 +48,19 @@ const TLCard = () => {
       label: t("ES_COMMON_INBOX"),
       link: `/digit-ui/employee/tl/inbox`,
     },
-    {
-      label: t("TL_NEW_APPLICATION"),
-      link: "/digit-ui/employee/tl/new-application",
-      role: "TL_CEMP",
-    },
+    // will enabled once the upgraded apply screen is developed
+    // {
+    //   label: t("TL_NEW_APPLICATION"),
+    //   link: "/digit-ui/employee/tl/new-application",
+    //   role: "TL_CEMP",
+    // },
     {
       label: t("TL_SEARCH_APPLICATIONS"),
-      link: `/digit-ui/employee/tl/search/application`,
+      link: `/digit-ui/employee/tl/search/application-v2`,
     },
     {
       label: t("TL_SEARCH_LICENSE"),
-      link: `/digit-ui/employee/tl/search/license`,
+      link: `/digit-ui/employee/tl/search/license-v2`,
       role: "TL_CEMP",
     },
   ];
