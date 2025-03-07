@@ -1,7 +1,4 @@
-import { useTLInbox } from "./useInbox";
-
 const tl = {
-  useInbox: useTLInbox,
 };
 
 const Hooks = {

@@ -10,13 +10,24 @@ const TLCard = () => {
   }
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const inboxSearchParams = { limit: 10, offset: 0 };
 
-  const { isLoading, data: inboxData } = Digit.Hooks.tl.useInbox({
-    tenantId,
-    filters: { ...inboxSearchParams },
-    config: {},
-  });
+  const reqCriteria = {
+    url: "/inbox/v2/_search",
+    body: {
+      inbox: {
+        tenantId,
+        processSearchCriteria: {
+          moduleName: "tl-services",
+          businessService: ["NewTL", "DIRECTRENEWAL", "EDITRENEWAL"],
+        },
+        moduleSearchCriteria: {},
+        limit: 10,
+        offset: 0
+      }
+    }
+  };
+
+  const { isLoading, data: inboxData } = Digit.Hooks.useCustomAPIHook(reqCriteria);
 
   const [isStateLocalisation, setIsStateLocalisation] = useState(true);
 
