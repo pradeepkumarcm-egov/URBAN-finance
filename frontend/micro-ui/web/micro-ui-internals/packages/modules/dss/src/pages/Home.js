@@ -341,7 +341,7 @@ const Home = ({ stateCode }) => {
                   className="multilink-block-wrapper"
                   label={t(`ES_DSS_SHARE`)}
                   icon={<ShareIcon className="mrsm" />}
-                  // showOptions={(e) => setShowOptions(e)}
+                  showOptions={(e) => setShowOptions(e)}
                   onHeadClick={(e) => setShowOptions(e !== undefined ? e : !showOptions)}
                   displayOptions={showOptions}
                   options={shareOptions}
