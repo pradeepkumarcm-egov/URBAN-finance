@@ -3,6 +3,8 @@ All notable changes to this module will be documented in this file.
 
 ## 1.2.0-SNAPSHOT - 2025-02-11
 - 2.9 LTS version upgrade is done in this version
+- Added Null Pointer check & upgraded Logback version
+- Fix for NPE in PGRRepository.java (fetchDynamicData method)
 
 ## 1.1.8 - 2023-08-10
 

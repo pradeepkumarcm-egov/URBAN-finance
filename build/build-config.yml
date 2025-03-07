@@ -238,10 +238,6 @@ config:
       - work-dir: "utilities/demo-utility"
         image-name: "demo-utility"
         dockerfile: "build/maven/Dockerfile"
-  - name: "builds/urban/utilities/egov-pdf"
-    build:
-      - work-dir: "utilities/egov-pdf"
-        image-name: "egov-pdf"
 
   - name: "builds/urban/utilities/egov-searcher"
     build:
