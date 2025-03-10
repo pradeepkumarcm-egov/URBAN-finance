@@ -1,0 +1,4524 @@
+{
+  "RequestInfo": {
+    "apiId": "string",
+    "ver": "string",
+    "ts": "12345678900",
+    "action": "string",
+    "did": "string",
+    "key": "string",
+    "msgId": "string",
+    "authToken": "fa72b42d-0cac-465a-a898-aa6473a5a22b",
+    "correlationId": "corelation",
+    "userInfo": {
+      "id": 73,
+      "userName": null,
+      "name": null,
+      "type": "EMPLOYEE",
+      "mobileNumber": null,
+      "emailId": null,
+      "roles": [
+        {
+          "id": 2,
+          "name": "Customer Support Representative",
+          "code": null
+        }
+      ],
+      "tenantId": null
+    }
+  },
+  "billingSlab": [
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-1",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-2",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-3",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-4",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-5",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-6",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-7",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-8",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-9",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-10",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-11",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-12",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-13",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-14",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-15",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-16",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-17",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-18",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-19",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-20",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-21",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-22",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-23",
+      "type": "FLAT",
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-24",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-25",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-26",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-27",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-28",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-29",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-30",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-31",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-32",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-33",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-34",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-35",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-36",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-37",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-38",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-39",
+      "uom": "GROSSUNITS",
+      "fromUom": 0,
+      "toUom": 20,
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-40",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-41",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-42",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-43",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-44",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-46",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-47",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-48",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-49",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-50",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-51",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-52",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-53",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-54",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-55",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-56",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-57",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-58",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-59",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-60",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-61",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-62",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-63",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-64",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-65",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-66",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-67",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-68",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-69",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-70",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-71",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-72",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-73",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-74",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-75",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-76",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-77",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-78",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-79",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-80",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-81",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-82",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-83",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-84",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-85",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-41",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-42",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-43",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-44",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-46",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-47",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-48",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-49",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-50",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-51",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-52",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-53",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-54",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-55",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-56",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-57",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-58",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-59",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-60",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-61",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-62",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-63",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-64",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-65",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-66",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-67",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-68",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-69",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-70",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-71",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-72",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-73",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-74",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-75",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-76",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-77",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-78",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-79",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-80",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-81",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-82",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-83",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-84",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-85",
+      "uom": "GROSSUNITS",
+      "fromUom": 21,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-86",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-87",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-88",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-89",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-90",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-91",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-92",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-93",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-94",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-95",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-96",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-97",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-98",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-99",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-100",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-101",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-102",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-103",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-104",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-105",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-106",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-107",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-108",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-109",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-110",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-111",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-112",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-113",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-114",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-115",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-116",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-117",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-118",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-119",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-120",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-121",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-123",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-124",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-125",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-126",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-127",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-128",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-129",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-130",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-131",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-132",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-133",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-134",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-135",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-136",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-137",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-138",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-139",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-140",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-141",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-142",
+      "type": "FLAT",
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-143",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-144",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-145",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-146",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-147",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-148",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-149",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-150",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-151",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-152",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-153",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-154",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-155",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-156",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-157",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-158",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-159",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-160",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-161",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-162",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-163",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-164",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-165",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-166",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-167",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-168",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-169",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-170",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-171",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-172",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-173",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-174",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-175",
+      "uom": "GALLONS",
+      "fromUom": 500,
+      "toUom": 1000,
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-176",
+      "uom": "GROSSUNITS",
+      "fromUom": 1001,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-177",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-178",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-179",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-180",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-181",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-182",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-183",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-184",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-185",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-186",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-187",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-188",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-189",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-190",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-191",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-192",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-193",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-194",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-195",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-196",
+      "type": "FLAT",
+      "rate": 1500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-197",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-198",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-199",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-200",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-201",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-202",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-203",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-204",
+      "uom": "GROSSUNITS",
+      "fromUom": 0,
+      "toUom": 2,
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-205",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-206",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-207",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-208",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-209",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-210",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-211",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-212",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-213",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-214",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-215",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-216",
+      "type": "FLAT",
+      "rate": 1500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-217",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-218",
+      "uom": "GROSSUNITS",
+      "fromUom": 3,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-219",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-220",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-221",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-222",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-223",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "TEMPORARY",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-224",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-1",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 0,
+      "toUom": 5,
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-1",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 6,
+      "toUom": 10,
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-1",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 11,
+      "toUom": 20,
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-1",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 21,
+      "toUom": 50,
+      "rate": 750
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-1",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 51,
+      "toUom": "Infinity",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCaegory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 0,
+      "toUom": 5,
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 6,
+      "toUom": 15,
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 16,
+      "toUom": 25,
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 26,
+      "toUom": 50,
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 51,
+      "toUom": 100,
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 101,
+      "toUom": 200,
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 201,
+      "toUom": 500,
+      "rate": 2500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-2",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 501,
+      "toUom": "Infinity",
+      "rate": 5000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 0,
+      "toUom": 5,
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 6,
+      "toUom": 15,
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 16,
+      "toUom": 25,
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 26,
+      "toUom": 50,
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 51,
+      "toUom": 100,
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 101,
+      "toUom": 200,
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 201,
+      "toUom": 500,
+      "rate": 2500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-3",
+      "type": "FLAT",
+      "uom": "HP",
+      "fromUom": 501,
+      "toUom": "Infinity",
+      "rate": 5000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-4",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "accessoryCategory": "ACC-5",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-1",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-2",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-3",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-4",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-5",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-6",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-7",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-8",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-9",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-10",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-11",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-12",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-13",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-14",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-15",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-16",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-17",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-18",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-19",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-20",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-21",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-22",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-23",
+      "type": "FLAT",
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-24",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-25",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-26",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-27",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.MANUFACTURE.TST-28",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-29",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-30",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-31",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-32",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-33",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-34",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-35",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-36",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-37",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-38",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-39",
+      "uom": "GROSSUNITS",
+      "fromUom": 0,
+      "toUom": 20,
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-40",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-41",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-42",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-43",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-44",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-46",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-47",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-48",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-49",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-50",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-51",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-52",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-53",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-54",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-55",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-56",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-57",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-58",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-59",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-60",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-61",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-62",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-63",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-64",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-65",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-66",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-67",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-68",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-69",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-70",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-71",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-72",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-73",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-74",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-75",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-76",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-77",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-78",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-79",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-80",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-81",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-82",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-83",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-84",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-85",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-41",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-42",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-43",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-44",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-46",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-47",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-48",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-49",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-50",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-51",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-52",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-53",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-54",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-55",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-56",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-57",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-58",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-59",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-60",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-61",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-62",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-63",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-64",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-65",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-66",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-67",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-68",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-69",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-70",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-71",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-72",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-73",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-74",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-75",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-76",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-77",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-78",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-79",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-80",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-81",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-82",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-83",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-84",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-85",
+      "uom": "GROSSUNITS",
+      "fromUom": 21,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-86",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-87",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-88",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-89",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-90",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-91",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-92",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-93",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-94",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-95",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-96",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-97",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-98",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-99",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-100",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-101",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-102",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-103",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-104",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-105",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-106",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-107",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-108",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-109",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-110",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-111",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-112",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-113",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-114",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-115",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-116",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-117",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-118",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-119",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-120",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-121",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-123",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-124",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-125",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-126",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-127",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-128",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-129",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-130",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-131",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-132",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-133",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-134",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-135",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-136",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-137",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-138",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-139",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-140",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-141",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-142",
+      "type": "FLAT",
+      "rate": 150
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-143",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-144",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-145",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-146",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-147",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-148",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-149",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-150",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-151",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-152",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-153",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-154",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-155",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-156",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-157",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-158",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-159",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-160",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-161",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-162",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-163",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-164",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-165",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-166",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-167",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-168",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-169",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-170",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-171",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-172",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-173",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-174",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-175",
+      "uom": "GALLONS",
+      "fromUom": 500,
+      "toUom": 1000,
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-176",
+      "uom": "GROSSUNITS",
+      "fromUom": 1000,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-177",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-178",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-179",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-180",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-181",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.WHOLESALE.TST-182",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-183",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-184",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-185",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-186",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-187",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-188",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-189",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-190",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-191",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-192",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-193",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-194",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-195",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-196",
+      "type": "FLAT",
+      "rate": 1500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-197",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-198",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-199",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-200",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-201",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.GBS.TST-202",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-203",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-204",
+      "uom": "GROSSUNITS",
+      "fromUom": 0,
+      "toUom": 2,
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-205",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-206",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-207",
+      "type": "FLAT",
+      "rate": 350
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-208",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-209",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-210",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-211",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-212",
+      "type": "FLAT",
+      "rate": 2000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-213",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-214",
+      "type": "FLAT",
+      "rate": 200
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-215",
+      "type": "FLAT",
+      "rate": 1000
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-216",
+      "type": "FLAT",
+      "rate": 1500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-217",
+      "type": "FLAT",
+      "rate": 300
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-218",
+      "uom": "GROSSUNITS",
+      "fromUom": 2,
+      "toUom": "Infinity",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-219",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "SERVICES.NGBS.TST-220",
+      "type": "FLAT",
+      "rate": 500
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-221",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-222",
+      "type": "FLAT",
+      "rate": 250
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-223",
+      "type": "FLAT",
+      "rate": 100
+    },
+    {
+      "tenantId": "{{tenantId}}",
+      "licenseType": "PERMANENT",
+      "structureType": "IMMOVABLE.PUCCA",
+      "tradeType": "GOODS.RETAIL.TST-224",
+      "type": "FLAT",
+      "rate": 250
+    }
+  ]
+}

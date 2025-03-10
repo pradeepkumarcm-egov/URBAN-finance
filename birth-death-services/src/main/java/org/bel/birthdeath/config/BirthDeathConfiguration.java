@@ -121,4 +121,9 @@ public class BirthDeathConfiguration {
     @Value("${egov.pdf.deathcert.createEndPoint}")
     private String	egovPdfDeathEndPoint;
 
+    @Value("${birth.event.inbox.kafka.topic}")
+    private String	birthEventInboxKafkaTopic;
+
+    @Value("${death.event.inbox.kafka.topic}")
+    private String	deathEventInboxKafkaTopic;
 }

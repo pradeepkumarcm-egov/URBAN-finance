@@ -84,8 +84,8 @@ public class SurveyRepository {
     public Integer fetchTotalSurveyCount(SurveySearchCriteria criteria) {
         List<Object> preparedStmtList = new ArrayList<>();
 
-        if(CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
-            return 0;
+//        if(CollectionUtils.isEmpty(criteria.getTenantIds()) && ObjectUtils.isEmpty(criteria.getUuid()))
+//            return 0;
 
         // Omit pagination in case of count
         criteria.setIsCountCall(Boolean.TRUE);

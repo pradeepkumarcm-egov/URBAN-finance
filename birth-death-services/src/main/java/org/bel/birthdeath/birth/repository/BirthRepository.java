@@ -198,6 +198,7 @@ public class BirthRepository {
 
 	public void save(BirthCertRequest birthCertRequest) {
 		bndProducer.push(birthCertRequest.getBirthCertificate().getTenantId(), config.getSaveBirthTopic(), birthCertRequest);
+		bndProducer.push(birthCertRequest.getBirthCertificate().getTenantId(), config.getBirthEventInboxKafkaTopic(), birthCertRequest);
 	}
 
 	public EgovPdfResp saveBirthCertPdf(BirthPdfApplicationRequest pdfApplicationRequest) {

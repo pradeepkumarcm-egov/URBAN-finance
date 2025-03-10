@@ -201,6 +201,7 @@ public class DeathRepository {
 
 	public void save(DeathCertRequest deathCertRequest) {
 		bndProducer.push(deathCertRequest.getDeathCertificate().getTenantId(), config.getSaveDeathTopic(), deathCertRequest);
+		bndProducer.push(deathCertRequest.getDeathCertificate().getTenantId(), config.getDeathEventInboxKafkaTopic(), deathCertRequest);
 	}
 
 	public EgovPdfResp saveDeathCertPdf(DeathPdfApplicationRequest pdfApplicationRequest) {
