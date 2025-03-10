@@ -1,45 +1,18 @@
 import cloneDeep from "lodash/cloneDeep";
-
+import { stringReplaceAll, convertEpochToDate } from "../../utils";
 export const TLSearch = {
-  all: async (tenantId, filters = {}) => {
-    const response = await Digit.CustomService.getResponse({
-      url: `/tl-services/v1/_search`,
-      method: "POST",
-      params: { tenantId, ...filters },
-      auth: true,
-      useCache: false,
-      userService: false,
-    });
-    return response;
-  },
-
-  application: async (tenantId, filters = {}) => {
-    const response = await Digit.CustomService.getResponse({
-      url: `/tl-services/v1/_search`,
-      method: "POST",
-      params: { tenantId, ...filters },
-      auth: true,
-      useCache: false,
-      userService: false,
-    });
-    return response.Licenses[0];
-  },
-
-  numberOfApplications: async (tenantId, filters = {}) => {
-    const response = await Digit.CustomService.getResponse({
-      url: `/tl-services/v1/_search`,
-      method: "POST",
-      params: { tenantId, ...filters },
-      auth: true,
-      useCache: false,
-      userService: false,
-    });
-    return response.Licenses;
-  },
-
   applicationDetails: async (t, tenantId, applicationNumber, userType) => {
     const filter = { applicationNumber };
-    const response = await TLSearch.application(tenantId, filter);
+    const { Licenses = [] } = await Digit.CustomService.getResponse({
+      url: `/tl-services/v1/_search`,
+      method: "POST",
+      params: { tenantId, ...filter },
+      auth: true,
+      useCache: false,
+      userService: false,
+    });
+
+    const response = Licenses[0];
     const propertyDetails =
       response?.tradeLicenseDetail?.additionalDetail?.propertyId &&
       (await Digit.CustomService.getResponse({
@@ -54,11 +27,26 @@ export const TLSearch = {
         userService: true,
       }));
     let numOfApplications = [];
+
     if (response?.licenseNumber) {
       const licenseNumbers = response?.licenseNumber;
       const filters = { licenseNumbers, offset: 0 };
-      numOfApplications = await TLSearch.numberOfApplications(tenantId, filters);
+
+      const reqCriteria = {
+        url: `/tl-services/v1/_search`,
+        params: { tenantId, ...filters },
+        config: {
+          enabled: true,
+          select: (data) => {
+            return data?.Licenses;
+          },
+        },
+      };
+
+      const { isLoading, data, isFetching } = Digit.Hooks.useCustomAPIHook(reqCriteria);
+      numOfApplications = data;
     }
+
     let propertyAddress = "";
     if (propertyDetails && propertyDetails?.Properties.length) {
       propertyAddress = getAddress(propertyDetails?.Properties[0]?.address, t);
