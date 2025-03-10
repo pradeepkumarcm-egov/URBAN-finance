@@ -14,7 +14,7 @@ export const COMPLAINT = {
 
 export const DRAFTS = {
   GET: {
-    URL: "pt-services-v2/drafts/_search",
+    URL: "property-services/drafts/_search",
     ACTION: "_search",
   },
 };
@@ -135,8 +135,7 @@ export const INBOXESCALTEDRECORDS = {
     URL: "/egov-workflow-v2/egov-wf/escalate/_search",
     ACTION: "_search",
   },
-}; 
-
+};
 
 export const PROPERTY = {
   GET: {
@@ -147,7 +146,7 @@ export const PROPERTY = {
 
 export const DRAFT = {
   GET: {
-    URL: "/pt-services-v2/drafts/_search",
+    URL: "/property-services/drafts/_search",
     ACTION: "_get",
   },
 };

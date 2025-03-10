@@ -21,162 +21,162 @@ config:
 #Municipal Services
   - name: "builds/urban/pt-calculator-v2"
     build:
-      - work-dir: "urban/property-tax/pt-calculator-v2"
+      - work-dir: "property-tax/pt-calculator-v2"
         image-name: "pt-calculator-v2"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/property-tax/pt-calculator-v2/src/main/resources/db"
+      - work-dir: "property-tax/pt-calculator-v2/src/main/resources/db"
         image-name: "pt-calculator-v2-db"
 
   - name: "builds/urban/pt-services-v2"
     build:
-      - work-dir: "urban/property-tax/pt-services-v2"
+      - work-dir: "property-tax/pt-services-v2"
         image-name: "pt-services-v2"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/property-tax/pt-services-v2/src/main/resources/db"
+      - work-dir: "property-tax/pt-services-v2/src/main/resources/db"
         image-name: "pt-services-v2-db"
 
   - name: "builds/urban/property-services"
     build:
-      - work-dir: "urban/property-tax/property-services"
+      - work-dir: "property-tax/property-services"
         image-name: "property-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/property-tax/property-services/src/main/resources/db"
+      - work-dir: "property-tax/property-services/src/main/resources/db"
         image-name: "property-services-db"
         
   - name: "builds/urban/rainmaker-pgr"
     build:
-      - work-dir: "urban/public-grievance-redressal/rainmaker-pgr"
+      - work-dir: "public-grievance-redressal/rainmaker-pgr"
         image-name: "rainmaker-pgr"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/public-grievance-redressal/rainmaker-pgr/src/main/resources/db"
+      - work-dir: "public-grievance-redressal/rainmaker-pgr/src/main/resources/db"
         image-name: "rainmaker-pgr-db"
 
   - name: "builds/urban/pgr-services"
     build:
-      - work-dir: "urban/public-grievance-redressal/pgr-services"
+      - work-dir: "public-grievance-redressal/pgr-services"
         image-name: "pgr-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/public-grievance-redressal/pgr-services/src/main/resources/db"
+      - work-dir: "public-grievance-redressal/pgr-services/src/main/resources/db"
         image-name: "pgr-services-db"
 
   - name: "builds/urban/tl-calculator"
     build:
-      - work-dir: "urban/tradelicense/tl-calculator"
+      - work-dir: "tradelicense/tl-calculator"
         image-name: "tl-calculator"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/tradelicense/tl-calculator/src/main/resources/db"
+      - work-dir: "tradelicense/tl-calculator/src/main/resources/db"
         image-name: "tl-calculator-db"
         
   - name: "builds/urban/tl-services"
     build:
-      - work-dir: "urban/tradelicense/tl-services"
+      - work-dir: "tradelicense/tl-services"
         image-name: "tl-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/tradelicense/tl-services/src/main/resources/db"
+      - work-dir: "tradelicense/tl-services/src/main/resources/db"
         image-name: "tl-services-db"
 
   - name: "builds/urban/firenoc-services"
     build:
-      - work-dir: "urban/firenoc/firenoc-services"
+      - work-dir: "firenoc/firenoc-services"
         image-name: "firenoc-services"
-      - work-dir: "urban/firenoc/firenoc-services/migration"
+      - work-dir: "firenoc/firenoc-services/migration"
         image-name: "firenoc-services-db"
 
   - name: "builds/urban/firenoc-calculator"
     build:
-      - work-dir: "urban/firenoc/firenoc-calculator"
+      - work-dir: "firenoc/firenoc-calculator"
         image-name: "firenoc-calculator"
-      - work-dir: "urban/firenoc/firenoc-calculator/migration"
+      - work-dir: "firenoc/firenoc-calculator/migration"
         image-name: "firenoc-calculator-db"
 
   - name: "builds/urban/ws-services"
     build:
-      - work-dir: "urban/water-connection/ws-services"
+      - work-dir: "water-connection/ws-services"
         image-name: "ws-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/water-connection/ws-services/src/main/resources/db"
+      - work-dir: "water-connection/ws-services/src/main/resources/db"
         image-name: "ws-services-db"
 
   - name: "builds/urban/ws-calculator"
     build:
-      - work-dir: "urban/water-connection/ws-calculator"
+      - work-dir: "water-connection/ws-calculator"
         image-name: "ws-calculator"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/water-connection/ws-calculator/src/main/resources/db"
+      - work-dir: "water-connection/ws-calculator/src/main/resources/db"
         image-name: "ws-calculator-db"
 
   - name: "builds/urban/sw-services"
     build:
-      - work-dir: "urban/sewerage-connection/sw-services"
+      - work-dir: "sewerage-connection/sw-services"
         image-name: "sw-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/sewerage-connection/sw-services/src/main/resources/db"
+      - work-dir: "sewerage-connection/sw-services/src/main/resources/db"
         image-name: "sw-services-db"
 
   - name: "builds/urban/sw-calculator"
     build:
-      - work-dir: "urban/sewerage-connection/sw-calculator"
+      - work-dir: "sewerage-connection/sw-calculator"
         image-name: "sw-calculator"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/sewerage-connection/sw-calculator/src/main/resources/db"
+      - work-dir: "sewerage-connection/sw-calculator/src/main/resources/db"
         image-name: "sw-calculator-db"     
 
   - name: "builds/urban/bpa-services"
     build:
-      - work-dir: "urban/online-building-plan-approval-system/bpa-services"
+      - work-dir: "online-building-plan-approval-system/bpa-services"
         image-name: "bpa-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/online-building-plan-approval-system/bpa-services/src/main/resources/db"
+      - work-dir: "online-building-plan-approval-system/bpa-services/src/main/resources/db"
         image-name: "bpa-services-db"         
 
   - name: "builds/urban/bpa-calculator"
     build:
-      - work-dir: "urban/online-building-plan-approval-system/bpa-calculator"
+      - work-dir: "online-building-plan-approval-system/bpa-calculator"
         image-name: "bpa-calculator"
         dockerfile: "build/maven/Dockerfile"     
 
   - name: "builds/urban/land-services"
     build:
-      - work-dir: "urban/online-building-plan-approval-system/land-services"
+      - work-dir: "online-building-plan-approval-system/land-services"
         image-name: "land-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/online-building-plan-approval-system/land-services/src/main/resources/db"
+      - work-dir: "online-building-plan-approval-system/land-services/src/main/resources/db"
         image-name: "land-services-db"
 
   - name: "builds/urban/noc-services"
     build:
-      - work-dir: "urban/online-building-plan-approval-system/noc-services"
+      - work-dir: "online-building-plan-approval-system/noc-services"
         image-name: "noc-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/online-building-plan-approval-system/noc-services/src/main/resources/db"
+      - work-dir: "online-building-plan-approval-system/noc-services/src/main/resources/db"
         image-name: "noc-services-db"
 
   - name: "builds/urban/echallan-services"
     build:
-      - work-dir: "urban/echallan/echallan-services"
+      - work-dir: "echallan/echallan-services"
         image-name: "echallan-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/echallan/echallan-services/src/main/resources/db"
+      - work-dir: "echallan/echallan-services/src/main/resources/db"
         image-name: "echallan-services-db"         
 
   - name: "builds/urban/echallan-calculator"
     build:
-      - work-dir: "urban/echallan/echallan-calculator"
+      - work-dir: "echallan/echallan-calculator"
         image-name: "echallan-calculator"
         dockerfile: "build/maven/Dockerfile"  
         
   - name: "builds/urban/turn-io-adapter"
     build:
-      - work-dir: "urban/public-grievance-redressal/turn-io-adapter"
+      - work-dir: "public-grievance-redressal/turn-io-adapter"
         image-name: "turn-io-adapter"
         dockerfile: "build/maven/Dockerfile"
 
   - name: "builds/urban/birth-death-services"
     build:
-      - work-dir: "urban/birth-death-services"
+      - work-dir: "birth-death-services"
         image-name: "birth-death-services"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/birth-death-services/src/main/resources/db"
+      - work-dir: "birth-death-services/src/main/resources/db"
         image-name: "birth-death-services-db"
 
  # Utilities
@@ -261,6 +261,27 @@ config:
                     
         
 
+  - name: "builds/urban/utilities/egov-searcher"
+    build:
+      - work-dir: "utilities/egov-searcher"
+        image-name: "egov-searcher"
+        dockerfile: "build/maven/Dockerfile"
+        
+  - name: "builds/urban/utilities/report"
+    build:
+      - work-dir: "utilities/report"
+        image-name: "report"
+        dockerfile: "build/maven/Dockerfile"      
+
+  - name: "builds/urban/utilities/egov-survey-services"
+    build:
+      - work-dir: "utilities/egov-survey-services"
+        image-name: "egov-survey-services"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "utilities/egov-survey-services/src/main/resources/db"
+        image-name: "egov-survey-services-db"
+        
+
   # Frontend
 
   - name: builds/urban/frontend/mono-ui/citizen
@@ -327,24 +348,24 @@ config:
         
   - name: builds/urban/edcr/dcr-service/egov-dcr
     build:
-      - work-dir: urban/online-building-plan-approval-system/edcr/service/egov
-        dockerfile: urban/online-building-plan-approval-system/edcr/service/Dockerfile
+      - work-dir: online-building-plan-approval-system/edcr/service/egov
+        dockerfile: online-building-plan-approval-system/edcr/service/Dockerfile
         image-name: egov-edcr
               
   #Finance
    
   - name: builds/urban/finance/egov-finance
     build:
-      - work-dir: urban/financial-module-system/finance/egov
+      - work-dir: financial-module-system/finance/egov
         image-name: egov-finance
-        dockerfile: finance/Dockerfile
+        dockerfile: financial-module-system/finance/Dockerfile
         
   - name: "builds/urban/business-services/egf-instrument"
     build:
-      - work-dir: urban/financial-module-system/egf-instrument"
+      - work-dir: financial-module-system/egf-instrument"
         image-name: "egf-instrument"
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/financial-module-system/egf-instrument/src/main/resources/db"
+      - work-dir: "financial-module-system/egf-instrument/src/main/resources/db"
         image-name: "egf-instrument-db"
 
   - name: "builds/urban/business-services/egf-master"
@@ -352,7 +373,7 @@ config:
       - work-dir: "builds/urban/financial-module-system/egf-master"
         image-name: urban/egf-master
         dockerfile: "build/maven/Dockerfile"
-      - work-dir: "urban/financial-module-system/egf-master/src/main/resources/db"
+      - work-dir: "financial-module-system/egf-master/src/main/resources/db"
         image-name: "egf-master-db"
   
   - name: "builds/urban/finance-collections-voucher-consumer"

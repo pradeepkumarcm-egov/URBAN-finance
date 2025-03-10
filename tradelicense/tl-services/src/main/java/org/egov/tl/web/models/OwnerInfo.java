@@ -8,16 +8,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import lombok.*;
 import org.egov.common.contract.request.Role;
-import org.hibernate.validator.constraints.SafeHtml;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 
 /**
  * OwnerInfo
  */
 @Validated
-@javax.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2018-09-18T17:06:11.263+05:30")
+@jakarta.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2018-09-18T17:06:11.263+05:30")
 
 @Getter
 @Setter
@@ -32,12 +32,12 @@ public class OwnerInfo extends User  {
         private Double ownerShipPercentage;
 
         @Size(max=64)
-        @SafeHtml
+        
         @JsonProperty("ownerType")
         private String ownerType;
 
         @Size(max=64)
-        @SafeHtml
+        
         @JsonProperty("institutionId")
         private String institutionId;
 

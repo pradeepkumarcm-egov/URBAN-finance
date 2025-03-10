@@ -50,10 +50,12 @@ public class LandRepository {
 	 */
 	public void save(String tenantId, LandInfoRequest landRequest) {
 		producer.push(tenantId, config.getSaveLandInfoTopic(), landRequest);
+		producer.push(tenantId, config.getLandEventInboxKafkaTopic(), landRequest);
 	}
 
 	public void update(String tenantId, LandInfoRequest landRequest) {
 		producer.push(tenantId, config.getUpdateLandInfoTopic(), landRequest);
+		producer.push(tenantId, config.getLandEventInboxKafkaTopic(), landRequest);
 	}
 	
 	/**

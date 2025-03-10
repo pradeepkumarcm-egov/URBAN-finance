@@ -2,7 +2,7 @@ package org.egov.echallan.service;
 
 import java.util.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.egov.common.contract.request.RequestInfo;
 import org.egov.common.contract.response.ResponseInfo;
@@ -97,6 +97,12 @@ public class ChallanService {
 	        }
 
 	        criteria=enrichmentService.getChallanCriteriaFromIds(challans);
+	
+	        Optional.ofNullable(requestInfo)
+	        .map(req -> req.getUserInfo())
+	        .map(user -> user.getTenantId())
+	        .ifPresent(criteria::setTenantId);
+
 	        challans = getChallansWithOwnerInfo(criteria,requestInfo);
 	        return challans;
 	    }

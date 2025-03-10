@@ -76,7 +76,7 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.validation</groupId>
+			<groupId>.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
 		<dependency>

@@ -101,7 +101,7 @@ const DashBoard = ({ stateCode }) => {
     enabled: isNational,
   });
 
-  const { data: response, isLoading } = Digit.Hooks.dss.useDashboardConfig(moduleCode);
+  const { data: response, isLoading } = Digit.Hooks.dss.useDashboardConfig(moduleCode, tenantId);
   const { data: ulbTenants, isLoading: isUlbLoading } = Digit.Hooks.useModuleTenants("DSS");
   const { isLoading: isMdmsLoading, data: mdmsData } = Digit.Hooks.useCommonMDMS(stateCode, "FSM", "FSTPPlantInfo");
   const [showOptions, setShowOptions] = useState(false);

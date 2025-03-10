@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import org.egov.bpa.web.model.landInfo.LandInfo;
-import org.hibernate.validator.constraints.SafeHtml;
+
+import org.egov.bpa.web.model.workflow.ProcessInstance;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,44 +26,44 @@ import lombok.NoArgsConstructor;
  */
 @ApiModel(description = "BPA application object to capture the details of land, land owners, and address of the land.")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:52:32.717Z[GMT]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:52:32.717Z[GMT]")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class BPA   {
-  @SafeHtml
+  
   @JsonProperty("id")
   private String id = null;
 
-  @SafeHtml
+  
   @JsonProperty("applicationNo")
   private String applicationNo = null;
 
-  @SafeHtml
+  
   @JsonProperty("approvalNo")
   private String approvalNo = null;
 
-  @SafeHtml
+  
   @JsonProperty("accountId")
   private String accountId = null;
 
-  @SafeHtml
+  
   @JsonProperty("edcrNumber")
   private String edcrNumber = null;
 
-  @SafeHtml
+  
   @JsonProperty("riskType")
   private String riskType = null;
   
-  @SafeHtml
+  
   @JsonProperty("businessService")
   private String businessService = null;
 
-  @SafeHtml
+  
   @JsonProperty("landId")
   private String landId = null;
 
-  @SafeHtml
+  
   @JsonProperty("tenantId")
   private String tenantId = null;
 
@@ -72,7 +73,7 @@ public class BPA   {
   @JsonProperty("applicationDate")
   private Long applicationDate = null;
   
-  @SafeHtml
+  
   @JsonProperty("status")
   private String status = null;
 
@@ -91,6 +92,9 @@ public class BPA   {
 
   @JsonProperty("additionalDetails")
   private Object additionalDetails = null;
+
+  @JsonProperty("processInstance")
+  private ProcessInstance processInstance = null;
 
   public BPA id(String id) {
     this.id = id;
@@ -115,7 +119,12 @@ public class BPA   {
     this.applicationNo = applicationNo;
     return this;
   }
-
+  public void setProcessInstance(ProcessInstance processInstance) {
+    this.processInstance = processInstance;
+  }
+  public ProcessInstance getProcessInstance() {
+    return processInstance;
+  }
   /**
    * Generate formatted Unique Identifier of the building permit application. Keep the format in mdms
    * @return applicationNo

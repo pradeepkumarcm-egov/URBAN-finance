@@ -1,10 +1,13 @@
 package org.egov.io;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class TurnIoAdapterApplicationTests {
+
+@RunWith(MockitoJUnitRunner.class)
+public class TurnIoAdapterApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -26,6 +26,16 @@ const RatingCard = ({ config, onSelect, t }) => {
     setRating(index);
   };
 
+  const stateId = Digit.ULBService.getStateId();
+
+  //uncomment this once mdms updated in QA
+  const { data: RatingAndFeedBack, isLoading: RatingAndFeedBackLoading } = Digit.Hooks.pt.useRatingAndFeedbackMDMS.RatingAndFeedBack(stateId);
+
+
+  const getCommentHeader = () => {
+    return RatingAndFeedBack?.headerByRating?.filter((ob) => rating >= ob?.minvalue && rating <= ob?.maxvalue)?.[0]?.code || t("CS_WHAT_WENT_WRONG");
+  }
+
   const segments = config.inputs?.map((input, index) => {
     if (input.type === "rate") {
       return (
@@ -39,8 +49,8 @@ const RatingCard = ({ config, onSelect, t }) => {
 
     if (input.type === "checkbox") {
       return (
-        <React.Fragment key={index}>
-          <CardLabel>{t(input.label)}</CardLabel>
+        <React.Fragment key={index}>          
+          <CardLabel>{t(getCommentHeader())}</CardLabel>
           {input?.error}
           {input.checkLabels &&
             input.checkLabels.map((label, index) => <CheckBox style={{ marginBottom: "16px", paddingTop:"10px" }} key={index} name={input.label} label={t(label)} value={label} inputRef={register} />)}

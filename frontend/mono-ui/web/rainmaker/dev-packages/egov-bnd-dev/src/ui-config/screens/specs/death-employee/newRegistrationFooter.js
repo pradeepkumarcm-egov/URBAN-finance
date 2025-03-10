@@ -247,7 +247,7 @@ export const postData = async (state, dispatch) => {
         : "savedeathimport";
     payload = await httpRequest(
       "post",
-      `birth-death-services/common/${actionmode}`,
+      `birth-death-services/common/${actionmode}?tenantId=${newRegData["tenantid"]}`,
       `${actionmode}`,
       [],
       payload

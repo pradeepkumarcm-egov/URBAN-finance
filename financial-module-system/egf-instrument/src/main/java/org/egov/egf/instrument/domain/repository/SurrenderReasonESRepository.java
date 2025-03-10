@@ -11,7 +11,7 @@ import org.egov.egf.instrument.persistence.entity.SurrenderReasonEntity;
 import org.egov.egf.instrument.web.contract.SurrenderReasonSearchContract;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.client.*;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.SortOrder;

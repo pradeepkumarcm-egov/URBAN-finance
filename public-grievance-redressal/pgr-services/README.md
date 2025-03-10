@@ -73,3 +73,17 @@ the citizen and will be updated by notifications whenever the status of the comp
 - Following are the Producer topic.
     - **save-pgr-request** :- This topic is used to create new complaint in the system.
     - **update-pgr-request** :- This topic is used to update the existing complaint in the systen.
+
+***LTS UPGRADATION***
+Under the LTS upgradation some dependencies versions are upgraded and imports are refactored. Below are the details
+
+1. artifact version updated to 1.1.9 from 1.1.8 .
+2. java version updated to 17 from 1.8 .
+3. spring boot starter parent updated to 3.2.2 from 2.2.6.RELEASE .
+4. tracer version updated to 2.9.0-SNAPSHOT from 2.1.0-SNAPSHOT .
+5. flyway-core version updated to 9.22.3 from 6.0.8 .
+6. postgresql version updated to 42.7.1 from 42.2.2.jre7 .
+7. javax validation api is removed as jakarta is being used.
+8. mdms-client version updated to 0.0.4-SNAPSHOT from 2.9.0-SNAPSHOT .
+9. commons-io version 2.11.0 is added.
+10. junit version 4.13.2 is added.

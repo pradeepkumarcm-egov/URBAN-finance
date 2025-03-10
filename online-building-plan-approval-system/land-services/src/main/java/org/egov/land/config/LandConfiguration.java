@@ -3,7 +3,7 @@ package org.egov.land.config;
 import java.util.Map;
 import java.util.TimeZone;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -90,5 +90,7 @@ public class LandConfiguration {
 	
 //	@Value("#{${appSrvTypeBussSrvCode}}")
 //	private Map<String,Map<String,String>> appSrvTypeBussSrvCode;
-	
+
+	@Value("${land.event.inbox.kafka.topic}")
+	private String landEventInboxKafkaTopic;
 }

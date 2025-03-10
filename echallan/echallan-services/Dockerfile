@@ -1,4 +1,4 @@
-FROM egovio/apline-jre:8u121
+FROM egovio/amazoncorretto:17-alpine3.19 AS build
 
 MAINTAINER Senthil<senthil.kalimuthu@tarento.com>
 

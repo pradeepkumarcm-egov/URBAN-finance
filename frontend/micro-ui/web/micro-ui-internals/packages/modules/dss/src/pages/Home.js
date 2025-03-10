@@ -39,7 +39,7 @@ const getInitialRange = () => {
   return { startDate, endDate, title, interval, denomination, tenantId };
 };
 const colors = [
-  { dark: "rgba(12, 157, 149, 0.85)", light: "rgba(11, 222, 133, 0.14)", defaultColor: "rgba(244, 119, 56, 1)"},
+  { dark: "rgba(12, 157, 149, 0.85)", light: "rgba(11, 222, 133, 0.14)", defaultColor: "rgba(244, 119, 56, 1)" },
   { dark: "rgba(251, 192, 45, 0.85)", light: "rgba(255, 202, 69, 0.24)" },
   { dark: "rgba(75, 31, 165, 0.85)", light: "rgba(138, 83, 255, 0.24)" },
   { dark: "rgba(4, 139, 208, 0.85)", light: "rgba(4, 139, 208, 0.24)" },
@@ -91,17 +91,19 @@ const Chart = ({ data, moduleLevel, overview = false }) => {
           <span style={{ fontSize: "14px", fontWeight: "400px", color: "white" }}>{t(`TIP_${data.name}`)}</span>
         </span>
       </div>
-      {data.name === "NATIONAL_DSS_OVERVIEW_CITIZEN_FEEDBACK_SCORE" ? 
-      <Rating
+      {data.name === "NATIONAL_DSS_OVERVIEW_CITIZEN_FEEDBACK_SCORE" ? (
+        <Rating
           //id={response?.responseData?.data?.[0]?.headerValue}
           currentRating={Math.round(response?.responseData?.data?.[0]?.headerValue * 10) / 10}
           styles={{ width: "unset", marginBottom: 0 }}
           starStyles={{ width: "25px" }}
           toolTipText={t("COMMON_RATING_LABEL")}
-      />
-              :<p className="p2">
-        {Digit.Utils.dss.formatter(response?.responseData?.data?.[0]?.headerValue, response?.responseData?.data?.[0]?.headerSymbol, "Lac", true, t)}
-      </p>}
+        />
+      ) : (
+        <p className="p2">
+          {Digit.Utils.dss.formatter(response?.responseData?.data?.[0]?.headerValue, response?.responseData?.data?.[0]?.headerSymbol, "Lac", true, t)}
+        </p>
+      )}
       {response?.responseData?.data?.[0]?.insight?.value ? (
         <p className={`p3 ${response?.responseData?.data?.[0]?.insight?.indicator === "upper_green" ? "color-green" : "color-red"}`}>
           {response?.responseData?.data?.[0]?.insight?.indicator === "upper_green" ? ArrowUpwardElement("10px") : ArrowDownwardElement("10px")}
@@ -228,7 +230,7 @@ const Home = ({ stateCode }) => {
   const { moduleCode } = useParams();
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading: localizationLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
-  const { data: response, isLoading } = Digit.Hooks.dss.useDashboardConfig(moduleCode);
+  const { data: response, isLoading } = Digit.Hooks.dss.useDashboardConfig(moduleCode, tenantId);
   const [showOptions, setShowOptions] = useState(false);
   const [selectedState, setselectedState] = useState("");
   const [drillDownId, setdrillDownId] = useState("none");
@@ -482,33 +484,50 @@ const Home = ({ stateCode }) => {
                               flexDirection: "row",
                             }}
                           >
-                            {!isLandingPage && <span><span style={{ paddingRight: 10 }}>{t("DSS_OVERVIEW")}</span>
+                            {!isLandingPage && (
                               <span>
-                                {" "}
-                                <Arrow_Right />
-                              </span></span>}
+                                <span style={{ paddingRight: 10 }}>{t("DSS_OVERVIEW")}</span>
+                                <span>
+                                  {" "}
+                                  <Arrow_Right />
+                                </span>
+                              </span>
+                            )}
                           </div>
                         ) : null}
                       </div>
 
-                      <div className="dss-card-body" style={{marginBottom: isLandingPage ? "20px" : ""}}>
+                      <div className="dss-card-body" style={{ marginBottom: isLandingPage ? "20px" : "" }}>
                         {item.charts.map((chart, key) => (
                           <div style={item.vizType == "collection" ? { width: Digit.Utils.browser.isMobile() ? "50%" : "25%" } : { width: "50%" }}>
                             <Chart data={chart} key={key} moduleLevel={item.moduleLevel} overview={item.vizType === "collection"} />
                           </div>
                         ))}
                       </div>
-                      {isLandingPage && <div
-                        style={{ borderRadius: "0px 0px 4px 4px", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center", bottom: "0px", left: "0px", width: "100%", background: item.vizType == "collection" || item.name.includes("PROJECT_STAUS") || item.name.includes("LIVE_ACTIVE_ULBS") ? colors?.[index]?.defaultColor : colors?.[index]?.dark }}
-                        onClick={() => routeTo(`/digit-ui/employee/dss/dashboard/${item.ref.url}`)}
-                      >
-                        <div style={{ padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", height: "40px" }}>
-                          <span style={{ marginRight: "10px", color: "white" }}>
-                            {`${t("COMMON_DSS_VIEW_DASH_BOARD_LABEL")} `}
-                          </span>
-                          <Arrow_Right_White />
+                      {isLandingPage && (
+                        <div
+                          style={{
+                            borderRadius: "0px 0px 4px 4px",
+                            position: "absolute",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            bottom: "0px",
+                            left: "0px",
+                            width: "100%",
+                            background:
+                              item.vizType == "collection" || item.name.includes("PROJECT_STAUS") || item.name.includes("LIVE_ACTIVE_ULBS")
+                                ? colors?.[index]?.defaultColor
+                                : colors?.[index]?.dark,
+                          }}
+                          onClick={() => routeTo(`/digit-ui/employee/dss/dashboard/${item.ref.url}`)}
+                        >
+                          <div style={{ padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", height: "40px" }}>
+                            <span style={{ marginRight: "10px", color: "white" }}>{`${t("COMMON_DSS_VIEW_DASH_BOARD_LABEL")} `}</span>
+                            <Arrow_Right_White />
+                          </div>
                         </div>
-                      </div>}
+                      )}
                     </div>
                   );
                 }

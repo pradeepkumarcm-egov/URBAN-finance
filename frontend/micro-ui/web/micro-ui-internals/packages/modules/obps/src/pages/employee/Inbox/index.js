@@ -7,11 +7,11 @@ import useInboxTableConfig from "./useInboxTableConfig";
 import useInboxMobileCardsData from "./useInboxMobileCardsData";
 import { Link } from "react-router-dom";
 
-const Inbox = ({ parentRoute }) => {
+const Inbox = ({ parentRoute, userType }) => {
   window.scroll(0, 0);
   const { t } = useTranslation();
 
-  const tenantId = Digit.ULBService.getCurrentTenantId();
+  const tenantId = userType === "citizen" ? Digit.ULBService.getCitizenCurrentTenant() : Digit.ULBService.getCurrentTenantId();
 
   const searchFormDefaultValues = {};
 
@@ -105,7 +105,7 @@ const Inbox = ({ parentRoute }) => {
     if (bService === "BPAREG") {
       redirectBS = "search/application/stakeholder";
     } else {
-      redirectBS = window.location.href.includes("/citizen") ? "bpa" : "search/application/bpa"
+      redirectBS = window.location.href.includes("/citizen") ? "bpa" : "search/application/bpa";
     }
     return redirectBS;
   };
@@ -115,11 +115,11 @@ const Inbox = ({ parentRoute }) => {
     {},
     t
   );
+  const isEmployee = userType === "employee";
 
-  const { isLoading: isInboxLoading, data: { table, statuses, totalCount } = {} } = Digit.Hooks.obps.useBPAInbox({
-    tenantId,
-    filters: { ...formState },
-  });
+  const { isLoading: isInboxLoading, data: { table, statuses, totalCount } = {} } = isEmployee
+    ? Digit.Hooks.obps.useBPAInbox({ tenantId, filters: { ...formState } })
+    : Digit.Hooks.obps.useBPAInboxV1({ tenantId, filters: { ...formState } });
 
   const PropsForInboxLinks = {
     logoIcon: <CaseIcon />,
@@ -161,13 +161,13 @@ const Inbox = ({ parentRoute }) => {
   );
 
   const onSearchFormSubmit = (data) => {
-    data.hasOwnProperty("") && delete data?.[""] ;
+    data.hasOwnProperty("") && delete data?.[""];
     dispatch({ action: "mutateTableForm", data: { ...tableOrderFormDefaultValues } });
     dispatch({ action: "mutateSearchForm", data });
   };
 
   const onFilterFormSubmit = (data) => {
-    data.hasOwnProperty("") && delete data?.[""] ;
+    data.hasOwnProperty("") && delete data?.[""];
     dispatch({ action: "mutateTableForm", data: { ...tableOrderFormDefaultValues } });
     dispatch({ action: "mutateFilterForm", data });
   };
@@ -200,13 +200,17 @@ const Inbox = ({ parentRoute }) => {
         {t("ES_COMMON_INBOX")}
         {totalCount ? <p className="inbox-count">{totalCount}</p> : null}
       </Header>
-      {Digit.Utils.browser.isMobile() &&
-        <div style={{marginLeft: "12px"}}>
-          <Link to={window.location.href.includes("/citizen") ? "/digit-ui/citizen/obps/search/application" : "/digit-ui/employee/obps/search/application"}>
+      {Digit.Utils.browser.isMobile() && (
+        <div style={{ marginLeft: "12px" }}>
+          <Link
+            to={
+              window.location.href.includes("/citizen") ? "/digit-ui/citizen/obps/search/application" : "/digit-ui/employee/obps/search/application"
+            }
+          >
             <span className="link">{t("BPA_SEARCH_PAGE_TITLE")}</span>
           </Link>
         </div>
-      }
+      )}
       <InboxComposer
         {...{
           isInboxLoading,

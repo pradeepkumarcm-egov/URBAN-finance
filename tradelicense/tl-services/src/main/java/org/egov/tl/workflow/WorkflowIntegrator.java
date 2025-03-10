@@ -6,15 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.egov.tl.config.TLConfiguration;
-import org.egov.tl.util.TLConstants;
 import org.egov.tl.web.models.TradeLicense;
 import org.egov.tl.web.models.TradeLicenseRequest;
+import org.egov.tl.web.models.workflow.ProcessInstance;
+import org.egov.tl.web.models.workflow.ProcessInstanceResponse;
+import org.egov.tl.web.models.workflow.WorkflowRequest;
 import org.egov.tracer.model.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -135,13 +139,23 @@ public class WorkflowIntegrator {
 		}
 		if(!array.isEmpty())
 		{
-			JSONObject workFlowRequest = new JSONObject();
-			workFlowRequest.put(REQUESTINFOKEY, tradeLicenseRequest.getRequestInfo());
-			workFlowRequest.put(WORKFLOWREQUESTARRAYKEY, array);
-			String response = null;
+			WorkflowRequest workFlowRequest = new WorkflowRequest();
+			workFlowRequest.setRequestInfo(tradeLicenseRequest.getRequestInfo());
+			workFlowRequest.setProcessInstances(array);
+			List<ProcessInstance> processInstances = null;
 			try {
-				response = rest.postForObject(config.getWfHost().concat(config.getWfTransitionPath()), workFlowRequest, String.class);
-			} catch (HttpClientErrorException e) {
+				HttpEntity<WorkflowRequest> requestEntity = new HttpEntity<>(workFlowRequest);
+				ProcessInstanceResponse response = rest.exchange(
+						config.getWfHost().concat(config.getWfTransitionPath()),
+						HttpMethod.POST,
+						requestEntity,
+						new ParameterizedTypeReference<ProcessInstanceResponse>() {}
+				).getBody();
+
+				// Extract only the list of ProcessInstance from the response
+				processInstances = response.getProcessInstances();
+			} catch (HttpClientErrorException e)
+			{
 
 				/*
 				 * extracting message from client error exception
@@ -150,7 +164,8 @@ public class WorkflowIntegrator {
 				List<Object> errros = null;
 				try {
 					errros = responseContext.read("$.Errors");
-				} catch (PathNotFoundException pnfe) {
+				} catch (PathNotFoundException pnfe)
+				{
 					log.error("EG_TL_WF_ERROR_KEY_NOT_FOUND",
 							" Unable to read the json path in error object : " + pnfe.getMessage());
 					throw new CustomException("EG_TL_WF_ERROR_KEY_NOT_FOUND",
@@ -166,19 +181,23 @@ public class WorkflowIntegrator {
 			 * on success result from work-flow read the data and set the status back to TL
 			 * object
 			 */
-			DocumentContext responseContext = JsonPath.parse(response);
-			List<Map<String, Object>> responseArray = responseContext.read(PROCESSINSTANCESJOSNKEY);
 			Map<String, String> idStatusMap = new HashMap<>();
-			responseArray.forEach(
-					object -> {
+			Map<String, ProcessInstance> processInstanceMap = new HashMap<>();
+			processInstances.forEach(
+					processInstance -> {
+						idStatusMap.put(processInstance.getBusinessId(),processInstance.getState().getApplicationStatus());
+						processInstanceMap.put(processInstance.getBusinessId(),processInstance);
+					}
+			);
 
-						DocumentContext instanceContext = JsonPath.parse(object);
-						idStatusMap.put(instanceContext.read(BUSINESSIDJOSNKEY), instanceContext.read(STATUSJSONKEY));
-					});
-
-			// setting the status back to TL object from wf response
+			// setting the status and processInstance back to TL object from wf response
 			tradeLicenseRequest.getLicenses()
-					.forEach(tlObj -> tlObj.setStatus(idStatusMap.get(tlObj.getApplicationNumber())));
+					.forEach(tlObj -> {
+						tlObj.setStatus(idStatusMap.get(tlObj.getApplicationNumber()));
+						tlObj.setProcessInstance(processInstanceMap.get(tlObj.getApplicationNumber()));
+							}
+
+					);
 		}
 	}
 }

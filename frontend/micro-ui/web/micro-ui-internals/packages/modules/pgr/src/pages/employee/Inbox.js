@@ -32,8 +32,10 @@ const Inbox = () => {
     setPageOffset((prevState) => prevState - 10);
   };
 
+
+
   const handlePageSizeChange = (e) => {
-    setPageSize(Number(e.target.value));
+    setPageSize((prevPageSize) => (e.target.value));
   };
 
   const handleFilterChange = (filterParam) => {
@@ -67,7 +69,7 @@ const Inbox = () => {
             onNextPage={fetchNextPage}
             onPrevPage={fetchPrevPage}
             onPageSizeChange={handlePageSizeChange}
-            currentPage={Math.floor(pageOffset / pageSize)}
+            currentPage={parseInt(pageOffset / pageSize)}
             totalRecords={totalRecords}
             pageSizeLimit={pageSize}
           />

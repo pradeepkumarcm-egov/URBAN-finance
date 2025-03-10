@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.egov.common.contract.request.RequestInfo;
 import org.egov.pt.config.PropertyConfiguration;
@@ -108,6 +108,7 @@ public class PropertyService {
 		}
 
 		producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+		producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(),request);
 		request.getProperty().setWorkflow(null);
 
 		/* decrypt here */
@@ -128,8 +129,11 @@ public class PropertyService {
 	 * @return List of updated properties
 	 */
 	public Property updateProperty(PropertyRequest request) {
-		
-		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request);
+
+		Property propertyFromRequest = request.getProperty();
+		PropertyCriteria criteria = propertyValidator.getPropertyCriteriaForSearch(request);
+		List<Property> propertiesFromSearchResponse = searchProperty(criteria, request.getRequestInfo());
+		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request,propertyFromRequest,propertiesFromSearchResponse);
 		propertyValidator.validateCommonUpdateInformation(request, propertyFromSearch);
 
 		boolean isRequestForOwnerMutation = CreationReason.MUTATION.equals(request.getProperty().getCreationReason());
@@ -191,6 +195,7 @@ public class PropertyService {
 				enrichmentService.enrichUpdateRequest(request, propertyFromSearch);
 				util.mergeAdditionalDetails(request, propertyFromSearch);
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);		
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);	
 	}
 
 	/**
@@ -233,8 +238,12 @@ public class PropertyService {
 
 				propertyFromSearch.setStatus(Status.INACTIVE);
 				producer.push(tenantId, config.getUpdatePropertyTopic(), OldPropertyRequest);
+				producer.push(tenantId, config.getPropertyEventInboxKafkaTopic(), OldPropertyRequest);
+
 				util.saveOldUuidToRequest(request, propertyFromSearch.getId());
 				producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 
 			} else if (state.getIsTerminateState()
 					&& !state.getApplicationStatus().equalsIgnoreCase(Status.ACTIVE.toString())) {
@@ -245,6 +254,7 @@ public class PropertyService {
 				 * If property is In Workflow then continue
 				 */
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 			}
 
 		} else {
@@ -253,6 +263,7 @@ public class PropertyService {
 			 * If no workflow then update property directly with mutation information
 			 */
 			producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+			producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 		}
 	}
 	
@@ -311,10 +322,14 @@ public class PropertyService {
 
 				propertyFromSearch.setStatus(Status.INACTIVE);
 				producer.push(tenantId, config.getUpdatePropertyTopic(), oldPropertyRequest);
+				producer.push(tenantId, config.getPropertyEventInboxKafkaTopic(),oldPropertyRequest);
+
 
 				util.saveOldUuidToRequest(request, propertyFromSearch.getId());
 				/* save new record */
 				producer.pushAfterEncrytpion(config.getSavePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 
 			} else if (state.getIsTerminateState()
 					&& !state.getApplicationStatus().equalsIgnoreCase(Status.ACTIVE.toString())) {
@@ -325,6 +340,7 @@ public class PropertyService {
 				 * If property is In Workflow then continue
 				 */
 				producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+				producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
 			}
 
 		} else {
@@ -333,6 +349,8 @@ public class PropertyService {
 			 * If no workflow then update property directly with mutation information
 			 */
 			producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+			producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 		}
 	}
 
@@ -361,6 +379,8 @@ public class PropertyService {
 		previousPropertyToBeReInstated.setStatus(Status.ACTIVE);
 		request.setProperty(previousPropertyToBeReInstated);
 		producer.pushAfterEncrytpion(config.getUpdatePropertyTopic(), request);
+		producer.pushAfterEncrytpion(config.getPropertyEventInboxKafkaTopic(), request);
+
 	}
 
 	/**
@@ -487,8 +507,10 @@ public class PropertyService {
 	}
 
 	public Property addAlternateNumber(PropertyRequest request) {
-		
-		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request);
+		Property propertyFromRequest = request.getProperty();
+		PropertyCriteria criteria = propertyValidator.getPropertyCriteriaForSearch(request);
+		List<Property> propertiesFromSearchResponse = searchProperty(criteria, request.getRequestInfo());
+		Property propertyFromSearch = unmaskingUtil.getPropertyUnmasked(request,propertyFromRequest,propertiesFromSearchResponse);
 		propertyValidator.validateAlternateMobileNumberInformation(request, propertyFromSearch);
 		userService.createUserForAlternateNumber(request);
 		
@@ -513,6 +535,7 @@ public class PropertyService {
 		util.mergeAdditionalDetails(request, propertyFromSearch);
 		
 		producer.push(request.getProperty().getTenantId() , config.getUpdatePropertyTopic(), request);
+		
 		
 		request.getProperty().setWorkflow(null);
 		

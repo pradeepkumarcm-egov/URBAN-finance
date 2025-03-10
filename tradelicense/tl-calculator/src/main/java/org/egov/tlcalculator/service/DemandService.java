@@ -33,8 +33,6 @@ import static org.egov.tlcalculator.utils.TLCalculatorConstants.businessService_
 @Service
 public class DemandService {
 
-    @Autowired
-    private CalculationService calculationService;
 
     @Autowired
     private CalculationUtils utils;

@@ -123,6 +123,7 @@ public class WorkflowService {
 		
 		request.getProperty().setStatus(Status.fromValue(state.getApplicationStatus()));
 		request.getProperty().getWorkflow().setState(state);
+		request.getProperty().setProcessInstance(workflowReq.getProcessInstances().get(0));	
 		return state;
 	}
 

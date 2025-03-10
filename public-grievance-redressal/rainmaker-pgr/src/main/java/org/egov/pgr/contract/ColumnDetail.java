@@ -1,10 +1,5 @@
 package org.egov.pgr.contract;
 
-import java.util.List;
-
-import org.egov.common.contract.response.ResponseInfo;
-import org.egov.pgr.contract.ReportResponse.ReportResponseBuilder;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;

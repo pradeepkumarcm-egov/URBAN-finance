@@ -1,3 +1,20 @@
+***PGR v1.1.5***
+
+***LTS Upgrade***
+
+This doc contains changes done in the service related to LTS upgrade. As for LTS upgradation mainly the pom dependency versions of existing libraries are updated and some import statements respective to those libraries.
+
+**Changes in pom.xml:**
+
+1. artifact id updated to 1.1.5_beta-SNAPSHOT from 1.1.4_beta-SNAPSHOT
+2. spring boot starter parent version upgraded from 2.2.6.RELEASE to 3.2.2
+3. tracer version updated to 2.9.0-SNAPSHOT from 2.0.0-SNAPSHOT.
+4. mdms client version updated to 2.9.0-SNAPSHOT from 0.0.2-SNAPSHOT.
+5. Junit dependency added and the version used is 4.13.2
+6. flyway-core version updated to 9.22.3 from 6.4.3.
+7. postgresql version updated to 42.7.1.
+8. Jackson databind dependency version updated to the compatible version i.e 2.15.2
+
 ***PGR v1.1***
 
 This doc contains the changes done in the rainmaker-pgr service for the v1.1 release. It includes the details of refactoring and enhancements done as part of v1.1 release. Every section in the doc contains code changes done to accommodate the new requirements whilst cleaning the redundant code that was needed during v1. This doc doesn't contain the granular details of every task as to which loop was added, what variables were removed, which methods were broken into different methods and things like that. It gives a top-level idea of the changes done.

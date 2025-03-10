@@ -32,36 +32,37 @@ public class UnmaskingUtil {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired 
-	private PropertyService service;
-	
-	@Autowired
-	private PropertyValidator validator;
-	
-	public Property getPropertyUnmasked(PropertyRequest request) {
-		
-		Property propertyFromRequest = request.getProperty(); 
+
+
+	public Property getPropertyUnmasked(PropertyRequest request,Property propertyFromRequest,List<Property> propertiesFromSearchResponse ) {
+
+		/*Property propertyFromRequest = request.getProperty();
         PropertyCriteria criteria = validator.getPropertyCriteriaForSearch(request);
-        List<Property> propertiesFromSearchResponse = service.searchProperty(criteria, request.getRequestInfo());
+        List<Property> propertiesFromSearchResponse = service.searchProperty(criteria, request.getRequestInfo());*/
 		if (CollectionUtils.isEmpty(propertiesFromSearchResponse)) {
 			throw new CustomException("EG_PT_PROPERTY_NOT_FOUND", "The property to be updated does not exist in the system");
 		}
+		Property propertyFromSearch = getProperty(propertyFromRequest, propertiesFromSearchResponse);
+
+
+		getOwnerDetailsUnmasked(request.getProperty(), request.getRequestInfo());
+		return propertyFromSearch;
+	}
+
+	private static Property getProperty(Property propertyFromRequest, List<Property> propertiesFromSearchResponse) {
 		Property propertyFromSearch = propertiesFromSearchResponse.get(0);
-		
+
 		Address addressFromRequest = propertyFromRequest.getAddress();
-		
+
 		if (null != addressFromRequest.getDoorNo() && addressFromRequest.getDoorNo().contains("*"))
 			addressFromRequest.setDoorNo(propertyFromSearch.getAddress().getDoorNo());
 		if (null != addressFromRequest.getStreet() && addressFromRequest.getStreet().contains("*"))
 			addressFromRequest.setStreet(propertyFromSearch.getAddress().getStreet());
 		if (null != addressFromRequest.getLandmark() && addressFromRequest.getLandmark().contains("*"))
 			addressFromRequest.setLandmark(propertyFromSearch.getAddress().getLandmark());
-		
-		
-		getOwnerDetailsUnmasked(request.getProperty(), request.getRequestInfo());
 		return propertyFromSearch;
 	}
-	
+
 	public void getOwnerDetailsUnmasked (Property property, RequestInfo requestInfo) {
 		
 		PlainAccessRequest apiPlainAccessRequest = requestInfo.getPlainAccessRequest();

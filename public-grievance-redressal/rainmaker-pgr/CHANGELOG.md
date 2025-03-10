@@ -2,6 +2,10 @@
 
 All notable changes to this module will be documented in this file.
 
+## 1.2.0-SNAPSHOT - 2025-02-11
+- 2.9 LTS version upgrade is done in this version
+- Fixed some failing test cases
+
 ## 1.1.4-beta - 2021-07-26
 
 - Added new source rb bot to support Reap benfit system integration

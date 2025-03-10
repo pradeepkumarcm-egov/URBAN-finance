@@ -17,9 +17,13 @@ const ReNewApplication = (props) => {
   const { t } = useTranslation();
   const [canSubmit, setSubmitValve] = useState(false);
   let { data: newConfig, isLoading } = Digit.Hooks.tl.useMDMS.getFormConfig(stateCode, {});
-  const { 
-    data: propertyDetails
-  } = Digit.Hooks.pt.usePropertySearch({ filters: { propertyIds: propertyId }, tenantId: tenantId }, { filters: { propertyIds: propertyId  }, tenantId: tenantId });
+  let propertyDetails = null;
+  if (propertyId) {
+    const { 
+      data: propertyDetailsData
+    } = Digit.Hooks.pt.usePropertySearch({ filters: { propertyIds: propertyId }, tenantId: tenantId }, { filters: { propertyIds: propertyId  }, tenantId: tenantId });
+    propertyDetails = propertyDetailsData;
+  }
 
   const history = useHistory();
   // delete

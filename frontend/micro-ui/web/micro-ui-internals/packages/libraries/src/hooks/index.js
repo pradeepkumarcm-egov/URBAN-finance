@@ -32,6 +32,8 @@ import { useEvents, useClearNotifications, useNotificationCount } from "./events
 import useCreateEvent from "./events/useCreateEvent";
 import useUpdateEvent from "./events/useUpdateEvent";
 import useNewInboxGeneral from "./useInboxGeneral/useNewInbox";
+import useNewInboxGeneralV2 from "./useInboxGeneral/useNewInboxV2";
+
 import useDynamicData from "./useDynamicData";
 
 import useComplaintDetails from "./pgr/useComplaintDetails";
@@ -247,6 +249,7 @@ import { usePrivacyContext } from "./usePrivacyContext";
 import useToCheckPrivacyEnablement from "./ws/useToCheckPrivacyEnablement";
 import useWSConfigMDMS from "./ws/useWSConfigMDMS";
 import useFeedBackSearch from "./useFeedBackSearch";
+import useBPAInboxV1 from "./obps/useBPAInboxV1";
 
 const pgr = {
   useComplaintDetails,
@@ -403,6 +406,7 @@ const obps = {
   useBPADetailsPage,
   useEmpBPAREGSearch,
   useBPAInbox,
+  useBPAInboxV1,
   useEDCRInbox,
   useArchitectInbox,
   SearchMdmsTypes,
@@ -511,6 +515,7 @@ const Hooks = {
   useRecieptSearch,
   usePaymentSearch,
   useNewInboxGeneral,
+  useNewInboxGeneralV2,
   useEvents,
   useClearNotifications,
   useNotificationCount,

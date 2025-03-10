@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -357,6 +357,10 @@ public class TLConfiguration {
 
     @Value("${egov.tl.calculator.billingSlab.endpoint}")
     private String billingSlabEndPoint;
+
+    @Value("${tl.event.inbox.kafka.topic}")
+    private String tlEventInboxKafkaTopic;
+
 
 
 }
