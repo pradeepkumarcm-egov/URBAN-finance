@@ -1,5 +1,6 @@
 import cloneDeep from "lodash/cloneDeep";
-import { stringReplaceAll, convertEpochToDate } from "../../utils";
+import { stringReplaceAll, convertEpochToDate, getAddress } from "../../utils";
+
 export const TLSearch = {
   applicationDetails: async (t, tenantId, applicationNumber, userType) => {
     const filter = { applicationNumber };
@@ -32,19 +33,16 @@ export const TLSearch = {
       const licenseNumbers = response?.licenseNumber;
       const filters = { licenseNumbers, offset: 0 };
 
-      const reqCriteria = {
+      const { response: licenseResponse } = await Digit.CustomService.getResponse({
         url: `/tl-services/v1/_search`,
+        method: "POST",
         params: { tenantId, ...filters },
-        config: {
-          enabled: true,
-          select: (data) => {
-            return data?.Licenses;
-          },
-        },
-      };
+        auth: true,
+        useCache: false,
+        userService: false,
+      });
 
-      const { isLoading, data, isFetching } = Digit.Hooks.useCustomAPIHook(reqCriteria);
-      numOfApplications = data;
+      numOfApplications = licenseResponse?.Licenses || [];
     }
 
     let propertyAddress = "";
