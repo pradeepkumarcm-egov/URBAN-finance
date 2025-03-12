@@ -2,7 +2,7 @@ import { Header, CitizenHomeCard, CaseIcon, HomeLink } from "@egovernments/digit
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouteMatch } from "react-router-dom";
-
+import TLViewUnit from "./components/TLViewUnit";
 import TLCard from "./components/TLCard";
 
 import { overrideHooks, updateCustomConfigs } from "./utils";
@@ -20,7 +20,7 @@ export const TLModule = ({ stateCode, userType, tenants }) => {
   Digit.SessionStorage.set("TL_TENANTS", tenants);
 
   // if (userType === "employee") {
-    return <EmployeeApp path={path} url={url} userType={userType} />;
+  return <EmployeeApp path={path} url={url} userType={userType} />;
   // } else return <CitizenApp />;
 };
 export const TLLinks = ({ matchPath, userType }) => {
@@ -52,7 +52,8 @@ export const TLLinks = ({ matchPath, userType }) => {
 const componentsToRegister = {
   TLCard,
   TLLinks,
-  TLModule
+  TLModule,
+  TLViewUnit,
 };
 
 export const initTLComponents = () => {
