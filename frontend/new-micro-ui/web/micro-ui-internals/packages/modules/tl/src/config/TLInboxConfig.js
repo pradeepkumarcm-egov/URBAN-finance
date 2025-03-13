@@ -146,27 +146,27 @@ export const TLInboxConfig = () => {
                 links: [
                   {
                     text: "TL_NEW_APPLICATION",
-                    link: "/digit-ui/employee/tl/new-application",
+                    url: "/employee/tl/new-application",
                     roles: ["TL_CEMP"],
                   },
                   {
                     text: "TL_SEARCH_APPLICATIONS",
-                    link: "/digit-ui/employee/tl/search/application",
+                    url: "/employee/tl/search/application",
                     roles: ["TL_FIELD_INSPECTOR","TL_APPROVER", "TL_DOC_VERIFIER","TL_CEMP"],
                   },
                   {
                     text: "TL_SEARCH_LICENSE",
-                    link: "/digit-ui/employee/tl/search/license",
+                    url: "/employee/tl/search/license",
                     roles: ["TL_APPROVER", "TL_DOC_VERIFIER","TL_FIELD_INSPECTOR"],
                   },
                   {
                     text: "TL_RENEWAL_HEADER",
-                    link: "/digit-ui/employee/tl/search/license",
+                    url: "/employee/tl/search/license",
                     roles: ["TL_CEMP"],
                   },
                   {
                     text: "ACTION_TEST_DASHBOARD",
-                    link: "/digit-ui/employee/dss/dashboard/tradelicence",
+                    url: "/employee/dss/dashboard/tradelicence",
                     roles: ["STADMIN"],
                   },
                 ],

@@ -49,11 +49,11 @@ const TLCard = () => {
       link: `/digit-ui/employee/tl/inbox`,
     },
     // will enabled once the upgraded apply screen is developed
-    // {
-    //   label: t("TL_NEW_APPLICATION"),
-    //   link: "/digit-ui/employee/tl/new-application",
-    //   role: "TL_CEMP",
-    // },
+    {
+      label: t("TL_NEW_APPLICATION"),
+      link: "/digit-ui/employee/tl/new-application",
+      role: "TL_CEMP",
+    },
     {
       label: t("TL_SEARCH_APPLICATIONS"),
       link: `/digit-ui/employee/tl/search/application-v2`,

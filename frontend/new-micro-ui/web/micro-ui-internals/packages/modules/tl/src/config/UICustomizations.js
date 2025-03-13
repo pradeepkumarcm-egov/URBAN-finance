@@ -98,7 +98,6 @@ export const UICustomizations = {
       };
     },
   },
-
   TLSearchApplicationConfig: {
     preProcess: (data) => {
       //set tenantId
@@ -204,7 +203,6 @@ export const UICustomizations = {
       return false;
     },
   },
-
   TLSearchConfig: {
     preProcess: (data) => {
       //set tenantId
