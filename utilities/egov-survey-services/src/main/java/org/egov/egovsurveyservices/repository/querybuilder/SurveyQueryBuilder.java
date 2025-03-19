@@ -157,6 +157,9 @@ public class SurveyQueryBuilder {
             query.append(" survey.tenantid ILIKE ? ");
             preparedStmtList.add("%" + criteria.getTenantId() + "%");
         }
+        addClauseIfRequired(query, preparedStmtList);
+        query.append(" survey.active = ? ");
+        preparedStmtList.add(Boolean.TRUE);
         return query.toString();
     }
 
