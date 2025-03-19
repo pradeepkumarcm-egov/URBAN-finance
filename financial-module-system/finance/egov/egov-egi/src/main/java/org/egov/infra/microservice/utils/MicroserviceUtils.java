@@ -1245,6 +1245,7 @@ public class MicroserviceUtils {
     }
 
     public void saveAuthToken(String auth_token, String sessionId) {
+    	LOGGER.info("Inside save auth_token::"+auth_token+"sessionId::"+sessionId);
         redisTemplate.opsForHash().putIfAbsent(auth_token, sessionId, sessionId);
     }
 
@@ -1282,15 +1283,24 @@ public class MicroserviceUtils {
             return null;
     }
 
-    public void removeSessionFromRedis(String access_token, String sessionId) {
+    public void removeSessionFromRedis(String access_token, String sessionId, boolean isLogout) {
         LOGGER.info("Logout for authtoken : " + access_token + " and session : " + sessionId);
-        if (null != access_token && redisTemplate.hasKey(access_token)) {
-            sessionId = (String) redisTemplate.opsForHash().get(sessionId, sessionId);
-            if (sessionId != null) {
-                System.out.println("***********sessionId**** " + sessionId);
+        Object sessionIdFromRedis = redisTemplate.opsForHash().get("session_token_fetch:" + access_token, "session_id");
+        LOGGER.info("**Redis:: sessionID*****"+sessionIdFromRedis);
+        if (null != access_token && (redisTemplate.hasKey(access_token) || redisTemplate.hasKey("auth:"+access_token))) {
+            //sessionId = (String) redisTemplate.opsForHash().get(sessionId, sessionId);
+            if (sessionIdFromRedis != null) {
+            	redisTemplate.delete(sessionId);
+            	sessionId = String.valueOf(sessionIdFromRedis);
+            	LOGGER.info("***********sessionId**** " + sessionId);
+            	redisTemplate.delete(access_token);
+                if(isLogout) {
+                	LOGGER.info("***********remove auth:token********");
+                	redisTemplate.delete("auth:"+access_token);
+                }
                 redisTemplate.delete(sessionId);
-                System.out.println("spring:session:sessions:" + sessionId);
-                System.out.println("spring:session:sessions:expires:" + sessionId);
+                LOGGER.info("spring:session:sessions:" + sessionId);
+                LOGGER.info("spring:session:sessions:expires:" + sessionId);
                 redisTemplate.delete("spring:session:sessions:" + sessionId);
                 redisTemplate.delete("spring:session:sessions:expires:" + sessionId);
                 redisTemplate.opsForHash().delete(access_token, sessionId);

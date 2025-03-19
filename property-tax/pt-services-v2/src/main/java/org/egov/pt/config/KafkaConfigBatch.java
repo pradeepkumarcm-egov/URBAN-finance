@@ -2,7 +2,8 @@ package org.egov.pt.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
-
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.egov.pt.web.models.collection.PaymentRequest;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +40,8 @@ public class KafkaConfigBatch {
         props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 10000);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
+        //props.put("spring.json.trusted.packages", "*");
+
         return props;
     }
 
@@ -50,6 +54,8 @@ public class KafkaConfigBatch {
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.springframework.kafka.support.serializer.JsonDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
+        //props.put("spring.json.trusted.packages", "*");
+
         return props;
     }
 
@@ -61,6 +67,29 @@ public class KafkaConfigBatch {
     public ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
+
+    @Bean
+public ConsumerFactory<String, PaymentRequest> paymentRequestconsumerFactory() {
+    Map<String, Object> props = new HashMap<>();
+  
+    props.put("spring.json.trusted.packages", "org.egov.collection.model");
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,org.apache.kafka.common.serialization.StringDeserializer.class);
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,org.springframework.kafka.support.serializer.JsonDeserializer.class);
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "egov-pt-services-v2");
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, List.of(propertyConfiguration.getKafkBootStrapServer()));
+
+    return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
+            new JsonDeserializer<>(PaymentRequest.class));
+}
+
+@Bean
+public ConcurrentKafkaListenerContainerFactory<String, PaymentRequest> kafkaListenerPaymentContainerFactory() {
+    ConcurrentKafkaListenerContainerFactory<String, PaymentRequest> factory = 
+            new ConcurrentKafkaListenerContainerFactory<>();
+    factory.setConsumerFactory(paymentRequestconsumerFactory());
+    return factory;
+}
+
 
     // TODO Need to check the setAckMode is correctly implemented or not
     @Bean("kafkaListenerContainerFactoryBatch")
