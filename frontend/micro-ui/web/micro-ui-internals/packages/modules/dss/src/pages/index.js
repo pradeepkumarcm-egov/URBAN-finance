@@ -79,7 +79,6 @@ const DashBoard = ({ stateCode }) => {
       return serviceJS;
     },
   });
-  
   const { data: nationalInfo, isLoadingNAT } = Digit.Hooks.dss.useMDMS(stateCode, "tenant", ["nationalInfo"], {
     select: (data) => {
       let nationalInfo = data?.tenant?.nationalInfo || [];
@@ -155,7 +154,6 @@ const DashBoard = ({ stateCode }) => {
       ...filters,
       moduleLevel: "",
     });
-    setFilters((prev) => ({ ...prev, moduleLevel: [] }));
   };
 
   const removeTenant = (id) => {
@@ -174,13 +172,9 @@ const DashBoard = ({ stateCode }) => {
   };
   const clearAllSt = () => {
     handleFilters({ ...filters, filters: { ...filters?.filters, state: [], ulb: [] } });
-  };  
-
-  const [refresh, setRefresh] = useState(false);
+  };
   const clearAllServices = () => {
     handleFilters({ ...filters, moduleLevel: "" });
-    setFilters({});
-    setRefresh((prev) => !prev);
   };
 
   const dashboardConfig = response?.responseData;
@@ -268,7 +262,6 @@ const DashBoard = ({ stateCode }) => {
   if (isLoading || isUlbLoading || localizationLoading || isMdmsLoading || isLoadingNAT || isServicesLoading) {
     return <Loader />;
   }
-
   return (
     <FilterContext.Provider value={provided}>
       <div ref={fullPageRef} id="divToPrint">
