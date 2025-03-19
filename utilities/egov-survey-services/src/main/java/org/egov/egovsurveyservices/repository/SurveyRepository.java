@@ -89,7 +89,7 @@ public class SurveyRepository {
         String query = surveyQueryBuilder.getSurveyCountQuery(criteria, preparedStmtList);
         criteria.setIsCountCall(Boolean.FALSE);
 
-        log.info("query for search: " + query + " params: " + preparedStmtList);
+        log.info("query for surveyCount: " + query + " params: " + preparedStmtList);
 
         return jdbcTemplate.queryForObject(query, preparedStmtList.toArray(), Integer.class);
     }

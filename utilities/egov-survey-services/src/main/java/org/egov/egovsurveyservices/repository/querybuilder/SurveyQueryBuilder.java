@@ -146,8 +146,18 @@ public class SurveyQueryBuilder {
     }
 
     public String getSurveyCountQuery(SurveySearchCriteria criteria, List<Object> preparedStmtList) {
-        String query = "select count(*) from eg_ss_survey;";
-        return query;
+        StringBuilder query = new StringBuilder("select count(*) from eg_ss_survey survey");
+        if(!CollectionUtils.isEmpty(criteria.getTenantIds())){
+            addClauseIfRequired(query, preparedStmtList);
+            query.append(" survey.tenantid IN ( ").append(createQuery(criteria.getTenantIds())).append(" )");
+            addToPreparedStatement(preparedStmtList, criteria.getTenantIds());
+        }
+        if(!ObjectUtils.isEmpty(criteria.getTenantId())){
+            addClauseIfRequired(query, preparedStmtList);
+            query.append(" survey.tenantid ILIKE ? ");
+            preparedStmtList.add("%" + criteria.getTenantId() + "%");
+        }
+        return query.toString();
     }
 
     public String getSurveyUuidsQuery(SurveySearchCriteria criteria, List<Object> preparedStmtList) {
