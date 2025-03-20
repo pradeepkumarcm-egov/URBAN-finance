@@ -1,9 +1,9 @@
-# digit-ui-module-common
+# digit-ui-module-bills
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-common
+npm install --save @egovernments/digit-ui-module-bills
 ```
 
 ## Limitation
@@ -24,7 +24,7 @@ frontend/micro-ui/web/package.json
 
 ### Summary for Version [1.7.35] - 2025-03-20
 
-No specific change. Version matched as used in URBAN.
+Added tenantId as param in bill-gen Api
 
 ### Contributors
 

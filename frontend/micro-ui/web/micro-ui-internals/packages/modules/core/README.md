@@ -1,9 +1,9 @@
-# digit-ui-module-common
+# digit-ui-module-core
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-common
+npm install --save @egovernments/digit-ui-module-core
 ```
 
 ## Limitation
@@ -24,7 +24,7 @@ frontend/micro-ui/web/package.json
 
 ### Summary for Version [1.7.35] - 2025-03-20
 
-No specific change. Version matched as used in URBAN.
+Corrected WhatsNewCard to handle when no data is coming from mdms
 
 ### Contributors
 

@@ -8,6 +8,12 @@
 npm install --save @egovernments/digit-ui-libraries
 ```
 
+## Limitation
+
+```bash
+This Package is more specific to Urban
+```
+
 ## Usage
 
 ```jsx
@@ -26,6 +32,12 @@ const App = ({ deltaConfig, stateCode, cityCode, moduleCode }) => {
 
 export default App;
 ```
+
+## Changelog
+
+### Summary for Version [1.7.35] - 2025-03-20
+
+Added tenantId in Multiple api calls of obps, bills, tl, pt etc
 
 ## License
 

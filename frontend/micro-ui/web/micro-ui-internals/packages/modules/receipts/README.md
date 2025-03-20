@@ -1,9 +1,9 @@
-# digit-ui-module-common
+# digit-ui-module-receipts
 
 ## Install
 
 ```bash
-npm install --save @egovernments/digit-ui-module-common
+npm install --save @egovernments/digit-ui-module-receipts
 ```
 
 ## Limitation
