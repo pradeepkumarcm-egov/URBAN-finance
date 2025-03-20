@@ -2,7 +2,7 @@ name: Node.js Publish UI Packages
 
 on:
   push:
-    branches: ["dev-build-9"]
+    branches: ["dev-build-10"]
 
     paths:
       - "frontend/micro-ui/web/micro-ui-internals/**"
