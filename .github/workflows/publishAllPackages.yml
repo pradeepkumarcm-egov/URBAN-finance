@@ -1,21 +1,24 @@
 name: Node.js Publish UI Packages
-
 on:
   push:
-    branches: ["dev-build-10"]
-
+    branches: [ 'develop' ]
     paths:
-      - "frontend/micro-ui/web/micro-ui-internals/**"
-
+      - 'frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/**'
 jobs:
-  build:
+  publish-receipts:
+    name: Publish receipts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 14.20.0
-          registry-url: https://registry.npmjs.org
-      - run: cd frontend/micro-ui/web/micro-ui-internals/ && bash ./publish-beta.sh
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies for SVG Components
+        run: |
+          cd frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/
+          rm -rf node_modules yarn.lock
+          yarn install --frozen-lockfile
+          npm publish --tag urban-2.9-beta
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
