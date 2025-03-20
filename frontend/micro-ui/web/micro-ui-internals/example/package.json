@@ -26,7 +26,6 @@
     "@egovernments/digit-ui-module-hrms":"1.7.35",
     "@egovernments/digit-ui-module-core":"1.7.35",
     "@egovernments/digit-ui-module-dss":"1.7.35",
-    "@egovernments/digit-ui-components": "1.7.35",
     "@egovernments/digit-ui-react-components":"1.7.35",
     "http-proxy-middleware": "1.0.5",
     "react": "17.0.2",
