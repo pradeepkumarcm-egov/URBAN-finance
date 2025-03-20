@@ -276,67 +276,67 @@ const Home = ({ stateCode }) => {
 
   const shareOptions = navigator.share
     ? [
-      {
-        label: t("ES_DSS_SHARE_PDF"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name));
-          }, 500);
+        {
+          label: t("ES_DSS_SHARE_PDF"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name));
+            }, 500);
+          },
         },
-      },
-      {
-        label: t("ES_DSS_SHARE_IMAGE"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name));
-          }, 500);
+        {
+          label: t("ES_DSS_SHARE_IMAGE"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name));
+            }, 500);
+          },
         },
-      },
-    ]
+      ]
     : [
-      {
-        icon: <EmailIcon />,
-        label: t("ES_DSS_SHARE_PDF"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "mail");
-          }, 500);
+        {
+          icon: <EmailIcon />,
+          label: t("ES_DSS_SHARE_PDF"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "mail");
+            }, 500);
+          },
         },
-      },
-      {
-        icon: <WhatsappIcon />,
-        label: t("ES_DSS_SHARE_PDF"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "whatsapp");
-          }, 500);
+        {
+          icon: <WhatsappIcon />,
+          label: t("ES_DSS_SHARE_PDF"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.PDF(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "whatsapp");
+            }, 500);
+          },
         },
-      },
-      {
-        icon: <EmailIcon />,
-        label: t("ES_DSS_SHARE_IMAGE"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "mail");
-          }, 500);
+        {
+          icon: <EmailIcon />,
+          label: t("ES_DSS_SHARE_IMAGE"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "mail");
+            }, 500);
+          },
         },
-      },
-      {
-        icon: <WhatsappIcon />,
-        label: t("ES_DSS_SHARE_IMAGE"),
-        onClick: () => {
-          setShowOptions(!showOptions);
-          setTimeout(() => {
-            return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "whatsapp");
-          }, 500);
+        {
+          icon: <WhatsappIcon />,
+          label: t("ES_DSS_SHARE_IMAGE"),
+          onClick: () => {
+            setShowOptions(!showOptions);
+            setTimeout(() => {
+              return Digit.ShareFiles.Image(tenantId, fullPageRef, t(dashboardConfig?.[0]?.name), "whatsapp");
+            }, 500);
+          },
         },
-      },
-    ];
+      ];
 
   if (isLoading || localizationLoading) {
     return <Loader />;
@@ -354,7 +354,7 @@ const Home = ({ stateCode }) => {
                   className="multilink-block-wrapper"
                   label={t(`ES_DSS_SHARE`)}
                   icon={<ShareIcon className="mrsm" />}
-                  // showOptions={(e) => setShowOptions(e)}
+                  showOptions={(e) => setShowOptions(e)}
                   onHeadClick={(e) => setShowOptions(e !== undefined ? e : !showOptions)}
                   displayOptions={showOptions}
                   options={shareOptions}
@@ -396,12 +396,13 @@ const Home = ({ stateCode }) => {
                 } else if (item?.charts?.[0]?.chartType == "map") {
                   return (
                     <div
-                      className={`dss-card-parent  ${item.vizType == "collection"
+                      className={`dss-card-parent  ${
+                        item.vizType == "collection"
                           ? "w-100"
                           : item.name.includes("PROJECT_STAUS") || item.name.includes("LIVE_ACTIVE_ULBS")
-                            ? "dss-h-100"
-                            : ""
-                        }`}
+                          ? "dss-h-100"
+                          : ""
+                      }`}
                       style={item.vizType == "collection" ? { backgroundColor: "#fff", height: "600px" } : { backgroundColor: colors[index].light }}
                       key={index}
                     >
@@ -464,19 +465,20 @@ const Home = ({ stateCode }) => {
                 } else {
                   return (
                     <div
-                      className={`dss-card-parent  ${item.vizType == "collection"
+                      className={`dss-card-parent  ${
+                        item.vizType == "collection"
                           ? "dss-w-100"
                           : item.name.includes("PROJECT_STAUS") || item.name.includes("LIVE_ACTIVE_ULBS")
-                            ? "h-100"
-                            : ""
-                        }`}
+                          ? "h-100"
+                          : ""
+                      }`}
                       style={
                         item.vizType == "collection" || item.name.includes("PROJECT_STAUS") || item.name.includes("LIVE_ACTIVE_ULBS")
                           ? { backgroundColor: "#fff", position: "relative" }
                           : { backgroundColor: colors[index].light, padding: "20px", paddingBottom: "40px", position: "relative" }
                       }
                       key={index}
-                    // onClick={() => routeTo(`/digit-ui/employee/dss/dashboard/${item.ref.url}`)}
+                      // onClick={() => routeTo(`/digit-ui/employee/dss/dashboard/${item.ref.url}`)}
                     >
                       <div style={{ justifyContent: "space-between", display: "flex", flexDirection: "row" }}>
                         <div className="dss-card-header" style={{ marginBottom: "10px" }}>
