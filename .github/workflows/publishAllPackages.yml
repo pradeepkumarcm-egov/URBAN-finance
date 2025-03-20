@@ -5,7 +5,8 @@ on:
     branches: ["develop"]
 
     paths:
-      - "frontend/micro-ui/web/micro-ui-internals/**"
+      # - "frontend/micro-ui/web/micro-ui-internals/**"
+      - "frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/"
 
 jobs:
   build:
@@ -16,6 +17,7 @@ jobs:
         with:
           node-version: 14.20.0
           registry-url: https://registry.npmjs.org
-      - run: cd frontend/micro-ui/web/micro-ui-internals/ && bash ./publish-beta.sh
+      - run: cd frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/ && bash ./publish-beta.sh
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
