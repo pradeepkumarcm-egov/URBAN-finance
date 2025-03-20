@@ -2,11 +2,10 @@ name: Node.js Publish UI Packages
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["dev-build-9"]
 
     paths:
-      # - "frontend/micro-ui/web/micro-ui-internals/**"
-      - "frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/"
+      - "frontend/micro-ui/web/micro-ui-internals/**"
 
 jobs:
   build:
@@ -17,7 +16,6 @@ jobs:
         with:
           node-version: 14.20.0
           registry-url: https://registry.npmjs.org
-      - run: cd frontend/micro-ui/web/micro-ui-internals/packages/modules/receipts/ && bash ./publish-beta.sh
+      - run: cd frontend/micro-ui/web/micro-ui-internals/ && bash ./publish-beta.sh
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
