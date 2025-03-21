@@ -28,7 +28,6 @@ export const CreateComplaint = ({ parentUrl }) => {
     },
     t
   );
-
   const [localities, setLocalities] = useState(fetchedLocalities);
   const [selectedLocality, setSelectedLocality] = useState(null);
   const [canSubmit, setSubmitValve] = useState(false);
@@ -64,7 +63,11 @@ export const CreateComplaint = ({ parentUrl }) => {
       setSelectedLocality(null);
       const __localityList = fetchedLocalities;
       const __filteredLocalities = __localityList.filter((city) => city["pincode"] == pincode);
-      setLocalities(__filteredLocalities);
+      if (__filteredLocalities && __filteredLocalities.length > 0) {
+        setLocalities(__filteredLocalities);
+      } else {
+        setLocalities(fetchedLocalities);
+      }
     } else if (pincode === "" || pincode === null) {
       setPincodeNotValid(false);
       setLocalities(fetchedLocalities);
