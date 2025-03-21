@@ -69,7 +69,16 @@ export const CreateComplaint = ({ parentUrl }) => {
       setPincodeNotValid(false);
       setLocalities(fetchedLocalities);
     } else {
-      setPincodeNotValid(true);
+      if (pincode) {
+        if (!Digit.Utils.getPattern("Pincode").test(pincode)) setPincodeNotValid(true);
+        const foundValue = cities?.find((obj) => obj.pincode?.find((item) => item.toString() === pincode));
+        if (foundValue) {
+          setPincodeNotValid(false)
+        }
+        else{
+          setPincodeNotValid(true)
+        }
+      }
     }
   }, [pincode]);
 
