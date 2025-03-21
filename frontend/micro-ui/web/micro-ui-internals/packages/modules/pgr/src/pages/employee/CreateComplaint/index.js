@@ -28,9 +28,6 @@ export const CreateComplaint = ({ parentUrl }) => {
     },
     t
   );
-
-  console.log(`*** LOG cities***`,cities);
-
   const [localities, setLocalities] = useState(fetchedLocalities);
   const [selectedLocality, setSelectedLocality] = useState(null);
   const [canSubmit, setSubmitValve] = useState(false);
