@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.*;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @jakarta.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2020-07-15T11:35:33.568+05:30")
@@ -42,7 +43,15 @@ public class RequestsApiController{
 
 
     @RequestMapping(value="/request/_create", method = RequestMethod.POST)
-    public ResponseEntity<ServiceResponse> requestsCreatePost(@Valid @RequestBody ServiceRequest request) throws IOException {
+    public ResponseEntity<ServiceResponse> requestsCreatePost(@Valid @RequestBody ServiceRequest request, HttpServletRequest httpServletRequest) throws IOException {
+    	// Print all headers
+        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+        System.out.println("Request Headers:");
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            String headerValue = httpServletRequest.getHeader(headerName);
+            System.out.println(headerName + ": " + headerValue);
+        }
         ServiceRequest enrichedReq = pgrService.create(request);
         ResponseInfo responseInfo = responseInfoFactory.createResponseInfoFromRequestInfo(request.getRequestInfo(), true);
         ServiceWrapper serviceWrapper = ServiceWrapper.builder().service(enrichedReq.getService()).workflow(enrichedReq.getWorkflow()).build();
@@ -53,8 +62,15 @@ public class RequestsApiController{
 
     @RequestMapping(value="/request/_search", method = RequestMethod.POST)
     public ResponseEntity<ServiceResponse> requestsSearchPost(@Valid @RequestBody RequestInfoWrapper requestInfoWrapper,
-                                                              @Valid @ModelAttribute RequestSearchCriteria criteria) {
-    	
+                                                              @Valid @ModelAttribute RequestSearchCriteria criteria, HttpServletRequest httpServletRequest) {
+    	// Print all headers
+        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+        System.out.println("Request Headers:");
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            String headerValue = httpServletRequest.getHeader(headerName);
+            System.out.println(headerName + ": " + headerValue);
+        }
     	String tenantId = criteria.getTenantId();
         List<ServiceWrapper> serviceWrappers = pgrService.search(requestInfoWrapper.getRequestInfo(), criteria);
         Map<String,Integer> dynamicData = pgrService.getDynamicData(tenantId);
