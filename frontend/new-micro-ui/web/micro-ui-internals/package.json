@@ -4,7 +4,8 @@
   "main": "index.js",
   "workspaces": [
     "example",
-    "packages/modules/tl"
+    "packages/modules/tl",
+    "packages/react-components"
   ],
   "author": "Mukund Tripathi <mukund.tripathi@egovernments.org>",
   "license": "MIT",
@@ -18,9 +19,11 @@
     "start:dev": "run-p dev:**",
     "start:script": "./scripts/create.sh",
     "dev:example": "cd example && yarn start",
+    "dev:components": "cd packages/react-components && yarn start",
     "dev:tl": "cd packages/modules/tl && yarn start",
     "build": "run-p build:**",
     "build:tl": "cd packages/modules/tl && yarn build",
+    "build:components": "cd packages/react-components && yarn build",
     "deploy:jenkins": "./scripts/jenkins.sh"
   },
   "devDependencies": {
@@ -45,6 +48,5 @@
     "**/@babel/preset-env": "7.14.0",
     "**/@babel/plugin-transform-modules-commonjs": "7.14.0",
     "**/styled-components": "5.0.0"
-
   }
 }

@@ -8,7 +8,7 @@ import { DigitUI } from "@egovernments/digit-ui-module-core";
 // import "@egovernments/digit-ui-sample-css/example/index.css";
 
 import { pgrCustomizations } from "./pgr";
-// import { UICustomizations } from "./UICustomizations";
+import { UICustomizations } from "./UICustomizations";
 // import { initUtilitiesComponents } from "@egovernments/digit-ui-module-utilities";
 import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 
@@ -58,7 +58,7 @@ const initDigitUI = () => {
   window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH") || "digit-ui";
   window.Digit.Customizations = {
     PGR: pgrCustomizations,
-    // commonUiConfig: UICustomizations,
+    commonUiConfig: UICustomizations,
   };
   window?.Digit.ComponentRegistryService.setupRegistry({
     // PaymentModule,
