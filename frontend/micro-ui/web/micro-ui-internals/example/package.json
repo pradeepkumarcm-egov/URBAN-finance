@@ -16,7 +16,7 @@
     "@egovernments/digit-ui-module-mcollect": "1.7.35",
     "@egovernments/digit-ui-module-noc": "1.7.35",
     "@egovernments/digit-ui-module-obps": "1.7.35",
-    "@egovernments/digit-ui-module-pgr": "1.7.35",
+    "@egovernments/digit-ui-module-pgr": "1.7.36",
     "@egovernments/digit-ui-module-pt": "1.7.35",
     "@egovernments/digit-ui-module-receipts": "1.7.0-beta.2",
     "@egovernments/digit-ui-module-tl": "1.7.35",
@@ -35,12 +35,12 @@
     "react-scripts": "^4.0.1"
   },
   "resolutions": {
-    "**/@babel/traverse":"7.25.9",
+    "**/@babel/traverse": "7.25.9",
     "**/styled-components": "5.0.0"
   },
   "browserslist": [
     ">0.2%",
-   "not dead",
-   "not op_mini all"
- ]
+    "not dead",
+    "not op_mini all"
+  ]
 }
