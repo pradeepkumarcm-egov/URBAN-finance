@@ -6,6 +6,7 @@ import { Toast } from '@egovernments/digit-ui-components';
 
 import { createConfig } from "../../config/TLCreateConfig";
 import { transformData } from "../../utils/transformCreateData";
+import { getUniqueItemsFromArray } from "../../utils";
 
 const NewApplication = ({ props }) => {
   const stateTenant = Digit.ULBService.getStateId();
@@ -23,8 +24,8 @@ const NewApplication = ({ props }) => {
   const [error, setError] = useState("");
 
   let TLData = {};
-  const EstimateSession = Digit.Hooks.useSessionStorage("NEW_TL_CREATE", TLData);
-  const [sessionFormData, setSessionFormData, clearSessionFormData] = EstimateSession;
+  const TradeLicenseSession = Digit.Hooks.useSessionStorage("NEW_TL_CREATE", TLData);
+  const [sessionFormData, setSessionFormData, clearSessionFormData] = TradeLicenseSession;
 
 
   // use this for call create or update
@@ -60,7 +61,6 @@ const NewApplication = ({ props }) => {
           data?.TenantBoundary[0]?.boundary.forEach((item) => {
             localities.push({ code: item.code, name: item.name, i18nKey: `${tenantId.replace(".", "_").toUpperCase()}_REVENUE_${item?.code}` });
           })
-          console.log(localities, "localities")
           return localities;
         }
     },true);
@@ -69,10 +69,9 @@ const NewApplication = ({ props }) => {
   const {isLoading: tlDataFetching, data: tlData } = Digit.Hooks.useCustomMDMS(
     stateTenant,
     "common-masters",
-    [ { "name": "StructureType" }],
+    [ { "name": "StructureType" }, { "name": "OwnerShipCategory" } ],
     {
         select: (data) => {
-          console.log(data, "tlData")
             let structureTypes = []
             let structureSubTypes = {}
             data?.["common-masters"]?.StructureType?.forEach(item => {
@@ -87,13 +86,26 @@ const NewApplication = ({ props }) => {
                 }
             })
             structureTypes = structureTypes.map(item => ({code: item, name: `COMMON_MASTERS_STRUCTURETYPE_${item}`}))
+
+            let OwnershipCategory = []
+            data?.["common-masters"]?.OwnerShipCategory?.forEach(item => {
+                if(!item?.active) return
+                if (item?.code?.includes("INSTITUTIONAL")) OwnershipCategory.push({code: item.code, name: `COMMON_MASTERS_OWNERSHIPCATEGORY_${item.code.split('.')[0]}`})
+                else OwnershipCategory.push({code: item.code, name: `COMMON_MASTERS_OWNERSHIPCATEGORY_${item.code.replaceAll(".", "_")}`})
+            })
+
+            OwnershipCategory = getUniqueItemsFromArray(OwnershipCategory, "name");
+            console.log("OwnershipCategory", OwnershipCategory);
+
+            console.log("here", data, OwnershipCategory);
             return {
                 structureTypes,
                 structureSubTypes,
+                OwnershipCategory
             }
         }
     }
-);
+  );
 
   const filteredStructureSubTypes = tlData?.structureSubTypes[selectedStructure];
 
@@ -113,21 +125,24 @@ const NewApplication = ({ props }) => {
             key: "locality",
             value: [localities],
           },
+          {
+            key: "ownershipCategory",
+            value: [tlData?.OwnershipCategory],
+          }
         ],
       }),
     [tlData, filteredStructureSubTypes, localities, createConfig]
   );
 
-  console.log(localities, createConfig, "here1");
-
-  const propertyReqCriteria = {
-    url: "/property-services/property/_search",
-    params: {
-      propertyIds: propertyId,
-      tenantId: tenantId,
-    },
-  }
-  const { isLoading: propertyLoading, data: propertyDetails } = Digit.Hooks.useCustomAPIHook(propertyReqCriteria);
+  // const propertyReqCriteria = {
+  //   url: "/property-services/property/_search",
+  //   params: {
+  //     propertyIds: propertyId,
+  //     tenantId: tenantId,
+  //   },
+  // }
+  // const { isLoading: propertyLoading, data: propertyDetails } = Digit.Hooks.useCustomAPIHook(propertyReqCriteria);
+  const propertyLoading = false;
 
 
   // Handle form submission
@@ -139,7 +154,7 @@ const NewApplication = ({ props }) => {
       setShowToast({display:true, type:"error"});
     };
     const onSuccess = (resp) => {
-      sessionStorage.removeItem("Digit.NEW_TL_CREATE");
+      sessionStorage.removeItem("NEW_TL_CREATE");
       clearSessionFormData();
       history.push(`/${window.contextPath}/employee/tl/response`);
     };
@@ -182,7 +197,7 @@ const NewApplication = ({ props }) => {
       }
       setValue("licenseType", {code: "PERMANENT", name: "TRADELICENSE_LICENSETYPE_PERMANENT"});
       setValue("city", {code: tenantId, name: tenantId});
-      setValue("ownershipCategory", {code: "INDIVIDUAL.SINGLEOWNER" })
+      // setValue("ownershipCategory", {code: "INDIVIDUAL.SINGLEOWNER" })
       setCity(tenantId);
       setSessionFormData({ ...sessionFormData, ...formData });
     }

@@ -120,6 +120,69 @@ export const createConfig = {
       ]
     },
     {
+      head: "TL_TRADE_UNITS_HEADER",
+      body: [
+        {
+          type: "component",
+          component: "TLTradeUnitsEmployee",
+          key: "tradeUnits",
+          withoutLabel: true,
+          // hideInCitizen: true,
+          "populators": {
+            "name": "projectName",
+            "error": "PROJECT_PATTERN_ERR_MSG",
+            "validation": {
+              "pattern": "^[^\\$\"<>?\\\\~`!@$%^()+={}\\[\\]*:;“”‘’]{1,50}$",
+              "minlength": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      head: "TL_NEW_TRADE_DETAILS_HEADER_ACC",
+      body: [
+        {
+          type: "component",
+          component: "TLAccessoriesEmployee",
+          key: "accessories",
+          withoutLabel: true,
+          hideInCitizen: true,
+          "populators": {
+            "name": "projectName",
+            "error": "PROJECT_PATTERN_ERR_MSG",
+            "validation": {
+              "pattern": "^[^\\$\"<>?\\\\~`!@$%^()+={}\\[\\]*:;“”‘’]{1,50}$",
+              "minlength": 2
+            }
+          }
+        }
+      ]
+    },
+    // {
+    //   head: "MB_NONSOR",
+    //   subHead: "",
+    //   sectionClassName:"table-included-section",
+    //   body: [
+    //     {
+    //       type: "component",
+    //       component: "MeasureTable",
+    //       withoutLabel: true,
+    //       key: "NONSOR",
+    //       mode: "CREATE",
+    //       useFieldArray: true,
+    //       "populators": {
+    //         "name": "projectName",
+    //         "error": "PROJECT_PATTERN_ERR_MSG",
+    //         "validation": {
+    //           "pattern": "^[^\\$\"<>?\\\\~`!@$%^()+={}\\[\\]*:;“”‘’]{1,50}$",
+    //           "minlength": 2
+    //         }
+    //       }
+    //     },
+    //   ],
+    // },
+    {
       "head": "TL_CHECK_ADDRESS",
       "body": [
         {
@@ -180,7 +243,7 @@ export const createConfig = {
       ]
     },
     {
-      "head": "ES_NEW_APPLICATION_OWNERSHIP_DETAILS",
+      "head": "TL_OWNERSHIP_DETAILS_HEADER",
       "body": [
         {
           isMandatory: false,
@@ -188,35 +251,62 @@ export const createConfig = {
           key: "ownershipCategory",
           label: "TL_NEW_OWNER_DETAILS_OWNERSHIP_TYPE_LABEL",
           disable: false,
+          preProcess: {
+            updateDependent : ["populators.options"]
+          },
           populators: {
             name: "ownershipCategory",
             optionsKey: "name",
             error: "",
             required: true,
-            mdmsConfig: {
-              masterName: "TLOwnerTypeWithSubtypes",
-              moduleName: "common-masters",
-              // localePrefix: "FY",
-              // filter: "[?(@.module == \"TL\")]"
-            },
+            options: [],
+            // mdmsConfig: {
+            //   masterName: "OwnerShipCategory",
+            //   moduleName: "common-masters",
+            //   localePrefix: "COMMON_MASTERS_OWNERSHIPCATEGORY",
+            //   // filter: "[?(@.module == \"TL\")]"
+            // },
           },
         }
       ]
     },
     {
-      "head": "TL_NEW_APPLICATION_DOCUMENTS_REQUIRED",
+        "head": "TL_OWNERSHIP_DETAILS_HEADER",
+        // "subHead": "",
+        // "navLink": "Ownership Details",
+        // "sectionClassName":"",
+        "body": [
+            {
+              type: "component",
+              component: "TLOwnerDetailsEmployee",
+              key: "owners",
+              withoutLabel: true,
+              hideInCitizen: true,
+              "populators": {
+                "name": "projectName",
+                "error": "PROJECT_PATTERN_ERR_MSG",
+                "validation": {
+                  "pattern": "^[^\\$\"<>?\\\\~`!@$%^()+={}\\[\\]*:;“”‘’]{1,50}$",
+                  "minlength": 2
+                }
+              }
+            },
+        ]
+    },
+    {
+      "head": "",
       "body": [
         {
           type: "documentUpload",
           withoutLabel: true,
-          module: "TL",
+          module: "Trade License",
           error: "WORKS_REQUIRED_ERR",
-          name: "uploadedDocs",
-          key: "documentDetails",
-          customClass: "my doc",
-          localePrefix: "MB_MEASUREMENT_DOC",
+          name: "documents",
+          // key: "documentDetails",
+          customClass: "",
+          localePrefix: "TL",
         },
       ]
     }
-]
+  ]
 };

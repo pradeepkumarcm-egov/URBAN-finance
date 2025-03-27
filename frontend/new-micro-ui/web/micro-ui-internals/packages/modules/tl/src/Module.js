@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useRouteMatch } from "react-router-dom";
 
 import TLCard from "./components/TLCard";
+import TLTradeUnitsEmployee from "./components/TLTradeUnitsEmployee";
+import TLAccessoriesEmployee from "./components/TLAccessoriesEmployee";
+import TLOwnerDetailsEmployee from "./components/TLOwnerDetailsEmployee";
 
 import { overrideHooks, updateCustomConfigs } from "./utils";
 // import CitizenApp from "./pages/citizen";
@@ -52,7 +55,10 @@ export const TLLinks = ({ matchPath, userType }) => {
 const componentsToRegister = {
   TLCard,
   TLLinks,
-  TLModule
+  TLModule,
+  TLTradeUnitsEmployee,
+  TLAccessoriesEmployee,
+  TLOwnerDetailsEmployee
 };
 
 export const initTLComponents = () => {
