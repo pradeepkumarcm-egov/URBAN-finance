@@ -21,7 +21,7 @@ public class BillingslabQueryBuilder {
 	 */
 	public String getSearchQuery(BillingSlabSearchCriteria criteria, List<Object> preparedStmtList) {
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * from eg_tl_billingslab ");
+		queryBuilder.append("SELECT * pg.from eg_tl_billingslab ");
 		addWhereClause(queryBuilder, criteria, preparedStmtList);
 		return queryBuilder.toString();
 	}
