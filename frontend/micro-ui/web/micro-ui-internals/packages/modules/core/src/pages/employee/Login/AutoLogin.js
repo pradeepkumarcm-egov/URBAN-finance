@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Loader } from "@egovernments/digit-ui-components";
+import { Loader } from "@egovernments/digit-ui-react-components";
 import { useHistory } from "react-router-dom";
 
 
@@ -53,7 +53,7 @@ const AutoLogin = () => {
       const requestData = {
         ...defaultCredentials,
         userType: "EMPLOYEE",
-        tenantId: defaultCredentials.city.code || Digit.ULBService.getStateId(),
+        tenantId: defaultCredentials.city.code,
       };
       delete requestData.city;
       const { UserRequest: info, ...tokens } = await Digit.UserService.authenticate(requestData);

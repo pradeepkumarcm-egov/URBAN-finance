@@ -18,6 +18,7 @@ import StaticDynamicCard from "./StaticDynamicComponent/StaticDynamicCard";
 import AcknowledgementCF from "../../components/AcknowledgementCF";
 import CitizenFeedback from "../../components/CitizenFeedback";
 import Search from "./SearchApp";
+import AutoLogin from "./Login/AutoLogin";
 const sidebarHiddenFor = [
   "digit-ui/citizen/register/name",
   "/digit-ui/citizen/select-language",
@@ -197,6 +198,11 @@ const Home = ({
           <Route path={`${path}/login`}>
             <Login stateCode={stateCode} />
           </Route>
+
+          <Route path={`${path}/auto-login`}>
+            <AutoLogin stateCode={stateCode} />
+          </Route>
+
 
           <Route path={`${path}/register`}>
             <Login stateCode={stateCode} isUserRegistered={false} />
