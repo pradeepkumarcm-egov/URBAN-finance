@@ -32,6 +32,7 @@ const AutoLogin = () => {
   const city = queryParams.get("city") || Digit.ULBService.getStateId();
   Digit.SessionStorage.set("CITIZEN.COMMON.HOME.CITY", city);
   const redirectUrl = queryParams.get("redirectUrl") || DEFAULT_REDIRECT_URL;
+  
 
   useEffect(() => {
     if (!user) return;
