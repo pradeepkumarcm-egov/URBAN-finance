@@ -22,7 +22,7 @@ frontend/micro-ui/web/package.json
 
 ## Changelog
 
-### Summary for Version [1.7.35] - 2025-03-20
+### Summary for Version [1.7.36] - 2025-03-28
 
 No specific change. Version matched as used in URBAN.
 
