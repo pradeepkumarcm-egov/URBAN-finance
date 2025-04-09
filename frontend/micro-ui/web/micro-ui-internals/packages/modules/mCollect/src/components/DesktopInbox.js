@@ -109,6 +109,13 @@ const DesktopInbox = ({ tableConfig, filterComponent, columns, ...props }) => {
       Cell: ({ row }) => {
         const amount = row.original?.totalAmount;
         let action = "ACTIVE";
+        if (row.original?.applicationStatus == "PAID") {
+          return (
+            <div>
+              <span className="link">{getActionButton(row.original?.["businessService"], row.original?.["challanNo"])}</span>
+            </div>
+          );
+        }
         if (amount > 0) action = "COLLECT";
         if (action == "COLLECT") {
           return (
@@ -124,13 +131,8 @@ const DesktopInbox = ({ tableConfig, filterComponent, columns, ...props }) => {
               </span>
             </div>
           );
-        } else if (row.original?.applicationStatus == "PAID") {
-          return (
-            <div>
-              <span className="link">{getActionButton(row.original?.["businessService"], row.original?.["challanNo"])}</span>
-            </div>
-          );
-        } else {
+        }
+         else {
           return GetCell(t(`${"CS_NA"}`));
         }
       },
