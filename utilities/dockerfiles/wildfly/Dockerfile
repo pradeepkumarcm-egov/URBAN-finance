@@ -15,7 +15,7 @@ RUN sed -i 's|^mirrorlist=|#mirrorlist=|g' /etc/yum.repos.d/CentOS-Base.repo \
 RUN yum install -y epel-release
 RUN yum install -y net-tools
 RUN yum install -y curl cabextract xorg-x11-font-utils fontconfig
-RUN curl -O http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+RUN curl -L -O http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 RUN rpm -Uvh nux-dextop-release-0-5.el7.nux.noarch.rpm
 RUN rpm -Uvh  https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 RUN rm nux-dextop-release-0-5.el7.nux.noarch.rpm
