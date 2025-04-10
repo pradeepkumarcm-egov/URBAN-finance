@@ -1,5 +1,5 @@
 import { Banner, Card, CardText, LinkButton, Loader, SubmitBar } from "@egovernments/digit-ui-react-components";
-import React, { useEffect } from "react";
+import React, { useEffect,useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { convertToEditTrade, convertToResubmitTrade, convertToTrade, convertToUpdateTrade, stringToBoolean } from "../../../utils";
@@ -33,6 +33,7 @@ const BannerPicker = (props) => {
 };
 
 const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
+  const hasTriggeredMutation = useRef(false);
   const { t } = useTranslation();
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("CITIZEN_TL_MUTATION_HAPPENED", false);
   const resubmit = window.location.href.includes("edit-application");
@@ -59,6 +60,10 @@ const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
 
 
   useEffect(() => {
+    if (!filteredData || filteredData.length === 0) return;
+    if (hasTriggeredMutation.current) return; // Prevent re-trigger
+
+    hasTriggeredMutation.current = true; 
     const onSuccessedit = () => {
       setMutationHappened(true);
     };
@@ -106,7 +111,7 @@ const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
       }
     } catch (err) {
     }
-  }, [fydata]);
+  }, [filteredData]);
 
   useEffect(() => {
     if (mutation.isSuccess || (mutation1.isSuccess && isEdit && !isDirectRenewal)) {

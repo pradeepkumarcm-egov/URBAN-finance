@@ -10,7 +10,8 @@
     "micro-ui-internals/packages/react-components",
     "micro-ui-internals/packages/modules/core",
     "micro-ui-internals/packages/modules/tl",
-    "micro-ui-internals/packages/modules/mcollect"
+    "micro-ui-internals/packages/modules/mcollect",
+    "micro-ui-internals/packages/modules/dss"
   ],
   "engines": {
     "node": ">=14"
