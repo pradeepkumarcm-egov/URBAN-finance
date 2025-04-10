@@ -9,6 +9,9 @@ USER root
 RUN rm /etc/localtime \
    && ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 RUN cd $HOME
+# Fix CentOS 7 repo issue
+RUN sed -i 's|^mirrorlist=|#mirrorlist=|g' /etc/yum.repos.d/CentOS-Base.repo \
+ && sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo
 RUN yum install -y epel-release
 RUN yum install -y net-tools
 RUN yum install -y curl cabextract xorg-x11-font-utils fontconfig
