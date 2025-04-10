@@ -280,6 +280,12 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "utilities/egov-survey-services/src/main/resources/db"
         image-name: "egov-survey-services-db"
+  
+  - name: "builds/urban/utilities/dockerfiles/wildfly"
+    build:
+      - work-dir: "utilities/dockerfiles/wildfly"
+        image-name: "wildfly"
+        dockerfile: "utilities/dockerfiles/wildfly/Dockerfile"
         
 
   # Frontend
