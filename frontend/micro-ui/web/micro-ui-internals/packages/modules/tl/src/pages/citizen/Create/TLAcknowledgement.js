@@ -32,6 +32,18 @@ const BannerPicker = (props) => {
   );
 };
 
+function getFinancialYear() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+
+  if (month >= 4) {
+    return `${year}-${(year + 1).toString().slice(-2)}`;
+  } else {
+    return `${year - 1}-${year.toString().slice(-2)}`;
+  }
+}
+
 const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
   const hasTriggeredMutation = useRef(false);
   const { t } = useTranslation();
@@ -39,6 +51,15 @@ const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
   const resubmit = window.location.href.includes("edit-application");
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const isRenewTrade = !window.location.href.includes("renew-trade")
+
+  const { isLoading: mdmsLoading, data: mdmsBillingData } = Digit.Hooks.useGetPaymentRulesForBusinessServices(tenantId);
+
+  const financialYearStart = getFinancialYear().slice(0, 4);
+  const filteredData = mdmsBillingData?.MdmsRes?.BillingService?.TaxPeriod?.filter(
+    (item) => item.service === "TL" && item.code === `TLRENEWAL${financialYearStart}`
+  );
+  console.log(`*** LOG 2***`,financialYearStart);
+  console.log(`*** LOG filteredData***`,filteredData);
   const mutation = Digit.Hooks.tl.useTradeLicenseAPI(
     data?.cpt?.details?.address?.tenantId ? data?.cpt?.details?.address?.tenantId : tenantId,
     isRenewTrade

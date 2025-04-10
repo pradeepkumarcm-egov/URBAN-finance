@@ -546,6 +546,8 @@ export const stringToBoolean = (value) => {
 export const convertToEditTrade = (data, fy = []) => {
   const currrentFYending = fy?.filter(item => item?.code === data?.financialYear)?.[0]?.endingDate;
   const nextFinancialYearForRenewal = fy?.filter(item => item?.startingDate === currrentFYending)?.[0]?.code;
+
+  console.log(`*** LOG nextFinancialYearForRenewal***`,nextFinancialYearForRenewal);
   let isDirectrenewal = stringToBoolean(sessionStorage.getItem("isDirectRenewal"));
   let isSameAsPropertyOwner = sessionStorage.getItem("isSameAsPropertyOwner"); 
   let formdata = {
@@ -563,7 +565,7 @@ export const convertToEditTrade = (data, fy = []) => {
         applicationDate: data?.applicationDate,
         commencementDate: data?.commencementDate,
         issuedDate: data?.issuedDate,
-        financialYear: nextFinancialYearForRenewal || "2022-23",
+        financialYear: nextFinancialYearForRenewal || "2025-26",
         validFrom: data?.validFrom,
         validTo: data?.validTo,
         action: "INITIATE",
