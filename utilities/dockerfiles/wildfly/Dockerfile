@@ -23,7 +23,7 @@ RUN rm nux-dextop-release-0-5.el7.nux.noarch.rpm
 # Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
 # Make sure the distribution is available from a well-known place
 RUN cd /tmp \
-    && curl -O https://devops.egovernments.org/Downloads/wildfly/$WILDFLY_VERSION.zip \
+    && curl -O https://unified-demo-central-instance.s3.ap-south-1.amazonaws.com/$WILDFLY_VERSION.zip \
     && unzip $WILDFLY_VERSION.zip \
     && rm $WILDFLY_VERSION.zip \
     && mv /tmp/wildfly-* $JBOSS_HOME \
