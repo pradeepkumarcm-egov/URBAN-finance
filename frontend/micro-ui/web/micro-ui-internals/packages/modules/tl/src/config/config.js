@@ -192,22 +192,6 @@ export const newConfig = [
             "nextStep": "owner-ship-details",
             "hideInEmployee": true
         },
-        {
-            "type": "component",
-            "route": "proof",
-            "component": "TLProof",
-            "withoutLabel": true,
-            "texts": {
-                "headerCaption": "TL_OWNERS_DETAILS",
-                "header": "TL_OWNERS_PHOTOGRAPH_HEADER",
-                "cardText": "",
-                "nextText": "CS_COMMON_NEXT",
-                "submitBarLabel": "CS_COMMON_NEXT"
-            },
-            "key": "owners",
-            "nextStep": null,
-            "hideInEmployee": true
-        }
     ]
   },
   {
@@ -466,7 +450,7 @@ export const newConfig = [
         },
         key: "owners",
         withoutLabel: true,
-        nextStep: "proof",
+        "nextStep": null,
         hideInEmployee: true,
       },
       {
