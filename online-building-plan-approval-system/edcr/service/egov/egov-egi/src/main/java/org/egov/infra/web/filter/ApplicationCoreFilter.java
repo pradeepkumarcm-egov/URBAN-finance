@@ -177,11 +177,12 @@ public class ApplicationCoreFilter implements Filter {
         String cityName;
         if(Boolean.valueOf(isEnvironmentCentralInstance)) {
             stateName = ApplicationThreadLocals.getStateName();
-            cityName = ApplicationThreadLocals.getCityName();
+            cityName = ApplicationThreadLocals.getCityName() == null ? (String) session.getAttribute(CITY_NAME_KEY) : ApplicationThreadLocals.getCityName();
         } else  {
             stateName = clientId;
             cityName = (String) session.getAttribute(CITY_NAME_KEY);
         }
+        LOG.warn("prepareApplicationThreadLocal*****->"+cityName);
         ApplicationThreadLocals.setCityCode((String) session.getAttribute(CITY_CODE_KEY));
         ApplicationThreadLocals.setCityName(cityName);
         ApplicationThreadLocals.setCityNameLocal((String) session.getAttribute(CITY_LOCAL_NAME_KEY));
@@ -209,12 +210,14 @@ public class ApplicationCoreFilter implements Filter {
             String stateName;
             String cityName;
             if(Boolean.TRUE.equals(Boolean.valueOf(isEnvironmentCentralInstance))) {
+            	LOG.warn("city.getName()*****-->"+city.getName());
                 stateName = ApplicationThreadLocals.getStateName();
                 cityName = ApplicationThreadLocals.getCityName() == null ? city.getName() : ApplicationThreadLocals.getCityName();
             } else  {
                 stateName = clientId;
                 cityName = city.getName();
             }
+            LOG.warn("prepareThreadLocal*****-->"+cityName);
             ApplicationThreadLocals.setCityCode(city.getCode());
             ApplicationThreadLocals.setCityName(cityName);
             ApplicationThreadLocals.setDistrictCode(city.getDistrictCode());
