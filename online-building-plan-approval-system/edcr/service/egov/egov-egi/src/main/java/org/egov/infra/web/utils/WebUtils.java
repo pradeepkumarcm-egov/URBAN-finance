@@ -84,15 +84,16 @@ public final class WebUtils {
         String requestURL = httpRequest.getRequestURL().toString();
         String domainName = getDomainName(requestURL);
         if (domainName.contains(EDCR_SERVICE_INTERNAL_URL)) {
-            if(isCentralInstance) {
-                domainName = commonDomainName;
-            } else {
-                String host = httpRequest.getHeader("x-forwarded-host");
-                domainName = commonDomainName;
-                if (StringUtils.isNotBlank(host)) {
-                    domainName = host.split(",")[0];
-                }
+			/*
+			 * if(isCentralInstance) { domainName = commonDomainName; } else {}
+			 */
+
+            String host = httpRequest.getHeader("x-forwarded-host");
+            domainName = commonDomainName;
+            if (StringUtils.isNotBlank(host)) {
+                domainName = host.split(",")[0];
             }
+        
             LOG.info("*****Domain Name***** {}", domainName);
         }
         return domainName;

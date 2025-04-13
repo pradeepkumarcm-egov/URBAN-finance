@@ -83,6 +83,7 @@ import org.egov.infra.validation.exception.ApplicationRestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 public class ApplicationTenantResolverFilter implements Filter {
 
@@ -103,7 +104,21 @@ public class ApplicationTenantResolverFilter implements Filter {
     private CityService cityService;
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationTenantResolverFilter.class);
-
+    
+    @Value("${is.environment.central.instance}")
+    private boolean isEnvironmentCentralInstance;
+    
+    @Value("${state.tenantid.index.position}")
+    private int stateTenantIndex;
+    
+    @Value("${is.subtenant.schema.based}")
+    private boolean isSubTenantSchemaBased;
+    
+    @Value("${state.level.tenantid.length}")
+    private int stateLevelTenantIdLength;
+    
+    private static final String EDCR_SERVICE_INTERNAL_URL = "egov-edcr.";
+    
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -112,7 +127,6 @@ public class ApplicationTenantResolverFilter implements Filter {
         HttpSession session = customRequest.getSession();
         LOG.info("Request URL--> {}", customRequest.getRequestURL());
         LOG.info("Request URI--> {}", customRequest.getRequestURI());
-        boolean isEnvironmentCentralInstance = environmentSettings.getProperty("is.environment.central.instance", Boolean.class);
         String commonDomainName = environmentSettings.getProperty("common.domain.name");
         LOG.info("####isEnvironmentCentralInstance--> {} #### domain name-->> {}", isEnvironmentCentralInstance, commonDomainName);
         String domainURL = extractRequestDomainURL(customRequest, false, isEnvironmentCentralInstance, commonDomainName);
@@ -158,16 +172,22 @@ public class ApplicationTenantResolverFilter implements Filter {
         if (StringUtils.isBlank(fullTenant)) {
             fullTenant = tenantFromBody;
         }
+        if (ApplicationThreadLocals.getDomainName().contains(EDCR_SERVICE_INTERNAL_URL)) {
+        	String domainName =  environmentSettings.getDomainNameFromSchema(getStateLevelTenant(fullTenant));
+            ApplicationThreadLocals.setDomainName(domainName);
+        }
         String[] tenantArr = fullTenant.split("\\.");
         String stateName;
-        if(isEnvironmentCentralInstance) {
-            if (tenantArr.length == 3 || tenantArr.length == 2) {
-                ApplicationThreadLocals.setStateName(tenantArr[1]);
-                stateName = tenantArr[1];
-            } else {
-                    ApplicationThreadLocals.setStateName(tenantArr[0]);
-                    stateName = "state";
-            }
+        if(isEnvironmentCentralInstance || !isSubTenantSchemaBased) {
+        	String stateTenantId = getStateLevelTenant(fullTenant);
+        	ApplicationThreadLocals.setStateName(stateTenantId);
+            stateName = stateTenantId;
+			/*
+			 * if (tenantArr.length == 3 || tenantArr.length == 2) {
+			 * ApplicationThreadLocals.setStateName(stateTenantId); stateName =
+			 * stateTenantId; } else { ApplicationThreadLocals.setStateName(stateTenantId);
+			 * stateName = "state"; }
+			 */
         } else {
             stateName = "state";
         }
@@ -181,11 +201,11 @@ public class ApplicationTenantResolverFilter implements Filter {
             }
             ApplicationThreadLocals.setFullTenantID(fullTenant);
             String tenant;
-            if(isEnvironmentCentralInstance) {
+            if(isEnvironmentCentralInstance || !isSubTenantSchemaBased) {
             	LOG.info("tenantArr.length---->>>>>>>>"+tenantArr.length);
-            	LOG.info("tenantArr-1**---->>>>>>>>"+tenantArr[1]);
+            	tenant = getStateLevelTenant(fullTenant);
+            	LOG.info("State Tenant---->>>>>>>>"+tenant);
                 if (tenantArr.length == 3) {
-                    tenant = tenantArr[1];
                     ApplicationThreadLocals.setStateName(stateName);
                     ApplicationThreadLocals.setCityName(tenantArr[2]);
                     ApplicationThreadLocals.setFilestoreTenantID(fullTenant);
@@ -196,14 +216,12 @@ public class ApplicationTenantResolverFilter implements Filter {
                     ApplicationThreadLocals.setDistrictName(tenantArr[2]);
                     ApplicationThreadLocals.setGrade(tenantArr[2]);
                 } else if (tenantArr.length == 2) {
-                    tenant = tenantArr[1];
-                    ApplicationThreadLocals.setCityName(tenant);
+                    ApplicationThreadLocals.setCityName(tenantArr[1]);
                     ApplicationThreadLocals.setCityCode(tenant);
-                    ApplicationThreadLocals.setDistrictName(tenant);
-                    ApplicationThreadLocals.setGrade(tenant);
+                    ApplicationThreadLocals.setDistrictName(tenantArr[1]);
+                    ApplicationThreadLocals.setGrade(tenantArr[1]);
                     ApplicationThreadLocals.setFilestoreTenantID(tenant);
                 } else {
-                    tenant = tenantArr[0];
                     ApplicationThreadLocals.setFilestoreTenantID(tenant);
                 }
             } else {
@@ -328,5 +346,20 @@ public class ApplicationTenantResolverFilter implements Filter {
         }
         return tenantAtBody;
     }
+    
+    private String getStateLevelTenant(String tenantId) {
+
+		String[] tenantArray = tenantId.split("\\.");
+		String stateTenant = tenantArray[0];
+		
+		if (stateLevelTenantIdLength < tenantArray.length) {
+			for (int i = 1; i < stateLevelTenantIdLength; i++)
+				stateTenant = stateTenant.concat(".").concat(tenantArray[i]);
+		} else {
+			stateTenant = tenantId;
+		}
+	
+		return stateTenant;
+	}
 
 }

@@ -108,6 +108,9 @@ public class ApplicationCoreFilter implements Filter {
     @Value("${is.environment.central.instance}")
     private String isEnvironmentCentralInstance;
     
+    @Value("${state.level.tenantid.length}")
+    private int stateLevelTenantIdLength;
+    
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationCoreFilter.class);
 
     @Override
@@ -132,14 +135,14 @@ public class ApplicationCoreFilter implements Filter {
         String[] tenantArr = fullTenant == null ? new String[0] : fullTenant.split("\\.");
         String stateName;
         if(Boolean.TRUE.equals(Boolean.valueOf(isEnvironmentCentralInstance))) {
-            if (tenantArr.length == 3 || tenantArr.length == 2) {
-                ApplicationThreadLocals.setStateName(tenantArr[1]);
-                stateName = tenantArr[1];
-            } else {
-                if(tenantArr.length == 1)
-                    ApplicationThreadLocals.setStateName(tenantArr[0]);
-                stateName = "state";
-            }
+        	stateName = getStateLevelTenant(fullTenant);
+        	ApplicationThreadLocals.setStateName(stateName);
+			/*
+			 * if (tenantArr.length == 3 || tenantArr.length == 2) {
+			 * 
+			 * } else { if(tenantArr.length == 1)
+			 * ApplicationThreadLocals.setStateName(tenantArr[0]); stateName = "state"; }
+			 */
         } else {
             stateName = "state";
         }
@@ -207,7 +210,7 @@ public class ApplicationCoreFilter implements Filter {
             String cityName;
             if(Boolean.TRUE.equals(Boolean.valueOf(isEnvironmentCentralInstance))) {
                 stateName = ApplicationThreadLocals.getStateName();
-                cityName = ApplicationThreadLocals.getCityName();
+                cityName = ApplicationThreadLocals.getCityName() == null ? city.getName() : ApplicationThreadLocals.getCityName();
             } else  {
                 stateName = clientId;
                 cityName = city.getName();
@@ -239,4 +242,19 @@ public class ApplicationCoreFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         // Nothing to be initialized
     }
+    
+    private String getStateLevelTenant(String tenantId) {
+
+		String[] tenantArray = tenantId.split("\\.");
+		String stateTenant = tenantArray[0];
+		
+		if (stateLevelTenantIdLength < tenantArray.length) {
+			for (int i = 1; i < stateLevelTenantIdLength; i++)
+				stateTenant = stateTenant.concat(".").concat(tenantArray[i]);
+		} else {
+			stateTenant = tenantId;
+		}
+	
+		return stateTenant;
+	}
 }
