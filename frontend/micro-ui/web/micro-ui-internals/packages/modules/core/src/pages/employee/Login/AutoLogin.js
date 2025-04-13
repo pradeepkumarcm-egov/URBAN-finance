@@ -31,6 +31,7 @@ const AutoLogin = () => {
     city: {
       code: queryParams.get("city"),
     },
+    fromSandbox: queryParams.get("fromSandbox") || false
   };
   const redirectUrl = queryParams.get("redirectUrl") || "/digit-ui/employee"; 
 
@@ -57,6 +58,7 @@ const AutoLogin = () => {
       delete requestData.city;
       const { UserRequest: info, ...tokens } = await Digit.UserService.authenticate(requestData);
       Digit.SessionStorage.set("Employee.tenantId", info?.tenantId);
+      Digit.SessionStorage.set("fromSandbox", defaultCredentials.fromSandbox);
       setUser({ info, ...tokens });
 
     } catch (err) {
