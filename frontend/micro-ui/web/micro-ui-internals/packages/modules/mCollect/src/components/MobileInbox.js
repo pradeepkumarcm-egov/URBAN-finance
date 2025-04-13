@@ -80,22 +80,7 @@ const MobileInbox = ({
       mobileCell: (original) => {
         const amount = original?.totalAmount;
         let action = "ACTIVE";
-        if (amount > 0) action = "COLLECT";
-        if (action == "COLLECT") {
-          return (
-            <div>
-              <span className="link">
-                <Link
-                  to={{
-                    pathname: `/digit-ui/employee/payment/collect/${original?.["businessService"]}/${original?.["challanNo"]}/tenantId=${original?.["tenantId"]}?workflow=mcollect`,
-                  }}
-                >
-                  {t(`UC_${action}`)}
-                </Link>
-              </span>
-            </div>
-          );
-        } else if (original?.applicationStatus == "PAID") {
+        if (original?.applicationStatus == "PAID") {
           return (
             <div>
               <span className="link">
@@ -113,6 +98,22 @@ const MobileInbox = ({
                     {" "}
                     {t(`${"UC_DOWNLOAD_RECEIPT"}`)}{" "}
                   </a>
+                </Link>
+              </span>
+            </div>
+          );
+        }
+        if (amount > 0) action = "COLLECT";
+        if (action == "COLLECT") {
+          return (
+            <div>
+              <span className="link">
+                <Link
+                  to={{
+                    pathname: `/digit-ui/employee/payment/collect/${original?.["businessService"]}/${original?.["challanNo"]}/tenantId=${original?.["tenantId"]}?workflow=mcollect`,
+                  }}
+                >
+                  {t(`UC_${action}`)}
                 </Link>
               </span>
             </div>
