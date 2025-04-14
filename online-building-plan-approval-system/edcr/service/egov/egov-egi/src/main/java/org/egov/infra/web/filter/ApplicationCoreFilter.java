@@ -78,6 +78,7 @@ import org.egov.infra.admin.master.service.CityService;
 import org.egov.infra.config.core.ApplicationThreadLocals;
 import org.egov.infra.config.security.authentication.userdetail.CurrentUser;
 import org.egov.infra.security.utils.SecurityUtils;
+import org.egov.infra.web.utils.ThreadLocalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,10 +119,12 @@ public class ApplicationCoreFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
         try {
+        	ThreadLocalLogger.logAllThreadLocalValues("Core filter --Before request processing");
             prepareUserSession(session);
             prepareApplicationThreadLocal(session);
             prepareRestService(request, session);
             LOG.info("Application core filter fielstore tenant ID*****->"+ApplicationThreadLocals.getFilestoreTenantID());
+            ThreadLocalLogger.logAllThreadLocalValues("Core filter --After request processing");
             chain.doFilter(request, resp);
         } finally {
             ApplicationThreadLocals.clearValues();

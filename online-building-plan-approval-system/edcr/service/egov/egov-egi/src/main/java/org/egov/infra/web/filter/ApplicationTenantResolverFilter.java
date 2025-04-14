@@ -80,6 +80,7 @@ import org.egov.infra.config.core.EnvironmentSettings;
 import org.egov.infra.rest.support.MultiReadRequestWrapper;
 import org.egov.infra.utils.TenantUtils;
 import org.egov.infra.validation.exception.ApplicationRestException;
+import org.egov.infra.web.utils.ThreadLocalLogger;
 import org.egov.infra.web.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -126,6 +127,7 @@ public class ApplicationTenantResolverFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         MultiReadRequestWrapper customRequest = new MultiReadRequestWrapper(req);
         HttpSession session = customRequest.getSession();
+        ThreadLocalLogger.logAllThreadLocalValues("Tenant filter --Before request processing");
         LOG.info("Request URL--> {}", customRequest.getRequestURL());
         LOG.info("Request URI--> {}", customRequest.getRequestURI());
         String commonDomainName = environmentSettings.getProperty("common.domain.name");
@@ -139,6 +141,7 @@ public class ApplicationTenantResolverFilter implements Filter {
         prepareRestService(customRequest, session);
         LOG.info("***Tenant ID--> {}", ApplicationThreadLocals.getTenantID());
         LOG.info("***Filestore Tenant ID--> {}", ApplicationThreadLocals.getFilestoreTenantID());
+        ThreadLocalLogger.logAllThreadLocalValues("Tenant filter --After request processing");
         chain.doFilter(customRequest, response);
     }
 
