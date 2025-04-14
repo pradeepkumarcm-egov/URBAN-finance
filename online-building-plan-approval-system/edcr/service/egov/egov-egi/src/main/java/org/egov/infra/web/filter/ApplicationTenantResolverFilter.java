@@ -137,6 +137,7 @@ public class ApplicationTenantResolverFilter implements Filter {
         ApplicationThreadLocals.setDomainURL(domainURL);
         prepareRestService(customRequest, session);
         LOG.info("***Tenant ID--> {}", ApplicationThreadLocals.getTenantID());
+        LOG.info("***Filestore Tenant ID--> {}", ApplicationThreadLocals.getFilestoreTenantID());
         chain.doFilter(customRequest, response);
     }
 

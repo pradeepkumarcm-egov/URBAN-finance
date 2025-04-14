@@ -121,6 +121,7 @@ public class ApplicationCoreFilter implements Filter {
             prepareUserSession(session);
             prepareApplicationThreadLocal(session);
             prepareRestService(request, session);
+            LOG.info("Application core filter fielstore tenant ID*****->"+ApplicationThreadLocals.getFilestoreTenantID());
             chain.doFilter(request, resp);
         } finally {
             ApplicationThreadLocals.clearValues();
