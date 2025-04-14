@@ -107,7 +107,7 @@ public final class WebUtils {
         return getDomainName(requestURL);
     }
 
-    private static String getDomainName(String requestURL) {
+    public static String getDomainName(String requestURL) {
         int domainNameStartIndex = requestURL.indexOf(SCHEME_DOMAIN_SEPARATOR) + 3;
         int domainNameEndIndex = requestURL.indexOf(FORWARD_SLASH, domainNameStartIndex);
         String domainName = requestURL.substring(domainNameStartIndex,

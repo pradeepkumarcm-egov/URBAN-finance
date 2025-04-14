@@ -80,6 +80,7 @@ import org.egov.infra.config.core.EnvironmentSettings;
 import org.egov.infra.rest.support.MultiReadRequestWrapper;
 import org.egov.infra.utils.TenantUtils;
 import org.egov.infra.validation.exception.ApplicationRestException;
+import org.egov.infra.web.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,9 +176,11 @@ public class ApplicationTenantResolverFilter implements Filter {
         }
         if(ApplicationThreadLocals.getFilestoreTenantID() == null)
         	ApplicationThreadLocals.setFilestoreTenantID(fullTenant);
-        if (ApplicationThreadLocals.getDomainName().contains(EDCR_SERVICE_INTERNAL_URL)) {
+        if (WebUtils.getDomainName(customRequest.getRequestURL().toString()).contains(EDCR_SERVICE_INTERNAL_URL)) {
         	String domainName =  environmentSettings.getDomainNameFromSchema(getStateLevelTenant(fullTenant));
             ApplicationThreadLocals.setDomainName(domainName);
+            String domainURL = extractRequestDomainURL(customRequest, false, isEnvironmentCentralInstance, domainName);
+            ApplicationThreadLocals.setDomainURL(domainURL);
         }
         String[] tenantArr = fullTenant.split("\\.");
         String stateName;
