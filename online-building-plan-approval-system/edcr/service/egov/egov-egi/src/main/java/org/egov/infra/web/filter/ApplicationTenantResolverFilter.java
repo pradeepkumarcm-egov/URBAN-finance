@@ -173,6 +173,8 @@ public class ApplicationTenantResolverFilter implements Filter {
         if (StringUtils.isBlank(fullTenant)) {
             fullTenant = tenantFromBody;
         }
+        if(ApplicationThreadLocals.getFilestoreTenantID() == null)
+        	ApplicationThreadLocals.setFilestoreTenantID(fullTenant);
         if (ApplicationThreadLocals.getDomainName().contains(EDCR_SERVICE_INTERNAL_URL)) {
         	String domainName =  environmentSettings.getDomainNameFromSchema(getStateLevelTenant(fullTenant));
             ApplicationThreadLocals.setDomainName(domainName);
