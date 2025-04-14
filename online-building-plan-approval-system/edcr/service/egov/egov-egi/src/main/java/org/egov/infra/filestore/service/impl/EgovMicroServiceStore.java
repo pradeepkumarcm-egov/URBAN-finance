@@ -177,6 +177,7 @@ public class EgovMicroServiceStore implements FileStoreService {
                 LOG.debug(String.format("Uploading .....  %s    with size %s   ", f.getName(), f.length()));
 
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            LOG.info("Filestore tenant::::"+ApplicationThreadLocals.getFilestoreTenantID());
             MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
             map.add("file", new FileSystemResource(f.getName()));
             map.add("tenantId", ApplicationThreadLocals.getFilestoreTenantID());

@@ -220,9 +220,9 @@ public class ApplicationTenantResolverFilter implements Filter {
                     ApplicationThreadLocals.setCityCode(tenant);
                     ApplicationThreadLocals.setDistrictName(tenantArr[1]);
                     ApplicationThreadLocals.setGrade(tenantArr[1]);
-                    ApplicationThreadLocals.setFilestoreTenantID(tenant);
+                    ApplicationThreadLocals.setFilestoreTenantID(fullTenant);
                 } else {
-                    ApplicationThreadLocals.setFilestoreTenantID(tenant);
+                    ApplicationThreadLocals.setFilestoreTenantID(fullTenant);
                 }
             } else {
                 if (tenantArr.length == 3) {
