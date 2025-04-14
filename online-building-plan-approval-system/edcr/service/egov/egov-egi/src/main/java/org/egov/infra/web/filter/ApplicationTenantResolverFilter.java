@@ -203,13 +203,13 @@ public class ApplicationTenantResolverFilter implements Filter {
         }
         LOG.info("stateName***" + stateName +"---->>>>"+requestURL);
         LOG.info("tenants.get(stateName)***" + tenants.get(stateName));
+        ApplicationThreadLocals.setFullTenantID(fullTenant);
         if (requestURL.contains(tenants.get(stateName))
                 && (requestURL.contains("/edcr/") && (requestURL.contains("/rest/")
                         || requestURL.contains("/oauth/")))) {
             if (StringUtils.isBlank(fullTenant)) {
                 throw new ApplicationRestException("incorrect_request", "RestUrl does not contain tenantId: " + fullTenant);
             }
-            ApplicationThreadLocals.setFullTenantID(fullTenant);
             String tenant;
             if(isEnvironmentCentralInstance || !isSubTenantSchemaBased) {
             	LOG.info("tenantArr.length---->>>>>>>>"+tenantArr.length);
@@ -270,7 +270,7 @@ public class ApplicationTenantResolverFilter implements Filter {
                 for (String city : tenants.keySet()) {
                     LOG.info("Key :" + city + " ,Value :" + tenants.get(city) + "request tenant" + tenant);
 
-                    if (tenants.get(city).contains(tenant)) {
+                    if (tenants.get(city).contains(tenant) || city.equals(tenant)) {
                         ApplicationThreadLocals.setTenantID(city);
                         found = true;
                         break;
