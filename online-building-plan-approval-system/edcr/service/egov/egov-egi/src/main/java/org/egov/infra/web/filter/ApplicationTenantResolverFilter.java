@@ -184,6 +184,7 @@ public class ApplicationTenantResolverFilter implements Filter {
             ApplicationThreadLocals.setDomainName(domainName);
             String domainURL = extractRequestDomainURL(customRequest, false, isEnvironmentCentralInstance, domainName);
             ApplicationThreadLocals.setDomainURL(domainURL);
+            requestURL = new StringBuilder().append(domainURL).append(customRequest.getRequestURI()).toString();
         }
         String[] tenantArr = fullTenant.split("\\.");
         String stateName;
