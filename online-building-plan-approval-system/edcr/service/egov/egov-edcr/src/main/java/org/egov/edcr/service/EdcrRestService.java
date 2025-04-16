@@ -1102,6 +1102,8 @@ public class EdcrRestService {
             } else {
                 EdcrApplicationDetail permitDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(dcrNo,
                         edcrRequest.getTenantId());
+                if(permitDcr == null)
+                	permitDcr = applicationDetailService.findByDcrNumberAndTenantId(dcrNo, edcrRequest.getTenantId());
 
                 if (permitDcr != null && permitDcr.getApplication() != null
                         && StringUtils.isBlank(permitDcr.getApplication().getServiceType())) {

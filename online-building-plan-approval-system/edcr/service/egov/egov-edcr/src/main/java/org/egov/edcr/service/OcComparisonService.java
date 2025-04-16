@@ -78,8 +78,12 @@ public class OcComparisonService {
             comparisonDetail.setTenantId(ocComparisonDetail.getTenantId());
             comparisonDetail.setStatus(ocComparisonDetail.getStatus());
         } else {
-            EdcrApplicationDetail ocDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(ocdcrNo, tenantId);
-            EdcrApplicationDetail permitDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(dcrNo, tenantId);
+			EdcrApplicationDetail ocDcr = applicationDetailService.findByDcrNumberAndTenantId(ocdcrNo, tenantId);
+			if (ocDcr == null)
+				ocDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(ocdcrNo, tenantId);
+			EdcrApplicationDetail permitDcr = applicationDetailService.findByDcrNumberAndTenantId(dcrNo, tenantId);
+			if (permitDcr == null)
+				permitDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(dcrNo, tenantId);
 
             List<ErrorDetail> errors = validate(ocdcrNo, dcrNo, ocDcr, permitDcr);
 
@@ -139,6 +143,8 @@ public class OcComparisonService {
         String tenantId = comparisonRequest.getTenantId();
 
         EdcrApplicationDetail permitDcr = applicationDetailService.findByDcrNumberAndTPUserTenant(dcrNo, tenantId);
+        if(permitDcr == null)
+        	permitDcr = applicationDetailService.findByDcrNumberAndTenantId(dcrNo, tenantId);
 
         EdcrApplication dcrApplication = ocDcr.getApplication();
 
