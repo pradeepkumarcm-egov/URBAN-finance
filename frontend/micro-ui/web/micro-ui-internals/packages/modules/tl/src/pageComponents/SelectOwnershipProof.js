@@ -27,6 +27,10 @@ const SelectOwnershipProof = ({ t, config, onSelect, userType, formData }) => {
   //   setDropdownValue(dropdownValue);
   // }
 
+  useEffect(() => {
+    localStorage.setItem("TLAppSubmitEnabled", "true");
+  }, []);
+
   const handleSubmit = () => {
     let fileStoreId = uploadedFile;
     let fileDetails = file;

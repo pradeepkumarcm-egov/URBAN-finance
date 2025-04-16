@@ -7,7 +7,7 @@ import TLSelectGeolocation from "../src/pageComponents/TLSelectGeolocation";
 import TLSelectAddress from "./pageComponents/TLSelectAddress";
 import TLSelectPincode from "./pageComponents/TLSelectPincode";
 // import Proof from "./pageComponents/Proof";
-import TLProof from "./pageComponents/TLProof";
+// import TLProof from "./pageComponents/TLProof";
 // import SelectOwnerShipDetails from "./pageComponents/SelectOwnerShipDetails";
 import TLSelectOwnerShipDetails from "./pageComponents/TLSelectOwnerShipDetails";
 // import SelectOwnerDetails from "./pageComponents/SelectOwnerDetails";
@@ -122,7 +122,7 @@ const componentsToRegister = {
   TLSelectAddress,
   TLSelectPincode,
   // Proof,
-  TLProof,
+  // TLProof,
   // SelectOwnerShipDetails,
   TLSelectOwnerShipDetails,
   // SelectOwnerDetails,

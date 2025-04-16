@@ -198,6 +198,14 @@ const RenewTrade = ({ parentRoute }) => {
       if (editProperty) {
         application.isEditProperty = true;
       }
+      application?.tradeLicenseDetail?.applicationDocuments?.forEach((doc) => {
+        if (doc.documentType === "BUSINESSREGISTRATIONCERTIFICATE") {
+          doc.documentType = "OWNERSHIPPROOF";
+        }
+        if (doc.documentType === "IDENTIFICATIONPROOF") {
+          doc.documentType = "OWNERIDPROOF";
+        }
+      });
       sessionStorage.setItem("tradeInitialObject", JSON.stringify({ ...application }));
       let tradeEditDetails = getTradeEditDetails(application,t);
       if(window.location.href.includes("property-details"))

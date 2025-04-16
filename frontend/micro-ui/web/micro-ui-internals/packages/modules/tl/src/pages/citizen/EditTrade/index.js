@@ -209,6 +209,14 @@ const EditTrade = ({ parentRoute }) => {
         application.isEditProperty = true;
       }
       sessionStorage.setItem("tradeInitialObject", JSON.stringify({ ...application }));
+      application?.tradeLicenseDetail?.applicationDocuments?.forEach((doc) => {
+        if (doc.documentType === "BUSINESSREGISTRATIONCERTIFICATE") {
+          doc.documentType = "OWNERSHIPPROOF";
+        }
+        if (doc.documentType === "IDENTIFICATIONPROOF") {
+          doc.documentType = "OWNERIDPROOF";
+        }
+      });
       let tradeEditDetails = getTradeEditDetails(application,t,wfdata);
       setParams({ ...params, ...tradeEditDetails });
     }

@@ -42,6 +42,9 @@ cd "$BASEDIR/packages/modules/common" &&  rm -rf node_modules &&  rm -rf dist   
 msg "Building and publishing Core module"
 cd "$BASEDIR/packages/modules/core" &&  rm -rf node_modules &&  rm -rf dist   &&  npm publish --access public
 
+msg "Building and publishing mcollect module"
+cd "$BASEDIR/packages/modules/mCollect" &&  rm -rf node_modules &&  rm -rf dist   &&  npm publish --access public
+
 msg "Building and publishing OBPS module"
 cd "$BASEDIR/packages/modules/obps" &&  rm -rf node_modules &&  rm -rf dist  &&  npm publish --access public
 
