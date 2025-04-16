@@ -74,8 +74,8 @@ public class OcComparisonService {
             comparisonDetail.setOcdcrNumber(ocComparisonDetail.getOcdcrNumber());
             comparisonDetail
                     .setComparisonReport(format(getFileDownloadUrl(ocComparisonDetail.getOcComparisonReport().getFileStoreId(),
-                            ApplicationThreadLocals.getTenantID())));
-            comparisonDetail.setTenantId(ocComparisonDetail.getTenantId());
+                    		ocComparisonDetail.getOcComparisonReport().getTenantId() == null ? ApplicationThreadLocals.getFilestoreTenantID() : ocComparisonDetail.getOcComparisonReport().getTenantId())));
+            comparisonDetail.setTenantId(ocComparisonDetail.getOcComparisonReport().getTenantId() == null ? ApplicationThreadLocals.getFilestoreTenantID() : ocComparisonDetail.getOcComparisonReport().getTenantId());
             comparisonDetail.setStatus(ocComparisonDetail.getStatus());
         } else {
 			EdcrApplicationDetail ocDcr = applicationDetailService.findByDcrNumberAndTenantId(ocdcrNo, tenantId);
@@ -112,9 +112,9 @@ public class OcComparisonService {
             comparisonDetail.setOcdcrNumber(ocComparisonDetailE.getOcdcrNumber());
             comparisonDetail
                     .setComparisonReport(format(getFileDownloadUrl(ocComparisonDetailE.getOcComparisonReport().getFileStoreId(),
-                            ApplicationThreadLocals.getTenantID())));
+                    		ocComparisonDetailE.getOcComparisonReport().getTenantId() == null ? ApplicationThreadLocals.getFilestoreTenantID() : ocComparisonDetailE.getOcComparisonReport().getTenantId())));
             comparisonDetail.setStatus(ocComparisonDetailE.getStatus());
-            comparisonDetail.setTenantId(ocComparisonDetailE.getTenantId());
+            comparisonDetail.setTenantId(ocComparisonDetailE.getTenantId() == null ? ApplicationThreadLocals.getFilestoreTenantID() : ocComparisonDetailE.getOcComparisonReport().getTenantId());
         }
 
         return comparisonDetail;
