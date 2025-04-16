@@ -94,11 +94,12 @@ public class MSCommController {
         try {
             String accessToken = request.getRequestInfo().getAuthToken();
             String sessionId = httpReq.getSession().getId();
+            LOGGER.info("********* Retrieved session::authtoken******** {}::{}", sessionId, accessToken);
             if(sessionId!=null && !sessionId.equalsIgnoreCase("null")){
 				LOGGER.info("********* Retrieved session::authtoken******** {}::{}", sessionId, accessToken);
                 if(redisRepository!=null){
                 	LOGGER.info("*********** Deleting the session for redisrepository {}", sessionId);   
-                    microserviceUtils.removeSessionFromRedis(accessToken, sessionId);
+                    microserviceUtils.removeSessionFromRedis(accessToken, sessionId, true);
                 }
             }
 

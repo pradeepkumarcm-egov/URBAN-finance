@@ -3,6 +3,11 @@ All notable changes to this module will be documented in this file.
 
 ## 1.3.0-SNAPSHOT - 2025-02-11
 - 2.9 LTS version upgrade is done in this version
+- Refactored Nexus Repository IDs (Fixed Nexus dependency fetch issues)
+- ElasticSearch Changes - Added SSL cert support
+- Updated javers-core dependency version
+- Inbox V2 changes
+- Fixed Circular Dependency Issues
 
 ## 1.2.2 - 2023-08-10
 

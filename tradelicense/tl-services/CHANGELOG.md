@@ -4,6 +4,8 @@ All notable changes to this module will be documented in this file.
 
 ## 1.2.0-SNAPSHOT - 2025-02-11
 - 2.9 LTS version upgrade is done in this version
+- Inbox V2 changes included along with LTS migration
+
 
 ## 1.1.9 - 2023-08-10
 
