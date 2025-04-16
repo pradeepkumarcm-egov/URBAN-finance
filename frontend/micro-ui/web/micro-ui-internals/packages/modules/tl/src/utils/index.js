@@ -547,7 +547,6 @@ export const convertToEditTrade = (data, fy = []) => {
   const currrentFYending = fy?.filter(item => item?.code === data?.financialYear)?.[0]?.endingDate;
   const nextFinancialYearForRenewal = fy?.filter(item => item?.startingDate === currrentFYending)?.[0]?.code;
 
-  console.log(`*** LOG nextFinancialYearForRenewal***`,nextFinancialYearForRenewal);
   let isDirectrenewal = stringToBoolean(sessionStorage.getItem("isDirectRenewal"));
   let isSameAsPropertyOwner = sessionStorage.getItem("isSameAsPropertyOwner"); 
   let formdata = {
