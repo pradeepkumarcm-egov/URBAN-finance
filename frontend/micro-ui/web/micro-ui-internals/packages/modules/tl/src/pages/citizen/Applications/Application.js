@@ -15,11 +15,11 @@ const TLMyApplications = ({ view }) => {
           config: { enabled: view === "bills" },
         })
       : Digit.Hooks.tl.useTLSearchApplication(
-          { tenantId: Digit.ULBService.getCitizenCurrentTenant() },
+          { tenantId: Digit.ULBService.getCitizenCurrentTenant(),limit:50 },
           {
             enabled: view !== "bills",
           },
-          t
+          t,
         );
 
   if (isLoading) {
