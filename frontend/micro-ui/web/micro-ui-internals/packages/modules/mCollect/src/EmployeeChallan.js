@@ -145,7 +145,7 @@ const EmployeeChallan = (props) => {
             <hr style={{ width: "35%", border: "1px solid #D6D5D4", marginTop: "1rem", marginBottom: "1rem" }} />
             <Row
               label={<b style={{ padding: "10px 0px" }}>{t("UC_TOTAL_DUE_AMOUT_LABEL")}</b>}
-              text={`₹${totalDueAmount}`}
+              text={`₹${challanDetails?.applicationStatus === "PAID" ? "0" : totalDueAmount}`}
               textStyle={{ fontSize: "24px", padding: "10px 0px", fontWeight: "700" }}
             />
           </StatusTable>

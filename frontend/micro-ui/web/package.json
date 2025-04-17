@@ -11,7 +11,8 @@
     "micro-ui-internals/packages/modules/core",
     "micro-ui-internals/packages/modules/tl",
     "micro-ui-internals/packages/modules/mCollect",
-    "micro-ui-internals/packages/modules/dss"
+    "micro-ui-internals/packages/modules/dss",
+    "micro-ui-internals/packages/modules/pt"
   ],
   "engines": {
     "node": ">=14"
