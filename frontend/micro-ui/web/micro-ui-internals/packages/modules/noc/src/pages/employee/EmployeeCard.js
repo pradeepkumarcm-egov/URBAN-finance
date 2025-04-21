@@ -74,7 +74,7 @@ const NOCEmployeeHomeCard = () => {
         {
           label: t("ES_COMMON_APPLICATION_SEARCH"),
           link: `/digit-ui/employee/noc/search`
-        },
+        }
       ]
     }),[isInboxLoading, totalCount]);
   
