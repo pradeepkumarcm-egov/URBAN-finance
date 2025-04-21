@@ -13,7 +13,9 @@
     "micro-ui-internals/packages/modules/mCollect",
     "micro-ui-internals/packages/modules/dss",
     "micro-ui-internals/packages/modules/pt",
-    "micro-ui-internals/packages/modules/obps"
+    "micro-ui-internals/packages/modules/obps",
+    "micro-ui-internals/packages/modules/ws",
+    "micro-ui-internals/packages/modules/noc"
   ],
   "engines": {
     "node": ">=14"
