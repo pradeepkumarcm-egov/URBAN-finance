@@ -123,6 +123,10 @@ const OBPSEmployeeHomeCard = () => {
           label: t("ES_COMMON_SEARCH_APPLICATION"),
           link: `/digit-ui/employee/obps/search/application`
         },
+        {
+          label: t("OBPS_DASHBOARD"),
+          link: `/digit-ui/employee/dss/dashboard/obps`
+        },
       ]
     }),[isInboxLoading, isInboxLoadingOfStakeholder, dataOfStakeholder, dataOfBPA, totalCount, totalCountEs]);
 
