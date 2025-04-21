@@ -45,6 +45,10 @@ const PTCard = () => {
       label: t("ES_COMMON_APPLICATION_SEARCH"),
       link: `/digit-ui/employee/pt/application-search`,
     },
+    {
+      label: t("PT_DASHBOARD"),
+      link: `/digit-ui/employee/dss/dashboard/propertytax`
+  }
   ];
   const PT_CEMP = Digit.UserService.hasAccess(["PT_CEMP"]) || false;
   const propsForModuleCard = {
