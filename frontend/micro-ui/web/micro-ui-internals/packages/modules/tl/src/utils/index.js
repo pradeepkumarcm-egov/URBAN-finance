@@ -563,7 +563,7 @@ export const convertToEditTrade = (data, fy = []) => {
         applicationDate: data?.applicationDate,
         commencementDate: data?.commencementDate,
         issuedDate: data?.issuedDate,
-        financialYear: nextFinancialYearForRenewal || "2022-23",
+        financialYear: nextFinancialYearForRenewal || "2025-26",
         validFrom: data?.validFrom,
         validTo: data?.validTo,
         action: "INITIATE",
