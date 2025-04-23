@@ -60,39 +60,79 @@ const Home = () => {
     window.open(obj?.navigationUrl);
   };
 
+  let options = [];
+  citizenServicesObj?.props?.forEach((element) => {
+    let serviceIcon = null;
+    switch (element?.label) {
+      case 'ACTION_TEST_MCOLLECT':
+        if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <ComplaintIcon />;
+        } else return;
+        break;
+      case 'MODULE_PT':
+        if (Digit.Utils.ptCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <PTIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      case 'MODULE_TL':
+        if (Digit.Utils.tlCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <CaseIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      case 'ACTION_TEST_BPA_STAKEHOLDER_HOME':
+        if (Digit.Utils.BPACitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <OBPSIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      // case 'ACTION_TEST_WATER_AND_SEWERAGE':
+      //   if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
+      //     serviceIcon = <WSICon className="fill-path-primary-main" />;
+      //   } else return;
+      //   break;
+      default:
+        return;
+    }
+    options.push({
+      name: t(element?.label),
+      Icon: serviceIcon,
+      onClick: () => history.push(element?.navigationUrl),
+    });
+  })
+
   const allCitizenServicesProps = {
     header: t(citizenServicesObj?.headerLabel),
     sideOption: {
       name: t(citizenServicesObj?.sideOption?.name),
       onClick: () => history.push(citizenServicesObj?.sideOption?.navigationUrl),
     },
-    options: [
-      {
-        name: t(citizenServicesObj?.props?.[0]?.label),
-        Icon: <ComplaintIcon />,
-        onClick: () => history.push(citizenServicesObj?.props?.[0]?.navigationUrl),
-      },
-      {
-        name: t(citizenServicesObj?.props?.[1]?.label),
-        Icon: <PTIcon className="fill-path-primary-main" />,
-        onClick: () => history.push(citizenServicesObj?.props?.[1]?.navigationUrl),
-      },
-      {
-        name: t(citizenServicesObj?.props?.[2]?.label),
-        Icon: <CaseIcon className="fill-path-primary-main" />,
-        onClick: () => history.push(citizenServicesObj?.props?.[2]?.navigationUrl),
-      },
-      // {
-      //     name: t("ACTION_TEST_WATER_AND_SEWERAGE"),
-      //     Icon: <DropIcon/>,
-      //     onClick: () => history.push("/digit-ui/citizen")
-      // },
-      {
-        name: t(citizenServicesObj?.props?.[3]?.label),
-        Icon: <WSICon />,
-        onClick: () => history.push(citizenServicesObj?.props?.[3]?.navigationUrl),
-      },
-    ],
+    options: options,
+    // [
+    //   {
+    //     name: t(citizenServicesObj?.props?.[0]?.label),
+    //     Icon: <ComplaintIcon />,
+    //     onClick: () => history.push(citizenServicesObj?.props?.[0]?.navigationUrl),
+    //   },
+    //   {
+    //     name: t(citizenServicesObj?.props?.[1]?.label),
+    //     Icon: <PTIcon className="fill-path-primary-main" />,
+    //     onClick: () => history.push(citizenServicesObj?.props?.[1]?.navigationUrl),
+    //   },
+    //   {
+    //     name: t(citizenServicesObj?.props?.[2]?.label),
+    //     Icon: <CaseIcon className="fill-path-primary-main" />,
+    //     onClick: () => history.push(citizenServicesObj?.props?.[2]?.navigationUrl),
+    //   },
+    //   // {
+    //   //     name: t("ACTION_TEST_WATER_AND_SEWERAGE"),
+    //   //     Icon: <DropIcon/>,
+    //   //     onClick: () => history.push("/digit-ui/citizen")
+    //   // },
+    //   {
+    //     name: t(citizenServicesObj?.props?.[3]?.label),
+    //     Icon: <WSICon />,
+    //     onClick: () => history.push(citizenServicesObj?.props?.[3]?.navigationUrl),
+    //   },
+    // ],
     styles: { display: "flex", flexWrap: "wrap", justifyContent: "flex-start", width: "100%" },
   };
   const allInfoAndUpdatesProps = {

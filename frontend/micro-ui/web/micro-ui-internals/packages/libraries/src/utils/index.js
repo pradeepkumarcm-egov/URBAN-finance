@@ -201,6 +201,13 @@ const BPAAccess = () => {
   return BPA_ACCESS?.length > 0;
 };
 
+const BPACitizenAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  return userRoles?.includes("BPA_CITIZEN");
+}
+
 const ptAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
@@ -210,6 +217,13 @@ const ptAccess = () => {
 
   return PT_ACCESS?.length > 0;
 };
+
+const ptCitizenAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  return userRoles?.includes("PT_CITIZEN");
+}
 
 const tlAccess = () => {
   const userInfo = Digit.UserService.getUser();
@@ -221,6 +235,13 @@ const tlAccess = () => {
   return TL_ACCESS?.length > 0;
 };
 
+const tlCitizenAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  return userRoles?.includes("TL_CITIZEN");
+}
+
 const mCollectAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
@@ -230,6 +251,13 @@ const mCollectAccess = () => {
 
   return MCOLLECT_ACCESS?.length > 0;
 };
+
+const mCollectCitizenAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  return userRoles?.includes("MC_CITIZEN");
+}
 
 const receiptsAccess = () => {
   const userInfo = Digit.UserService.getUser();
@@ -255,6 +283,13 @@ const wsAccess = () => {
 
   return WS_ACCESS?.length > 0;
 };
+
+const wsCitizenAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  return userRoles?.includes("WS_CITIZEN");
+}
 
 const swAccess = () => {
   const userInfo = Digit.UserService.getUser();
@@ -301,6 +336,11 @@ export default {
   tlAccess,
   wsAccess,
   swAccess,
+  wsCitizenAccess,
+  mCollectCitizenAccess,
+  tlCitizenAccess,
+  ptCitizenAccess,
+  BPACitizenAccess,
 
   ...privacy
 };
