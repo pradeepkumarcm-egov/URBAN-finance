@@ -162,7 +162,7 @@ const TLSelectOwnerShipDetails = ({ t, config, onSelect, userType, formData, onB
         value={ownershipCategory}
         labelKey="PT_OWNERSHIP"
         isDependent={true}
-        disabled={isEdit}
+        disabled={isEdit || isSameAsPropertyOwner}
         isTLFlow={true}
       />
     </FormStep>
