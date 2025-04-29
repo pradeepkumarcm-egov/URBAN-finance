@@ -26,6 +26,8 @@ const AutoLogin = () => {
   const DEFAULT_REDIRECT_URL = "/digit-ui/citizen";
   
   const queryParams = new URLSearchParams(location.search);
+  const fromSandbox= queryParams.get("fromSandbox") || false
+
 
   const mobileNumber = queryParams.get("mobile");
   const otp = queryParams.get("otp") || "123456"; 
@@ -39,7 +41,8 @@ const AutoLogin = () => {
     
     Digit.SessionStorage.set("citizen.userRequestObject", user);
     Digit.UserService.setUser(user);
-    setCitizenDetail(user?.info, user?.access_token, city);  
+    setCitizenDetail(user?.info, user?.access_token, city);
+    Digit.SessionStorage.set("fromSandbox", fromSandbox);  
 
     if (!Digit.ULBService.getCitizenCurrentTenant(true)) {
       history.replace("/digit-ui/citizen/select-location", {
