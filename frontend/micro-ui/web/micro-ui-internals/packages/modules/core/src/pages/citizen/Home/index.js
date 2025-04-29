@@ -14,6 +14,9 @@ import {
   WhatsNewCard,
   OBPSIcon,
   WSICon,
+  FirenocIcon,
+  BirthIcon,
+  DeathIcon,
 } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -63,6 +66,7 @@ const Home = () => {
   let options = [];
   citizenServicesObj?.props?.forEach((element) => {
     let serviceIcon = null;
+    if (options.length >= 4) return;
     switch (element?.label) {
       case 'ACTION_TEST_MCOLLECT':
         if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
@@ -84,11 +88,26 @@ const Home = () => {
           serviceIcon = <OBPSIcon className="fill-path-primary-main" />;
         } else return;
         break;
-      // case 'ACTION_TEST_WATER_AND_SEWERAGE':
-      //   if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
-      //     serviceIcon = <WSICon className="fill-path-primary-main" />;
-      //   } else return;
-      //   break;
+      case 'ACTION_TEST_WATER_AND_SEWERAGE':
+        if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <WSICon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      case 'ACTION_TEST_FIRE_NOC':
+        if (Digit.Utils.NOCCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <FirenocIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      case 'ACTION_TEST_BIRTH_CERTIFICATE':
+        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <BirthIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
+      case 'ACTION_TEST_DEATH_CERTIFICATE':
+        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+          serviceIcon = <DeathIcon className="fill-path-primary-main" />;
+        } else return;
+        break;
       default:
         return;
     }
@@ -106,33 +125,6 @@ const Home = () => {
       onClick: () => history.push(citizenServicesObj?.sideOption?.navigationUrl),
     },
     options: options,
-    // [
-    //   {
-    //     name: t(citizenServicesObj?.props?.[0]?.label),
-    //     Icon: <ComplaintIcon />,
-    //     onClick: () => history.push(citizenServicesObj?.props?.[0]?.navigationUrl),
-    //   },
-    //   {
-    //     name: t(citizenServicesObj?.props?.[1]?.label),
-    //     Icon: <PTIcon className="fill-path-primary-main" />,
-    //     onClick: () => history.push(citizenServicesObj?.props?.[1]?.navigationUrl),
-    //   },
-    //   {
-    //     name: t(citizenServicesObj?.props?.[2]?.label),
-    //     Icon: <CaseIcon className="fill-path-primary-main" />,
-    //     onClick: () => history.push(citizenServicesObj?.props?.[2]?.navigationUrl),
-    //   },
-    //   // {
-    //   //     name: t("ACTION_TEST_WATER_AND_SEWERAGE"),
-    //   //     Icon: <DropIcon/>,
-    //   //     onClick: () => history.push("/digit-ui/citizen")
-    //   // },
-    //   {
-    //     name: t(citizenServicesObj?.props?.[3]?.label),
-    //     Icon: <WSICon />,
-    //     onClick: () => history.push(citizenServicesObj?.props?.[3]?.navigationUrl),
-    //   },
-    // ],
     styles: { display: "flex", flexWrap: "wrap", justifyContent: "flex-start", width: "100%" },
   };
   const allInfoAndUpdatesProps = {
