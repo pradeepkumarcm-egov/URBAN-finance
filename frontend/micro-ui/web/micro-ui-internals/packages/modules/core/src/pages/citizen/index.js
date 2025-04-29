@@ -68,6 +68,53 @@ const Home = ({
       },
     }
   );
+  let roleBasedLinkData = {};
+  Object.entries(linkData || {}).forEach(([key , val]) => {
+    switch (key) {
+      case "MCollect":
+        if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        } 
+        break;
+        case "TL":
+          if (Digit.Utils.tlCitizenAccess() || Digit.UserService.getUser() === null) {
+            roleBasedLinkData[key] = val;
+        }
+        break;
+      case "PT":
+        if (Digit.Utils.ptCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      case "OBPS":
+        if (Digit.Utils.BPACitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      case "WS":
+        if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      case "FireNoc":
+        if (Digit.Utils.NOCCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      case "Birth":
+        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      case "Death":
+        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+          roleBasedLinkData[key] = val;
+        }
+        break;
+      default:
+        return;
+    }
+  })
 
   const classname = Digit.Hooks.fsm.useRouteSubscription(pathname);
   const { t } = useTranslation();
@@ -158,7 +205,7 @@ const Home = ({
       <div className={`main center-container citizen-home-container mb-25`}>
         {hideSidebar ? null : (
           <div className="SideBarStatic">
-            <StaticCitizenSideBar linkData={linkData} islinkDataLoading={islinkDataLoading} />
+            <StaticCitizenSideBar linkData={roleBasedLinkData} islinkDataLoading={islinkDataLoading} />
           </div>
         )}
 
@@ -189,7 +236,7 @@ const Home = ({
             <AppHome
               userType="citizen"
               modules={modules}
-              getCitizenMenu={linkData}
+              getCitizenMenu={roleBasedLinkData}
               fetchedCitizen={isLinkDataFetched}
               isLoading={islinkDataLoading}
             />
