@@ -71,52 +71,26 @@ const Home = ({
 
 
   let roleBasedLinkData = {};
-  Object.entries(linkData || {}).forEach(([key , val]) => {
-    switch (key) {
-      case "MCollect":
-        if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        } 
-        break;
-        case "TL":
-          if (Digit.Utils.tlCitizenAccess() || Digit.UserService.getUser() === null) {
-            roleBasedLinkData[key] = val;
-        }
-        break;
-      case "PT":
-        if (Digit.Utils.ptCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      case "OBPS":
-        if (Digit.Utils.BPACitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      case "WS":
-        if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      case "FireNoc":
-        if (Digit.Utils.NOCCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      case "Birth":
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      case "Death":
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
-          roleBasedLinkData[key] = val;
-        }
-        break;
-      default:
-        return;
+  const user = Digit.UserService.getUser();
+  
+  const accessCheckMap = {
+    MCollect: Digit.Utils.mCollectCitizenAccess,
+    TL: Digit.Utils.tlCitizenAccess,
+    PT: Digit.Utils.ptCitizenAccess,
+    OBPS: Digit.Utils.BPACitizenAccess,
+    WS: Digit.Utils.wsCitizenAccess,
+    FireNoc: Digit.Utils.NOCCitizenAccess,
+    Birth: Digit.Utils.bdCitizenAccess,
+    Death: Digit.Utils.bdCitizenAccess,
+  };
+  
+  for (const [key, val] of Object.entries(linkData || {})) {
+    const accessCheckFn = accessCheckMap[key];
+    if (accessCheckFn && (accessCheckFn() || user === null)) {
+      roleBasedLinkData[key] = val;
     }
-  })
+  }
+  
 
   const classname = Digit.Hooks.fsm.useRouteSubscription(pathname);
   const { t } = useTranslation();
