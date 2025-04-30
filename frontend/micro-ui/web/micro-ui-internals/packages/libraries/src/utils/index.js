@@ -162,6 +162,19 @@ const NOCAccess = () => {
   return NOC_ACCESS?.length > 0;
 };
 
+const BnDAccess = () => {
+  const userInfo = Digit.UserService.getUser();
+  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
+
+  const NOC_ROLES = [
+    "BND_CEMP"
+  ]
+
+  const BND_ACCESS = userRoles?.filter((role) => NOC_ROLES?.includes(role));
+
+  return BND_ACCESS?.length > 0;
+};
+
 const BPAREGAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
@@ -301,6 +314,7 @@ export default {
   tlAccess,
   wsAccess,
   swAccess,
+  BnDAccess,
 
   ...privacy
 };
