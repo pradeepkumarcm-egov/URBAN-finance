@@ -171,16 +171,11 @@ const StaticCitizenSideBar = ({ linkData, islinkDataLoading }) => {
     return <Item />;
   };
   let profileItem;
-  const fromSandbox = Digit.SessionStorage.get("fromSandbox");
 
   if (isFetched && user && user.access_token) {
     profileItem = <Profile info={user?.info} stateName={stateInfo?.name} t={t} />;
-    menuItems = menuItems.filter(
-      (item) => item?.id !== "login-btn" && item?.id !== "help-line"
-    );
-  
-    // Always add EDIT_PROFILE
-    const updatedMenuItems = [
+    menuItems = menuItems.filter((item) => item?.id !== "login-btn" && item?.id !== "help-line");
+    menuItems = [
       ...menuItems,
       {
         text: t("EDIT_PROFILE"),
@@ -190,37 +185,28 @@ const StaticCitizenSideBar = ({ linkData, islinkDataLoading }) => {
           onClick: showProfilePage,
         },
       },
-    ];
-  
-    // Conditionally add LOGOUT if fromSandbox is false
-    if (!fromSandbox) {
-      updatedMenuItems.push({
+      {
         text: t("CORE_COMMON_LOGOUT"),
         element: "LOGOUT",
         icon: "LogoutIcon",
         populators: { onClick: handleLogout },
-      });
-    }
-  
-    // Always add HELPLINE
-    updatedMenuItems.push({
-      text: (
-        <React.Fragment>
-          {t("CS_COMMON_HELPLINE")}
-          <div className="telephone" style={{ marginTop: "-10%" }}>
-            <div className="link">
-              <a href={`tel:${filteredTenantContact}`}>{filteredTenantContact}</a>
+      },
+      {
+        text: (
+          <React.Fragment>
+            {t("CS_COMMON_HELPLINE")}
+            <div className="telephone" style={{ marginTop: "-10%" }}>
+              <div className="link">
+                <a href={`tel:${filteredTenantContact}`}>{filteredTenantContact}</a>
+              </div>
             </div>
-          </div>
-        </React.Fragment>
-      ),
-      element: "Helpline",
-      icon: "Phone",
-    });
-  
-    menuItems = updatedMenuItems;
+          </React.Fragment>
+        ),
+        element: "Helpline",
+        icon: "Phone",
+      },
+    ];
   }
-  
   Object.keys(linkData)
     ?.sort((x, y) => y.localeCompare(x))
     ?.map((key) => {

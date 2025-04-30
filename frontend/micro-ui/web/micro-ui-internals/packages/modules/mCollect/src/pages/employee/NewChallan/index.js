@@ -200,7 +200,7 @@ const NewChallan = ({ChallanData}) => {
             });
           }
         })
-        .catch((e) => {setShowToast({ key: "error", label: t(e?.response?.data?.Errors[0].message) })});
+        .catch((e) => {setShowToast({ key: "error", label: e?.response?.data?.Errors[0].message })});
     }
   };
   let configs = newConfig || [];

@@ -45,11 +45,6 @@ const AutoLogin = () => {
     if (user?.info?.roles?.length > 0) user.info.roles = filteredRoles;
     Digit.UserService.setUser(user);
     setEmployeeDetail(user?.info, user?.access_token);
-    if(queryParams.get("redirectUrl")) 
-      {
-        window.location.href = redirectUrl;
-      }
-    else
     history.replace(redirectUrl);
   }, [user]);
 

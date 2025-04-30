@@ -15,7 +15,6 @@ const ApplicationTable = ({
   pageSizeLimit,
   sortParams,
   totalRecords,
-  inboxStyles
 }) => {
   return (
     <Table
@@ -32,7 +31,6 @@ const ApplicationTable = ({
       onSort={onSort}
       sortParams={sortParams}
       totalRecords={totalRecords}
-      inboxStyles={inboxStyles}
     />
   );
 };

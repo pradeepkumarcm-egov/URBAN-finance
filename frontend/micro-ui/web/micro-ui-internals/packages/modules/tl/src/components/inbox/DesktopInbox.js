@@ -105,7 +105,6 @@ const DesktopInbox = ({ tableConfig, filterComponent,columns, isLoading, setSear
               minWidth: cellInfo.column.Header === t("ES_INBOX_APPLICATION_NO") ? "240px" : "",
               padding: "20px 18px",
               fontSize: "16px",
-              "overflow-x":"auto"
             },
           };
         }}
@@ -118,7 +117,6 @@ const DesktopInbox = ({ tableConfig, filterComponent,columns, isLoading, setSear
         disableSort={props.disableSort}
         sortParams={props.sortParams}
         totalRecords={props.totalRecords}
-        inboxStyles={{"overflow-x":"auto"}}
       />
     );
   }
@@ -174,7 +172,7 @@ const DesktopInbox = ({ tableConfig, filterComponent,columns, isLoading, setSear
           </div>
         </div>
       )}
-      <div style={{ flex: 1, "overflow-x":"auto" }}>
+      <div style={{ flex: 1 }}>
         <SearchLicenseApplication
           defaultSearchParams={props.defaultSearchParams}
           onSearch={props.onSearch}
@@ -184,7 +182,7 @@ const DesktopInbox = ({ tableConfig, filterComponent,columns, isLoading, setSear
           searchParams={props.searchParams}
           {...{setSearchFieldsBackToOriginalState, setSetSearchFieldsBackToOriginalState}}
         />
-        <div className="result" style={{ marginLeft: !props?.isSearch ? "24px" : "", flex: 1 , "overflow-x":"auto"}}>
+        <div className="result" style={{ marginLeft: !props?.isSearch ? "24px" : "", flex: 1 }}>
           {result}
         </div>
       </div>
