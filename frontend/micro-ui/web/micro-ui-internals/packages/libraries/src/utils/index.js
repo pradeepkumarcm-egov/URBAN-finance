@@ -231,7 +231,6 @@ const mCollectAccess = () => {
   return MCOLLECT_ACCESS?.length > 0;
 };
 
-
 const receiptsAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles.map((roleData) => roleData?.code);
@@ -268,55 +267,6 @@ const swAccess = () => {
 };
 
 
-const mCollectCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-  
-  return userRoles?.includes("MC_CITIZEN");
-}
-
-const ptCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-  
-  return userRoles?.includes("PT_CITIZEN");
-}
-
-const tlCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-  
-  return userRoles?.includes("TL_CITIZEN");
-}
-
-const BPACitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-
-  return userRoles?.includes("BPA_CITIZEN");
-}
-
-const wsCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-
-  return userRoles?.includes("WS_CITIZEN");
-}
-
-const NOCCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-
-  return userRoles?.includes("FN_CITIZEN");
-};
-
-const bdCitizenAccess = () => {
-  const userInfo = Digit.UserService.getUser();
-  const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
-
-  return userRoles?.includes("BD_CITIZEN");
-};
-
 export default {
   pdf: PDFUtil,
   downloadReceipt,
@@ -351,13 +301,6 @@ export default {
   tlAccess,
   wsAccess,
   swAccess,
-  mCollectCitizenAccess,
-  tlCitizenAccess,
-  ptCitizenAccess,
-  BPACitizenAccess,
-  wsCitizenAccess,
-  NOCCitizenAccess,
-  bdCitizenAccess,
 
   ...privacy
 };
