@@ -272,49 +272,49 @@ const mCollectCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
   
-  return userRoles?.includes("MC_CITIZEN");
+  return userRoles?.includes("MC_CITIZEN", "CITIZEN");
 }
 
 const ptCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
   
-  return userRoles?.includes("PT_CITIZEN");
+  return userRoles?.includes("PT_CITIZEN", "CITIZEN");
 }
 
 const tlCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
   
-  return userRoles?.includes("TL_CITIZEN");
+  return userRoles?.includes("TL_CITIZEN", "CITIZEN");
 }
 
 const BPACitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
 
-  return userRoles?.includes("BPA_CITIZEN");
+  return userRoles?.includes("BPA_CITIZEN", "CITIZEN");
 }
 
 const wsCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
 
-  return userRoles?.includes("WS_CITIZEN");
+  return userRoles?.includes("WS_CITIZEN", "CITIZEN");
 }
 
 const NOCCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
 
-  return userRoles?.includes("FN_CITIZEN");
+  return userRoles?.includes("FN_CITIZEN", "CITIZEN");
 };
 
 const bdCitizenAccess = () => {
   const userInfo = Digit.UserService.getUser();
   const userRoles = userInfo?.info?.roles?.map((roleData) => roleData?.code);
 
-  return userRoles?.includes("BD_CITIZEN");
+  return userRoles?.includes("BD_CITIZEN", "CITIZEN");
 };
 
 export default {
