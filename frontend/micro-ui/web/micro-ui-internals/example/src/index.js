@@ -35,6 +35,7 @@ import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-
 // import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
 import { pgrCustomizations, pgrComponents } from "./pgr";
+import { initFirenocComponents } from "@egovernments/digit-ui-module-firenoc";
 
 var Digit = window.Digit || {};
 
@@ -59,6 +60,7 @@ const enabledModules = [
   "Bills",
   "SW",
   "BillAmendment",
+  "Firenoc"
 ];
 
 const initTokens = (stateCode) => {
@@ -103,11 +105,14 @@ const initDigitUI = () => {
     HRMSModule,
     ReceiptsModule,
     BillsModule,
+    // FireNocCard
 
     // TLModule,
     // TLLinks,
   });
 
+
+  
   initFSMComponents();
   initPGRComponents();
   initDSSComponents();
@@ -122,6 +127,7 @@ const initDigitUI = () => {
   initWSComponents();
   initCommonPTComponents();
   initBillsComponents();
+  initFirenocComponents();
 
   // initCustomisationComponents();
 
@@ -142,6 +148,7 @@ const initDigitUI = () => {
   initTokens(stateCode);
 
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
+  console.log("enabledModules",enabledModules);
   ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
 };
 
