@@ -17,10 +17,22 @@ import {
 } from "../../../../../ui-utils/commons";
 import "./index.css";
 import { onchangeOfTenant } from "./propertyLocationDetails";
+
+
 export const getTenantId = () => {
-  let tenant=sessionStorage.getItem('Digit.Employee.tenantId');
-  return `${JSON.parse(tenant)?.value||localStorage.getItem('tenant-id')}`;
-}
+  const tenantRaw = sessionStorage.getItem('Digit.Employee.tenantId');
+  let tenantValue = null;
+
+  try {
+    const parsed = JSON.parse(tenantRaw);
+    tenantValue = parsed && parsed.value ? parsed.value : null;
+  } catch (e) {
+    // Ignore JSON parse errors and fall back to localStorage
+  }
+
+  return tenantValue || localStorage.getItem('tenant-id');
+};
+
 
 const loadProvisionalNocData = async (state, dispatch) => {
   let fireNOCNumber = get(
