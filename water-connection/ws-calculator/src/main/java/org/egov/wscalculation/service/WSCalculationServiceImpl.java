@@ -191,8 +191,10 @@ public class WSCalculationServiceImpl implements WSCalculationService {
 							}
 							Integer taxPeriod = Math.round((toDate - fromDate) / 86400000);
 							Long daysOfUsage = Math.round(Math.abs(Double.parseDouble(toDate.toString()) - waterConnection.getDateEffectiveFrom()) / 86400000);
+							String tamount = totalTaxAmount.toString();
+							Double farction = Double.parseDouble(tamount) * daysOfUsage;
 							BigDecimal finalWaterCharge = waterCharge.add(BigDecimal.valueOf(
-									(Double.parseDouble(totalTaxAmount.toString()) * daysOfUsage) / taxPeriod));
+									farction / taxPeriod));
 							criteria.setTo(waterConnection.getDateEffectiveFrom());
 							criteria.setFrom(toDate);
 
