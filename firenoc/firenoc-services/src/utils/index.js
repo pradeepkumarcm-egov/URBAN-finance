@@ -248,12 +248,16 @@ const stateSchemaIndexPositionInTenantId = parseInt(envVariables.STATE_SCHEMA_IN
 if(typeof isCentralInstance =="string")
   isCentralInstance = (isCentralInstance.toLowerCase() == "true");
 console.log(" IsCentralInstance :" + isCentralInstance);
-if (tenantId.includes(".") && isCentralInstance) {
+if (isCentralInstance) {
   if (stateSchemaIndexPositionInTenantId >= tenantId.length) {
     throw new InvalidTenantIdException(
         "The tenantId length is smaller than the defined schema index in tenantId for central instance");
   }
-  let schemaName = tenantId.split(".")[stateSchemaIndexPositionInTenantId];
+  let schemaName;
+  if(tenantId.includes("."))
+    schemaName = tenantId.split(".")[stateSchemaIndexPositionInTenantId];
+  else
+    schemaName = tenantId;
   console.log(" schemaName :" + schemaName);
   finalQuery = 	query.replace(/{schema}/g, schemaName);
 } else {
