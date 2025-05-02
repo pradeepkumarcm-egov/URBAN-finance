@@ -3,10 +3,10 @@
   "version": "1.5.4",
   "main": "index.js",
   "workspaces": [
-    "packages/libraries",
     "example",
-    "packages/react-components",
-    "packages/modules/*"
+    "packages/modules/firenoc",
+    "packages/modules/birth",
+    "packages/modules/death"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
   "license": "MIT",
