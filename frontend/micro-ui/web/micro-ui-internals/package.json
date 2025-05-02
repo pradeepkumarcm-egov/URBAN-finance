@@ -4,6 +4,8 @@
   "main": "index.js",
   "workspaces": [
     "example",
+    "packages/react-components",
+    "packages/modules/obps",
     "packages/modules/firenoc",
     "packages/modules/birth",
     "packages/modules/death"

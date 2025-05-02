@@ -6,7 +6,9 @@
   "homepage": "/digit-ui",
   "workspaces": [
     "micro-ui-internals/packages/css",
+    "micro-ui-internals/packages/react-components",
     "micro-ui-internals/packages/modules/firenoc",
+    "micro-ui-internals/packages/modules/obps",
     "micro-ui-internals/packages/modules/birth",
     "micro-ui-internals/packages/modules/death"
   ],
@@ -31,7 +33,7 @@
     "@egovernments/digit-ui-module-hrms": "1.7.35",
     "@egovernments/digit-ui-module-core": "0.0.1-sandbox",
     "@egovernments/digit-ui-module-dss": "0.0.1-sandbox",
-    "@egovernments/digit-ui-react-components": "0.0.1-sandbox",
+    "@egovernments/digit-ui-react-components": "1.7.35",
     "@egovernments/digit-ui-module-firenoc": "0.0.1-sandbox",
     "@egovernments/digit-ui-module-birth": "0.0.1-sandbox",
     "@egovernments/digit-ui-module-death": "0.0.1-sandbox",
