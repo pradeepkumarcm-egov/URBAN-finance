@@ -41,9 +41,15 @@
     "dev:bills": "cd packages/modules/bills && yarn start",
     "dev:reports": "cd packages/modules/reports && yarn start",
     "dev:example": "cd example && yarn start",
+    "dev:firenoc": "cd packages/modules/firenoc && yarn start",
+    "dev:birth": "cd packages/modules/birth && yarn start",
+    "dev:death": "cd packages/modules/death && yarn start",
     "build": "run-p build:**",
     "build:libraries": "cd packages/libraries && yarn build",
     "build:components": "cd packages/react-components && yarn build",
+    "build:firenoc": "cd packages/modules/firenoc && yarn build",
+    "build:birth": "cd packages/modules/birth && yarn build",
+    "build:death": "cd packages/modules/death && yarn build",
     "build:common": "cd packages/modules/common && yarn build",
     "build:pt": "cd packages/modules/pt && yarn build",
     "buildD:commonPt": "cd packages/modules/commonPt && yarn build",
@@ -68,7 +74,8 @@
     "lint-staged": "12.3.7",
     "npm-run-all": "4.1.5",
     "prettier": "2.1.2",
-    "@babel/plugin-transform-optional-chaining": "7.25.9"
+    "@babel/plugin-transform-optional-chaining": "7.25.9",
+    "@babel/preset-react": "^7.25.9"
   },
   "husky": {},
   "lint-staged": {

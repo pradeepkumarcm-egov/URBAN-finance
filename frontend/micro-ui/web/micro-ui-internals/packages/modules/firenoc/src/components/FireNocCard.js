@@ -1,0 +1,32 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { EmployeeModuleCard, PropertyHouse } from "@egovernments/digit-ui-react-components";
+import { CaseIcon } from "@egovernments/digit-ui-react-components";
+
+const FirenocCard = () => {
+
+  if (!Digit.Utils.NOCAccess()) return null;
+  const { t } = useTranslation();
+
+  const links = [
+    {
+      label: t("ES_COMMON_INBOX"),
+      link: `/employee/fire-noc/inbox`,
+    },
+    {
+      label: t("ES_COMMON_SEARCH"),
+      link: `/employee/fire-noc/search`,
+    }
+  ];
+
+  const propsForModuleCard = {
+    moduleName: t("COMMON_FIRENOC"),
+    links: links,
+    icon: <CaseIcon/>
+}
+
+  return <EmployeeModuleCard {...propsForModuleCard} />;
+};
+
+export default FirenocCard;
