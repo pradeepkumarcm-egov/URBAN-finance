@@ -25,7 +25,7 @@
   "dependencies": {
     "@egovernments/digit-ui-libraries": "1.7.35",
     "@egovernments/digit-ui-module-common": "1.7.35",
-    "@egovernments/digit-ui-module-engagement": "1.7.35",
+    "@egovernments/digit-ui-module-engagement": "1.7.36",
     "@egovernments/digit-ui-module-fsm": "1.7.35",
     "@egovernments/digit-ui-module-mcollect": "1.7.35",
     "@egovernments/digit-ui-module-noc": "1.7.35",
