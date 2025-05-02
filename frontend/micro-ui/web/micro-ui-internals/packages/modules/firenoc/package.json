@@ -1,6 +1,6 @@
 {
     "name": "@egovernments/digit-ui-module-firenoc",
-    "version": "0.0.1",
+    "version": "sandbox-0.0.1",
     "description": "FireNoc Module UI",
     "main": "dist/index.js",
     "module": "dist/index.modern.js",
