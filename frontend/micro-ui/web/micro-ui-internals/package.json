@@ -3,12 +3,15 @@
   "version": "1.5.4",
   "main": "index.js",
   "workspaces": [
+    "packages/libraries",
     "example",
     "packages/react-components",
-    "packages/modules/obps",
-    "packages/modules/firenoc",
     "packages/modules/birth",
-    "packages/modules/death"
+    "packages/modules/core",
+    "packages/modules/death",
+    "packages/modules/firenoc",
+    "packages/modules/obps",
+    "packages/modules/pt"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
   "license": "MIT",
