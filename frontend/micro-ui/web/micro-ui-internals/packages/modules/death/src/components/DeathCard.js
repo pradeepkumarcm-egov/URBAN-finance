@@ -13,11 +13,15 @@ const DeathCard = () => {
   const links = [
     {
       label: t("DEATH_REGISTRATION"),
-      link: `/employee/death-employee/newRegistration`,
+      link: `https://unified-demo.digit.org/employee/death-employee/newRegistration`,
+      hyperlink: true
+
     },
     {
       label: t("SEARCH_DEATH_CERTIFICATE"),
-      link: `/employee/death-common/getCertificate`,
+      link: `https://unified-demo.digit.org/employee/death-common/getCertificate`,
+      hyperlink: true
+
     },
   ];
 

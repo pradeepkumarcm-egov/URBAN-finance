@@ -12,11 +12,14 @@ const FirenocCard = () => {
   const links = [
     {
       label: t("ES_COMMON_INBOX"),
-      link: `/employee/fire-noc/inbox`,
+      link: `https://unified-demo.digit.org/employee/fire-noc/inbox`,
+      hyperlink: true
     },
     {
       label: t("ES_COMMON_SEARCH"),
-      link: `/employee/fire-noc/search`,
+      link: `https://unified-demo.digit.org/employee/fire-noc/search`,
+      hyperlink: true
+
     }
   ];
 

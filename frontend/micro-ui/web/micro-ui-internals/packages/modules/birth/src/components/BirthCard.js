@@ -12,17 +12,22 @@ const BirthCard = () => {
   const links = [
     {
       label: t("BIRTH_REGISTRATION"),
-      link: "/employee/birth-employee/newRegistration",
+      link: `https://unified-demo.digit.org/employee/birth-employee/newRegistration`,
+      hyperlink: true
     },
     {
       label: t("SEARCH_BIRTH_CERTIFICATE"),
-      link: `/employee/birth-common/getCertificate`,
+      link: `https://unified-demo.digit.org/employee/birth-common/getCertificate`,
+      hyperlink: true
+
     }
   ];
 
   const propsForModuleCard = {
     moduleName: t("COMMON_BIRTH"),
     links: links,
+    kpis: [
+    ],
     icon: <CaseIcon/>
 }
 
