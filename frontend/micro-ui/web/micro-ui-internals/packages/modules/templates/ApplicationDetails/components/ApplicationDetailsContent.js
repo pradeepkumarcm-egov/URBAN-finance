@@ -9,7 +9,7 @@ import {
   Row,
   StatusTable,
 } from "@egovernments/digit-ui-react-components";
-import { values } from "lodash";
+// import { values } from "lodash";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";

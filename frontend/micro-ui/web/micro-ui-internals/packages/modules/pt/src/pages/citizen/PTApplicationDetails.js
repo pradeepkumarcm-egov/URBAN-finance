@@ -22,7 +22,7 @@ import PTCitizenFeedbackPopUp from "../../pageComponents/PTCitizenFeedbackPopUp"
 //import PTCitizenFeedback from "@egovernments/digit-ui-module-core/src/components/PTCitizenFeedback";
 
 import get from "lodash/get";
-import { size } from "lodash";
+// import { size } from "lodash";
 
 const PTApplicationDetails = () => {
   const { t } = useTranslation();
