@@ -62,6 +62,13 @@ const Home = () => {
   const handleClickOnWhatsAppBanner = (obj) => {
     window.open(obj?.navigationUrl);
   };
+  
+  const userNullCheck = () => {
+    if (Digit.UserService.getUser() === null) return true;
+    else if (Digit.UserService.getUser()?.info === null) return true;
+    else if (Digit.UserService.getUser()?.info?.roles === null) return true;
+    return false;
+  };
 
   let options = [];
   citizenServicesObj?.props?.forEach((element) => {
@@ -69,42 +76,42 @@ const Home = () => {
     if (options.length >= 4) return;
     switch (element?.label) {
       case 'ACTION_TEST_MCOLLECT':
-        if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.mCollectCitizenAccess() || userNullCheck()) {
           serviceIcon = <ComplaintIcon />;
         } else return;
         break;
       case 'MODULE_PT':
-        if (Digit.Utils.ptCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.ptCitizenAccess() || userNullCheck()) {
           serviceIcon = <PTIcon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'MODULE_TL':
-        if (Digit.Utils.tlCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.tlCitizenAccess() || userNullCheck()) {
           serviceIcon = <CaseIcon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'ACTION_TEST_BPA_STAKEHOLDER_HOME':
-        if (Digit.Utils.BPACitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.BPACitizenAccess() || userNullCheck()) {
           serviceIcon = <OBPSIcon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'ACTION_TEST_WATER_AND_SEWERAGE':
-        if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.wsCitizenAccess() || userNullCheck()) {
           serviceIcon = <WSICon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'ACTION_TEST_FIRE_NOC':
-        if (Digit.Utils.NOCCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.NOCCitizenAccess() || userNullCheck()) {
           serviceIcon = <FirenocIcon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'ACTION_TEST_BIRTH_CERTIFICATE':
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.bdCitizenAccess() || userNullCheck()) {
           serviceIcon = <BirthIcon className="fill-path-primary-main" />;
         } else return;
         break;
       case 'ACTION_TEST_DEATH_CERTIFICATE':
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.bdCitizenAccess() || userNullCheck()) {
           serviceIcon = <DeathIcon className="fill-path-primary-main" />;
         } else return;
         break;
