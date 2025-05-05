@@ -36,9 +36,9 @@ import { initWSComponents } from "@egovernments/digit-ui-module-ws";
 import { initCustomisationComponents } from "./Customisations";
 import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents } from "@egovernments/digit-ui-module-bills";
-import { initFirenocComponents } from "@egovernments/digit-ui-module-firenoc";
-import { initBirthComponents } from "@egovernments/digit-ui-module-birth";
-import { initDeathComponents } from "@egovernments/digit-ui-module-death";
+// import { initFirenocComponents } from "@egovernments/digit-ui-module-firenoc";
+// import { initBirthComponents } from "@egovernments/digit-ui-module-birth";
+// import { initDeathComponents } from "@egovernments/digit-ui-module-death";
 
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
 
@@ -99,9 +99,9 @@ initCommonPTComponents();
 initBillsComponents();
 // initReportsComponents();
 initCustomisationComponents();
-initFirenocComponents();
-initBirthComponents();
-initDeathComponents(); 
+// initFirenocComponents();
+// initBirthComponents();
+// initDeathComponents(); 
 
 const moduleReducers = (initData) => ({
   pgr: PGRReducers(initData),
