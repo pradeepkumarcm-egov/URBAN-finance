@@ -238,6 +238,28 @@ config:
       - work-dir: "utilities/demo-utility"
         image-name: "demo-utility"
         dockerfile: "build/maven/Dockerfile"
+        
+  - name: "builds/urban/utilities/egov-searcher"
+    build:
+      - work-dir: "utilities/egov-searcher"
+        image-name: "egov-searcher"
+        dockerfile: "build/maven/Dockerfile"
+        
+  - name: "builds/urban/utilities/report"
+    build:
+      - work-dir: "utilities/report"
+        image-name: "report"
+        dockerfile: "build/maven/Dockerfile"  
+        
+  - name: "builds/urban/utilities/egov-survey-services"
+    build:
+      - work-dir: "utilities/egov-survey-services"
+        image-name: "egov-survey-services"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "utilities/egov-survey-services/src/main/resources/db"
+        image-name: "egov-survey-services-db"
+                    
+        
 
   - name: "builds/urban/utilities/egov-searcher"
     build:
@@ -258,6 +280,12 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "utilities/egov-survey-services/src/main/resources/db"
         image-name: "egov-survey-services-db"
+  
+  - name: "builds/urban/utilities/dockerfiles/wildfly"
+    build:
+      - work-dir: "utilities/dockerfiles/wildfly"
+        image-name: "wildfly"
+        dockerfile: "utilities/dockerfiles/wildfly/Dockerfile"
         
 
   # Frontend
@@ -308,6 +336,12 @@ config:
       - work-dir: frontend/micro-ui/
         dockerfile: frontend/micro-ui/web/docker/Dockerfile
         image-name: digit-ui
+
+  - name: builds/urban/frontend/micro-ui/digit-ui-tl
+    build:
+      - work-dir: frontend/new-micro-ui/
+        dockerfile: frontend/new-micro-ui/web/docker/Dockerfile
+        image-name: digit-ui-tl
 
   - name: builds/urban/frontend/micro-ui/storybook
     build:
