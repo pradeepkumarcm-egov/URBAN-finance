@@ -29,7 +29,7 @@ const removeSpaceInLocalisationKey = (key = "") => {
 
 export const getTenantId = () => {
     let tenant=sessionStorage.getItem('Digit.Employee.tenantId');
-    return `${JSON.parse(tenant)?.value||localStorage.getItem('tenant-id')}`;
+    return `${JSON.parse(tenant).value||localStorage.getItem('tenant-id')}`;
 }
 export const getToken = () => {
     let user=sessionStorage.getItem('Digit.User');
