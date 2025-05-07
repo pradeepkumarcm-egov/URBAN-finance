@@ -175,16 +175,17 @@ export const propertyLocationDetails = getCommonCard(
       }),
       propertyCity: {
         ...getSelectField({
-          label: { labelName: "City", labelKey: "NOC_PROPERTY_CITY_LABEL" },
-          localePrefix: {
-            moduleName: "TENANT",
-            masterName: "TENANTS",
-          },
-          optionLabel: "name",
+          label: { labelName: "City", labelKey: "NOC_PROPERTY_CITY_LABEL" },          
           placeholder: {
             labelName: "Select City",
             labelKey: "NOC_PROPERTY_CITY_PLACEHOLDER",
           },
+          localePrefix: {
+            moduleName: "TENANT",
+            masterName: "TENANTS",
+          },
+          labelsFromLocalisation: true,
+          required: true,
           sourceJsonPath: "applyScreenMdmsData.tenant.tenants",
           jsonPath: "FireNOCs[0].fireNOCDetails.propertyDetails.address.city",
           required: true,
