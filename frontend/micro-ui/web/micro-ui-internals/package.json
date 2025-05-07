@@ -61,7 +61,9 @@
     "build:ws": "cd packages/modules/ws && yarn build",
     "buildD:bills": "cd packages/modules/bills && yarn build",
     "buildR:reports": "cd packages/modules/reports && yarn build",
-    "deploy:jenkins": "./scripts/jenkins.sh"
+    "deploy:jenkins": "./scripts/jenkins.sh",
+    "dev:death": "cd packages/modules/death && yarn start",
+    "build:death": "cd packages/modules/death && yarn build"
   },
   "devDependencies": {
     "husky": "7.0.4",

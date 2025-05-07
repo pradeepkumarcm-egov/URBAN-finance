@@ -23,6 +23,7 @@ import { initWSComponents } from "@egovernments/digit-ui-module-ws";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
 import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-bills";
+import { DeathModule, initDeathComponents } from "@egovernments/digit-ui-module-death";
 
 // import {initCustomisationComponents} from "./customisations";
 
@@ -35,6 +36,7 @@ import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-
 // import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
 import { pgrCustomizations, pgrComponents } from "./pgr";
+import { UICustomizations } from "./UICustomizations";
 
 var Digit = window.Digit || {};
 
@@ -59,6 +61,7 @@ const enabledModules = [
   "Bills",
   "SW",
   "BillAmendment",
+  "Death",
 ];
 
 const initTokens = (stateCode) => {
@@ -103,6 +106,7 @@ const initDigitUI = () => {
     HRMSModule,
     ReceiptsModule,
     BillsModule,
+    DeathModule
 
     // TLModule,
     // TLLinks,
@@ -122,6 +126,7 @@ const initDigitUI = () => {
   initWSComponents();
   initCommonPTComponents();
   initBillsComponents();
+  initDeathComponents();
 
   // initCustomisationComponents();
 
@@ -136,6 +141,7 @@ const initDigitUI = () => {
       customiseRenewalCreateFormData: (formData, licenceObject) => licenceObject,
       customiseSendbackFormData: (formData, licenceObject) => licenceObject,
     },
+    commonUiConfig:UICustomizations,
   };
 
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";

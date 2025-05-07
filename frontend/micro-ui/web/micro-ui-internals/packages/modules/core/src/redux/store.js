@@ -21,4 +21,5 @@ const enhancer = composeEnhancers(
 const getStore = (defaultStore, moduleReducers = {}) => {
   return createStore(getRootReducer(defaultStore, moduleReducers), enhancer);
 };
+
 export default getStore;

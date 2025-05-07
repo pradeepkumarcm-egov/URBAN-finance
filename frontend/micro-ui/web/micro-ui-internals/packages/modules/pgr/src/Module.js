@@ -105,6 +105,14 @@ const componentsToRegister = {
   PGRResponseCitzen: ResponseCitizen
 };
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Initializes the PGR components by registering them with the Digit Component Registry Service.
+ * Iterates over the componentsToRegister object and sets each component in the registry
+ * using its respective key and value.
+ */
+
+/*******  3c83f185-7b83-4f94-a850-1b64dfc74840  *******/
 export const initPGRComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);

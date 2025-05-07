@@ -96,6 +96,18 @@ export const Request = async ({
     Desc :: To send additional field in HTTP Requests inside RequestInfo Object as plainAccessRequest
     */
     const privacy = Digit.Utils.getPrivacyObject();
+    
+    if (typeof url === "object" && url !== null) {
+      if (url.hasOwnProperty('href')) {
+        url = url.href;
+      } else if (url.hasOwnProperty('url')) {
+        url = url.url;
+      } else {
+        console.warn("URL is an object but doesn't contain a recognized string property.");
+        url = ""; // fallback or handle appropriately
+      }
+    }
+    console.log("url",url)
     if (privacy && !url.includes("/edcr/rest/dcr/") && !noRequestInfo) {
       data.RequestInfo = { ...data.RequestInfo, plainAccessRequest: { ...privacy } };
     }
