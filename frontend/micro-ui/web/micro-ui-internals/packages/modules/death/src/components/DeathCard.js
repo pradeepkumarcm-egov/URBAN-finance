@@ -12,6 +12,8 @@ const DeathCard = () => {
 
   window.localStorage.setItem("Employee.locale", "en_IN");
   window.localStorage.setItem("locale", "en_IN");
+  window.localStorage.setItem("Employee.tenant-id", Digit.ULBService.getCurrentTenantId());
+  window.localStorage.setItem("tenant-id",Digit.ULBService.getCurrentTenantId());
 
   const links = [
     {
