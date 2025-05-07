@@ -1,6 +1,6 @@
 
 import DeathCard from "./components/DeathCard";
-import { CitizenHomeCard, FormComposerV2, Loader } from "@egovernments/digit-ui-react-components";
+import { CitizenHomeCard, Loader } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import EmployeeApp from "../src/pages/employee/index";
@@ -11,7 +11,6 @@ import { overrideHooks, updateCustomConfigs } from "./utils";
 
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
-  console.log(FormComposerV2);
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const moduleCode = ["death", "common", "workflow"];
   const language = Digit.StoreData.getCurrentLanguage();

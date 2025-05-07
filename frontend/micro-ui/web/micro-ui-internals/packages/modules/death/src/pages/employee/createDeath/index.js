@@ -222,7 +222,7 @@
 
 
 
-import { Toast, FormComposerV2 } from "@egovernments/digit-ui-components";
+import { Toast } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useRef } from "react";
 import createDeathConfig from "./createDeathConfig";
 import { useHistory } from "react-router-dom";
@@ -359,7 +359,7 @@ export const CreateDeath = () => {
       setShowToast({ key: "error", label: "Failed to Create Death Certificate" });
     }
   };
-
+return <div>hi</div>
   return (
     <React.Fragment>
       <Header>Create Death Certificates</Header>
