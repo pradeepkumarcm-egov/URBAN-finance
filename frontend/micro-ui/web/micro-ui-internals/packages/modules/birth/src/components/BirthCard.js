@@ -8,6 +8,8 @@ const BirthCard = () => {
   if (!Digit.Utils.BnDAccess()) return null;
 
   const { t } = useTranslation();
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
 
   const links = [
     {

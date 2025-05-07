@@ -9,6 +9,10 @@ const FirenocCard = () => {
   if (!Digit.Utils.NOCAccess()) return null;
   const { t } = useTranslation();
 
+
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
+
   const links = [
     {
       label: t("ES_COMMON_INBOX"),

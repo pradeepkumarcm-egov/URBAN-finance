@@ -10,6 +10,9 @@ const DeathCard = () => {
 
   const { t } = useTranslation();
 
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
+
   const links = [
     {
       label: t("DEATH_REGISTRATION"),
@@ -19,7 +22,7 @@ const DeathCard = () => {
     },
     {
       label: t("SEARCH_DEATH_CERTIFICATE"),
-      link: `https://unified-demo.digit.org/employee/death-common/getCertificate`,
+      link: `https://unified-demo.digit.orgs/employee/death-common/getCertificate`,
       hyperlink: true
 
     },
