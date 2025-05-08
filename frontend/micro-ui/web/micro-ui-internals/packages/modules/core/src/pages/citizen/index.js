@@ -68,46 +68,54 @@ const Home = ({
       },
     }
   );
+
+  const userNullCheck = () => {
+    if (Digit.UserService.getUser() === null) return true;
+    else if (Digit.UserService.getUser()?.info === null) return true;
+    else if (Digit.UserService.getUser()?.info?.roles === null) return true;
+    return false;
+  };
+  
   let roleBasedLinkData = {};
   Object.entries(linkData || {}).forEach(([key , val]) => {
     switch (key) {
       case "MCollect":
-        if (Digit.Utils.mCollectCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.mCollectCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         } 
         break;
         case "TL":
-          if (Digit.Utils.tlCitizenAccess() || Digit.UserService.getUser() === null) {
+          if (Digit.Utils.tlCitizenAccess() || userNullCheck()) {
             roleBasedLinkData[key] = val;
         }
         break;
       case "PT":
-        if (Digit.Utils.ptCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.ptCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;
       case "OBPS":
-        if (Digit.Utils.BPACitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.BPACitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;
       case "WS":
-        if (Digit.Utils.wsCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.wsCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;
       case "FireNoc":
-        if (Digit.Utils.NOCCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.NOCCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;
       case "Birth":
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.bdCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;
       case "Death":
-        if (Digit.Utils.bdCitizenAccess() || Digit.UserService.getUser() === null) {
+        if (Digit.Utils.bdCitizenAccess() || userNullCheck()) {
           roleBasedLinkData[key] = val;
         }
         break;

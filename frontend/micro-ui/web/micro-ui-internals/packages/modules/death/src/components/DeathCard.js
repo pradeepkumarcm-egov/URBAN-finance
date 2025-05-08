@@ -10,14 +10,23 @@ const DeathCard = () => {
 
   const { t } = useTranslation();
 
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
+  window.localStorage.setItem("Employee.tenant-id", Digit.ULBService.getCurrentTenantId());
+  window.localStorage.setItem("tenant-id",Digit.ULBService.getCurrentTenantId());
+
   const links = [
     {
       label: t("DEATH_REGISTRATION"),
-      link: `/employee/death-employee/newRegistration`,
+      link: `https://unified-demo.digit.org/employee/death-employee/newRegistration`,
+      hyperlink: true
+
     },
     {
       label: t("SEARCH_DEATH_CERTIFICATE"),
-      link: `/employee/death-common/getCertificate`,
+      link: `https://unified-demo.digit.org/employee/death-common/getCertificate`,
+      hyperlink: true
+
     },
   ];
 

@@ -5,7 +5,7 @@ import ApplicationDetailsTemplate from "../../../../templates/ApplicationDetails
 import { useParams, useLocation, useHistory } from "react-router-dom";
 import { ActionBar, Header, Loader, SubmitBar,Card,CardSubHeader,CardSectionHeader,LinkLabel, CardLabel, CardHeader, CardText} from "@egovernments/digit-ui-react-components";
 import { useQueryClient } from "react-query";
-import _, { first, update } from "lodash";
+import _ from "lodash";
 import { Modal,Dropdown, Row, StatusTable } from "@egovernments/digit-ui-react-components";
 import {convertEpochToDate} from "../../utils/index";
 
@@ -473,7 +473,7 @@ const Penality_menu=[
                 return (
                   <div style={{marginTop:"19px"}}>
                   <CardSubHeader style={{marginBottom:"8px",color:"#0B0C0C",fontSize:"24px"}}>
-                  {t("PT_CALC_DETAILS")}<br/>
+                  {/* {t("PT_CALC_DETAILS")}<br/> */}
                   </CardSubHeader>
                   <CardSectionHeader style={{marginBottom:"16px",color:"#0B0C0C",fontSize:"16px",marginTop:"revert"}}>{t("PT_CALC_LOGIC_HEADER")}</CardSectionHeader>
                   <CardText style={{fontSize:"16px"}}>{t("PT_CALC_LOGIC")}</CardText>

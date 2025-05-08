@@ -9,14 +9,23 @@ const FirenocCard = () => {
   if (!Digit.Utils.NOCAccess()) return null;
   const { t } = useTranslation();
 
+
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
+  window.localStorage.setItem("Employee.tenant-id", Digit.ULBService.getCurrentTenantId());
+  window.localStorage.setItem("tenant-id",Digit.ULBService.getCurrentTenantId());
+
   const links = [
     {
       label: t("ES_COMMON_INBOX"),
-      link: `/employee/fire-noc/inbox`,
+      link: `https://unified-demo.digit.org/employee/fire-noc/inbox`,
+      hyperlink: true
     },
     {
       label: t("ES_COMMON_SEARCH"),
-      link: `/employee/fire-noc/search`,
+      link: `https://unified-demo.digit.org/employee/fire-noc/search`,
+      hyperlink: true
+
     }
   ];
 
