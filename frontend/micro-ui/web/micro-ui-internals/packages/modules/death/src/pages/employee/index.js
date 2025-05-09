@@ -6,9 +6,13 @@ import SampleCard from "../../components/DeathCard";
 import { CreateDeath } from "./createDeath";
 import SearchDeath from "./searchDeath";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import ViewDeath from "./viewDeath";
+
+
 const EmployeeApp = ({ path, url, userType }) => {
     console.log("User Type: ........................", userType);
   const { t } = useTranslation();
+  console.log("Path: ", path);
   
   return (
     <Switch>
@@ -30,6 +34,12 @@ const EmployeeApp = ({ path, url, userType }) => {
       <PrivateRoute
         path={`${path}/death-common/getCertificate`}
         component={SearchDeath}
+      />
+        
+        {/* Route for Search Death Registration */}
+      <PrivateRoute
+        path={`${path}/death-common/viewDeath`}
+        component={ViewDeath} 
       />
     </Switch>
   );

@@ -8,6 +8,7 @@ import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import CitizenApp from "../src/pages/citizen/index";
 // import ParentInfoCard from "./pages/employee/customcomponents/ParentInfoCard";
 import { overrideHooks, updateCustomConfigs } from "./utils";
+import ViewDeath from "./pages/employee/viewDeath";
 
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
@@ -34,6 +35,7 @@ export const DeathModule = ({ stateCode, userType, tenants }) => {
 const componentsToRegister = {
   DeathModule,
   DeathCard,
+  ViewDeath,
 };
 export const initDeathComponents = () => {
   overrideHooks();

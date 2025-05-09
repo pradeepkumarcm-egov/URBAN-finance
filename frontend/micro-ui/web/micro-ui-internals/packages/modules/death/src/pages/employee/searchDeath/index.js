@@ -22,8 +22,8 @@ console.log(InboxSearchComposer, "InboxSearchComposer")
         // console.log(data, "Data from MDMS: ")
         // const configs = data?.commonUiConfig?.searchDeathConfig?.[0] 
 
-        console.log(searchDeathConfig(), "searchDeathConfig")
-        const configs =  searchDeathConfig()?.commonUiConfig?.DeathInboxConfig?.[0];
+
+        const configs =  searchDeathConfig();
         console.log("Configs ", configs)
 
         // const main = CampaignsInboxConfig().CampaignsInboxConfig[0];
@@ -32,8 +32,8 @@ console.log(InboxSearchComposer, "InboxSearchComposer")
     // if(isLoading)  return <Loader variant={"PageLoader"}/>
     return (
         <React.Fragment>
-        <Header styles={{ fontSize: "32px" }}>{t(configs?.label)}</Header>
             <div className="digit-inbox-search-wrapper">
+                <Header styles={{ fontSize: "32px" }}>{t(configs?.label)}</Header>
                 <InboxSearchComposer configs={configs}></InboxSearchComposer>
             </div>
         </React.Fragment>
