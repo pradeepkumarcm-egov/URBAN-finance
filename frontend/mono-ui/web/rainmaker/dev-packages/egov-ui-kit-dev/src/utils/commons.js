@@ -1043,15 +1043,15 @@ export const downloadFromLink = async (link,filename="help.pdf") => {
 export const getModuleName = () => {
   const pathName = window.location.pathname;
   if (pathName.indexOf("inbox") > -1) {
-    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd,rainmaker-common-noc";
   } else if (pathName.indexOf("dss") > -1) {
-    return "rainmaker-dss,rainmaker-bnd";
+    return "rainmaker-dss,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("receipts") > -1) {
-    return "rainmaker-receipts,rainmaker-bnd";
+    return "rainmaker-receipts,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("property-tax") > -1 || pathName.indexOf("rainmaker-pt") > -1 || pathName.indexOf("pt-mutation") > -1) {
-    return "rainmaker-pt,rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-pt,rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("pt-common-screens") > -1 || pathName.indexOf("pt-mutation/public-search") > -1) {
-    return "rainmaker-pt,rainmaker-bnd";
+    return "rainmaker-pt,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (
     pathName.indexOf("complaint") > -1 ||
     pathName.indexOf("pgr") > -1 ||
@@ -1062,55 +1062,55 @@ export const getModuleName = () => {
     pathName.indexOf("request-reassign") > -1 ||
     pathName.indexOf("reassign-success") > -1
   ) {
-    return "rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("wns") > -1 || pathName.indexOf("wns/public-search") > -1) {
-    return "rainmaker-ws,rainmaker-bnd";
+    return "rainmaker-ws,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (
     pathName.indexOf("tradelicense") > -1 ||
     pathName.indexOf("rainmaker-tl") > -1 ||
     pathName.indexOf("tradelicence") > -1 ||
     pathName.indexOf("tradelicense-citizen") > -1
   ) {
-    return "rainmaker-tl,rainmaker-bnd";
+    return "rainmaker-tl,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("hrms") > -1) {
-    return "rainmaker-hr,rainmaker-bnd";
+    return "rainmaker-hr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("bill-amend") > -1) {
-    return "rainmaker-bill-amend,rainmaker-abg,rainmaker-bnd";
+    return "rainmaker-bill-amend,rainmaker-abg,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("fire-noc") > -1) {
-    return "rainmaker-noc,rainmaker-pgr,rainmaker-common,rainmaker-bnd";
+    return "rainmaker-noc,rainmaker-pgr,rainmaker-common,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("dss/home") > -1) {
-    return "rainmaker-dss,rainmaker-bnd";
+    return "rainmaker-dss,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("language-selection") > -1) {
-    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("login") > -1) {
-    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("pay") > -1) {
-    return "rainmaker-noc,rainmaker-bnd";
+    return "rainmaker-noc,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("abg") > -1) {
-    return "rainmaker-abg,rainmaker-bnd";
+    return "rainmaker-abg,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("bills") > -1) {
-    return "rainmaker-ws,rainmaker-abg,rainmaker-bills,rainmaker-bnd";
+    return "rainmaker-ws,rainmaker-abg,rainmaker-bills,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("uc") > -1) {
-    return "rainmaker-uc,rainmaker-bnd";
+    return "rainmaker-uc,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("pgr-home") > -1 || pathName.indexOf("rainmaker-pgr") > -1) {
-    return "rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (
     pathName.indexOf("bpastakeholder") > -1 ||
     pathName.indexOf("edcrscrutiny") > -1 ||
     pathName.indexOf("egov-bpa") > -1 ||
     pathName.indexOf("oc-bpa") > -1
   ) {
-    return "rainmaker-bpa,rainmaker-bpareg,rainmaker-bnd";
+    return "rainmaker-bpa,rainmaker-bpareg,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (pathName.indexOf("noc") > -1) {
-    return "rainmaker-common-noc,rainmaker-bnd";
+    return "rainmaker-common-noc,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   } else if (
     pathName.indexOf("birth") > -1 ||
     pathName.indexOf("death") > -1 ||
     pathName.indexOf("bnd") > -1 
   ) {
-    return "rainmaker-bnd";
+    return "rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   }else {
-    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd";
+    return "rainmaker-common,rainmaker-noc,rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc";
   }
 };
 
