@@ -9,7 +9,7 @@ const AddComplaintForm = ({ formKey, localizationLabels, handleFieldChange, form
   const submit = form.submit;
   return (
     <div className="add-complaint-main-cont form-without-button-cont-generic">
-      <ImageUpload module="rainmaker-pgr,rainmaker-bnd" formKey={formKey} fieldKey="media" />
+      <ImageUpload module="rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc" formKey={formKey} fieldKey="media" />
       <ComplaintTypeCard
         localizationLabels={localizationLabels}
         categories={categories}

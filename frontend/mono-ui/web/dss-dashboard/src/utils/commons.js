@@ -45,7 +45,7 @@ export const fetchLocalisationRequest = (language) => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     };
-    const reqUrl = `${CONFIGS.LOCALISATION_URL}?locale=${language}&tenantId=${stateTenant()}&module=rainmaker-common,rainmaker-dss,rainmaker-bnd`;
+    const reqUrl = `${CONFIGS.LOCALISATION_URL}?locale=${language}&tenantId=${stateTenant()}&module=rainmaker-common,rainmaker-dss,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc`;
     const reqBody = {}
     return { reqHeaders, reqBody, reqUrl };
 }
