@@ -1,4 +1,4 @@
-FROM egovio/alpine-maven-builder-jdk-8:1-master-NA-6036091e AS build
+FROM egovio/amazoncorretto AS build
 ARG WORK_DIR
 WORKDIR /app
 
@@ -18,7 +18,7 @@ RUN mvn -B -f /app/pom.xml package
 
 # Create runtime image
 #FROM egovio/8-openjdk-alpine
-FROM egovio/amazoncorretto:17-alpine3.19
+FROM egovio/amazoncorretto
 
 
 WORKDIR /opt/egov
