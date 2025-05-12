@@ -229,7 +229,7 @@ public class SurveyService {
 
         }
        if(!ObjectUtils.isEmpty(surveyEntity.getStartDate()) && !ObjectUtils.isEmpty(surveyEntity.getEndDate())){
-           if(surveyEntity.getStartDate() < System.currentTimeMillis() && surveyEntity.getEndDate() > System.currentTimeMillis())
+           if(surveyEntity.getStartDate() < System.currentTimeMillis() && surveyEntity.getEndDate() > System.currentTimeMillis() && !surveyEntity.getStatus().equalsIgnoreCase("inactive"))
                surveyEntity.setStatus(ACTIVE);
 
        }
