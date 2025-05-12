@@ -8,6 +8,7 @@ import { CreateBirth } from "./createBirth";
 import SearchBirth from "./SeachBirth";
 import BirthCard from "../../components/BirthCard";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import ViewBirth from "./ViewBirth";
 
 const EmployeeApp = ({ path, url, userType }) => {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const EmployeeApp = ({ path, url, userType }) => {
           </Route>
           <PrivateRoute path={`${path}/createbirth`} component={CreateBirth} />
           <PrivateRoute path={`${path}/searchbirth`} component={SearchBirth} />
+          <PrivateRoute path={`${path}/viewbirth/:id`} component={ViewBirth}/>
         </div>
       </React.Fragment>
     </Switch>

@@ -38,6 +38,23 @@ const ViewLinkButton = ({ tenantId, certificateId }) => {
     </span>
   );
 };
+const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
+  const history = useHistory();
+
+  const handleClick = () => {
+  history.push(`/${window.contextPath}/employee/birth/viewbirth/${certificateId}`);
+  };
+
+  return (
+    <span
+      className="link"
+      onClick={handleClick}
+      style={{ cursor: "pointer", color: "blue" }}
+    >
+      View
+    </span>
+  );
+};
 
 const GetSlaCell = (value) => {
   if (value === "-") return <span className="sla-cell-success">-</span>;
@@ -174,7 +191,7 @@ export const UICustomizations = {
 
     switch (key) {
       case "view":
-        return <ViewLinkButton tenantId={tenantId} certificateId={row?.id} />;
+        return <ViewBirthLinkButton tenantId={tenantId} certificateId={row?.id} />;
         // return (
         //   <span className="link">
         //                 <Link
