@@ -88,6 +88,7 @@ import useDriverUpdate from "./fsm/useDriverUpdate";
 import useDriverDetails from "./fsm/useDriverDetails";
 import useVendorSearch from "./fsm/useVendorSearch";
 import useAdvanceBalanceCalulation from "./fsm/useAdvanceBalanceCalculation";
+import useWorkflowDetailsV2 from "./useWorkflowDetailsV2";
 
 import useEmployeeSearch from "./useEmployeeSearch";
 
@@ -251,6 +252,8 @@ import useWSConfigMDMS from "./ws/useWSConfigMDMS";
 import useFeedBackSearch from "./useFeedBackSearch";
 import useBPAInboxV1 from "./obps/useBPAInboxV1";
 import useCustomAPIMutationHook from "./useCustomAPIMutationHook";
+import useUpdateCustom from "./useUpdateCustom";
+
 
 const pgr = {
   useComplaintDetails,
@@ -558,6 +561,9 @@ const Hooks = {
   useBulkPdfDetails,
   useBillAmendmentInbox,
   useAudit,
+  useWorkflowDetailsV2,
+  useUpdateCustom
+
 };
 
 export default Hooks;
