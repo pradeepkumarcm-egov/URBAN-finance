@@ -115,7 +115,7 @@ export const fetchLocalizationLabel = (locale = 'en_IN', module, tenantId, isFro
           { key: "tenantId", value: commonConfig.tenantId },
         ]);
 
-        if (payload1?.messages) {
+        if (payload1 && payload1.messages) {
           resultArray = [...payload1.messages];
         }
       }
@@ -128,7 +128,7 @@ export const fetchLocalizationLabel = (locale = 'en_IN', module, tenantId, isFro
           { key: "tenantId", value: tenantId || commonConfig.tenantId },
         ]);
 
-        if (payload2?.messages) {
+        if (payload2 && payload2.messages) {
           storedModuleList.push(tenantModule);
           setStoredModulesList(JSON.stringify(storedModuleList));
           resultArray = [...resultArray, ...payload2.messages];
