@@ -19,9 +19,10 @@ import FilterDialog from "./components/FilterDialog";
 import "./index.css";
 
 let localizationLabels = transformById(
-  JSON.parse(getLocalization(`localization_${getLocale()}`)),
+  JSON.parse(getLocalization("localization_" + getLocale())),
   "code"
 );
+
 class Inbox extends Component {
   state = {
     dialogOpen: false,
@@ -29,18 +30,22 @@ class Inbox extends Component {
     hasWorkflow: false,
     filterPopupOpen: false
   };
-  constructor(props){
+
+  constructor(props) {
     super(props);
   }
+
   componentDidMount = () => {
-    const { fetchLocalizationLabel } = this.props
+    const { fetchLocalizationLabel } = this.props;
     const tenantId = getTenantId();
     fetchLocalizationLabel(getLocale(), tenantId, tenantId);
-  }
+  };
+
   componentWillUnmount = () => {
-    const { resetFetchRecords } = this.props
+    const { resetFetchRecords } = this.props;
     resetFetchRecords();
-  }
+  };
+
   onDialogClose = () => {
     this.setState({
       dialogOpen: false,
@@ -49,21 +54,10 @@ class Inbox extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { menu } = nextProps;
-    const workflowList = menu && menu.filter((item) => item.name === "rainmaker-common-workflow");
-    if (workflowList && workflowList.length > 0) {
-      this.setState({
-        hasWorkflow: true,
-      });
-    } else {
-      this.setState({
-        hasWorkflow: false,
-      });
-    }
-
-    const list = menu && menu.filter((item) => item.url === "card");
-    this.setState({
-      actionList: list,
-    });
+    const workflowList = menu && menu.filter(function(item) { return item.name === "rainmaker-common-workflow"; });
+    this.setState({ hasWorkflow: workflowList && workflowList.length > 0 });
+    const list = menu && menu.filter(function(item) { return item.url === "card"; });
+    this.setState({ actionList: list });
   }
 
   handleClose = () => {
@@ -72,7 +66,8 @@ class Inbox extends Component {
 
   onPopupOpen = () => {
     this.setState({ filterPopupOpen: true });
-  }
+  };
+
   getProcessIntanceData = async (pid) => {
     const tenantId = getTenantId();
     const queryObject = [
@@ -81,7 +76,9 @@ class Inbox extends Component {
       { key: "tenantId", value: tenantId },
     ];
     const payload = await httpRequest("egov-workflow-v2/egov-wf/process/_search?", "", queryObject);
-    const processInstances = payload && payload.ProcessInstances.length > 0 && orderWfProcessInstances(payload.ProcessInstances);
+    const processInstances = payload && payload.ProcessInstances && payload.ProcessInstances.length > 0
+      ? orderWfProcessInstances(payload.ProcessInstances)
+      : [];
     return processInstances;
   };
 
@@ -90,14 +87,18 @@ class Inbox extends Component {
     const processInstances = await this.getProcessIntanceData(moduleNumber);
     let exclamationMarkIndex;
     if (processInstances && processInstances.length > 0) {
-      processInstances.map((data, index) => {
+      processInstances.map(function(data, index) {
         if (data.assigner && data.assigner.roles && data.assigner.roles.length > 0) {
-          data.assigner.roles.map(role => {
-            if (role.code === "AUTO_ESCALATE") return exclamationMarkIndex = index - 1;
-          })
+          data.assigner.roles.map(function(role) {
+            if (role.code === "AUTO_ESCALATE") {
+              exclamationMarkIndex = index - 1;
+            }
+          });
         }
       });
-      if (exclamationMarkIndex) processInstances[exclamationMarkIndex].isExclamationMark = true;
+      if (exclamationMarkIndex !== undefined) {
+        processInstances[exclamationMarkIndex].isExclamationMark = true;
+      }
     }
     if (processInstances && processInstances.length > 0) {
       await addWflowFileUrl(processInstances, prepareFinalObject);
@@ -105,55 +106,51 @@ class Inbox extends Component {
         dialogOpen: true,
       });
     } else {
-      console.error("ERROR")
+      console.error("ERROR");
     }
   };
-
 
   render() {
     const { name, history, setRoute, menu, Loading, inboxLoading, inbox, loaded, mdmsGetLoading, errorMessage = "", error = false, ProcessInstances } = this.props;
     const { hasWorkflow } = this.state;
-    const a = menu ? menu.filter(item => item.url === "quickAction") : [];
-    const downloadMenu = a.map((obj, index) => {
+    const a = menu ? menu.filter(function(item) { return item.url === "quickAction"; }) : [];
+    const downloadMenu = a.map(function(obj, index) {
       return {
         labelName: obj.displayName,
-        labelKey: `ACTION_TEST_${obj.displayName.toUpperCase().replace(/[._:-\s\/]/g, "_")}`,
-        link: () => {
+        labelKey: "ACTION_TEST_" + obj.displayName.toUpperCase().replace(/[._:\-\s\/]/g, "_"),
+        link: function() {
           if (obj.navigationURL === "tradelicence/apply") {
             this.props.setRequiredDocumentFlag();
           }
-          if (obj.navigationURL && obj.navigationURL.includes('digit-ui')) {
+          if (obj.navigationURL && obj.navigationURL.indexOf('digit-ui') !== -1) {
             window.location.href = obj.navigationURL;
             return;
           } else {
-            setRoute(obj.navigationURL)
+            setRoute(obj.navigationURL);
           }
-        }
-      }
-    })
+        }.bind(this)
+      };
+    }.bind(this));
+
     const { isLoading } = Loading;
     const buttonItems = {
       label: { labelName: "Take Action", labelKey: "INBOX_QUICK_ACTION" },
       rightIcon: "arrow_drop_down",
       props: { variant: "outlined", style: { marginLeft: 5, marginRight: 15, marginTop: 10, backgroundColor: "#FE7A51", color: "#fff", border: "none", height: "40px", width: "200px" } },
       menu: downloadMenu
-    }
-    let user = { ...JSON.parse(localStorage.getItem("user-info")), auth: localStorage.getItem("token") };
+    };
+
+    let user = Object.assign({}, JSON.parse(localStorage.getItem("user-info")), { auth: localStorage.getItem("token") });
+
     return (
       <div>
         <div className="rainmaker-topHeader" style={{ marginTop: 15, justifyContent: "space-between" }}>
           {mdmsGetLoading && <LoadingIndicator></LoadingIndicator>}
           <div className="rainmaker-topHeader flex">
             <Label className="landingPageHeader flex-child" label={"CS_LANDING_PAGE_WELCOME_TEXT"} />
-            <Label className="landingPageUser flex-child" label={name} />,
+            <Label className="landingPageUser flex-child" label={name} />, 
           </div>
-          {/* <div className="quick-action-button">
-            <MenuButton data={buttonItems} />
-          </div> */}
         </div>
-        {/* <div className={"inbox-service-list"}>
-          <ServiceList history={history} />
-        </div> */}
         {hasWorkflow && inboxLoading && <div>
           <div className="jk-spinner-wrapper">
             <div className="jk-inbox-loader"></div>
@@ -162,27 +159,26 @@ class Inbox extends Component {
             <Label label={"CS_INBOX_LOADING_MSG"} />
           </div>
         </div>}
-        {!hasWorkflow && !mdmsGetLoading && errorMessage != "" && error && <div>
+        {!hasWorkflow && !mdmsGetLoading && errorMessage !== "" && error && <div>
           <div className="jk-spinner-wrapper">
             <Label label={errorMessage} />
           </div>
         </div>}
 
-        {hasWorkflow && <JkInbox user={{ ...user, permanentCity: commonConfig.tenantId }}
+        {hasWorkflow && <JkInbox user={Object.assign({}, user, { permanentCity: commonConfig.tenantId })}
           historyClick={this.onHistoryClick}
-          t={(key) => {
+          t={function(key) {
             return getLocaleLabels("", key, localizationLabels);
           }}
-          historyComp={<div onClick={() => { }} style={{ cursor: "pointer" }}>
-            <i class="material-icons">history</i>
+          historyComp={<div onClick={function() { }} style={{ cursor: "pointer" }}>
+            <i className="material-icons">history</i>
           </div>}
           esclatedComp={<Tooltip title={getLocaleLabels("COMMON_INBOX_TAB_ESCALATED", "COMMON_INBOX_TAB_ESCALATED", localizationLabels)} placement="top">
-            <span> <i class="material-icons" style={{ color: "rgb(244, 67, 54)" }}>error</i> </span>
+            <span> <i className="material-icons" style={{ color: "rgb(244, 67, 54)" }}>error</i> </span>
           </Tooltip>}
         >
-
         </JkInbox>}
-        {/* {hasWorkflow && !inboxLoading && loaded && <TableData onPopupOpen={this.onPopupOpen} workflowData={inbox} />} */}
+
         <FilterDialog popupOpen={this.state.filterPopupOpen} popupClose={this.handleClose} />
         <TaskDialog open={this.state.dialogOpen} onClose={this.onDialogClose} history={ProcessInstances} />
       </div>
@@ -193,27 +189,31 @@ class Inbox extends Component {
 const mapStateToProps = (state) => {
   const { auth, app, screenConfiguration } = state;
   const { menu, inbox, actionMenuFetch } = app;
-  const { loading: inboxLoading, loaded } = inbox || { };
-  const { userInfo } = auth;
+  const inboxLoading = inbox && inbox.loading;
+  const loaded = inbox && inbox.loaded;
+  const userInfo = auth && auth.userInfo;
   const name = auth && userInfo.name;
-  const { preparedFinalObject } = screenConfiguration;
-  const { Loading = { }, workflow } = preparedFinalObject;
-  const { isLoading } = Loading;
-  const { ProcessInstances } = workflow || [];
-  const { loading: mdmsGetLoading = false, errorMessage = "", error } = actionMenuFetch;
-  return { name, menu, Loading, isLoading, inboxLoading, inbox, loaded, mdmsGetLoading, errorMessage, error, ProcessInstances };
+  const preparedFinalObject = screenConfiguration && screenConfiguration.preparedFinalObject;
+  const Loading = preparedFinalObject && preparedFinalObject.Loading ? preparedFinalObject.Loading : {};
+  const workflow = preparedFinalObject && preparedFinalObject.workflow ? preparedFinalObject.workflow : {};
+  const ProcessInstances = workflow.ProcessInstances || [];
+  const mdmsGetLoading = actionMenuFetch && actionMenuFetch.loading;
+  const errorMessage = actionMenuFetch && actionMenuFetch.errorMessage;
+  const error = actionMenuFetch && actionMenuFetch.error;
+  return { name, menu, Loading, inboxLoading, inbox, loaded, mdmsGetLoading, errorMessage, error, ProcessInstances };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setRoute: url => dispatch(setRoute(url)),
-    fetchLocalizationLabel: (locale, tenantId, module) => dispatch(fetchLocalizationLabel(locale, tenantId, module)),
-    setRequiredDocumentFlag: () => dispatch(prepareFinalObject("isRequiredDocuments", true)),
-    resetFetchRecords: () => dispatch(resetFetchRecords()),
-    prepareFinalObject: (path, value) => dispatch(prepareFinalObject(path, value)),
+    setRoute: function(url) { dispatch(setRoute(url)); },
+    fetchLocalizationLabel: function(locale, tenantId, module) { dispatch(fetchLocalizationLabel(locale, tenantId, module)); },
+    setRequiredDocumentFlag: function() { dispatch(prepareFinalObject("isRequiredDocuments", true)); },
+    resetFetchRecords: function() { dispatch(resetFetchRecords()); },
+    prepareFinalObject: function(path, value) { dispatch(prepareFinalObject(path, value)); },
   };
-}
+};
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Inbox);
