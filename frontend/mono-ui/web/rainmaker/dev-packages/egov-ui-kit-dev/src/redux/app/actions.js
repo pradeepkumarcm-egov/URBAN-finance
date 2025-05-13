@@ -27,10 +27,21 @@ export const setBottomNavigationIndex = (bottomNavigationIndex) => {
 };
 
 export const setLocalizationLabels = (locale, localizationLabels) => {
-  window.localStorage.setItem(`localization_${locale}`, JSON.stringify(localizationLabels));
+  if (Array.isArray(localizationLabels)) {
+    window.localStorage.setItem(`localization_${locale}`, JSON.stringify(localizationLabels));
+  } else {
+    console.warn("Invalid localizationLabels data, expected array:", localizationLabels);
+  }
+
   setLocale(locale);
-  return { type: actionTypes.ADD_LOCALIZATION, locale, localizationLabels };
+
+  return {
+    type: actionTypes.ADD_LOCALIZATION,
+    locale,
+    localizationLabels
+  };
 };
+
 
 export const toggleSnackbarAndSetText = (open, message = {}, variant) => {
   return {
@@ -44,70 +55,114 @@ export const toggleSnackbarAndSetText = (open, message = {}, variant) => {
 export const fetchLocalizationLabel = (locale = 'en_IN', module, tenantId, isFromModule) => {
   return async (dispatch) => {
     let storedModuleList = [];
-    if (getStoredModulesList() !== null) {
-      storedModuleList = JSON.parse(getStoredModulesList());
+
+    try {
+      if (getStoredModulesList() !== null) {
+        storedModuleList = JSON.parse(getStoredModulesList());
+      }
+    } catch (e) {
+      console.error("Failed to parse stored module list", e);
     }
+
     const moduleName = getModule();
     let localeModule;
+
     if (moduleName === 'rainmaker-common') {
       localeModule = 'rainmaker-common';
-    }
-    else if (storedModuleList.includes('rainmaker-common')) {
+    } else if (storedModuleList.includes('rainmaker-common')) {
       localeModule = moduleName;
-    }
-    else {
+    } else {
       localeModule = moduleName ? `rainmaker-common,${moduleName}` : `rainmaker-common`;
     }
+
     try {
-      let resultArray = [], tenantModule = "", isCommonScreen;
+      let resultArray = [];
+      let tenantModule = "";
+      let isCommonScreen = false;
+
       if (module != null) {
         tenantModule = `rainmaker-${module}`;
       }
 
-      if ((window.location.href.includes("/language-selection") || window.location.href.includes("/user/register") || window.location.href.includes("/user/login") || window.location.href.includes("/withoutAuth"))) {
-        if ((moduleName && storedModuleList.includes(moduleName) === false) || moduleName == null) isCommonScreen = true;
+      const url = window.location.href;
+
+      if (
+        url.includes("/language-selection") ||
+        url.includes("/user/register") ||
+        url.includes("/user/login") ||
+        url.includes("/withoutAuth")
+      ) {
+        if ((moduleName && !storedModuleList.includes(moduleName)) || moduleName == null) {
+          isCommonScreen = true;
+        }
       }
 
-      if ((window.location.href.includes("/inbox"))) {
-        if (moduleName && storedModuleList.includes(`rainmaker-common`)) isFromModule = false;
+      if (url.includes("/inbox")) {
+        if (moduleName && storedModuleList.includes("rainmaker-common")) {
+          isFromModule = false;
+        }
       }
 
-      if ((moduleName && storedModuleList.includes(moduleName) === false) || isFromModule || isCommonScreen) {
+      // Load default/common module
+      if (
+        (moduleName && !storedModuleList.includes(moduleName)) ||
+        isFromModule ||
+        isCommonScreen
+      ) {
         const payload1 = await httpRequest(LOCALATION.GET.URL, LOCALATION.GET.ACTION, [
           { key: "module", value: localeModule },
           { key: "locale", value: locale },
           { key: "tenantId", value: commonConfig.tenantId },
         ]);
-        resultArray = [...payload1.messages];
+
+        if (payload1?.messages) {
+          resultArray = [...payload1.messages];
+        }
       }
 
-      if ((module && storedModuleList.includes(tenantModule) === false)) {
-        storedModuleList.push(tenantModule);
-        var newList = JSON.stringify(storedModuleList);
-        const payload2 = module
-          ? await httpRequest(LOCALATION.GET.URL, LOCALATION.GET.ACTION, [
-            { key: "module", value: `rainmaker-${module}` },
-            { key: "locale", value: locale },
-            { key: "tenantId", value: tenantId ? tenantId : commonConfig.tenantId },
-          ])
-          : [];
-        if (payload2 && payload2.messages) {
-          setStoredModulesList(newList);
+      // Load additional module-specific labels
+      if (module && !storedModuleList.includes(tenantModule)) {
+        const payload2 = await httpRequest(LOCALATION.GET.URL, LOCALATION.GET.ACTION, [
+          { key: "module", value: tenantModule },
+          { key: "locale", value: locale },
+          { key: "tenantId", value: tenantId || commonConfig.tenantId },
+        ]);
+
+        if (payload2?.messages) {
+          storedModuleList.push(tenantModule);
+          setStoredModulesList(JSON.stringify(storedModuleList));
           resultArray = [...resultArray, ...payload2.messages];
         }
       }
 
+      // Merge with previous if exists
       let prevLocalisationLabels = [];
-      if (getLocalizationLabels() != null && !isCommonScreen && storedModuleList.length > 0) {
-        prevLocalisationLabels = JSON.parse(getLocalizationLabels());
+      if (getLocalizationLabels() && !isCommonScreen && storedModuleList.length > 0) {
+        try {
+          prevLocalisationLabels = JSON.parse(getLocalizationLabels());
+        } catch (e) {
+          console.warn("Failed to parse previous localization labels", e);
+        }
       }
+
       resultArray = [...prevLocalisationLabels, ...resultArray];
-      localStorage.removeItem(`localization_${getLocale()}`);
+
+      // Fallback: if nothing fetched, retain previous
+      if (!resultArray.length && getLocalizationLabels()) {
+        try {
+          resultArray = JSON.parse(getLocalizationLabels());
+        } catch (e) {
+          console.warn("Fallback failed to parse existing localization", e);
+        }
+      }
+
       dispatch(setLocalizationLabels(locale, resultArray));
     } catch (error) {
+      console.error("Localization fetch failed:", error);
     }
   };
 };
+
 
 export const fetchLocalizationLabelForOpenScreens= (locale = 'en_IN', module, tenantId, isFromModule) => {
   return async (dispatch) => {
