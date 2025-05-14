@@ -7,6 +7,7 @@ import { CreateDeath } from "./createDeath";
 import SearchDeath from "./searchDeath";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import ViewDeath from "./viewDeath";
+import UpdateDeath from "./updateDeath";
 
 
 const EmployeeApp = ({ path, url, userType }) => {
@@ -41,6 +42,11 @@ const EmployeeApp = ({ path, url, userType }) => {
         path={`${path}/death-common/viewDeath`}
         component={ViewDeath} 
       />
+
+      <PrivateRoute
+        path={`${path}/death-common/update-death`}
+        component={UpdateDeath}
+        />
     </Switch>
   );
 };

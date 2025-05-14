@@ -251,6 +251,8 @@ import useWSConfigMDMS from "./ws/useWSConfigMDMS";
 import useFeedBackSearch from "./useFeedBackSearch";
 import useBPAInboxV1 from "./obps/useBPAInboxV1";
 import useCustomAPIMutationHook from "./useCustomAPIMutationHook";
+import useWorkflowDetailsV2 from "./useWorkflowDetailsV2";
+import useUpdateCustom from "./useUpdateCustom";
 
 const pgr = {
   useComplaintDetails,
@@ -557,6 +559,8 @@ const Hooks = {
   useDynamicData,
   useBulkPdfDetails,
   useBillAmendmentInbox,
+  useWorkflowDetailsV2,
+  useUpdateCustom,
   useAudit,
 };
 

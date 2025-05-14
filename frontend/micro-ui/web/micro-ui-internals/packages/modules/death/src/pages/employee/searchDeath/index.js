@@ -1,7 +1,8 @@
 import React from "react";
-import { Header, InboxSearchComposer, Loader } from "@egovernments/digit-ui-components";
+import { InboxSearchComposer, Loader } from "@egovernments/digit-ui-components";
 import { searchDeathConfig } from "./searchDeathConfig";
 import { useTranslation } from "react-i18next";
+import { Header } from "@egovernments/digit-ui-react-components";
 
 const SearchDeath = () => {
     // const config = searchDeathConfig();
@@ -23,7 +24,7 @@ console.log(InboxSearchComposer, "InboxSearchComposer")
         // const configs = data?.commonUiConfig?.searchDeathConfig?.[0] 
 
 
-        const configs =  searchDeathConfig();
+        const configs =  searchDeathConfig(t);
         console.log("Configs ", configs)
 
         // const main = CampaignsInboxConfig().CampaignsInboxConfig[0];

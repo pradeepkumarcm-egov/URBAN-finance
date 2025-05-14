@@ -9,11 +9,11 @@ import CitizenApp from "../src/pages/citizen/index";
 // import ParentInfoCard from "./pages/employee/customcomponents/ParentInfoCard";
 import { overrideHooks, updateCustomConfigs } from "./utils";
 import ViewDeath from "./pages/employee/viewDeath";
-
+import EditButton from "./pages/employee/customcomponents/EditButton";
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["death", "common", "workflow"];
+  const moduleCode = ["death", "common", "workflow","bnd"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,
@@ -36,6 +36,7 @@ const componentsToRegister = {
   DeathModule,
   DeathCard,
   ViewDeath,
+  EditButton,
 };
 export const initDeathComponents = () => {
   overrideHooks();

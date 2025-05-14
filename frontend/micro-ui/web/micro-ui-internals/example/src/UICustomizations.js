@@ -56,9 +56,11 @@ export const UICustomizations = {
         data.params.gender = 1;
       } else if (gender === "FEMALE") {
         data.params.gender = 2;
-      } else {
-        data.params.gender = 3;
-      }
+      }else if (gender === "TRANSGENDER") {
+      data.params.gender = 3;
+    } else {
+      delete data.params.gender;
+    }
       const fromDate = data?.state?.searchForm?.fromDate;
       if (fromDate) {
         const [yyyy, mm, dd] = fromDate.split("-");
@@ -69,6 +71,53 @@ export const UICustomizations = {
         const [yyyy, mm, dd] = toDate.split("-");
         data.params.toDate = `${dd}-${mm}-${yyyy}`;
       }
+
+      const registrationNo = data?.state?.searchForm?.registrationno;
+      if (registrationNo && registrationNo.trim() !== "") {
+        data.params.registrationNo = registrationNo.trim();
+      } else {
+        delete data.params.registrationNo; 
+      }
+      
+      const hospitalId = data?.state?.searchForm?.hospitalId;
+      if (hospitalId && hospitalId.trim() !== "") {
+        data.params.hospitalId = encodeURIComponent(hospitalId.trim());
+      } else {
+        delete data.params.hospitalId;
+      }
+
+      // Add motherName if provided
+      const motherName = data?.state?.searchForm?.motherName;
+      if (motherName && motherName.trim() !== "") {
+        data.params.motherName = motherName.trim();
+      } else {
+        delete data.params.motherName;
+      }
+
+      // Add fatherName if provided
+      const fatherName = data?.state?.searchForm?.fatherName;
+      if (fatherName && fatherName.trim() !== "") {
+        data.params.fatherName = fatherName.trim();
+      } else {
+        delete data.params.fatherName;
+      }
+
+      // Add spouseName if provided
+      const spouseName = data?.state?.searchForm?.spouseName;
+      if (spouseName && spouseName.trim() !== "") {
+        data.params.spouseName = spouseName.trim();
+      } else {
+        delete data.params.spouseName;
+      }
+
+      // Add name if provided
+      const name = data?.state?.searchForm?.name;
+      if (name && name.trim() !== "") {
+        data.params.name = name.trim();
+      } else {
+        delete data.params.name;
+      }
+
       data.params.tenantId = tenantId;
       console.log(data, "data in preProcess of searchDeathConfig");
       if (data?.params?.fromDate || data?.params?.toDate) {
@@ -91,7 +140,7 @@ export const UICustomizations = {
       
 
       switch (key) {
-        case "view":
+        case "View":
           return <ViewLinkButton tenantId={tenantId} certificateId={row?.id} />;
           // return (
           //   <span className="link">
@@ -123,10 +172,14 @@ export const UICustomizations = {
       }
     },
     customValidationCheck: (data) => {
-      //checking both to and from date are present
-      const { fromDate, toDate } = data;
-      if ((fromDate === "" && toDate !== "") || (fromDate !== "" && toDate === "")) return { warning: true, label: "ES_COMMON_ENTER_DATE_RANGE" };
+   const { fromDate, toDate } = data;
 
+   console.log("customValidationCheck called with data:", data);
+
+      if (fromDate && toDate && new Date(toDate) < new Date(fromDate)) {
+        console.log("Validation error: To date before From date");
+        return { error: true, label: "TO_DATE_CANNOT_BE_BEFORE_FROM_DATE" };
+      }
       return false;
     },
  }

@@ -8,24 +8,24 @@ const createDeathConfig = [
         disable: false,
         withoutLabel: true,
         populators: {
-          name: "checkbox-label",
+          name: "checkboxlabel",
           title: "This is a Legacy Record",
         },
       },
     ],
   },
   {
-    head: "Registration Details",
+    head: "BND_REGISTRATION",
     body: [
       {
         inline: true,
-        label: "Registration Number",
+        label: "BND_REG_NO_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Registration Number",
         disable:true,
         populators: {
-          name: "Registration Number",
+          name: "RegistrationNumber",
           error: "Registration Number is Required!",
           validation: {
             minLength: 5,
@@ -38,7 +38,7 @@ const createDeathConfig = [
         isMandatory: false,
         key: "Hospital Name",
         type: "dropdown",
-        label: "Enter Hospital Name",
+        label: "BND_HOSPITALNAME_LABEL",
         disable: false,
         placeholder: "Don't select if NA",
         populators: {
@@ -55,7 +55,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Date of Registration",
+        label: "BND_DEATH_DOR",
         isMandatory: true,
         key: "doRegistration",
         type: "date",
@@ -71,11 +71,11 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Information of the Deceased",
+    head: "BND_INFO_OF_DECEASED",
     body: [
       {
         inline: true,
-        label: "Date of Death",
+        label: "BND_DEATH_DOB_PLACEHOLDER",
         isMandatory: true,
         key: "dob",
         type: "date",
@@ -84,7 +84,7 @@ const createDeathConfig = [
           name: "dob",
           error: "Date of Death is Required!",
           validation: {
-            maxDate: new Date().toISOString().split("T")[0], // Cannot be a future date
+            maxDate: new Date().toISOString().split("T")[0], 
           },
         },
       },
@@ -92,7 +92,7 @@ const createDeathConfig = [
         isMandatory: true,
         key: "Gender",
         type: "dropdown",
-        label: "Gender",
+        label: "BND_GENDER",
         disable: false,
         populators: {
           name: "Gender",
@@ -108,7 +108,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Age",
+        label: "BND_AGE",
         type: "text",
         isMandatory: true,
         placeholder: "Ex: 10 years 6 months 3 days",
@@ -122,12 +122,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
         populators: {
-          name: "First Name",
+          name: "FirstName",
           error: "First Name is Required!",
           validation: {
             minLength: 3,
@@ -138,12 +138,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
         populators: {
-          name: "Middle Name",
+          name: "MiddleName",
           error: "Middle Name is Required!",
           validation: {
             maxLength: 50,
@@ -153,12 +153,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
         populators: {
-          name: "Last Name",
+          name: "LastName",
           error: "Last Name is Required!",
           validation: {
             minLength: 3,
@@ -169,12 +169,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "EID Number",
+        label: "BND_EIDNO",
         type: "number",
         isMandatory: false,
         placeholder: "EID Number",
         populators: {
-          name: "EID Number",
+          name: "EIDNumber",
           error: "EID Number is Required!",
           validation: {
             pattern: /^[0-9]{12}$/, // 12-digit number
@@ -183,12 +183,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "number",
         isMandatory: false,
         placeholder: "Aadhar Number",
         populators: {
-          name: "Aadhar Number",
+          name: "AadharNumber",
           error: "Aadhar Number is Required!",
           validation: {
             pattern: /^[0-9]{12}$/, // 12-digit number
@@ -197,7 +197,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Nationality",
+        label: "BND_NATIONALITY",
         type: "text",
         isMandatory: true,
         placeholder: "Nationality",
@@ -213,7 +213,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Religion",
+        label: "BND_RELIGION",
         type: "text",
         isMandatory: false,
         placeholder: "Religion",
@@ -229,16 +229,16 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Information of Death",
+    head: "BND_DEATH_INFO",
     body: [
       {
         inline: true,
-        label: "Death Place",
+        label: "BND_DEATH_PLACE",
         type: "text",
         isMandatory: true,
         placeholder: "Death Place",
         populators: {
-          name: "Death Place",
+          name: "DeathPlace",
           error: "Death Place is Required!",
           validation: {
             minLength: 3,
@@ -248,12 +248,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "ICD Code",
+        label: "BND_ICDCODE",
         type: "text",
         isMandatory: false,
         placeholder: "ICD Code",
         populators: {
-          name: "ICD Code",
+          name: "ICDCode",
           error: "ICD Code is Required!",
           validation: {
             pattern: /^[A-Za-z0-9]+$/, // Alphanumeric only
@@ -263,16 +263,16 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Spouse Information",
+    head: "BND_SPOUSES_INFO",
     body: [
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
         populators: {
-          name: "First Name2",
+          name: "FirstName2",
           error: "First Name is Required!",
           validation: {
             minLength: 3,
@@ -283,12 +283,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
         populators: {
-          name: "Middle Name2",
+          name: "MiddleName2",
           error: "Middle Name is Required!",
           validation: {
             maxLength: 50,
@@ -298,12 +298,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
         populators: {
-          name: "Last Name2",
+          name: "LastName2",
           error: "Last Name is Required!",
           validation: {
             minLength: 3,
@@ -314,12 +314,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "number",
         isMandatory: false,
         placeholder: "Aadhar Number",
         populators: {
-          name: "Aadhar Number2",
+          name: "AadharNumber2",
           error: "Aadhar Number is Required!",
           validation: {
             pattern: /^[0-9]{12}$/, // 12-digit number
@@ -328,12 +328,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Email ID",
+        label: "BND_EMAIL_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Email ID",
         populators: {
-          name: "Email ID",
+          name: "EmailID",
           error: "Email ID is Required!",
           validation: {
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Email format
@@ -347,7 +347,7 @@ const createDeathConfig = [
         isMandatory: false,
         placeholder: "Mobile Number",
         populators: {
-          name: "Mobile Number",
+          name: "MobileNumber",
           error: "Mobile Number is Required!",
           validation: {
             pattern: /^[6-9][0-9]{9}$/, // Valid Indian mobile number
@@ -357,16 +357,16 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Father's Information",
+    head: "BND_FATHERS_INFO",
     body: [
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
         populators: {
-          name: "First Name3",
+          name: "FirstName3",
           error: "First Name is Required!",
           validation: {
             minLength: 3,
@@ -377,12 +377,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
         populators: {
-          name: "Middle Name3",
+          name: "MiddleName3",
           error: "Middle Name is Required!",
           validation: {
             maxLength: 50,
@@ -392,12 +392,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
         populators: {
-          name: "Last Name3",
+          name: "LastName3",
           error: "Last Name is Required!",
           validation: {
             minLength: 3,
@@ -408,12 +408,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "number",
         isMandatory: false,
         placeholder: "Aadhar Number",
         populators: {
-          name: "Aadhar Number3",
+          name: "AadharNumber3",
           error: "Aadhar Number is Required!",
           validation: {
             pattern: /^[0-9]{12}$/, // 12-digit number
@@ -422,11 +422,11 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Email ID",
+        label: "BND_EMAIL_LABEL",
         type: "text",
         placeholder: "Email ID",
         populators: {
-          name: "Email ID2",
+          name: "EmailID2",
           error: "Email ID is Required!",
           validation: {
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Email format
@@ -439,7 +439,7 @@ const createDeathConfig = [
         type: "number",
         placeholder: "Mobile Number",
         populators: {
-          name: "Mobile Number2",
+          name: "MobileNumber2",
           error: "Mobile Number is Required!",
           validation: {
             pattern: /^[6-9][0-9]{9}$/, // Valid Indian mobile number
@@ -449,16 +449,16 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Mother's Information",
+    head: "BND_MOTHERS_INFO",
     body: [
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
         populators: {
-          name: "First Name4",
+          name: "FirstName4",
           error: "First Name is Required!",
           validation: {
             minLength: 3,
@@ -469,12 +469,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
         populators: {
-          name: "Middle Name4",
+          name: "MiddleName4",
           error: "Middle Name is Required!",
           validation: {
             maxLength: 50,
@@ -484,12 +484,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
         populators: {
-          name: "Last Name4",
+          name: "LastName4",
           error: "Last Name is Required!",
           validation: {
             minLength: 3,
@@ -500,12 +500,12 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "number",
         isMandatory: false,
         placeholder: "Aadhar Number",
         populators: {
-          name: "Aadhar Number4",
+          name: "AadharNumber4",
           error: "Aadhar Number is Required!",
           validation: {
             pattern: /^[0-9]{12}$/, // 12-digit number
@@ -514,7 +514,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Email ID",
+        label: "BND_EMAIL_LABEL",
         type: "text",
         placeholder: "Email ID",
         isMandatory: false,
@@ -543,50 +543,12 @@ const createDeathConfig = [
       },
     ]
   },
-  // {
-  //   head: "Parent's Information",
-  //   body: [
-  //     {
-  //       key: "ParentInfoCard",
-  //       type: "component",
-  //       component: "ParentInfoCard",
-  //       withoutLabel: true,
-  //       disable: false,
-  //       customProps: {
-  //         parentType: "Father" 
-  //       },
-  //       populators: {
-  //         name: "parentInfo", 
-  //         required: true
-  //       }
-  //     }
-  //   ]
-  // },
-  // {
-  //   head: "Parent's Information",
-  //   body: [
-  //     {
-  //       key: "ParentInfoCard",
-  //       type: "component",
-  //       component: "ParentInfoCard",
-  //       withoutLabel: true,
-  //       disable: false,
-  //       customProps: {
-  //         parentType: "Mother" 
-  //       },
-  //       populators: {
-  //         name: "parentInfo", 
-  //         required: true
-  //       }
-  //     }
-  //   ]
-  // },
   {
-    head: "Address of Deceased at the Time of Death",
+    head: "BND_PRESENT_ADDR_DURING_DEATH",
     body: [
       {
         inline: true,
-        label: "Building Number",
+        label: "BND_BUILDINGNO_LABEL",
         type: "number",
         isMandatory: false,
         placeholder: "Building Number",
@@ -598,7 +560,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "House No",
+        label: "BND_HOUSENO_LABEL",
         type: "number",
         isMandatory: false,
         placeholder: "House No",
@@ -610,7 +572,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Street Name",
+        label: "BND_STREETNAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Street Name",
@@ -622,7 +584,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Locality",
+        label: "BND_LOCALITY_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Locality",
@@ -634,7 +596,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Tehsil",
+        label: "BND_TEHSIL_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Tehsil",
@@ -646,7 +608,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "District",
+        label: "BND_DISTRICT_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "District",
@@ -658,7 +620,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "City",
+        label: "BND_APPL_CANT",
         type: "text",
         isMandatory: false,
         placeholder: "City",
@@ -670,7 +632,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "State",
+        label: "BND_STATE_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "State",
@@ -682,7 +644,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Country",
+        label: "BND_COUNTRY_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Country",
@@ -694,7 +656,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Pincode",
+        label: "BND_PINNO_LABEL",
         type: "number",
         isMandatory: false,
         placeholder: "Pincode",
@@ -722,132 +684,132 @@ const createDeathConfig = [
     ],
   },
   {
-    head: "Permanent Address of Deceased",
+    head: "BND_DEATH_ADDR_PERM",
     body: [
-      {
-        inline: true,
-        label: "Building Number",
-        type: "number",
-        isMandatory: true,
-        placeholder: "Building Number",
-        populators: {
-          name: "permanentBuildingNumber",
-          validation: { minLength: 1 },
-          error: "Building Number is required!",
-        },
-      },
-      {
-        inline: true,
-        label: "House No",
-        type: "number",
-        isMandatory: true,
-        placeholder: "House No",
-        populators: {
-          name: "permanentHouseNo",
-          validation: { minLength: 1 },
-          error: "House No is required!",
-        },
-      },
-      {
-        inline: true,
-        label: "Street Name",
-        type: "text",
-        isMandatory: true,
-        placeholder: "Street Name",
-        populators: {
-          name: "permanentStreetName",
-          validation: { minLength: 3 },
-          error: "Street Name must have at least 3 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "Locality",
-        type: "text",
-        isMandatory: true,
-        placeholder: "Locality",
-        populators: {
-          name: "permanentLocality",
-          validation: { minLength: 2 },
-          error: "Locality must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "Tehsil",
-        type: "text",
-        isMandatory: true,
-        placeholder: "Tehsil",
-        populators: {
-          name: "permanentTehsil",
-          validation: { minLength: 2 },
-          error: "Tehsil must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "District",
-        type: "text",
-        isMandatory: true,
-        placeholder: "District",
-        populators: {
-          name: "permanentDistrict",
-          validation: { minLength: 2 },
-          error: "District must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "City",
-        type: "text",
-        isMandatory: true,
-        placeholder: "City",
-        populators: {
-          name: "permanentCity",
-          validation: { minLength: 2 },
-          error: "City must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "State",
-        type: "text",
-        isMandatory: true,
-        placeholder: "State",
-        populators: {
-          name: "permanentState",
-          validation: { minLength: 2 },
-          error: "State must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "Country",
-        type: "text",
-        isMandatory: true,
-        placeholder: "Country",
-        populators: {
-          name: "permanentCountry",
-          validation: { minLength: 2 },
-          error: "Country must have at least 2 characters!",
-        },
-      },
-      {
-        inline: true,
-        label: "Pincode",
-        type: "number",
-        isMandatory: true,
-        placeholder: "Pincode",
-        populators: {
-          name: "permanentPincode",
-          validation: { minLength: 6, maxLength: 6 },
-          error: "Pincode must be 6 digits!",
-        },
-      },
-    ],
+  {
+    inline: true,
+    label: "BND_BUILDINGNO_LABEL",
+    type: "number",
+    isMandatory: true,
+    placeholder: "Building Number",
+    populators: {
+      name: "permanentBuildingNumber",
+      validation: { minLength: 1 },
+      error: "Building Number is required!",
+    },
   },
   {
-    head: "Informant’s Information",
+    inline: true,
+    label: "BND_HOUSENO_LABEL",
+    type: "number",
+    isMandatory: true,
+    placeholder: "House No",
+    populators: {
+      name: "permanentHouseNo",
+      validation: { minLength: 1 },
+      error: "House No is required!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_STREETNAME_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "Street Name",
+    populators: {
+      name: "permanentStreetName",
+      validation: { minLength: 3 },
+      error: "Street Name must have at least 3 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_LOCALITY_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "Locality",
+    populators: {
+      name: "permanentLocality",
+      validation: { minLength: 2 },
+      error: "Locality must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_TEHSIL_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "Tehsil",
+    populators: {
+      name: "permanentTehsil",
+      validation: { minLength: 2 },
+      error: "Tehsil must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_DISTRICT_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "District",
+    populators: {
+      name: "permanentDistrict",
+      validation: { minLength: 2 },
+      error: "District must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_APPL_CANT",
+    type: "text",
+    isMandatory: true,
+    placeholder: "City",
+    populators: {
+      name: "permanentCity",
+      validation: { minLength: 2 },
+      error: "City must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_STATE_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "State",
+    populators: {
+      name: "permanentState",
+      validation: { minLength: 2 },
+      error: "State must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_COUNTRY_LABEL",
+    type: "text",
+    isMandatory: true,
+    placeholder: "Country",
+    populators: {
+      name: "permanentCountry",
+      validation: { minLength: 2 },
+      error: "Country must have at least 2 characters!",
+    },
+  },
+  {
+    inline: true,
+    label: "BND_PINNO_LABEL",
+    type: "number",
+    isMandatory: true,
+    placeholder: "Pincode",
+    populators: {
+      name: "permanentPincode",
+      validation: { minLength: 6, maxLength: 6 },
+      error: "Pincode must be 6 digits!",
+    },
+  },
+  ],
+  },
+  {
+    head: "BND_INFORMANTS_INFO",
     body: [
       {
         inline: true,
@@ -863,7 +825,7 @@ const createDeathConfig = [
       },
       {
         inline: true,
-        label: "Address",
+        label: "BND_ADDRESS",
         type: "text",
         isMandatory: false,
         placeholder: "Address",
@@ -879,7 +841,7 @@ const createDeathConfig = [
     body: [
       {
         inline: true,
-        label: "Remarks",
+        label: "BND_REMARKS_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Remarks",
