@@ -87,6 +87,8 @@ public class ReportQueryBuilder {
 
         baseQuery = baseQuery.replaceAll("\\$userid", ":userId");
 
+	baseQuery = baseQuery.replaceAll("\\$service", ":service");
+
         for (SearchParam searchParam : searchParams) {
             baseQuery = baseQuery.replaceAll("\\$" + searchParam.getName(), ":" + searchParam.getName());
         }
