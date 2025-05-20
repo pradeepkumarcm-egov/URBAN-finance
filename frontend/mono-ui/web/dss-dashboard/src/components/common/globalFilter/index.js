@@ -65,7 +65,13 @@ class GlobalFilter extends Component {
 
     componentDidMount() {
         let tenentCode = `${getTenantId()}` ? `${getTenantId()}` : ''
-        let userInfo = JSON.parse(`${localStorage.getItem('user-info')}` ? `${localStorage.getItem('user-info')}` : '');
+        let userInfo = {};
+        if (process.env.REACT_APP_NAME == "Citizen") {
+            userInfo = JSON.parse(`${localStorage.getItem('Citizen.user-info')}` ? `${localStorage.getItem('Citizen.user-info')}` : '');
+        }
+        else {
+            userInfo = JSON.parse(`${localStorage.getItem('Employee.user-info')}` ? `${localStorage.getItem('Employee.user-info')}` : '');
+        }
         let tenentList = []
         if (userInfo && userInfo['roles'] && Array.isArray(userInfo['roles']) && userInfo['roles'].length > 0) {
             userInfo['roles'].map(role => {
@@ -80,14 +86,14 @@ class GlobalFilter extends Component {
         }
 
 
-        let tenent = stateTenant() ||  '';
+        let tenent = stateTenant() || '';
         let req = {
             "RequestInfo": {
                 "authToken": ""
             },
             "MdmsCriteria": {
                 "tenantId": tenent && tenent !== 'null' ? tenent : '',
-                "moduleDetails": [   {
+                "moduleDetails": [{
                     "moduleName": "dss-dashboard",
                     "masterDetails": [
                         {
@@ -97,16 +103,16 @@ class GlobalFilter extends Component {
                             "name": "SERVICES"
                         }, {
                             "name": "CHART_COLOR_CODE"
-                        } 
+                        }
                     ]
                 },
-                    {
-                        "moduleName": "tenant",
-                        "masterDetails": [
-                            {
-                                "name": "tenants"
-                            }]
-                    }
+                {
+                    "moduleName": "tenant",
+                    "masterDetails": [
+                        {
+                            "name": "tenants"
+                        }]
+                }
                 ]
             }
         }
@@ -207,7 +213,7 @@ class GlobalFilter extends Component {
             } else {
                 if (newFilterData.duration.title === 'CUSTOM') {
                     var formatL = moment.localeData().longDateFormat('ll');
-                    var formatYearlessL = formatL.replace(/YYYY/g,'YY');
+                    var formatYearlessL = formatL.replace(/YYYY/g, 'YY');
                     newFilterData.duration.title = moment.unix(_.get(newFilterData, 'duration.value.startDate')).format(formatYearlessL)
 
                         + ' - ' + moment.unix(_.get(newFilterData, 'duration.value.endDate')).format(formatYearlessL);
@@ -252,7 +258,7 @@ class GlobalFilter extends Component {
                         "MdmsCriteria": {
                             "tenantId": ulbs[ulbs.length - 1],
 
-                            "moduleDetails": [ 
+                            "moduleDetails": [
                                 {
                                     "moduleName": "egov-location",
                                     "masterDetails": [
@@ -282,7 +288,7 @@ class GlobalFilter extends Component {
             } else {
                 if (newFilterData.duration.title === 'CUSTOM') {
                     var formatL = moment.localeData().longDateFormat('ll');
-                    var formatYearlessL = formatL.replace(/YYYY/g,'YY');
+                    var formatYearlessL = formatL.replace(/YYYY/g, 'YY');
                     newFilterData.duration.title = moment.unix(_.get(newFilterData, 'duration.value.startDate')).format(formatYearlessL)
 
                         + '-' + moment.unix(_.get(newFilterData, 'duration.value.endDate')).format(formatYearlessL);
@@ -437,7 +443,7 @@ class GlobalFilter extends Component {
                     case "DDRs":
                         return this.renderAutoComplete(object.label, this.handleChanges, this.state.ddrs, object.values, '')
                     case "Services":
-                        return this.renderSimpleSelect(object.label,JSON.parse(sessionStorage.getItem('SERVICES')) , this.handleChanges)
+                        return this.renderSimpleSelect(object.label, JSON.parse(sessionStorage.getItem('SERVICES')), this.handleChanges)
                     case "Date Range":
                         return this.renderDateRange(object.label, object.values);
                 }
