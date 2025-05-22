@@ -3,12 +3,14 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import config from "./config.json";
-import swaggerTools from "swagger-tools";
 import bodyParser from "body-parser";
 import api from "./controller";
 const { Pool } = require("pg");
 import tracer from "./middleware/tracer";
 import envVariables from "./envVariables";
+import { OpenApiValidator } from "express-openapi-validator";
+var swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("./swagger.json");
 
 var ssl = envVariables.DB_SSL;
 if(typeof ssl =="string")
@@ -48,24 +50,41 @@ app.use(
 
 app.use(tracer());
 
-let swaggerDoc = require("./swagger.json");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-swaggerTools.initializeMiddleware(swaggerDoc, middleware => {
-  app.use(middleware.swaggerMetadata());
+// Add OpenAPI validation middleware
+new OpenApiValidator({
+  apiSpec: swaggerDocument,
+  validateRequests: true, // (default)
+  validateResponses: false, // Enable if you want response validation
+}).install(app)
+  .then(() => {
+    // Define your routes
+    app.use("/", api(pool));
 
-  // Validate Swagger requests
-  // app.use(middleware.swaggerValidator());
+    // Error handler middleware
+    app.use((err, req, res, next) => {
+      console.error(err);
+      if (err.status) {
+        res.status(err.status).json({
+          message: err.message,
+          errors: err.errors,
+        });
+      } else {
+        res.status(500).send("Oops, something went wrong.");
+      }
+    });
 
-  // Route validated requests to appropriate controller
-  // app.use(middleware.swaggerRouter(options));
-
-  // Serve the Swagger documents and Swagger UI
-  app.use(middleware.swaggerUi());
-  let serverPort = envVariables.SERVER_PORT;
-  app.server.listen(serverPort, () => {
-    console.log("port is ", serverPort);
+    // Start server
+    const serverPort = envVariables.SERVER_PORT;
+    app.server.listen(serverPort, () => {
+      console.log("Server listening on port", serverPort);
+    });
+  })
+  .catch((e) => {
+    console.error("Failed to start server:", e);
   });
-});
+  
 app.use("/", api(pool));
 
 //error handler middleware
