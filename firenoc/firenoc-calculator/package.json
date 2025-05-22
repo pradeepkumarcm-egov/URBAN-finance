@@ -58,5 +58,9 @@
     "babel-preset-stage-0": "^6.5.0",
     "eslint": "^3.1.1",
     "nodemon": "^1.9.2"
+  },
+  "overrides": {
+    "path-loader>superagent": "3.8.3",
+    "json-refs>superagent": "3.8.3"
   }
 }
