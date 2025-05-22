@@ -44,7 +44,9 @@
     "morgan": "1.8.0",
     "pg": "7.6.1",
     "resource-router-middleware": "0.6.0",
-    "swagger-tools": "0.10.4",
+    "swagger-express-validator": "^1.0.0",
+    "swagger-model-validator": "^3.0.10",
+    "swagger-ui-express": "^4.0.2",
     "uuid": "3.3.2",
     "winston": "3.2.1"
   },
