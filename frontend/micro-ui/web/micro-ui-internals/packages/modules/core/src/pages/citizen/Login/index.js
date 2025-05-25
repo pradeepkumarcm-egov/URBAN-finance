@@ -14,7 +14,7 @@ const DEFAULT_REDIRECT_URL = "/digit-ui/citizen";
 
 /* set citizen details to enable backward compatiable */
 const setCitizenDetail = (userObject, token, tenantId) => {
-  let locale = JSON.parse(sessionStorage.getItem("Digit.initData"))?.value?.selectedLanguage;
+  let locale = JSON.parse(sessionStorage.getItem("Digit.locale"))?.value?.selectedLanguage || "en_IN";
   localStorage.setItem("Citizen.tenant-id", tenantId);
   localStorage.setItem("tenant-id", tenantId);
   localStorage.setItem("citizen.userRequestObject", JSON.stringify(userObject));

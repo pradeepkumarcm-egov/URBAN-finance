@@ -3,7 +3,7 @@ import { Loader } from "@egovernments/digit-ui-react-components";
 import { useHistory, useLocation } from "react-router-dom";
 
 const setCitizenDetail = (userObject, token, tenantId) => {
-  let locale = JSON.parse(sessionStorage.getItem("Digit.initData"))?.value?.selectedLanguage;
+  let locale = JSON.parse(sessionStorage.getItem("Digit.locale"))?.value?.selectedLanguage || "en_IN";
   localStorage.setItem("Citizen.tenant-id", tenantId);
   localStorage.setItem("tenant-id", tenantId);
   localStorage.setItem("citizen.userRequestObject", JSON.stringify(userObject));

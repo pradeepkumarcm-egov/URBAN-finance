@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 
 const setEmployeeDetail = (userObject, token) => {
-    let locale = JSON.parse(sessionStorage.getItem("Digit.locale"))?.value;
+    let locale = JSON.parse(sessionStorage.getItem("Digit.locale"))?.value || "en_IN";
     localStorage.setItem("Employee[HPM] Error occurred while trying to proxy request /localization/messages/v1/_search?module=rainmaker-privacy-policy&locale=en_IN&_=1743502018537 from localhost:3000 to https://unified-qa.digit.org (ECONNRESET) (https://nodejs.org/api/errors.html#errors_common_system_errors).tenant-id", userObject?.tenantId);
     localStorage.setItem("tenant-id", userObject?.tenantId);
     localStorage.setItem("Employee.tenant-id", userObject?.tenantId);
