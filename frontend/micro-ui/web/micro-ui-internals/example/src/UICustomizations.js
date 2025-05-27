@@ -84,6 +84,7 @@ const ViewLinkButton = ({ tenantId, certificateId,hospitalname }) => {
       {
         myData: certificateId,
         myhospitalname: hospitalname,
+        mytenantId: tenantId,
       }
     );
   };

@@ -8,6 +8,7 @@ import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import ViewDeath from "./viewDeath";
 import UpdateDeath from "./updateDeath";
 import DeathCard from "../../components/DeathCard";
+import PayandDownload from "./payanddownload";
 
 
 const EmployeeApp = ({ path, url, userType }) => {
@@ -47,6 +48,8 @@ const EmployeeApp = ({ path, url, userType }) => {
         path={`${path}/death-common/update-death`}
         component={UpdateDeath}
         />
+
+         <PrivateRoute path={`${path}/egov-common/pay`} component={PayandDownload} />
     </Switch>
   );
 };

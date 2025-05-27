@@ -26,18 +26,17 @@ const MyApplications = () => {
   changeQueryName: `deathApplicationsSearch-${tenantId}`,
 });
 
-
- useEffect(() => {
-    console.log("Full API Response:", data);
-    const certs = data?.applications;
-    console.log("Certificates:", certs);
-    if(certs){
-        const viewConfig = viewApplicationConfig(certs,t);
-        console.log("Generated Config:", viewConfig);
+useEffect(() => {
+    console.log("Full API Response for MyApplications:", data); // Check this log carefully
+    const applications = data?.applications;
+    console.log("Applications array from API:", applications); // Log the array itself
+    if (applications) {
+        // Pass the searchTenantId as props, so viewApplicationConfig can use it as a fallback
+        const viewConfig = viewApplicationConfig(applications, t, { tenantId: tenantId });
+        console.log("Generated Config for MyApplications:", viewConfig);
         setConfig(viewConfig);
-    }     
-  }, [data]);
-
+    }
+  }, [data, t, tenantId]);
 if (isLoading) {
   return <Loader />;
 }

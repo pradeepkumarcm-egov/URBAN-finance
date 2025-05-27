@@ -29,6 +29,8 @@ const PayandDownload = () => {
   const [billDetails, setBillDetails] = useState(null);
 
 
+  console.log("edewfwe", id, tenantId);
+
    const initialPaidByFromStaticConfig = useMemo(() => (
     payandDownloadConfig
       .find(s => s.head === "Payer Details")
@@ -165,6 +167,8 @@ const PayandDownload = () => {
       const payerNameField = payerDetailsSection.body.find(field => field.key === "payerName");
       const payerMobileField = payerDetailsSection.body.find(field => field.key === "payermobileNumber");
 
+      console.log("cdscfcs",payerNameField, payerMobileField);
+
       if (selectedPaidBy?.code === "OWNER") {
         if (payerNameField) { payerNameField.disable = true; payerNameField.isMandatory = false; }
         if (payerMobileField) { payerMobileField.disable = true; payerMobileField.isMandatory = false; }
@@ -181,10 +185,6 @@ const PayandDownload = () => {
     const previousPaidByCodeInRef = prevSelectedPaidByRef.current?.code;
     const currentPaidByCodeInForm = currentPaidByInForm?.code;
 
-    // console.log(`onFormValueChange: PrevRef Code: ${previousPaidByCodeInRef}, CurrentForm Code: ${currentPaidByCodeInForm}, formData.paidBy:`, formData?.paidBy);
-
-    // Step 1: If 'paidBy' in the form has changed from what we last processed, update our local state.
-    // This local state change will trigger the `dynamicFormConfig` to re-evaluate.
     if (currentPaidByCodeInForm !== previousPaidByCodeInRef) {
       console.log(`PaidBy changed from ${previousPaidByCodeInRef} to ${currentPaidByCodeInForm}. Updating state & ref.`);
       setSelectedPaidBy(currentPaidByInForm); // Update state --> triggers config recalculation
@@ -224,29 +224,54 @@ const PayandDownload = () => {
 
 
   return (
-   <React.Fragment>
-       <div style={{ display: "flex", alignItems: "center" }}>
-         <Header>Payment Information</Header>
-         <Button
-           className="custom-class"
-           label={`Consumer Code ${consumerCode}`}
-           variation="secondary"
-           style={{ 
-             marginLeft: "16px", 
-             whiteSpace: "nowrap", 
-           }}
-         />
-       </div>
-       <FormComposerV2
-         key={`form-${selectedPaidBy?.code}`} // This forces re-render when paidBy changes
-         label={t("Make Payment")}
-         config={dynamicFormConfig} // Use the dynamic config instead of static configs
-         defaultValues={defaultValues}
-         onSubmit={(data) => onSubmit(data)}
-         onFormValueChange={onFormValueChange}
-         labelfielddirectionvertical={false}
-       />
-     </React.Fragment>
+    // <React.Fragment>
+    //   <div style={{ display: "flex", alignItems: "center" }}>
+    //       <Header>Payment Information</Header>
+    //       <Button
+    //         className="custom-class"
+    //         label={`Consumer Code ${consumerCode}`}  // Dynamic label from state
+    //         variation="secondary"
+    //         style={{ 
+    //           marginLeft: "16px", 
+    //           whiteSpace: "nowrap", 
+    //         }}
+    //        />
+    //   </div>
+    //   <FormComposerV2
+    //   label={t( "Make Payment")}
+    //       config={configs.map((config) => ({
+    //                 ...config,
+    //               }))}
+    //       defaultValues={defaultValues}
+    //       onSubmit={(data) => onSubmit(data)}
+    //       onFormValueChange={onFormValueChange}
+    //       labelfielddirectionvertical={false}
+    //   />
+    // </React.Fragment>
+  <React.Fragment>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Header>Payment Information</Header>
+      <Button
+        className="custom-class"
+        label={`Consumer Code ${consumerCode}`}
+        variation="secondary"
+        style={{ 
+          marginLeft: "16px", 
+          whiteSpace: "nowrap", 
+        }}
+      />
+    </div>
+    <FormComposerV2
+      key={`form-${selectedPaidBy?.code}`} // This forces re-render when paidBy changes
+      label={t("Make Payment")}
+      config={dynamicFormConfig} // Use the dynamic config instead of static configs
+      defaultValues={defaultValues}
+      onSubmit={(data) => onSubmit(data)}
+      onFormValueChange={onFormValueChange}
+      labelfielddirectionvertical={false}
+    />
+  </React.Fragment>
+
   );
 };
 

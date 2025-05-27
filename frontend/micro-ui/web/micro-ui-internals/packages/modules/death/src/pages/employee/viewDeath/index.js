@@ -215,29 +215,180 @@
 
 
 
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+// import { useLocation, useHistory } from "react-router-dom";
+// import { Button, Footer } from "@egovernments/digit-ui-components";
+// import { ViewComposer, Loader } from "@egovernments/digit-ui-react-components";
+// import viewDeathConfig from "./viewDeathConfig";
+// import { useTranslation } from "react-i18next";
+// import { usePdfDownloader } from "../../../components/usePdfDownloader"; // Adjust path as needed
+
+// const ViewDeath = () => {
+//   const { t } = useTranslation();
+//   const location = useLocation();
+//   const history = useHistory();
+//   const id = location.state?.myData; // This is the certificate ID
+//   const Hospitalname = location.state?.myhospitalname;
+
+//   const currentLocalTenantId = Digit.ULBService.getCurrentTenantId(); // Get it once
+//   const authToken = window?.Digit?.UserService?.getUser()?.access_token;
+
+//   // Use the custom hook for download logic
+//   // Pass the certificate ID to the hook if it's stable and known at this level
+//   const { initiateDownload, isDownloading, downloadError } = usePdfDownloader(id);
+
+
+//   const {
+//     data: certificateViewData,
+//     isLoading: isViewDataLoading,
+//     error: viewDataError,
+//   } = Digit.Hooks.useCustomAPIHook({
+//     url: "/birth-death-services/death/_viewfullcertdata",
+//     method: "POST",
+//     params: { tenantId: currentLocalTenantId, id }, // Use currentLocalTenantId
+//     body: {
+//       RequestInfo: { /* ... */ authToken },
+//     },
+//     headers: { "Content-Type": "application/json" },
+//     changeQueryName: `deathCertData_${id}`,
+//     config: {
+//         enabled: !!id && !!currentLocalTenantId, // Use currentLocalTenantId
+//     }
+//   });
+
+//   const [config, setConfig] = useState(null);
+
+//   const handleEditClick = () => {
+//     // ... (same as before)
+//     const certs = certificateViewData?.DeathCertificate;
+//     if (certs && certs.length > 0) {
+//       const certToEdit = { ...certs[0] };
+//       certToEdit.hospitalname = Hospitalname;
+//       history.push(
+//         `/${window.contextPath}/employee/death/death-common/update-death?action=EDIT&certificateId=${id}&module=death`,
+//         {
+//           editdata: certToEdit,
+//           certificateId: id,
+//           module: "death",
+//         }
+//       );
+//     } else {
+//       console.error("No certificate data found to edit.");
+//     }
+//   };
+
+//   useEffect(() => {
+    
+//     if (certificateViewData?.DeathCertificate && certificateViewData.DeathCertificate.length > 0) {
+//       const certs = [...certificateViewData.DeathCertificate];
+//       certs[0].hospitalname = Hospitalname;
+//       const viewConfig = viewDeathConfig(certs, id, currentLocalTenantId, t); 
+//       setConfig(viewConfig);
+//     }
+//   }, [certificateViewData, Hospitalname, id, currentLocalTenantId, t]); 
+
+
+//   // Handler for the download button
+//   const HandleDownloadPdf = () => {
+//     // Call the function from our custom hook
+//     initiateDownload(currentLocalTenantId, id);
+//   };
+
+//   // Optional: Display download errors to the user
+//   useEffect(() => {
+//     if (downloadError) {
+//         // You could show a toast message here, e.g., Digit.Toast.show(downloadError, "error");
+//         console.error("Download Error:", downloadError);
+//     }
+//   }, [downloadError]);
+
+
+//   if (!id && !location.state) {
+//     return <div>Error: No certificate ID found. Please go back and select a certificate.</div>;
+//   }
+
+//   // Combined loading state for the page
+//   const pageIsLoading = isViewDataLoading || !config;
+
+//   if (pageIsLoading) {
+//     return <Loader />;
+//   }
+
+//   if (viewDataError) {
+//     console.error("Error fetching certificate data:", viewDataError);
+//     return <div>Error fetching certificate data. Please try again.</div>;
+//   }
+
+//   return (
+//     <div>
+//       {ViewComposer && config ? <ViewComposer data={config} /> : <div>Loading View Composer...</div>}
+//       {/* Optional: Display download error near the button or as a toast */}
+//       {/* {downloadError && <p style={{color: 'red'}}>{downloadError}</p>} */}
+//       <Footer
+//         actionFields={[
+//           <Button
+//             key="update-btn"
+//             icon="Edit"
+//             label={t("CORE_COMMON_UPDATE")}
+//             onClick={handleEditClick}
+//             type="button"
+//             variation="secondary"
+//           />,
+//           <Button
+//             key="download-btn"
+//             label={t("FREE_DOWNLOAD")}
+//             onClick={HandleDownloadPdf} // Calls our simplified handler
+//             className={"employee-download-btn-className"}
+//             variation="secondary"
+//             type="button"
+//             icon={"FileDownload"}
+//             disabled={isDownloading} // Use the loading state from the custom hook
+//           />,
+//         ]}
+//         className=""
+//       />
+//     </div>
+//   );
+// };
+
+// export default ViewDeath;
+
+
+
+
+import React, { useEffect, useState, useCallback } from "react"; // Added useCallback
 import { useLocation, useHistory } from "react-router-dom";
 import { Button, Footer } from "@egovernments/digit-ui-components";
 import { ViewComposer, Loader } from "@egovernments/digit-ui-react-components";
 import viewDeathConfig from "./viewDeathConfig";
 import { useTranslation } from "react-i18next";
-import { usePdfDownloader } from "../../../components/usePdfDownloader"; // Adjust path as needed
+import { usePdfDownloader } from "../../../components/usePdfDownloader"; 
 
 const ViewDeath = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const history = useHistory();
+
   const id = location.state?.myData; // This is the certificate ID
   const Hospitalname = location.state?.myhospitalname;
-
-  const currentLocalTenantId = Digit.ULBService.getCurrentTenantId(); // Get it once
+  const tenantId = location.state?.mytenantId || Digit.ULBService.getCurrentTenantId(); 
+  const currentLocalTenantId = Digit.ULBService.getCurrentTenantId();
   const authToken = window?.Digit?.UserService?.getUser()?.access_token;
 
-  // Use the custom hook for download logic
-  // Pass the certificate ID to the hook if it's stable and known at this level
-  const { initiateDownload, isDownloading, downloadError } = usePdfDownloader(id);
+  // --- State for UI and Data ---
+  const [config, setConfig] = useState(null);
+  const [showPayAndDownload, setShowPayAndDownload] = useState(false); // To control which button to show
+  
+
+  // --- Custom Hooks ---
+  const {
+    initiateDownload: initiateFreeDownload, // Rename for clarity
+    isDownloading: isFreeDownloading,
+    downloadError: freeDownloadError,
+  } = usePdfDownloader(id); // 'id' is for filename in hook
 
 
+  // --- Fetch Certificate View Data ---
   const {
     data: certificateViewData,
     isLoading: isViewDataLoading,
@@ -245,85 +396,133 @@ const ViewDeath = () => {
   } = Digit.Hooks.useCustomAPIHook({
     url: "/birth-death-services/death/_viewfullcertdata",
     method: "POST",
-    params: { tenantId: currentLocalTenantId, id }, // Use currentLocalTenantId
+    params: { tenantId: currentLocalTenantId, id },
     body: {
-      RequestInfo: { /* ... */ authToken },
+      RequestInfo: { apiId: "Rainmaker", ver: ".01", /* ... other RequestInfo params ... */ authToken },
     },
     headers: { "Content-Type": "application/json" },
     changeQueryName: `deathCertData_${id}`,
     config: {
-        enabled: !!id && !!currentLocalTenantId, // Use currentLocalTenantId
-    }
+      enabled: !!id && !!currentLocalTenantId,
+    },
   });
 
-  const [config, setConfig] = useState(null);
+  // --- Effect to set up ViewComposer config and determine button type ---
+  useEffect(() => {
+    if (certificateViewData?.DeathCertificate && certificateViewData.DeathCertificate.length > 0) {
+      const certData = certificateViewData.DeathCertificate[0];
+      console.log("ViewDeath: Certificate Data Received:", certData);
 
+      // Prepare data for ViewComposer
+      const certsForView = [{ ...certData }]; // Create a new array/object for safety
+      if (Hospitalname) { // Only add if Hospitalname is present
+        certsForView[0].hospitalname = Hospitalname;
+      }
+      const viewConfig = viewDeathConfig(certsForView, id, currentLocalTenantId, t);
+      setConfig(viewConfig);
+
+      // Determine which button to show based on counter
+      if (certData.counter === 1) {
+        console.log("ViewDeath: Counter is 1, showing Pay and Download button.");
+        setShowPayAndDownload(true);
+      } else {
+        console.log("ViewDeath: Counter is not 1 (or undefined), showing Free Download button. Counter:", certData.counter);
+        setShowPayAndDownload(false);
+      }
+    } else if (certificateViewData && (!certificateViewData.DeathCertificate || certificateViewData.DeathCertificate.length === 0)) {
+        console.warn("ViewDeath: DeathCertificate array is missing or empty in the response.");
+        // Handle cases where certificate data is expected but not found properly
+    }
+  }, [certificateViewData, Hospitalname, id, currentLocalTenantId, t]);
+
+
+  // --- Event Handlers ---
   const handleEditClick = () => {
-    // ... (same as before)
     const certs = certificateViewData?.DeathCertificate;
     if (certs && certs.length > 0) {
       const certToEdit = { ...certs[0] };
-      certToEdit.hospitalname = Hospitalname;
+      if (Hospitalname) certToEdit.hospitalname = Hospitalname; // Ensure hospitalname is included if passed
       history.push(
         `/${window.contextPath}/employee/death/death-common/update-death?action=EDIT&certificateId=${id}&module=death`,
-        {
-          editdata: certToEdit,
-          certificateId: id,
-          module: "death",
-        }
+        { editdata: certToEdit, certificateId: id, module: "death" }
       );
     } else {
-      console.error("No certificate data found to edit.");
+      console.error("ViewDeath: No certificate data found to edit.");
     }
   };
 
-  useEffect(() => {
-    // ... (same as before)
-    if (certificateViewData?.DeathCertificate && certificateViewData.DeathCertificate.length > 0) {
-      const certs = [...certificateViewData.DeathCertificate];
-      certs[0].hospitalname = Hospitalname;
-      const viewConfig = viewDeathConfig(certs, id, currentLocalTenantId, t); // Use currentLocalTenantId
-      setConfig(viewConfig);
-    }
-  }, [certificateViewData, Hospitalname, id, currentLocalTenantId, t]); // Use currentLocalTenantId
-
-
-  // Handler for the download button
-  const HandleDownloadPdf = () => {
-    // Call the function from our custom hook
-    initiateDownload(currentLocalTenantId, id);
+  const handleFreeDownload = () => {
+    console.log("ViewDeath: Initiating Free Download...");
+    initiateFreeDownload(currentLocalTenantId, id); // id is the certificateId
   };
 
-  // Optional: Display download errors to the user
+  const handlePayAndDownload = ()=>{
+    history.push(
+      `/${window.contextPath}/employee/death/egov-common/pay`,
+      {
+        mytenantId: tenantId,
+        myData: id ,
+        myhospitalname: Hospitalname,
+      }
+    );
+
+   
+  };
+
+
+  // --- Handle Download/Payment Errors (Optional: Show Toasts) ---
   useEffect(() => {
-    if (downloadError) {
-        // You could show a toast message here, e.g., Digit.Toast.show(downloadError, "error");
-        console.error("Download Error:", downloadError);
+    if (freeDownloadError) {
+      console.error("ViewDeath: Free Download Error:", freeDownloadError);
+      // Digit.Toast.show(t("BND_ERROR_FREE_DOWNLOAD_FAILED", { error: freeDownloadError }), "error");
+      alert(`Free Download Error: ${freeDownloadError}`);
     }
-  }, [downloadError]);
+  }, [freeDownloadError, t]);
 
 
+  // --- Loading and Error States for Page ---
   if (!id && !location.state) {
     return <div>Error: No certificate ID found. Please go back and select a certificate.</div>;
   }
-
-  // Combined loading state for the page
-  const pageIsLoading = isViewDataLoading || !config;
-
-  if (pageIsLoading) {
+  if (isViewDataLoading || !config) { 
     return <Loader />;
   }
-
   if (viewDataError) {
-    console.error("Error fetching certificate data:", viewDataError);
+    console.error("ViewDeath: Error fetching certificate data:", viewDataError);
     return <div>Error fetching certificate data. Please try again.</div>;
+  }
+
+  // --- Determine which action button to render ---
+  let actionButton;
+  if (showPayAndDownload) {
+    actionButton = (
+      <Button
+        key="pay-download-btn"
+        label={t("BND_PAY_AND_DOWNLOAD_BUTTON_LABEL", "Pay and Download")}
+        onClick={handlePayAndDownload}
+        className={"employee-pay-download-btn-className"} 
+        variation="secondary"
+        type="button"
+      />
+    );
+  } else {
+    actionButton = (
+      <Button
+        key="download-btn"
+        label={t("BND_FREE_DOWNLOAD_BUTTON_LABEL", "Download")}
+        onClick={handleFreeDownload}
+        className={"employee-download-btn-className"}
+        variation="secondary"
+        type="button"
+        icon={"FileDownload"}
+        disabled={isFreeDownloading}
+      />
+    );
   }
 
   return (
     <div>
-      {ViewComposer && config ? <ViewComposer data={config} /> : <div>Loading View Composer...</div>}
-      {/* Optional: Display download error near the button or as a toast */}
-      {/* {downloadError && <p style={{color: 'red'}}>{downloadError}</p>} */}
+      {ViewComposer && config ? <ViewComposer data={config} /> : <div>{t("COMMON_LOADING_VIEW", "Loading View...")}</div>}
       <Footer
         actionFields={[
           <Button
@@ -332,18 +531,10 @@ const ViewDeath = () => {
             label={t("CORE_COMMON_UPDATE")}
             onClick={handleEditClick}
             type="button"
-            variation="secondary"
+            variation="secondary" // Or "primary" if it's the main non-download action
+            style={{ marginRight: "1rem" }} // Space between update and download/pay button
           />,
-          <Button
-            key="download-btn"
-            label={t("FREE_DOWNLOAD")}
-            onClick={HandleDownloadPdf} // Calls our simplified handler
-            className={"employee-download-btn-className"}
-            variation="secondary"
-            type="button"
-            icon={"FileDownload"}
-            disabled={isDownloading} // Use the loading state from the custom hook
-          />,
+          actionButton, 
         ]}
         className=""
       />

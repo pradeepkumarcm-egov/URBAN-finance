@@ -44,11 +44,11 @@ const payandDownloadConfig = [
         key: "payerName",
         isMandatory: true,
         placeholder: "Enter Payer Name",
+        disable:true,
         populators: {
           name: "payerName",
           error: "Payer Name is Required!",
           defaultValue: "",
-          disable:true,
           validation: {
             minLength: 3,
             maxLength: 100,
@@ -62,10 +62,10 @@ const payandDownloadConfig = [
         isMandatory: true,
         key: "payermobileNumber",
         placeholder: "Enter Payer Mobile Number",
+        disable:true,
         populators: {
           name: "payermobileNumber",
           error: "Payer Mobile Number is Required!",
-          disable:true,
           defaultValue: "",
           validation: {
             minLength: 10,
