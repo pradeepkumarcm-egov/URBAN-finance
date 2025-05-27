@@ -6,6 +6,7 @@ const viewDeathConfig = (deathCertArray, applicationNumber, tenantId, t) => {
     console.log("inide view death config ");
 
    const DeathData = deathCertArray?.[0]; 
+   console.log("DeathData", DeathData);
   if (!DeathData) return { cards: [], apiResponse: {}, additionalDetails: {} };
 
   const getValue = (value) => {

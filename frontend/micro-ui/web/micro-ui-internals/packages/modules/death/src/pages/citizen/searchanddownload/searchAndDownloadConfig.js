@@ -1,6 +1,6 @@
 import { add } from "lodash";
 
-export const searchDeathConfig = (t) => {
+export const searchAndDownloadConfig = (t) => {
   const id = Digit.ULBService.getCurrentTenantId();
   return {
     label: t("BND_SEARCH_REGISTRY"),
@@ -9,9 +9,9 @@ export const searchDeathConfig = (t) => {
       serviceName: "/birth-death-services/death/_search",
       requestParam: {},
       requestBody:{},
-      minParametersForSearchForm: 1,
+      minParametersForSearchForm: 3,
       masterName: "commonUiConfig",
-      moduleName: "searchDeathConfig",
+      moduleName: "searchAndDownloadConfig",
       tableFormJsonPath: "requestParam",
       filterFormJsonPath: "requestParam",
       searchFormJsonPath: "requestParam",
@@ -25,44 +25,54 @@ export const searchDeathConfig = (t) => {
           secondaryLabel: "ES_COMMON_CLEAR_SEARCH",
           minReqFields: 1,
           defaultValues: {
-            fromDate: "",
-            toDate: "",
+            tenantId: "",
+            dateOfDeath: "",
             gender: "",
+            placeofdeath:"",
+            nameofdeceased: "",
+            spouseName: "",
+            registrationno: "",
+            FatherName: "",
+            MotherName: "",
           },
           fields: [
             {
-              label: t("BND_FROM_DATE"),
+              label:t("City"),
+              key: "tenantId",
+              type: "dropdown",
+              isMandatory: true,
+              disable: true,
+               preProcess : {
+                        updateDependent : ["populators.options"]
+              },
+              populators: {
+                name: "tenantId",
+                optionsKey: "name",
+                options: [],
+                error: "City is required !",
+                // required: true,
+                // mdmsConfig: {
+                //   masterName: "tenants",
+                //   moduleName: "tenant",
+                //   // localePrefix:"",
+                //   localePrefix: "COMMON_CITY",
+                // },
+              }
+            },
+            {
+              label: t("BND_DEATH_DOB"),
               type: "date",
               isMandatory: true,
               disable: false,
-              key: "fromDate",
+              key: "dateOfDeath",
               populators: {
-                name: "fromDate",
+                name: "dateOfDeath",
                 max: "currentDate",
-                error: "DATE_VALIDATION_MSG"
+                error: t("DATE_VALIDATION_MSG")
               },
             },
             {
-              label: t("BND_TO_DATE"),
-              type: "date",
               isMandatory: true,
-              disable: false,
-              key: "toDate",
-              populators: {
-                name: "toDate",
-                error: "DATE_VALIDATION_MSG",
-                max: "currentDate",
-              },
-              additionalValidations: {
-                type: "date",
-                keys: {
-                  start: "fromDate",
-                  end: "toDate",
-                },
-              },
-            },
-            {
-              isMandatory: false,
               type: "dropdown",
               key: "gender",
               label: t("BND_COMMON_GENDER"),
@@ -70,7 +80,7 @@ export const searchDeathConfig = (t) => {
               populators: {
                 name: "gender",
                 optionsKey: "name",
-                error: "gender required !",
+                error: "gender is required !",
                 required: true,
                 mdmsConfig: {
                   masterName: "GenderType",
@@ -99,10 +109,14 @@ export const searchDeathConfig = (t) => {
               type: "dropdown",
               isMandatory: false,
               disable: false,
+              preProcess : {
+                  updateDependent : ["populators.options"]
+              },
               populators: {
                 name: "placeofdeath",
                 "optionsKey": "originalName",
                 "valueKey": "code",
+                options:[],
                 "error": "Hospital Name is Required!",
                 "required": false
               },
@@ -141,7 +155,7 @@ export const searchDeathConfig = (t) => {
       searchResult: {
         registrationno: "",
         nameofdeceased: "",
-        fromDate: "",
+        dateOfDeath: "",
         MotherName: "",
         FatherName: "",
         spouseName: "",
@@ -153,10 +167,20 @@ export const searchDeathConfig = (t) => {
               jsonPath: "registrationno",
             },
             {
-              key: "fromDate",
+                key: "nameofdeceased",
+                label: t("BND_COMMON_NAME"),
+                jsonPath: "fullName",
+            },
+            {
+              key: "dateOfDeath",
               label: t("BND_DEATH_DATE"),
               jsonPath: "dateofdeath",
               additionalCustomization: true,
+            },
+            {
+                key:"gender",
+                label: t("BND_COMMON_GENDER"),
+                jsonPath: "genderStr",
             },
             {
               key: "MotherName",
@@ -174,8 +198,8 @@ export const searchDeathConfig = (t) => {
               jsonPath: "deathSpouseInfo.fullName",
             },
             {
-              key: "view",
-              label: t("BND_VIEW_CERTIFICATE"),
+              key: "action",
+              label: t("BND_COMMON_TABLE_ACTION"),
               jsonPath: "id",
               additionalCustomization: true,
             },

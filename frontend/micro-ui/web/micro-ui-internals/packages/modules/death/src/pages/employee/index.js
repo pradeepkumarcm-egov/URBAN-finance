@@ -2,12 +2,12 @@ import React from "react";
 import { Switch, useLocation, Link } from "react-router-dom";
 import { AppContainer, BackButton, PrivateRoute } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import SampleCard from "../../components/DeathCard";
 import { CreateDeath } from "./createDeath";
 import SearchDeath from "./searchDeath";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import ViewDeath from "./viewDeath";
 import UpdateDeath from "./updateDeath";
+import DeathCard from "../../components/DeathCard";
 
 
 const EmployeeApp = ({ path, url, userType }) => {
@@ -21,7 +21,7 @@ const EmployeeApp = ({ path, url, userType }) => {
       <Route exact path={path}>
         <AppContainer>
           <BackButton style={{ top: "55px" }}>{t("Back")}</BackButton>
-          <SampleCard userType={userType} />
+          <DeathCard userType={userType} />
         </AppContainer>
       </Route>
 

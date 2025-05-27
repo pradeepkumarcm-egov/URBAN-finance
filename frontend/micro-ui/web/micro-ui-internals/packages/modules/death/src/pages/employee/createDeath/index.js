@@ -1,70 +1,110 @@
 import { Toast, FormComposerV2 } from "@egovernments/digit-ui-components";
 import React, { useState, useEffect, useRef } from "react";
-import createDeathConfig from "./createDeathConfig";
+import createDeathConfig from "./createDeathConfig"; // Ensure this path is correct
 import { useHistory } from "react-router-dom";
-import { Header } from "@egovernments/digit-ui-react-components";
+import { useTranslation } from "react-i18next";
+import { Header, Loader } from "@egovernments/digit-ui-react-components";
 
 export const CreateDeath = () => {
-  const [permanent, setPermanent] = useState(false);
-  const [sameAddressChecked, setSameAddressChecked] = useState(false);
+  // Initialize formConfig with the base configuration
   const [formConfig, setFormConfig] = useState(createDeathConfig);
+  const [sameAddressChecked, setSameAddressChecked] = useState(false);
+  // const [permanent, setPermanent] = useState(false); // 'permanent' state is set but not used in this component. Kept as per your original.
   const setValueRef = useRef(null);
   const prevLegacyCheckboxRef = useRef(false);
   const prevCheckboxRef = useRef(false);
+   const { t } = useTranslation();
 
-  // New state to control submit button disable specifically for date validation error
   const [isSubmitDisabledByDateError, setIsSubmitDisabledByDateError] = useState(false);
   const [showToast, setShowToast] = useState(null);
   const history = useHistory();
 
+  // --- MDMS Hook for Hospital List ---
+  const hospitalTenantId = Digit.ULBService.getCurrentTenantId(); // Specific tenant for hospital data
+  const { isLoading: hospitalListLoading, data: hospitalListData } = Digit.Hooks.useCustomMDMS(
+    hospitalTenantId,
+    "birth-death-service",
+    [{ "name": "hospitalList" }],
+    {
+      select: (data) => {
+        const hospitalOptions = data?.["birth-death-service"]?.hospitalList
+          ?.filter(hospital => hospital.active === "true" || hospital.active === true)
+          .map(hospital => ({
+            code: hospital.hospitalName,
+            name: `COMMON_HOSPITAL_${hospital.hospitalName.replace(/\s+/g, '_').toUpperCase()}`,
+            originalName: hospital.hospitalName 
+          }));
+        return {
+          hospitalListOptions: hospitalOptions || []
+        };
+      },
+    }
+  );
 
-  // Helper function to check date order validity
-  // Returns true if valid or not enough info, false if invalid order
+  // --- Effect to merge fetched hospital data into formConfig ---
+  useEffect(() => {
+    if (hospitalListData?.hospitalListOptions) {
+      setFormConfig(prevConfig =>
+        prevConfig.map(section => ({
+          ...section,
+          body: section.body.map(field => {
+            if (field.populators?.name === "HospitalName") {
+              return {
+                ...field,
+                populators: {
+                  ...field.populators,
+                  options: hospitalListData.hospitalListOptions,
+                  optionsKey: field.populators.optionsKey || "name",
+                  valueKey: field.populators.valueKey || "code",
+                },
+              };
+            }
+            return field;
+          }),
+        }))
+      );
+    }
+  }, [hospitalListData]); 
   const checkDateOrderValidity = (formData) => {
-    const dobStr = formData.dob; // Assuming 'dob' is key for Date of Death
-    const doRegStr = formData.doRegistration; // Assuming 'doRegistration' is key for Date of Registration
-
+    const dobStr = formData.dob;
+    const doRegStr = formData.doRegistration;
     if (dobStr && doRegStr) {
       const deathDate = new Date(dobStr);
       const regDate = new Date(doRegStr);
-
-      if (isNaN(deathDate.getTime()) || isNaN(regDate.getTime())) {
-        // If either input string is not a valid date, consider it "valid" for order checking.
-        // Format validation should be handled by the field itself or FormComposerV2.
-        return true;
-      }
+      if (isNaN(deathDate.getTime()) || isNaN(regDate.getTime())) return true; // Invalid date strings, let field validation handle
       return regDate >= deathDate;
     }
-    // If one or both dates are not filled yet, the order validation doesn't apply.
-    return true;
+    return true; 
   };
 
-  const updateConfigBasedOnCheckbox = (sameAddressChecked) => {
-    return createDeathConfig.map((section) => {
-      if (section.head === "Address of Deceased at the Time of Death") {
+
+  const updateConfigBasedOnSameAddressCheckbox = (isChecked, currentConfigToUpdate) => {
+    return currentConfigToUpdate.map((section) => {
+      // If checkbox is checked, Present Address fields become mandatory
+      if (section.head === "BND_PRESENT_ADDR_DURING_DEATH") {
         return {
           ...section,
           body: section.body.map((field) => ({
             ...field,
-            isMandatory: sameAddressChecked ? true : field.isMandatory,
+            // If checked, make these fields mandatory, otherwise retain their original mandatory status
+            isMandatory: isChecked ? true : (createDeathConfig.find(s => s.head === section.head)?.body.find(f => f.populators?.name === field.populators?.name)?.isMandatory || false),
           })),
         };
       }
-      if (section.head === "Permanent Address of Deceased" && sameAddressChecked) {
-        return null;
+      // If checkbox is checked, hide the Permanent Address section
+      if (section.head === "BND_DEATH_ADDR_PERM" && isChecked) {
+        return null; 
       }
       return section;
-    }).filter(Boolean);
+    }).filter(Boolean); 
   };
 
-  useEffect(() => {
-    setFormConfig(createDeathConfig);
-  }, []);
 
   const transformFormData = (formData) => {
     const toEpoch = (dateStr) => dateStr ? Math.floor(new Date(dateStr).getTime() / 1000) : undefined;
 
-    const address = {
+    // Present Address (always filled from form)
+    const presentAddress = {
       buildingno: formData?.buildingNumber || "",
       houseno: formData?.houseNo || "",
       district: formData?.district || "",
@@ -77,6 +117,7 @@ export const CreateDeath = () => {
       state: formData?.state || "",
     };
 
+    // Permanent Address (filled from specific fields if checkbox is unchecked)
     const permanentAddress = {
       buildingno: formData?.permanentBuildingNumber || "",
       houseno: formData?.permanentHouseNo || "",
@@ -92,53 +133,54 @@ export const CreateDeath = () => {
 
     return {
       age: String(formData?.age || ""),
-      checkboxforaddress: !!formData["checkboxlabel"],
-      counter: 1,
+      checkboxforaddress: !!formData?.sameAddressCheckbox, 
+      // counter: !!formData?.checkboxlabel ? 1 : 0,
+      counter:0,
       dateofdeathepoch: toEpoch(formData?.dob),
       dateofreportepoch: toEpoch(formData?.doRegistration),
       deathFatherInfo: {
-        firstname: formData?.["FirstName3"] || "",
-        middlename: formData?.["MiddleName3"] || "",
-        lastname: formData?.["LastName3"] || "",
-        emailid: formData?.["EmailID2"] || "",
-        mobileno: formData?.["MobileNumber2"] || "",
-        aadharno: formData?.["AadharNumber3"] || "",
+        firstname: formData?.FirstName3 || "",
+        middlename: formData?.MiddleName3 || "",
+        lastname: formData?.LastName3 || "",
+        emailid: formData?.EmailID2 || "",
+        mobileno: formData?.MobileNumber2 || "",
+        aadharno: formData?.AadharNumber3 || "",
       },
       deathMotherInfo: {
-        firstname: formData?.["FirstName4"] || "",
-        middlename: formData?.["MiddleName4"] || "",
-        lastname: formData?.["LastName4"] || "",
-        emailid: formData?.["emailId3"] || "",
-        mobileno: formData?.["mobileNumber3"] || "",
-        aadharno: formData?.["AadharNumber4"] || "",
+        firstname: formData?.FirstName4 || "",
+        middlename: formData?.MiddleName4 || "",
+        lastname: formData?.LastName4 || "",
+        emailid: formData?.emailId3 || "",
+        mobileno: formData?.mobileNumber3 || "",
+        aadharno: formData?.AadharNumber4 || "",
       },
       deathSpouseInfo: {
-        firstname: formData?.["FirstName2"] || "",
-        middlename: formData?.["MiddleName2"] || "",
-        lastname: formData?.["LastName2"] || "",
-        emailid: formData?.["EmailID"] || "",
-        mobileno: formData?.["MobileNumber"] || "",
-        aadharno: formData?.["AadharNumber2"] || "",
+        firstname: formData?.FirstName2 || "",
+        middlename: formData?.MiddleName2 || "",
+        lastname: formData?.LastName2 || "",
+        emailid: formData?.EmailID || "",
+        mobileno: formData?.MobileNumber || "",
+        aadharno: formData?.AadharNumber2 || "",
       },
-      deathPermaddr: formData?.sameAddressCheckbox ? address : permanentAddress,
-      deathPresentaddr: address,
-      eidno: formData?.["EIDNumber"] || "",
-      excelrowindex: -1,
-      firstname: formData?.["FirstName"] || "",
-      middlename: formData?.["MiddleName"] || "",
-      lastname: formData?.["LastName"] || "",
-      genderStr: formData?.["Gender"]?.code || "",
-      hospitalname: formData?.["HospitalName"] || "Unknown",
-      icdcode: formData?.["ICDCode"] || "",
-      informantsname: formData?.["informantName"] || "",
-      informantsaddress: formData?.["informantAddress"] || "",
-      isLegacyRecord: !!formData["checkboxlabel"],
-      registrationno: formData["checkboxlabel"] ? formData?.["RegistrationNumber"] || "" : "",
-      nationality: formData?.["Nationality"] || "",
-      placeofdeath: formData?.["DeathPlace"] || "",
-      aadharno: formData?.["AadharNumber"] || "",
-      religion: formData?.["Religion"] || "",
-      remarks: formData?.["remarks"] || "",
+      deathPermaddr: formData?.sameAddressCheckbox ? presentAddress : permanentAddress,
+      deathPresentaddr: presentAddress,
+      eidno: formData?.EIDNumber || "",
+      excelrowindex: -1, // Assuming default
+      firstname: formData?.FirstName || "",
+      middlename: formData?.MiddleName || "",
+      lastname: formData?.LastName || "",
+      genderStr: formData?.Gender?.code || "", // Assuming Gender dropdown returns an object
+      hospitalname: formData?.HospitalName?.code, // formData.HospitalName will be the 'code' (which is hospital name string)
+      icdcode: formData?.ICDCode || "",
+      informantsname: formData?.informantName || "",
+      informantsaddress: formData?.informantAddress || "",
+      isLegacyRecord: !!formData?.checkboxlabel, // From "This is a Legacy Record" checkbox
+      registrationno: formData?.checkboxlabel ? (formData?.RegistrationNumber || "") : "",
+      nationality: formData?.Nationality || "",
+      placeofdeath: formData?.DeathPlace || "",
+      aadharno: formData?.AadharNumber || "",
+      religion: formData?.Religion || "",
+      remarks: formData?.remarks || "",
       tenantid: Digit.ULBService.getCurrentTenantId(),
     };
   };
@@ -146,39 +188,34 @@ export const CreateDeath = () => {
   const reqCreate = {
     url: "/birth-death-services/common/savedeathimport",
     params: { tenantId: Digit.ULBService.getCurrentTenantId() },
-    body: {},
-    config: { enabled: true }, // This usually controls if the hook is ready to fire, not the button
+    body: {}, 
+    config: { enabled: true },
   };
-
   const mutation = Digit.Hooks.useCustomAPIMutationHook(reqCreate);
 
   const onSubmit = async (formData) => {
-    // Perform date validation on submit
     if (!checkDateOrderValidity(formData)) {
       setShowToast({ key: "error", label: "Date of Registration must be on or after Date of Death." });
-      setIsSubmitDisabledByDateError(true); // Disable button
-      return; // Stop submission
+      setIsSubmitDisabledByDateError(true);
+      return;
     }
-
-    // If date validation passes, ensure button is not disabled by our custom logic
     setIsSubmitDisabledByDateError(false);
-    console.log("Form submitted with data:", formData);
 
     const payload = {
       deathCerts: [transformFormData(formData)],
     };
-    console.log("Payload:.................", payload);
+    console.log("Submitting Payload:", payload);
 
     await mutation.mutate(
       {
-        url: "/birth-death-services/common/savedeathimport",
-        params: { tenantId: Digit.ULBService.getCurrentTenantId() },
+        // url and params are already in reqCreate, but can be overridden here if needed
         body: payload,
       },
       {
         onSuccess: (response) => {
           console.log("API Response:", response);
           setShowToast({ key: "success", label: "Death Certificate Created Successfully" });
+          // history.push(...); // Navigate on success if needed
         },
         onError: (error) => {
           console.error("API Error:", error);
@@ -188,118 +225,164 @@ export const CreateDeath = () => {
     );
   };
 
+  const onFormValueChange = (setValue, formData, formState) => {
+    setValueRef.current = setValue; // Store setValue for reset
+
+    // Date order validation on change
+    if (isSubmitDisabledByDateError && checkDateOrderValidity(formData)) {
+      setIsSubmitDisabledByDateError(false);
+    }
+
+    // --- Handle "Same Address" checkbox ---
+    const currentIsSameAddressChecked = !!formData?.sameAddressCheckbox;
+    if (prevCheckboxRef.current !== currentIsSameAddressChecked) {
+      prevCheckboxRef.current = currentIsSameAddressChecked;
+      setSameAddressChecked(currentIsSameAddressChecked); // Update state if needed elsewhere
+      // setPermanent(currentIsSameAddressChecked); // Update 'permanent' state if it's used
+
+      // Update formConfig based on the checkbox, using the current formConfig as base
+      setFormConfig(prevCurrentConfig =>
+        updateConfigBasedOnSameAddressCheckbox(currentIsSameAddressChecked, prevCurrentConfig)
+      );
+    }
+
+    // --- Handle "Legacy Record" checkbox ---
+    const currentIsLegacy = !!formData?.checkboxlabel;
+    if (prevLegacyCheckboxRef.current !== currentIsLegacy) {
+      prevLegacyCheckboxRef.current = currentIsLegacy;
+
+      // Update formConfig for RegistrationNumber field, using current formConfig as base
+      setFormConfig(prevCurrentConfig =>
+        prevCurrentConfig.map(section => ({
+          ...section,
+          body: section.body.map(field => {
+            if (field.populators?.name === "RegistrationNumber") {
+              return {
+                ...field,
+                disable: !currentIsLegacy,
+                isMandatory: currentIsLegacy,
+                validation: { ...(field.validation || {}), required: currentIsLegacy },
+                populators: {
+                  ...field.populators,
+                  error: currentIsLegacy ? (field.populators?.error || "Registration Number is Required!") : undefined,
+                },
+              };
+            }
+            return field;
+          })
+        }))
+      );
+    }
+  };
+
+  const onSecondayActionClick = () => { // Reset handler
+    // Reset form values using setValueRef
+    if (setValueRef.current) {
+      const allFieldNames = createDeathConfig.flatMap(section =>
+        section.body.map(field => field.populators?.name).filter(Boolean)
+      );
+      const defaultValues = {
+        sameAddressCheckbox: false,
+        checkboxlabel: false,
+        // Add other fields that need specific default non-empty values if any
+      };
+      allFieldNames.forEach(name => {
+        setValueRef.current(name, defaultValues[name] !== undefined ? defaultValues[name] : "");
+      });
+      // Explicitly set checkboxes if they weren't caught by allFieldNames or need specific handling
+      setValueRef.current("sameAddressCheckbox", false);
+      setValueRef.current("checkboxlabel", false);
+    }
+
+    // Reset internal states
+    setSameAddressChecked(false);
+    // setPermanent(false);
+    prevCheckboxRef.current = false;
+    prevLegacyCheckboxRef.current = false;
+    setIsSubmitDisabledByDateError(false);
+
+    // Rebuild formConfig from scratch to ensure clean state
+    let newConfig = [...createDeathConfig]; // Deep clone or ensure createDeathConfig is immutable
+
+    // 1. Apply "Same Address" checkbox default state (false)
+    newConfig = updateConfigBasedOnSameAddressCheckbox(false, newConfig);
+
+    // 2. Apply "Legacy Record" checkbox default state (false) for RegistrationNumber
+    newConfig = newConfig.map(section => ({
+      ...section,
+      body: section.body.map(field => {
+        if (field.populators?.name === "RegistrationNumber") {
+          return {
+            ...field,
+            disable: true, // Disabled by default
+            isMandatory: false,
+            validation: { ...(field.validation || {}), required: false },
+            populators: { ...field.populators, error: undefined },
+          };
+        }
+        return field;
+      })
+    }));
+
+    // 3. Re-apply hospital data if it was fetched
+    if (hospitalListData?.hospitalListOptions) {
+      newConfig = newConfig.map(section => ({
+        ...section,
+        body: section.body.map(field => {
+          if (field.populators?.name === "HospitalName") {
+            return {
+              ...field,
+              populators: {
+                ...field.populators,
+                options: hospitalListData.hospitalListOptions,
+              },
+            };
+          }
+          return field;
+        }),
+      }));
+    }
+    setFormConfig(newConfig);
+  };
+
+  // --- Handle Loading State for Hospital Data ---
+  if (hospitalListLoading) {
+    return <Loader />;
+  }
+
   return (
     <React.Fragment>
-      <Header>Create Death Certificates</Header>
+      <Header>Create Death Certificates</Header> {/* Consider using t() for localization */}
       <div className="jk-header-btn-wrapper">
-        <Header>New Registration</Header>
-        <p>(*) marked items are mandatory</p>
+        <Header>{t("BND_NEW_REGISTRATION")}</Header>
+        <p>{t("BND_NEW_REGISTRATION_SUBTEXT")}</p>
       </div>
       <FormComposerV2
-        config={formConfig.map((conf, i) => ({
+        config={formConfig.map((conf) => ({
           ...conf,
-          head: conf.head,
-          body: conf.body.map((field, index) => ({
+          // Ensure head is translated if it's a localization key
+          // head: conf.head ? t(conf.head) : undefined,
+          body: conf.body.map((field) => ({
             ...field,
-            key: field.populators?.name || `${conf.head}-${index}`,
+            // Ensure label is translated if it's a localization key
+            // label: field.label ? t(field.label) : undefined,
+            // Key for formData should be derived from populators.name for consistency
+            key: field.populators?.name || `${conf.head || 'section'}-${field.key || field.label || field.type}`, // More robust key generation
           })),
         }))}
-        // The button is disabled if isSubmitDisabledByDateError is true.
-        // FormComposerV2 might have its own internal logic for disabling based on mandatory fields,
-        // which should ideally work in conjunction.
-        isDisabled={isSubmitDisabledByDateError}
-        label="SUBMIT"
+        isDisabled={isSubmitDisabledByDateError} // FormComposerV2 also has its own isDisabled logic for mandatory fields
+        label={"SUBMIT"} // Consider t("SUBMIT")
         onSubmit={onSubmit}
         showSecondaryLabel={true}
-        onFormValueChange={(setValue, formData, formState) => {
-          setValueRef.current = setValue;
-
-          // If the submit button was previously disabled due to a date error,
-          // check if the dates are now valid. If so, re-enable the button.
-          if (isSubmitDisabledByDateError) {
-            if (checkDateOrderValidity(formData)) {
-              setIsSubmitDisabledByDateError(false); // Re-enable button
-            }
-          }
-
-          // --- Existing logic for checkboxes ---
-          const isSameAddressChecked = !!formData["sameAddressCheckbox"];
-          if (prevCheckboxRef.current !== isSameAddressChecked) {
-            prevCheckboxRef.current = isSameAddressChecked;
-            setSameAddressChecked(isSameAddressChecked);
-            setPermanent(isSameAddressChecked);
-            const updatedConfig = updateConfigBasedOnCheckbox(isSameAddressChecked);
-            setFormConfig(updatedConfig);
-          }
-
-          const isLegacy = !!formData["checkboxlabel"];
-          if (prevLegacyCheckboxRef.current !== isLegacy) {
-            prevLegacyCheckboxRef.current = isLegacy;
-            const updatedForm = formConfig.map(section => ({
-              ...section,
-              body: section.body.map(field => {
-                if (field.populators?.name === "RegistrationNumber") {
-                  return {
-                    ...field,
-                    disable: !isLegacy,
-                    isMandatory: isLegacy,
-                    validation: { ...(field.validation || {}), required: isLegacy },
-                    populators: {
-                      ...field.populators,
-                      error: isLegacy ? (field.populators?.label ? `${field.populators.label} is Required!` : "Registration Number is Required!") : undefined,
-                    },
-                  };
-                }
-                return field;
-              })
-            }));
-            setFormConfig(updatedForm);
-          }
-        }}
-        secondaryLabel={"Reset"}
+        onFormValueChange={onFormValueChange}
+        secondaryLabel={"Reset"} // Consider t("Reset")
         actionClassName={"actionBarClass microplan-actionbar"}
-        onSecondayActionClick={() => {
-          if (setValueRef.current) {
-            const allNames = formConfig.flatMap(section =>
-              section.body.map(field => field.populators?.name).filter(Boolean)
-            );
-            const defaultValues = { "sameAddressCheckbox": false, "checkboxlabel": false };
-            allNames.forEach(name => {
-              setValueRef.current(name, defaultValues[name] !== undefined ? defaultValues[name] : "");
-            });
-            setValueRef.current("sameAddressCheckbox", false);
-            setValueRef.current("checkboxlabel", false);
-
-            setSameAddressChecked(false);
-            setPermanent(false);
-            prevCheckboxRef.current = false;
-            prevLegacyCheckboxRef.current = false;
-
-            const originalConfig = createDeathConfig;
-            const resetConfigAfterAddress = updateConfigBasedOnCheckbox(false);
-            const finalResetConfig = resetConfigAfterAddress.map(section => ({
-                ...section,
-                body: section.body.map(field => {
-                  if (field.populators?.name === "RegistrationNumber") {
-                    return {
-                      ...field,
-                      disable: true,
-                      isMandatory: false,
-                      validation: { ...(field.validation || {}), required: false },
-                      populators: { ...field.populators, error: undefined },
-                    };
-                  }
-                  return field;
-                })
-              }));
-            setFormConfig(finalResetConfig);
-            setIsSubmitDisabledByDateError(false); 
-          }
-        }}
+        onSecondayActionClick={onSecondayActionClick}
+       
       />
       {showToast && (
         <Toast
-          style={{ zIndex: 10001 }}
+          style={{ zIndex: 10001 }} 
           label={showToast.label}
           type={showToast.key}
           error={showToast.key === "error"}

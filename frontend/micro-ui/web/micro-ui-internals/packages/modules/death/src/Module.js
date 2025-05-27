@@ -7,9 +7,13 @@ import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import CitizenApp from "../src/pages/citizen/index";
 // import ParentInfoCard from "./pages/employee/customcomponents/ParentInfoCard";
-import { overrideHooks, updateCustomConfigs } from "./utils";
+import { overrideHooks,updateCustomConfigs } from "./utils";
 import ViewDeath from "./pages/employee/viewDeath";
 import EditButton from "./pages/employee/customcomponents/EditButton";
+import PaymentCollectionDetailsCard from "./pages/citizen/components/PaymentCollectionDetailsCard";
+import { usePdfDownloader } from "./components/usePdfDownloader";
+import usePreFetchPayData from "./components/usePreFetchPayData";
+
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -25,7 +29,7 @@ export const DeathModule = ({ stateCode, userType, tenants }) => {
     return <Loader />;
   }
   const { path, url } = useRouteMatch();
-  console.log("User Type: ........................", path);
+  console.log("path: ........................", path);
   if(userType==="employee"){
     return <EmployeeApp path={path} url={url} userType={userType}/>
   }else{
@@ -37,6 +41,9 @@ const componentsToRegister = {
   DeathCard,
   ViewDeath,
   EditButton,
+  PaymentCollectionDetailsCard,
+  usePdfDownloader:usePdfDownloader,
+  usePreFetchPayData:usePreFetchPayData,
 };
 export const initDeathComponents = () => {
   overrideHooks();

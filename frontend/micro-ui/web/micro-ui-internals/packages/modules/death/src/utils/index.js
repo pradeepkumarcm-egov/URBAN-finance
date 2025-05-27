@@ -48,7 +48,7 @@
 
 import _ from "lodash";
 import { CustomisedHooks } from "../hooks";
-import { UICustomizations } from "../configs/UICustomizations";
+import  {UICustomizations}  from "../configs/UICustomizations";
 
 
 

@@ -25,7 +25,7 @@ import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-bills";
 import { DeathModule, initDeathComponents } from "@egovernments/digit-ui-module-death";
 
-// import {initCustomisationComponents} from "./customisations";
+import { UICustomizations } from "./UICustomizations";
 
 // import { PGRModule, PGRLinks } from "@egovernments/digit-ui-module-pgr";
 // import { Body, TopBar } from "@egovernments/digit-ui-react-components";
@@ -36,7 +36,7 @@ import { DeathModule, initDeathComponents } from "@egovernments/digit-ui-module-
 // import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
 import { pgrCustomizations, pgrComponents } from "./pgr";
-import { UICustomizations } from "./UICustomizations";
+
 
 var Digit = window.Digit || {};
 

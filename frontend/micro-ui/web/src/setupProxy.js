@@ -28,6 +28,8 @@ module.exports = function (app) {
     "/inbox/v2/dss/_search",
     "/inbox/v2/elastic/_search",
     "/birth-death-services",
-    "/health-project"
+    "/health-project",
+    "/billing-service",
+    "/filestore",
   ].forEach((location) => app.use(location, createProxy));
 };

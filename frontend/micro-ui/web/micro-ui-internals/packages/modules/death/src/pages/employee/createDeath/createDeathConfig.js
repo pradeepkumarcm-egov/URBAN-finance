@@ -30,29 +30,44 @@ const createDeathConfig = [
           validation: {
             minLength: 5,
             maxLength: 100,
-            pattern: /^[A-Za-z0-9]+$/i, 
+            // pattern: /^[A-Za-z0-9]+$/i, 
           },
         },
       },
       {
-        isMandatory: false,
-        key: "Hospital Name",
-        type: "dropdown",
-        label: "BND_HOSPITALNAME_LABEL",
-        disable: false,
-        placeholder: "Don't select if NA",
-        populators: {
-          name: "HospitalName",
-          optionsKey: "name",
-          error: "Hospital Name is Required!",
-          required: true,
-          mdmsConfig: {
-            masterName: "hospitalList",
-            moduleName: "birth-death-service",
-            localePrefix: "COMMON_HOSPITAL",
-          },
-        },
+        "isMandatory": false,
+        "key": "Hospital Name",
+        "type": "dropdown",
+        "label": "BND_HOSPITALNAME_LABEL",
+        "disable": false,
+        "placeholder": "Don't select if NA",
+        "populators": {
+          "name": "HospitalName",
+          "optionsKey": "originalName",
+          "valueKey": "code",
+          "error": "Hospital Name is Required!",
+          "required": false
+        }
       },
+      // {
+      //   isMandatory: false,
+      //   key: "Hospital Name",
+      //   type: "dropdown",
+      //   label: "BND_HOSPITALNAME_LABEL",
+      //   disable: false,
+      //   placeholder: "Don't select if NA",
+      //   populators: {
+      //     name: "HospitalName",
+      //     optionsKey: "name",
+      //     error: "Hospital Name is Required!",
+      //     required: true,
+      //     mdmsConfig: {
+      //       masterName: "hospitalList",
+      //       moduleName: "birth-death-service",
+      //       localePrefix: "COMMON_HOSPITAL",
+      //     },
+      //   },
+      // },
       {
         inline: true,
         label: "BND_DEATH_DOR",
@@ -859,3 +874,5 @@ const createDeathConfig = [
 
 
 export default createDeathConfig;
+
+
