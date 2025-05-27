@@ -134,8 +134,8 @@ export const CreateDeath = () => {
     return {
       age: String(formData?.age || ""),
       checkboxforaddress: !!formData?.sameAddressCheckbox, 
-      // counter: !!formData?.checkboxlabel ? 1 : 0,
-      counter:0,
+      counter: !!formData?.checkboxlabel ? 1 : 0,
+      // counter:0,
       dateofdeathepoch: toEpoch(formData?.dob),
       dateofreportepoch: toEpoch(formData?.doRegistration),
       deathFatherInfo: {
