@@ -238,9 +238,9 @@ const PayandDownload = () => {
          />
        </div>
        <FormComposerV2
-         key={`form-${selectedPaidBy?.code}`} // This forces re-render when paidBy changes
+         key={`form-${selectedPaidBy?.code}`} 
          label={t("Make Payment")}
-         config={dynamicFormConfig} // Use the dynamic config instead of static configs
+         config={dynamicFormConfig} 
          defaultValues={defaultValues}
          onSubmit={(data) => onSubmit(data)}
          onFormValueChange={onFormValueChange}

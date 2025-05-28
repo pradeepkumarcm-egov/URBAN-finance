@@ -224,30 +224,6 @@ const PayandDownload = () => {
 
 
   return (
-    // <React.Fragment>
-    //   <div style={{ display: "flex", alignItems: "center" }}>
-    //       <Header>Payment Information</Header>
-    //       <Button
-    //         className="custom-class"
-    //         label={`Consumer Code ${consumerCode}`}  // Dynamic label from state
-    //         variation="secondary"
-    //         style={{ 
-    //           marginLeft: "16px", 
-    //           whiteSpace: "nowrap", 
-    //         }}
-    //        />
-    //   </div>
-    //   <FormComposerV2
-    //   label={t( "Make Payment")}
-    //       config={configs.map((config) => ({
-    //                 ...config,
-    //               }))}
-    //       defaultValues={defaultValues}
-    //       onSubmit={(data) => onSubmit(data)}
-    //       onFormValueChange={onFormValueChange}
-    //       labelfielddirectionvertical={false}
-    //   />
-    // </React.Fragment>
   <React.Fragment>
     <div style={{ display: "flex", alignItems: "center" }}>
       <Header>Payment Information</Header>
