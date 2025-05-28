@@ -67,6 +67,10 @@ module.exports = function (app) {
     "/inbox/v2/elastic/_search",
     "/fsm-calculator",
     "/service-request",
+    "/birth-death-services",
+    '/health-project',
+    "/billing-service",
+     "/filestore",
   ].forEach((location) => app.use(location, createProxy));
   ["/pb-egov-assets"].forEach((location) => app.use(location, assetsProxy));
 };

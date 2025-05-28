@@ -180,7 +180,8 @@ const BillDetails = ({ paymentRules, businessService }) => {
   };
 
   if (isLoading || isFSMLoading) return <Loader />;
-
+// return <div>hi</div>
+console.log(businessService, wrkflow, "businessService");
   return (
     <React.Fragment>
       <Header>{t("CS_PAYMENT_BILL_DETAILS")}</Header>

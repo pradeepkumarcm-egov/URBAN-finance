@@ -250,6 +250,9 @@ import useToCheckPrivacyEnablement from "./ws/useToCheckPrivacyEnablement";
 import useWSConfigMDMS from "./ws/useWSConfigMDMS";
 import useFeedBackSearch from "./useFeedBackSearch";
 import useBPAInboxV1 from "./obps/useBPAInboxV1";
+import useCustomAPIMutationHook from "./useCustomAPIMutationHook";
+import useWorkflowDetailsV2 from "./useWorkflowDetailsV2";
+import useUpdateCustom from "./useUpdateCustom";
 
 const pgr = {
   useComplaintDetails,
@@ -496,6 +499,7 @@ const Hooks = {
   useSessionStorage,
   useQueryParams,
   useFetchPayment,
+  useRouteSubscription,
   usePaymentUpdate,
   useFetchCitizenBillsForBuissnessService,
   useFetchBillsForBuissnessService,
@@ -545,6 +549,7 @@ const Hooks = {
   ws,
   useCustomMDMS,
   useCustomAPIHook,
+  useCustomAPIMutationHook,
   reports,
   useGetHowItWorksJSON,
   useGetFAQsJSON,
@@ -554,6 +559,8 @@ const Hooks = {
   useDynamicData,
   useBulkPdfDetails,
   useBillAmendmentInbox,
+  useWorkflowDetailsV2,
+  useUpdateCustom,
   useAudit,
 };
 

@@ -1,0 +1,55 @@
+
+import DeathCard from "./components/DeathCard";
+import { CitizenHomeCard, Loader } from "@egovernments/digit-ui-react-components";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import EmployeeApp from "../src/pages/employee/index";
+import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
+import CitizenApp from "../src/pages/citizen/index";
+// import ParentInfoCard from "./pages/employee/customcomponents/ParentInfoCard";
+import { overrideHooks,updateCustomConfigs } from "./utils";
+import ViewDeath from "./pages/employee/viewDeath";
+import EditButton from "./pages/employee/customcomponents/EditButton";
+import PaymentCollectionDetailsCard from "./pages/citizen/components/PaymentCollectionDetailsCard";
+import { usePdfDownloader } from "./components/usePdfDownloader";
+import usePreFetchPayData from "./components/usePreFetchPayData";
+
+
+export const DeathModule = ({ stateCode, userType, tenants }) => {
+  const tenantId = Digit.ULBService.getCurrentTenantId();
+  const moduleCode = ["death", "common", "workflow","bnd"];
+  const language = Digit.StoreData.getCurrentLanguage();
+  const { isLoading, data: store } = Digit.Services.useStore({
+    stateCode,
+    moduleCode,
+    language,
+  });
+  const { t } = useTranslation();
+  if (isLoading) {
+    return <Loader />;
+  }
+  const { path, url } = useRouteMatch();
+  console.log("path: ........................", path);
+  if(userType==="employee"){
+    return <EmployeeApp path={path} url={url} userType={userType}/>
+  }else{
+    return <CitizenApp path={path} url={url} userType={userType}/>
+  }
+};
+const componentsToRegister = {
+  DeathModule,
+  DeathCard,
+  ViewDeath,
+  EditButton,
+  PaymentCollectionDetailsCard,
+  usePdfDownloader:usePdfDownloader,
+  usePreFetchPayData:usePreFetchPayData,
+};
+export const initDeathComponents = () => {
+  overrideHooks();
+  updateCustomConfigs();
+  Object.entries(componentsToRegister).forEach(([key, value]) => {
+    Digit.ComponentRegistryService.setComponent(key, value);
+  });
+};
+

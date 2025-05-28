@@ -105,6 +105,8 @@ const componentsToRegister = {
   PGRResponseCitzen: ResponseCitizen
 };
 
+
+
 export const initPGRComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);

@@ -13,7 +13,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@egovernments/digit-ui-libraries": "1.7.35",
+    "@egovernments/digit-ui-libraries": "1.8.13",
     "@egovernments/digit-ui-module-common": "1.7.35",
     "@egovernments/digit-ui-module-engagement": "1.7.36",
     "@egovernments/digit-ui-module-fsm": "1.7.35",
@@ -27,10 +27,10 @@
     "@egovernments/digit-ui-module-ws": "1.7.36",
     "@egovernments/digit-ui-module-bills": "1.7.35",
     "@egovernments/digit-ui-module-commonpt": "1.7.35",
-    "@egovernments/digit-ui-module-hrms":"1.7.35",
-    "@egovernments/digit-ui-module-core":"1.7.35",
-    "@egovernments/digit-ui-module-dss":"1.7.38",
-    "@egovernments/digit-ui-react-components":"1.7.35",
+    "@egovernments/digit-ui-module-hrms": "1.7.35",
+    "@egovernments/digit-ui-module-core": "1.7.35",
+    "@egovernments/digit-ui-module-dss": "1.7.38",
+    "@egovernments/digit-ui-react-components": "1.7.0-beta.4",
     "babel-loader": "8.1.0",
     "clean-webpack-plugin": "4.0.0",
     "react": "17.0.2",
