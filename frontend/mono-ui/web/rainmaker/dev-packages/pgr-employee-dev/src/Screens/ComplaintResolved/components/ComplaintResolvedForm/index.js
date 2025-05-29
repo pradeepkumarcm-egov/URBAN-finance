@@ -9,7 +9,7 @@ const ComplaintResolvedForm = ({ formKey, form, handleFieldChange, onSubmit }) =
   return (
     <div>
       <div className="custom-padding-for-screens">
-        <ImageUpload module="rainmaker-pgr" formKey={formKey} fieldKey="media" />
+        <ImageUpload module="rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc" formKey={formKey} fieldKey="media" />
         <div style={{ padding: "24px 16px 0px 1px" }}>
           <TextArea onChange={(e, value) => handleFieldChange("textarea", value)} {...fields.textarea} />
         </div>

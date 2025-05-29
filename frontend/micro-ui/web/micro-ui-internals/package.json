@@ -6,7 +6,16 @@
     "packages/libraries",
     "example",
     "packages/react-components",
-    "packages/modules/*"
+    "packages/modules/tl",
+    "packages/modules/mCollect",
+    "packages/modules/dss",
+    "packages/modules/ws",
+    "packages/modules/birth",
+    "packages/modules/core",
+    "packages/modules/death",
+    "packages/modules/firenoc",
+    "packages/modules/obps",
+    "packages/modules/pt"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
   "license": "MIT",

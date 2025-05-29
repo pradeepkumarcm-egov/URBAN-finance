@@ -167,7 +167,7 @@ export const fetchLocalisation = async () => {
         redirect: 'follow'
     };
 
-    let localisationResponse = await fetch(`${window.location.origin}/localization/messages/v1/_search?locale=en_IN&tenantId=pb&module=rainmaker-common`, requestOptions)
+    let localisationResponse = await fetch(`${window.location.origin}/localization/messages/v1/_search?locale=en_IN&tenantId=pb&module=rainmaker-common,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc`, requestOptions)
         .then(response => response.text())
         .then(result => JSON.parse(result))
         .then(result => result.messages)

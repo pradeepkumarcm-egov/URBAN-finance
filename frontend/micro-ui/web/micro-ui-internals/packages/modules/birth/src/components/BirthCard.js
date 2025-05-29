@@ -8,21 +8,30 @@ const BirthCard = () => {
   if (!Digit.Utils.BnDAccess()) return null;
 
   const { t } = useTranslation();
+  window.localStorage.setItem("Employee.locale", "en_IN");
+  window.localStorage.setItem("locale", "en_IN");
+  window.localStorage.setItem("Employee.tenant-id", Digit.ULBService.getCurrentTenantId());
+  window.localStorage.setItem("tenant-id",Digit.ULBService.getCurrentTenantId());
 
   const links = [
     {
       label: t("BIRTH_REGISTRATION"),
-      link: "/employee/birth-employee/newRegistration",
+      link: `https://unified-demo.digit.org/employee/birth-employee/newRegistration`,
+      hyperlink: true
     },
     {
       label: t("SEARCH_BIRTH_CERTIFICATE"),
-      link: `/employee/birth-common/getCertificate`,
+      link: `https://unified-demo.digit.org/employee/birth-common/getCertificate`,
+      hyperlink: true
+
     }
   ];
 
   const propsForModuleCard = {
     moduleName: t("COMMON_BIRTH"),
     links: links,
+    kpis: [
+    ],
     icon: <CaseIcon/>
 }
 

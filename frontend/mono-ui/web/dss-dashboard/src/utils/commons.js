@@ -29,7 +29,7 @@ const removeSpaceInLocalisationKey = (key = "") => {
 
 export const getTenantId = () => {
     let tenant=sessionStorage.getItem('Digit.Employee.tenantId');
-    return `${JSON.parse(tenant)?.value||localStorage.getItem('tenant-id')}`;
+    return `${JSON.parse(tenant).value||localStorage.getItem('tenant-id')}`;
 }
 export const getToken = () => {
     let user=sessionStorage.getItem('Digit.User');
@@ -45,7 +45,7 @@ export const fetchLocalisationRequest = (language) => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     };
-    const reqUrl = `${CONFIGS.LOCALISATION_URL}?locale=${language}&tenantId=${stateTenant()}&module=rainmaker-common,rainmaker-dss`;
+    const reqUrl = `${CONFIGS.LOCALISATION_URL}?locale=${language}&tenantId=${stateTenant()}&module=rainmaker-common,rainmaker-dss,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc`;
     const reqBody = {}
     return { reqHeaders, reqBody, reqUrl };
 }

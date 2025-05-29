@@ -19,7 +19,7 @@ const ReopenComplaintForm = ({ form, formKey, options, ontextAreaChange, handleO
         {role &&
           role !== "csr" && (
             <div className="reopencomplaint-upload-photo">
-              <ImageUpload module="rainmaker-pgr" formKey={formKey} fieldKey="media" />
+              <ImageUpload module="rainmaker-pgr,rainmaker-bnd,rainmaker-noc,rainmaker-common-noc" formKey={formKey} fieldKey="media" />
             </div>
           )}
         <div className="reopencomplaint-textArea">
