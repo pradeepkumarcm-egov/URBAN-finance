@@ -241,6 +241,8 @@ const UpdateDeath = () => {
       pinno: formData?.permanentPincode || "", state: formData?.permanentState || "",
     };
 
+    const registrationNumberForPayload = formData?.RegistrationNumber || editData?.registrationno || "";
+
     return {
       id: certificateId,
       age: String(formData?.age || ""),
@@ -271,7 +273,8 @@ const UpdateDeath = () => {
       informantsname: formData?.informantName || "",
       informantsaddress: formData?.informantAddress || "",
       isLegacyRecord: !!formData?.checkboxlabel,
-      registrationno: formData?.checkboxlabel ? (formData?.RegistrationNumber || "") : (editData?.isLegacyRecord ? editData?.registrationno : ""),
+      // registrationno: formData?.checkboxlabel ? (formData?.RegistrationNumber || "") : (editData?.isLegacyRecord ? editData?.registrationno : ""),
+      registrationno:registrationNumberForPayload,
       aadharno: formData?.AadharNumber || "",
       nationality: formData?.Nationality || "",
       placeofdeath: formData?.DeathPlace || "",
