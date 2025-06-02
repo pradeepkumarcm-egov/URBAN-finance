@@ -15,9 +15,16 @@ export const getTenantId = () => {
 export const getLocalization = (key) => {
   return localStorage.getItem(key);
 };
-export const getLocale = () => {
-  console.log(`*** LOG GET***`,localStorage.getItem("locale"));
-  return localStorage.getItem("locale") || "en_IN";
+var getLocale = exports.getLocale = function getLocale() {
+  var locale = localStorage.getItem("locale");
+  console.log("*** LOG GET***", locale);
+  if (!locale || locale.trim() === "") {
+  console.log("*** LOG GET ENG***", 'en_IN');
+
+    return "en_IN";
+  }
+  console.log("*** LOG GET NOT NULL***", locale);
+  return locale;
 };
 export const getModule = () => {
   return localStorage.getItem("module");
