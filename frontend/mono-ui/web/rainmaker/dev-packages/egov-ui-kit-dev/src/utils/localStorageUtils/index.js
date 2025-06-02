@@ -15,24 +15,9 @@ export const getTenantId = () => {
 export const getLocalization = (key) => {
   return localStorage.getItem(key);
 };
-var getLocale = exports.getLocale = function getLocale() {
-  var locale = localStorage.getItem("locale");
-  console.log("*** LOG GET*** 1", locale);
-
-  if (locale == undefined) {
-    console.log("*** LOG GET ENG***2", 'en_IN');
-    localStorage.setItem("locale", 'en_IN');
-    sessionStorage.setItem("Digit.locale", JSON.stringify({ value: 'en_IN' }));
-
-    return "en_IN";
-  }
-  if (!locale || locale.trim() === "") {
-    console.log("*** LOG GET ENG***3", 'en_IN');
-
-    return "en_IN";
-  }
-  console.log("*** LOG GET NOT NULL***4", locale);
-  return locale;
+export const getLocale = () => {
+  // return localStorage.getItem("locale");
+  return "en_IN";
 };
 export const getModule = () => {
   return localStorage.getItem("module");
@@ -61,8 +46,8 @@ export const setRefreshToken = (refreshToken) => {
   localStorageSet("refresh-token", refreshToken, null);
 };
 export const setUserObj = (user = {}) => {
-  localStorage.setItem("citizen.userRequestObject", user);
-  sessionStorage.setItem("Digit.citizen.userRequestObject", JSON.stringify({ value: { info: JSON.parse(user) } }));
+  localStorage.setItem("citizen.userRequestObject", user );
+  sessionStorage.setItem("Digit.citizen.userRequestObject", JSON.stringify({ value: { info: JSON.parse(user ) } }));
 };
 export const setTenantId = (tenantId) => {
   localStorageSet("tenant-id", tenantId, null);
@@ -79,13 +64,10 @@ export const setTenantId = (tenantId) => {
   }
 };
 export const setLocale = (locale) => {
-  console.log(`*** LOG SET***`, locale);
-  const finalLocale = locale && locale.trim() !== "" ? locale : "en_IN";
-  localStorageSet("locale", finalLocale);
-  localStorage.setItem("locale", finalLocale);
-  sessionStorage.setItem("Digit.locale", JSON.stringify({ value: finalLocale }));
+  localStorageSet("locale", locale);
+  localStorage.setItem("locale", locale);
+  sessionStorage.setItem("Digit.locale", JSON.stringify({ value: locale }));
 };
-
 export const setModule = (moduleName) => {
   localStorageSet("module", moduleName);
 };
