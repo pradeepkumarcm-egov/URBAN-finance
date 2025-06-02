@@ -16,6 +16,7 @@ export const getLocalization = (key) => {
   return localStorage.getItem(key);
 };
 export const getLocale = () => {
+  console.log(`*** LOG GET***`,localStorage.getItem("locale"));
   return localStorage.getItem("locale") || "en_IN";
 };
 export const getModule = () => {
@@ -63,6 +64,7 @@ export const setTenantId = (tenantId) => {
   }
 };
 export const setLocale = (locale) => {
+  console.log(`*** LOG SET***`,locale);
   const finalLocale = locale && locale.trim() !== "" ? locale : "en_IN";
   localStorageSet("locale", finalLocale);
   localStorage.setItem("locale", finalLocale);
