@@ -11,11 +11,10 @@ const useBirthConfig = (birthCertData, applicationNumber, tenantId) => {
     };
   }
 
-
   const formatDate = (timestamp) => {
     if (timestamp) {
       const date = new Date(timestamp);
-      return date.toLocaleDateString(); 
+      return date.toLocaleDateString();
     }
     return "NA";
   };
@@ -144,10 +143,21 @@ const useBirthConfig = (birthCertData, applicationNumber, tenantId) => {
 
           {
             type: "WFHISTORY",
-            businessService: "BIRTH_CERTIFICATE",
-            tenantId: tenantId,
+            businessService: "BIRTH_CERT",
             applicationNumber: applicationNumber,
+            tenantId: tenantId,
+            // moduleName: "BillingService",
+            // timelineStatusPrefix: "TEST",
           },
+          // {
+          //   type: "COMPONENT",
+          //   component: "EditButton",
+          //   noCardStyle: true,
+          //   props: {
+          //     tenantId: tenantId,
+          //     applicationNumber: applicationNumber,
+          //   },
+          // },
         ],
       },
     ],

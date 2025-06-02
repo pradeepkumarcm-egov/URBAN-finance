@@ -1,4 +1,4 @@
-export const BirthConfig = [
+export  const BirthConfig = [
   {
     head: "Registration Details",
     body: [
@@ -17,7 +17,7 @@ export const BirthConfig = [
         inline: true,
         label: "Registration Number",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         disable:false,
         placeholder: "Registration Number",
         populators: {
@@ -39,16 +39,10 @@ export const BirthConfig = [
         disable: false,
         populators: {
           name: "hospital_name",
-          optionsKey: "name",
-          error: "Required",
-          required: true,
-          mdmsConfig: {
-            masterName: "hospitalList",
-            moduleName: "birth-death-service", 
-            tenantId: "pg.citya", 
-            localePrefix: "COMMON_HOSPITAL",
-          },
-        
+          optionsKey: "originalName",
+          valueKey: "code",
+          error: "Hospital Name is Required!",
+          required: false
         },
       },
       {

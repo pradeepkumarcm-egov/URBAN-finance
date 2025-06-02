@@ -8,6 +8,7 @@ import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import CitizenApp from "./pages/citizen";
 import BirthCard from "./components/BirthCard"
 import Address from "./pages/employee/createBirth/components/Address";
+import EditButton from "./components/EditButton";
 
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
@@ -42,6 +43,7 @@ const componentsToRegister = {
   BirthModule,
   Address,
   BirthCard,
+  EditButton,
 };
 export const initBirthComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {

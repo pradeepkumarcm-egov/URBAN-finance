@@ -39,9 +39,9 @@ const ViewBirth = () => {
   console.log(config,"...............");
 
   return (
-    <div>
+    <React.Fragment>
       <ViewComposer data={config} />
-    </div>
+    </React.Fragment>
   );
 };
 
