@@ -16,7 +16,7 @@ export const getLocalization = (key) => {
   return localStorage.getItem(key);
 };
 export const getLocale = () => {
-  return localStorage.getItem("locale");
+  return localStorage.getItem("locale") || "en_IN";
 };
 export const getModule = () => {
   return localStorage.getItem("module");
@@ -63,10 +63,12 @@ export const setTenantId = (tenantId) => {
   }
 };
 export const setLocale = (locale) => {
-  localStorageSet("locale", locale);
-  localStorage.setItem("locale", locale);
-  sessionStorage.setItem("Digit.locale", JSON.stringify({ value: locale }));
+  const finalLocale = locale && locale.trim() !== "" ? locale : "en_IN";
+  localStorageSet("locale", finalLocale);
+  localStorage.setItem("locale", finalLocale);
+  sessionStorage.setItem("Digit.locale", JSON.stringify({ value: finalLocale }));
 };
+
 export const setModule = (moduleName) => {
   localStorageSet("module", moduleName);
 };

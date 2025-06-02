@@ -13,7 +13,7 @@ class EGFFinance extends Component {
 
   render() {
     let auth_token = getAccessToken(),
-    locale = localStorage.getItem("locale"),
+    locale = localStorage.getItem("locale") || "en_IN",
     menuUrl = this.props.location.pathname,
     loc = window.location,
     subdomainurl,
@@ -50,7 +50,7 @@ class EGFFinance extends Component {
   }
   componentDidUpdate() {
     let isSecure = window.location.protocol === "https";
-    let localeCookie = "locale=" + localStorage.getItem("locale") + ";path=/;domain=." + this.getSubdomain();
+    let localeCookie = "locale=" + localStorage.getItem("locale") || "en_IN" + ";path=/;domain=." + this.getSubdomain();
     if (isSecure) {
       localeCookie += ";secure";
     }
