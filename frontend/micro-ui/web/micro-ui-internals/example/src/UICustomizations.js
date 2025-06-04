@@ -20,6 +20,7 @@ var Digit = window.Digit || {};
 const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) => {
   const history = useHistory();
   const handleClick = async () => {
+    // history.push(`/${window.contextPath}/citizen/death/bill-details/${certificateId}`);
     history.push(
       `/${window.contextPath}/citizen/death/egov-common/pay`,
       {

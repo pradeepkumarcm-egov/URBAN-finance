@@ -11,14 +11,25 @@ import MyApplications from "./myapplications";
 
 
 
+
+const deathPaymentRules = {
+  minAmountPayable: 0,
+  isAdvanceAllowed: false,
+  partPaymentAllowed: false, 
+};
+
+// const BillDetails = Digit.ComponentRegistryService.getComponent("BillDetails");
+
 const CitizenApp = ({ path, url, userType }) => {
+
+  
   const { t } = useTranslation();
 
    console.log("User Type: ........................", userType);
     console.log("Path: ", path);
     console.log("qwertyu",SearchAndDownload)
 
-    const BillDetails = Digit.ComponentRegistryService.getComponent("BillDetails");
+    // const BillDetails = Digit.ComponentRegistryService.getComponent("BillDetails");
 
   return (
     <span className={"death-citizen"} style={{marginTop:"1.5rem",marginLeft:"1.5rem",width:"100%"}}>
@@ -33,7 +44,7 @@ const CitizenApp = ({ path, url, userType }) => {
         <PrivateRoute path={`${path}/death-common/getCertificate`} component={SearchAndDownload} />
         <PrivateRoute path={`${path}/egov-common/pay`} component={PayandDownload} />
         <PrivateRoute path={`${path}/death-citizen/myApplications`} component={MyApplications} />
-        {/* <PrivateRoute path={`${path}/:consumerCode`} component={() => <BillDetails {...{ paymentRules, businessService }} />} /> */}
+        {/* <PrivateRoute path={`${path}/bill-details/:consumerCode`} component={() => <BillDetails paymentRules={deathPaymentRules} businessService="DEATH_CERT" />} /> */}
 
       
       </Switch>
