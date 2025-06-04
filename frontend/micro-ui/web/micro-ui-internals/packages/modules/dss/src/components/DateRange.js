@@ -191,6 +191,7 @@ const DateRange = ({ values, onFilterChange, t }) => {
         <div className={`select ${isModalOpen ? "dss-input-active-border" : ""}`}>
           <input
             className={`employee-select-wrap--elipses`}
+            style={{ zIndex: 5 }}
             type="text"
             value={values?.title ? `${values?.title}` : ""}
             readOnly
