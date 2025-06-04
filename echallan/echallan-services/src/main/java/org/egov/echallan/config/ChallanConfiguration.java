@@ -215,4 +215,12 @@ public class ChallanConfiguration {
     @Value("${egov.challan.validity}")
     private String challanValidity;
 
+     // central-instance configs
+    
+    @Value("${state.level.tenantid.length}")
+    private Integer stateLevelTenantIdLength;
+    
+    @Value("${is.environment.central.instance}")
+    private Boolean isEnvironmentCentralInstance;
+
 }
