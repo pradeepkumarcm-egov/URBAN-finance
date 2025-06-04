@@ -9,7 +9,7 @@
     "micro-ui-internals/packages/css",
     "micro-ui-internals/packages/react-components",
     "micro-ui-internals/example",
-    "micro-ui-internals/packages/modules/*"
+    "micro-ui-internals/packages/modules/*" 
   ],
   "engines": {
     "node": ">=14"
