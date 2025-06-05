@@ -11,11 +11,19 @@ import DeathCard from "../../components/DeathCard";
 import PayandDownload from "./payanddownload";
 
 
+// const deathPaymentRules = {
+//   minAmountPayable: 0,
+//   isAdvanceAllowed: false,
+//   partPaymentAllowed: false, 
+// };
+
 const EmployeeApp = ({ path, url, userType }) => {
     console.log("User Type: ........................", userType);
   const { t } = useTranslation();
   console.log("Path: ", path);
   
+  // const BillDetails = Digit.ComponentRegistryService.getComponent("BillDetails");
+
   return (
     <Switch>
       {/* Base path: Only BackButton + SampleCard */}
@@ -50,6 +58,8 @@ const EmployeeApp = ({ path, url, userType }) => {
         />
 
          <PrivateRoute path={`${path}/egov-common/pay`} component={PayandDownload} />
+
+         {/* <PrivateRoute path="/digit-ui/citizen/payment/my-bills/:consumerCode/:businessService" component={() => <BillDetails paymentRules={deathPaymentRules} businessService="DEATH_CERT" />} /> */}
     </Switch>
   );
 };

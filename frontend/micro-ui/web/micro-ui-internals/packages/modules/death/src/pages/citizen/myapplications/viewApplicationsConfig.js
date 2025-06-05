@@ -158,6 +158,7 @@ export const viewApplicationConfig = (applicationsArray, t, props = {}) => {
         rawStatus &&
         rawStatus.toUpperCase() === "FREE_DOWNLOAD" &&
         appData.fileStoreId && 
+         appData.fileStoreId !== "EXPIRED" &&
         idForDownloadLogic &&  
         tenantIdForButton;     
     if (shouldShowDownloadButton) {

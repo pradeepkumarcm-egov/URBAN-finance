@@ -457,17 +457,17 @@ const ViewDeath = () => {
   };
 
   const handlePayAndDownload = ()=>{
-    // const consumerCode= "DT/1013/20/2025-0/007719";
-    // const businessService= "DEATH_CERT"
-    //  history.push(`/digit-ui/citizen/payment/my-bills/${consumerCode}/${businessService}?workflow=mcollect`);
-    history.push(
-      `/${window.contextPath}/employee/death/egov-common/pay`,
-      {
-        mytenantId: tenantId,
-        myData: id ,
-        myhospitalname: Hospitalname,
-      }
-    );
+    const consumerCode= "DT/1013/20/2025-0/007719";
+    const businessService= "DEATH_CERT"
+     history.push(`/digit-ui/citizen/payment/my-bills/${consumerCode}/${businessService}?workflow=mcollect`);
+    // history.push(
+    //   `/${window.contextPath}/employee/death/egov-common/pay`,
+    //   {
+    //     mytenantId: tenantId,
+    //     myData: id ,
+    //     myhospitalname: Hospitalname,
+    //   }
+    // );
 
   };
 
