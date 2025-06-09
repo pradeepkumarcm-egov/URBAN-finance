@@ -11,8 +11,9 @@ const customisedComponent = {
 
 
 export const initCustomisationComponents = () => {
+    console.log(window.Digit) ;
     Object.entries(customisedComponent).forEach(([key, value]) => {
-        Digit.ComponentRegistryService.setComponent(key, value);
+        window.Digit.ComponentRegistryService.setComponent(key, value);
     });
 };
 
