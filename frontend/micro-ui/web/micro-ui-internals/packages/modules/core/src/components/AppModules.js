@@ -7,6 +7,7 @@ import EmployeeLogin from "../pages/employee/Login/index";
 import ChangePassword from "../pages/employee/ChangePassword/index";
 import ForgotPassword from "../pages/employee/ForgotPassword/index";
 import LanguageSelection from "../pages/employee/LanguageSelection";
+import EGF from "../pages/employee/EGF";
 // import UserProfile from "./userProfile";
 
 const getTenants = (codes, tenants) => {
@@ -47,6 +48,9 @@ export const AppModules = ({ stateCode, userType, modules, appTenants }) => {
         </Route>
         <Route path={`${path}/change-password`}>
           <ChangePassword />
+        </Route>
+        <Route path={`${path}/services/EGF`}>
+          <EGF />
         </Route>
         <Route>
           <AppHome userType={userType} modules={modules} />

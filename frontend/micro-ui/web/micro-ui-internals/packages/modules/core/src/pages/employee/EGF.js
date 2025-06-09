@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import EGFFinance from "../../components/EGF";
-// import IFrameInterface from "../../components/IFrameInterface";
 
 const EGF = () => {
   let location = window.location.pathname;
