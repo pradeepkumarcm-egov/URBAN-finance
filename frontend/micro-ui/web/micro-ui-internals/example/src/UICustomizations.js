@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import _ from "lodash";
 import React, { useState, Fragment, useEffect } from "react";
-import { Button as ButtonNew,Toast } from "@egovernments/digit-ui-components";
+import { Button as ButtonNew,Toast,Loader } from "@egovernments/digit-ui-components";
 
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
 //how to call these -> Digit?.Customizations?.[masterName]?.[moduleName]
@@ -18,17 +18,21 @@ var Digit = window.Digit || {};
 
 
 const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) => {
+  const useDeathDownload= Digit.ComponentRegistryService.getComponent("useDeathDownload");
   const history = useHistory();
+  const { consumerCode } = useDeathDownload(tenantId, certificateId);
   const handleClick = async () => {
-    // history.push(`/${window.contextPath}/citizen/death/bill-details/${certificateId}`);
-    history.push(
-      `/${window.contextPath}/citizen/death/egov-common/pay`,
-      {
-        mytenantId: tenantId,
-        myData: certificateId,
-        myhospitalname: hospitalName,
-      }
-    );
+  const businessService = "DEATH_CERT";
+    const encodedConsumerCode = encodeURIComponent(consumerCode);
+    history.push(`/${window.contextPath}/citizen/payment/my-bills/${businessService}/${encodedConsumerCode}?workflow=death`);
+    // history.push(
+    //   `/${window.contextPath}/citizen/death/egov-common/pay`,
+    //   {
+    //     mytenantId: tenantId,
+    //     myData: certificateId,
+    //     myhospitalname: hospitalName,
+    //   }
+    // );
   };
 
   return (
@@ -40,6 +44,8 @@ const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) => {
   />
   );
 };
+
+
 
 
 const DownloadButton = ({ tenantId, certificateId }) => {
@@ -372,6 +378,7 @@ export const UICustomizations = {
       console.log("t", t);
       console.log("searchResult", searchResult);
       console.log("tenantId", tenantId);
+      console.log("row", row);
 
       
 

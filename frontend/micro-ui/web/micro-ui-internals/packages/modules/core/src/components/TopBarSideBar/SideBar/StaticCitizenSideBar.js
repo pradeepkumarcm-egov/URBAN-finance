@@ -220,7 +220,7 @@ const StaticCitizenSideBar = ({ linkData, islinkDataLoading }) => {
         });
       }
     });
-
+console.log("menuItems", menuItems);
   return (
     <React.Fragment>
       <div>
