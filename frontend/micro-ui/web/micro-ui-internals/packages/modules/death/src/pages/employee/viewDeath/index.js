@@ -376,7 +376,7 @@ const ViewDeath = () => {
   const authToken = window?.Digit?.UserService?.getUser()?.access_token;
 
   const useDeathDownload= Digit.ComponentRegistryService.getComponent("useDeathDownload");
-  const { consumerCode } = useDeathDownload(Digit.ULBService.getStateId(), id);
+  const { consumerCode } = useDeathDownload(tenantId, id);
 
   // --- State for UI and Data ---
   const [config, setConfig] = useState(null);
