@@ -23,7 +23,7 @@ export const getRequestInfo = (auth = null) => ({
     action: "_create",
     did: "1",
     key: "",
-    msgId: `20170310130900|${localStorage.getItem("locale")}`,
+    msgId: `20170310130900|${localStorage.getItem("locale") || "en_IN"}`,
     authToken: auth,
   },
 });

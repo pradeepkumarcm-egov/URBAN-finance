@@ -16,7 +16,8 @@ export const getLocalization = (key) => {
   return localStorage.getItem(key);
 };
 export const getLocale = () => {
-  return localStorage.getItem("locale");
+  // return localStorage.getItem("locale");
+  return "en_IN";
 };
 export const getModule = () => {
   return localStorage.getItem("module");
