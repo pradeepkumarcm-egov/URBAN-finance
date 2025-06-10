@@ -2,14 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import useBirthConfig from "../../../utils/useBirthConfig";
-import { ViewComposer } from "@egovernments/digit-ui-react-components";
+import { ViewComposer, Loader } from "@egovernments/digit-ui-react-components";
 const ViewBirth = () => {
   const { id } = useParams();
   if (!id) return <div>Error: Unauthorized access</div>;
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const authToken = window?.Digit?.UserService?.getUser()?.access_token;
 
-  // console.log(ViewComposer,"***********");
 
   const { data, isLoading, error } = Digit.Hooks.useCustomAPIHook({
     url: "/birth-death-services/birth/_viewfullcertdata",
@@ -31,12 +30,12 @@ const ViewBirth = () => {
       "Content-Type": "application/json",
     },
   });
-  // console.log(data?.BirthCertificate);
+
 
   const config = useBirthConfig(data);
-  console.log(ViewComposer);
 
-  console.log(config,"...............");
+
+ 
 
   return (
     <React.Fragment>
