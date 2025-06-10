@@ -15,7 +15,8 @@
     "packages/modules/death",
     "packages/modules/firenoc",
     "packages/modules/obps",
-    "packages/modules/pt"
+    "packages/modules/pt",
+    "packages/modules/bills"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
   "license": "MIT",
