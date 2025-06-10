@@ -31,7 +31,7 @@ const ServicesBreadCrumbs = ({ location }) => {
     }
   ]
 
-  return <BreadCrumb crumbs={crumbs} spanStyle={{ maxWidth: "min-content" }}/>
+  return <BreadCrumb crumbs={crumbs} spanStyle={{ maxWidth: "min-content" }} style={{marginTop: "15px"}}/>
 }
 
 export const AppModules = ({ stateCode, userType, modules, appTenants }) => {
@@ -70,7 +70,7 @@ export const AppModules = ({ stateCode, userType, modules, appTenants }) => {
           <ChangePassword />
         </Route>
         <Route path={`${path}/services/EGF`}>
-          <ServicesBreadCrumbs location={location} />
+          <ServicesBreadCrumbs location={location}/>
           <EGF />
         </Route>
         <Route>
