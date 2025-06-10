@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button, Footer } from "@egovernments/digit-ui-components";
 import { useTranslation } from "react-i18next";
-import useBirthConfig from "../../../utils/useBirthConfig";
+import useBirthConfig from "./config/useBirthConfig";
 import { ViewComposer } from "@egovernments/digit-ui-react-components";
 import { usePdfDownloader } from "../../../components/usePdfDownloader";
 
@@ -61,7 +61,9 @@ const ViewBirth = () => {
   const handleEditClick = () => {
     if (data?.BirthCertificate?.length > 0) {
       const certToEdit = { ...data.BirthCertificate[0] };
-      history.push(`/${window.contextPath}/employee/birth/birth-common/update-birth?action=EDIT&certificateId=${id}&module=birth`, {
+      console.log("certToEdit", certToEdit);
+      console.log("id****", id);
+      history.push(`/${window.contextPath}/employee/birth/update-birth?action=EDIT&certificateId=${id}&module=birth`, {
         editdata: certToEdit,
         certificateId: id,
         module: "birth",
