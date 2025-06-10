@@ -12,7 +12,6 @@ import CancelBill from "./CancelBill";
 import GroupBill from "./GroupBill";
 import DownloadBill from "./DownloadBill";
 import SearchApp from "./SearchApp";
-import EGF from "./EGF";
 
 const BILLSBreadCrumbs = ({ location }) => {
   const { t } = useTranslation();
@@ -131,10 +130,6 @@ const EmployeeApp = ({ path, url, userType }) => {
           <PrivateRoute
             path={`${path}/bill-details`}
             component={() => <BillDetailsv1 parentRoute={path} />}
-          />
-          <PrivateRoute
-            path={`${path}/services/EGF`}
-            component={() => <EGF parentRoute={path} />}
           />
         </div>
       </React.Fragment>

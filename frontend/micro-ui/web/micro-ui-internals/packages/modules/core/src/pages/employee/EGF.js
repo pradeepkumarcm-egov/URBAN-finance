@@ -5,7 +5,7 @@ const EGF = () => {
   let location = window.location.pathname;
   location = location.substring(location.indexOf("/services"));
   return (
-    <div className="dashboard">
+    <div>
       <EGFFinance location={location} />
     </div>
   );
