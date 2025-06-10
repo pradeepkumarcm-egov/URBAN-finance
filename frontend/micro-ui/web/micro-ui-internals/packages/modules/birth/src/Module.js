@@ -9,6 +9,7 @@ import CitizenApp from "./pages/citizen";
 import BirthCard from "./components/BirthCard"
 import Address from "./pages/employee/createBirth/components/Address";
 import EditButton from "./components/EditButton";
+import { usePdfDownloader } from "./components/usePdfDownloader.JS";
 
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
@@ -44,6 +45,7 @@ const componentsToRegister = {
   Address,
   BirthCard,
   EditButton,
+  usePdfDownloader:usePdfDownloader,
 };
 export const initBirthComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
