@@ -11,8 +11,7 @@ import { UICustomizations } from './Customisations/UICustomizations';
 initLibraries();
 
 
-window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations,
-commonUiConfig: UICustomizations};
+window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations, commonUiConfig: TLCustomisations };
 
 const user = window.Digit.SessionStorage.get("User");
 

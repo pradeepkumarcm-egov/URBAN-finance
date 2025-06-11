@@ -65,6 +65,11 @@ const enabledModules = [
   "BillAmendment",
   "Death",
 ];
+
+const moduleReducers = (initData) => ({
+  pgr: PGRReducers(initData),
+});
+
 window.Digit.ComponentRegistryService.setupRegistry({
   ...paymentConfigs,
   PTModule,
@@ -79,6 +84,10 @@ window.Digit.ComponentRegistryService.setupRegistry({
   TLLinks,
   // ReceiptsModule
 });
+
+window.Digit.Customizations = {
+    commonUiConfig: UICustomizations,
+};
 
 initPGRComponents();
 initFSMComponents();
@@ -98,13 +107,7 @@ initBillsComponents();
 initDeathComponents();
 
 
-window.Digit.Customizations = {
-    commonUiConfig: UICustomizations,
-  };
 
-const moduleReducers = (initData) => ({
-  pgr: PGRReducers(initData),
-});
 
 function App() {
   window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH") || "digit-ui";
