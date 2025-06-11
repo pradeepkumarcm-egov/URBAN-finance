@@ -12,7 +12,7 @@ initLibraries();
 
 
 window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations,
-commonUiConfig:UICustomizations};
+commonUiConfig: UICustomizations};
 
 const user = window.Digit.SessionStorage.get("User");
 

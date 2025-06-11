@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import CitizenApp from "../src/pages/citizen/index";
-// import ParentInfoCard from "./pages/employee/customcomponents/ParentInfoCard";
 import { overrideHooks,updateCustomConfigs } from "./utils";
 import ViewDeath from "./pages/employee/viewDeath";
 import EditButton from "./pages/employee/customcomponents/EditButton";
