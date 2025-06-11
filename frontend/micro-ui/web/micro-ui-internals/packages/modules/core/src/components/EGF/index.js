@@ -20,7 +20,7 @@ class EGFFinance extends Component {
     domainurl,
     finEnv,
     hostname = loc.hostname,
-    // winheight = window.innerHeight - 100,
+    winheight = window.innerHeight - 275,
     erp_url,
     tenantId = Digit.ULBService.getCurrentTenantId();
     //Reading domain name from the request url
@@ -33,21 +33,7 @@ class EGFFinance extends Component {
 
     return (
       <div>
-        <iframe 
-          name="erp_iframe" 
-          id="erp_iframe" 
-          style={{
-            width: '100%',
-            border: 'none',
-            margin: 0,
-            padding: 0,
-            display: 'block'
-          }}
-          onLoad={(e) => {
-            const iframe = e.target;
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-          }}
-        />
+        <iframe name="erp_iframe" id="erp_iframe" height={winheight} width="100%"/>
         <form action={erp_url} id="erp_form" method="post" target="erp_iframe">
           <input readOnly hidden="true" name="auth_token" value={auth_token} />
           <input readOnly hidden="true" name="tenantId" value={tenantId} />
