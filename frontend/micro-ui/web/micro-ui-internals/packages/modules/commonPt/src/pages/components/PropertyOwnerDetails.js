@@ -280,7 +280,7 @@ const PropertyOwnerDetails = ({ t, config, onSelect, userType, formData, formSta
                         }}
                         render={({ value, onChange, onBlur }) => (
                           <Dropdown
-                            selected={institutionTypeMenu?.length === 1 ? Menu1[0] : value}
+                            selected={institutionTypeMenu?.length === 1 ? institutionTypeMenu[0] : value}
                             disable={institutionTypeMenu?.length === 1 || editScreen}
                             option={institutionTypeMenu ? institutionTypeMenu.sort((a, b) => a.name.localeCompare(b.name)) : []}
                             select={(value) => {
