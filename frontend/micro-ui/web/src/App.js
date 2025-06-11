@@ -99,6 +99,7 @@ initDeathComponents();
 
 
 window.Digit.Customizations = {
+    PGR: {},
     commonUiConfig: UICustomizations,
   };
 
