@@ -38,7 +38,7 @@ import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents } from "@egovernments/digit-ui-module-bills";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
 import { initDeathComponents } from "@egovernments/digit-ui-module-death";
-
+import { UICustomizations } from "./Customisations/UICustomizations";
 
 initLibraries();
 
@@ -97,6 +97,10 @@ initBillsComponents();
 // initCustomisationComponents();
 initDeathComponents();
 
+
+window.Digit.Customizations = {
+    commonUiConfig: UICustomizations,
+  };
 
 const moduleReducers = (initData) => ({
   pgr: PGRReducers(initData),
