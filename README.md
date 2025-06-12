@@ -6,7 +6,7 @@ DIGIT offers a suite of open APIs, microservices, and reference implementations,
 
 With a strong focus on inclusion, DIGIT emphasizes openness and citizen choice. The platform's architecture is based on open standards and APIs, ensuring seamless integration with existing systems and encouraging the development of contextually relevant solutions. Recognizing that mobile devices are the primary mode of internet access for most Indians, DIGIT embraces a "mobile-first" philosophy while supporting multiple access channels to serve diverse user needs.
 
-## Explore more from these Useful Links:
+## Explore more from these Useful Links
 
 * ### [Documentation](https://docs.digit.org)
 
@@ -24,4 +24,4 @@ With a strong focus on inclusion, DIGIT emphasizes openness and citizen choice. 
 
 ### DIGIT Code is open sources under the MIT License and under [Contributor License Agreement](https://forms.gle/nnNZjB7P1YPuEHb69)
 
-### DIGIT is Developed and Maintained by eGovernments Foundation (A non-profit and non-governmental organisation)
+### DIGIT is Developed and Maintained by eGovernments Foundation (A non-profit and non-governmental organization)
