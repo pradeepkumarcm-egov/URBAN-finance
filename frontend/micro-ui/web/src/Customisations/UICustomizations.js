@@ -6,6 +6,94 @@ import _ from "lodash";
 // these functions will act as middlewares
 var Digit = window.Digit || {};
 
+const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) => {
+  const useDeathDownload= Digit.ComponentRegistryService.getComponent("useDeathDownload");
+  const history = useHistory();
+  const { consumerCode } = useDeathDownload(tenantId, certificateId);
+  const handleClick = async () => {
+  const businessService = "DEATH_CERT";
+    const encodedConsumerCode = encodeURIComponent(consumerCode);
+    history.push(`/${window.contextPath}/citizen/payment/my-bills/${businessService}/${encodedConsumerCode}?workflow=death`);
+    // history.push(
+    //   `/${window.contextPath}/citizen/death/egov-common/pay`,
+    //   {
+    //     mytenantId: tenantId,
+    //     myData: certificateId,
+    //     myhospitalname: hospitalName,
+    //   }
+    // );
+  };
+
+  return (
+     <ButtonNew
+    className="custom-class"
+    label="Pay and Download"
+    onClick={handleClick}
+    variation="link"
+  />
+  );
+};
+
+
+
+
+const DownloadButton = ({ tenantId, certificateId }) => {
+const usePdfDownloader= Digit.ComponentRegistryService.getComponent("usePdfDownloader");
+    console.log(usePdfDownloader,"usePdfDownloaderusePdfDownloaderusePdfDownloader")
+  const { initiateDownload, isDownloading, downloadError } = usePdfDownloader(certificateId);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    if (isDownloading) {
+      console.log("Download already in progress for certificate:", certificateId);
+      return;
+    }
+    console.log(`DownloadButton clicked for cert: ${certificateId}, tenant: ${tenantId}`);
+    initiateDownload(tenantId, certificateId);
+  };
+
+  useEffect(() => {
+    if (downloadError) {
+      console.error(`Download error for certificate ${certificateId}:`, downloadError);
+    }
+  }, [downloadError, certificateId]);
+
+  return (
+    <ButtonNew
+      className="custom-class"
+      label={isDownloading ? "Downloading..." : "Download"}
+      onClick={!isDownloading ? handleClick : undefined}
+      title={isDownloading ? "Download in progress..." : "Download Certificate"}
+      variation="link"
+      disabled={isDownloading}
+    />
+  );
+};
+
+
+const ViewLinkButton = ({ tenantId, certificateId,hospitalname }) => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push(
+      `/${window.contextPath}/employee/death/death-common/viewDeath`,
+      {
+        myData: certificateId,
+        myhospitalname: hospitalname,
+        mytenantId: tenantId,
+      }
+    );
+  };
+
+  return (
+    <ButtonNew
+    className="custom-class"
+    label="View"
+    onClick={handleClick}
+    variation="link"
+  />
+  );
+};
 
 
 const businessServiceMap = {
@@ -521,7 +609,7 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      const ViewLinkButton = Digit.ComponentRegistryService.getComponent("ViewLinkButton");
+      // const ViewLinkButton = Digit.ComponentRegistryService.getComponent("ViewLinkButton");
       console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
       console.log("key", key);
@@ -676,8 +764,8 @@ export const UICustomizations = {
   },
 
      additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      const DownloadButton = Digit.ComponentRegistryService.getComponent("DownloadButton");
-      const PayAndDownloadButton = Digit.ComponentRegistryService.getComponent("PayAndDownloadButton");
+      // const DownloadButton = Digit.ComponentRegistryService.getComponent("DownloadButton");
+      // const PayAndDownloadButton = Digit.ComponentRegistryService.getComponent("PayAndDownloadButton");
       const tenantId = searchResult?.[0]?.tenantid;
       const counter = row?.counter;
       console.log("counter", counter);
