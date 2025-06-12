@@ -12,6 +12,9 @@ import EditButton from "./pages/employee/customcomponents/EditButton";
 import PaymentCollectionDetailsCard from "./pages/citizen/components/PaymentCollectionDetailsCard";
 import { usePdfDownloader } from "./components/usePdfDownloader";
 import useDeathDownload from "./components/useDeathDownload";
+import { DownloadButton } from "./components/DownloadButton";
+import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
+import { ViewLinkButton } from "./components/ViewLinkButton";
 
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
@@ -43,6 +46,9 @@ const componentsToRegister = {
   PaymentCollectionDetailsCard,
   usePdfDownloader:usePdfDownloader,
   useDeathDownload:useDeathDownload,
+  DownloadButton: DownloadButton,
+  PayAndDownloadButton: PayAndDownloadButton,
+  ViewLinkButton: ViewLinkButton,
 };
 export const initDeathComponents = () => {
   overrideHooks();

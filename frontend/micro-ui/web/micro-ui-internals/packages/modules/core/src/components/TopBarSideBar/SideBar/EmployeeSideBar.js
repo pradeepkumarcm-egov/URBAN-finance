@@ -18,6 +18,8 @@ const EmployeeSideBar = () => {
     collapseNav();
   }, [isLoading]);
 
+  console.log("data",data);
+
   const expandNav = () => {
     sidebarRef.current.style.width = "260px";
     sidebarRef.current.style.overflow = "auto";

@@ -17,7 +17,7 @@ const user = window.Digit.SessionStorage.get("User");
 
 if (!user || !user.access_token || !user.info) {
   // login detection
-
+g
   const parseValue = (value) => {
     try {
       return JSON.parse(value)
