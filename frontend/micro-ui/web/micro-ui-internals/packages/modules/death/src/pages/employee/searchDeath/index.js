@@ -6,7 +6,7 @@ import { Header } from "@egovernments/digit-ui-react-components";
 
 const SearchDeath = () => {
     console.log(InboxSearchComposer, "InboxSearchComposer")
-
+    
     const { t } = useTranslation();
    
     const tenant= Digit.ULBService.getStateId(); 

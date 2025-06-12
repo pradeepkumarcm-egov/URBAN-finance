@@ -136,7 +136,9 @@ const initDigitUI = () => {
     pgr: PGRReducers(initData),
   });
 
+  
   window.Digit.Customizations = {
+     ...(window.Digit.Customizations || {}),
     PGR: pgrCustomizations,
     TL: {
       customiseCreateFormData: (formData, licenceObject) => licenceObject,
