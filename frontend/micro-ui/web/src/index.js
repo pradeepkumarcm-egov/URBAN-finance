@@ -5,19 +5,19 @@ import { initLibraries } from "@egovernments/digit-ui-libraries";
 import "./index.css";
 import App from './App';
 import { TLCustomisations } from './Customisations/tl/TLCustomisation';
-import { UICustomizations } from './Customisations/UICustomizations';
+
 
 
 initLibraries();
 
 
-window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations, commonUiConfig: UICustomizations };
+window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations};
 
 const user = window.Digit.SessionStorage.get("User");
 
 if (!user || !user.access_token || !user.info) {
   // login detection
-g
+
   const parseValue = (value) => {
     try {
       return JSON.parse(value)
