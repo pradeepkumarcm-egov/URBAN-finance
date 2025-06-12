@@ -1172,14 +1172,19 @@ export const getFetchBillAPI = () => {
 
 // const userObject=JSON.parse(localStorage.getItem("citizen.userRequestObject"))||{};
 // return {user:[userObject]};
-
 export const getUserSearchedResponse = () => {
-  let userObject = JSON.parse(localStorage.getItem("citizen.userRequestObject")) || {};
-  if (process.env.REACT_APP_NAME == "Citizen" && commonConfig.singleInstance) {
+  const isCitizen = process.env.REACT_APP_NAME === "Citizen";
+  const storageKey = isCitizen ? "citizen.userRequestObject" : "Employee.user-info";
+
+  let userObject = JSON.parse(localStorage.getItem(storageKey)) || {};
+
+  if (isCitizen && commonConfig.singleInstance) {
     userObject = convertUserForSingleInstance(userObject);
   }
+
   return { user: [userObject] };
 };
+
 
 export const getResultUrl = (moduleName, reportName) => {
   let reportResultUrl = `/report/${moduleName}/${reportName}/_get`;
