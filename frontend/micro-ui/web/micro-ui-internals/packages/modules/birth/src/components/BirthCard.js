@@ -28,11 +28,11 @@ const BirthCard = () => {
   ];
 
   const propsForModuleCard = {
+    Icon:<CaseIcon/>, 
     moduleName: t("COMMON_BIRTH"),
     links: links,
     kpis: [
     ],
-    icon: <CaseIcon/>
 }
 
   return <EmployeeModuleCard {...propsForModuleCard} />;

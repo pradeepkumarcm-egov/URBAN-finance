@@ -31,11 +31,11 @@ const DeathCard = () => {
   ];
 
   const propsForModuleCard = {
+    Icon:<CaseIcon/>, 
     moduleName: t("COMMON_DEATH"),
     links: links,
     kpis: [
     ],
-    icon: <CaseIcon/>
 }
 
   return <EmployeeModuleCard {...propsForModuleCard} />;
