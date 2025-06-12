@@ -26,8 +26,8 @@ const EmployeeApp = ({ path, url, userType }) => {
               <BirthCard userType={userType} />
             </AppContainer>
           </Route>
-          <PrivateRoute path={`${path}/createbirth`} component={CreateBirth} />
-          <PrivateRoute path={`${path}/searchbirth`} component={SearchBirth} />
+          <PrivateRoute path={`${path}/birth-common/create-birth`} component={CreateBirth} />
+          <PrivateRoute path={`${path}/birth-common/getCertificate`} component={SearchBirth} />
           <PrivateRoute path={`${path}/viewbirth/:id`} component={ViewBirth} />
           <PrivateRoute path={`${path}/update-birth`} component={UpdateBirth} />
         </div>

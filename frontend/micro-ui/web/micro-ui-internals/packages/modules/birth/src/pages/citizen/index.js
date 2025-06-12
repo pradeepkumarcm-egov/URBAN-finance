@@ -3,21 +3,27 @@ import React from "react";
 import { Redirect, Switch, useRouteMatch } from "react-router-dom";
 import SearchBirth from "./SearchAndDownload";
 import MyApplications from "./MyApplication";
+import BirthCard from "../../components/BirthCard";
+import { Route } from "react-router-dom/cjs/react-router-dom.min";
 // import SearchChallanComponent from "./SearchChallan";
 // import SearchResultsComponent from "./SearchResults";
 // import MyChallanResultsComponent from "./MyChallan";
 //import BillInfo from "./SearchResults/BillInfo";
 
-const CitizenApp = () => {
-  const { path, url, ...match } = useRouteMatch();
+const CitizenApp = ({ path, url, userType }) => {
+  console.log(userType, "****");
   console.log(path);
   return (
     <span className={"birth-citizen"}>
       <Switch>
-        <AppContainer>
-          <PrivateRoute path={`${path}/myapplication`} component={MyApplications}/>
-          <PrivateRoute path={`${path}/search`} component={SearchBirth} />
-        </AppContainer>
+        <Route exact path={path}>
+          <AppContainer>
+            <BirthCard userType={userType} />
+          </AppContainer>
+        </Route>
+
+        <PrivateRoute path={`${path}/birth-common/getCertificate`} component={MyApplications} />
+        <PrivateRoute path={`${path}/birth-citizen/myApplications`} component={SearchBirth} />
       </Switch>
     </span>
   );

@@ -1,11 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { EmployeeModuleCard } from "@egovernments/digit-ui-react-components";
-const BirthCard = () => {
+const BirthCard = ({ userType }) => {
+  console.log("BirthCard");
   const { t } = useTranslation();
   window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH");
   // Check URL
   const isCitizen = window?.location?.pathname?.toLowerCase().includes("citizen");
+
   console.log("Context Path:", window?.contextPath);
 
   const propsForModuleCard = {
@@ -25,11 +27,11 @@ const BirthCard = () => {
       : [
           {
             label: t("Employee -Search and Download Birth Certificate"),
-            link: `/${window?.contextPath}/employee/birth/searchbirth`,
+            link: `/${window?.contextPath}/employee/birth/birth-common/getCertificate`,
           },
           {
             label: t("Employee - Register Birth Certificate"),
-            link: `/${window?.contextPath}/employee/birth/createbirth`,
+            link: `/${window?.contextPath}/employee/birth/birth-common/create-birth`,
           },
         ],
   };

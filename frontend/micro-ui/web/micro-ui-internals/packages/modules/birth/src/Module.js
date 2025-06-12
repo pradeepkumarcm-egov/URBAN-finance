@@ -6,14 +6,12 @@ import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 
 import CitizenApp from "./pages/citizen";
-import BirthCard from "./components/BirthCard"
+import BirthCard from "./components/BirthCard";
 import Address from "./pages/employee/createBirth/components/Address";
 import EditButton from "./components/EditButton";
 import { usePdfDownloader } from "./components/usePdfDownloader.JS";
 
-
 export const BirthModule = ({ stateCode, userType, tenants }) => {
-  
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const moduleCode = ["birth", "common", "workflow"];
   const language = Digit.StoreData.getCurrentLanguage();
@@ -28,16 +26,11 @@ export const BirthModule = ({ stateCode, userType, tenants }) => {
     return <Loader />;
   }
   const { path, url } = useRouteMatch();
-  if(userType==="employee"){
-    return <EmployeeApp path={path} url={url} userType={userType}/>
-  }else{
-    return <CitizenApp/>
+  if (userType === "employee") {
+    return <EmployeeApp path={path} url={url} userType={userType} />;
+  } else {
+    return <CitizenApp path={path} url={url} userType={userType} />;
   }
-
- 
-
-
-
 };
 
 const componentsToRegister = {
@@ -45,7 +38,7 @@ const componentsToRegister = {
   Address,
   BirthCard,
   EditButton,
-  usePdfDownloader:usePdfDownloader,
+  usePdfDownloader: usePdfDownloader,
 };
 export const initBirthComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
