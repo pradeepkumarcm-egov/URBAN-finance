@@ -110,6 +110,17 @@ const MobileGroupBill = ({ Controller, register, control, t, reset, handleSubmit
         
     };
 
+     const downloadBills = async () => {
+
+    const keyv1 = keys.filter((key) => key.code === searchParams.businesService);
+    const bills = await Digit.PaymentService.generatePdf(tenantId, { Bill: data.Bills }, keyv1[0].billKey);
+    const res = await Digit.UploadServices.Filefetch(bills?.filestoreIds, tenantId);
+    window.open(res.data[bills.filestoreIds[0]]);
+    //logic for downloading all bills anyway(if api is giving multiple filestoreids)
+    const fsObj = res.data.fileStoreIds;
+    // downloadAll(fsObj)
+  };
+
     const [showOptions, setShowOptions] = useState(false)
     const dowloadOptions = serviceType === "WS" ? [
         {
