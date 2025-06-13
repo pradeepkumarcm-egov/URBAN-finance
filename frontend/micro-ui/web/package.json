@@ -17,7 +17,8 @@
     "micro-ui-internals/packages/modules/dss",
     "micro-ui-internals/packages/modules/bills",
     "micro-ui-internals/packages/modules/engagement",
-    "micro-ui-internals/packages/modules/commonPt"
+    "micro-ui-internals/packages/modules/commonPt",
+    "micro-ui-internals/packages/modules/finance"
   ],
   "engines": {
     "node": ">=14"
@@ -44,6 +45,7 @@
     "@egovernments/digit-ui-module-firenoc": "0.0.1-sandbox",
     "@egovernments/digit-ui-module-birth": "0.0.1-sandbox",
     "@egovernments/digit-ui-module-death": "0.0.1-sandbox",
+    "@egovernments/digit-ui-module-finance": "0.0.1-sandbox",
     "babel-loader": "8.1.0",
     "clean-webpack-plugin": "4.0.0",
     "react": "17.0.2",
