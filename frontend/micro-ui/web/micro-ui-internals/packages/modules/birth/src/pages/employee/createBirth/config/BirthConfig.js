@@ -1,4 +1,4 @@
-export  const BirthConfig = [
+export const BirthConfig = [
   {
     head: "Registration Details",
     body: [
@@ -6,7 +6,7 @@ export  const BirthConfig = [
         inline: true,
         isMandatory: true,
         type: "checkbox",
-       
+
         withoutLabel: true,
         populators: {
           name: "checkbox_legacy",
@@ -18,13 +18,12 @@ export  const BirthConfig = [
         label: "Registration Number",
         type: "text",
         isMandatory: false,
-        disable:false,
+        disable: true,
         placeholder: "Registration Number",
         populators: {
           name: "registration_number",
           error: "Registration Number is Required!",
           validation: {
-            required: true,
             pattern: /^[A-Za-z0-9-]+$/,
             minLength: 5,
             maxLength: 20,
@@ -42,7 +41,7 @@ export  const BirthConfig = [
           optionsKey: "originalName",
           valueKey: "code",
           error: "Hospital Name is Required!",
-          required: false
+          required: false,
         },
       },
       {
@@ -286,6 +285,7 @@ export  const BirthConfig = [
         label: "Profession",
         type: "text",
         placeholder: "Profession",
+        isMandatory: true,
         populators: {
           name: "father_profession",
           error: "Profession must be 3-100 characters",
@@ -299,6 +299,7 @@ export  const BirthConfig = [
         inline: true,
         label: "Nationality",
         type: "text",
+        isMandatory: true,
         placeholder: "Nationality",
         populators: {
           name: "father_nationality",
@@ -314,6 +315,7 @@ export  const BirthConfig = [
         inline: true,
         label: "Religion",
         type: "text",
+        isMandatory: true,
         placeholder: "Religion",
         populators: {
           name: "father_religion",
@@ -441,6 +443,7 @@ export  const BirthConfig = [
         inline: true,
         label: "Profession",
         type: "text",
+        isMandatory: true,
         placeholder: "Profession",
         populators: {
           name: "mother_profession",
@@ -455,6 +458,7 @@ export  const BirthConfig = [
         inline: true,
         label: "Nationality",
         type: "text",
+        isMandatory: true,
         placeholder: "Nationality",
         populators: {
           name: "mother_nationality",
@@ -470,6 +474,7 @@ export  const BirthConfig = [
         inline: true,
         label: "Religion",
         type: "text",
+        isMandatory: true,
         placeholder: "Religion",
         populators: {
           name: "mother_religion",

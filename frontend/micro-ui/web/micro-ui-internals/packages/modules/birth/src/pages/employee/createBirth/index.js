@@ -4,6 +4,7 @@ import { FormComposerV2 } from "@egovernments/digit-ui-components";
 import { BirthConfig } from "./config/BirthConfig";
 import { useHistory } from "react-router-dom";
 
+// Main component for creating birth certificates
 export const CreateBirth = () => {
   const [permanent, setPermanent] = useState(false);
   const [sameAddressChecked, setSameAddressChecked] = useState(false);
@@ -12,10 +13,12 @@ export const CreateBirth = () => {
   const prevLegacyCheckboxRef = useRef(false);
   const [showToast, setShowToast] = useState(null);
   const history = useHistory();
-
   const prevCheckboxRef = useRef(false);
 
+  // Fetch current tenant ID for hospital list
   const hospitalTenantId = Digit.ULBService.getCurrentTenantId();
+
+  // Fetch hospital list from MDMS and transform for dropdown options
   const { isLoading: hospitalListLoading, data: hospitalListData } = Digit.Hooks.useCustomMDMS(
     hospitalTenantId,
     "birth-death-service",
@@ -36,6 +39,7 @@ export const CreateBirth = () => {
     }
   );
 
+  // Update form config with hospital list options when data is loaded
   useEffect(() => {
     if (hospitalListData?.hospitalListOptions) {
       setFormConfig((prevConfig) =>
@@ -60,8 +64,8 @@ export const CreateBirth = () => {
     }
   }, [hospitalListData]);
 
+  // Update form config based on "Same as Permanent Address" checkbox
   const updateConfigBasedOnCheckbox = (sameAddressChecked) => {
-    // Update form configuration based on checkbox state
     return BirthConfig.map((section) => {
       if (section.head === "Address of Parents at the Time of Birth") {
         return {
@@ -72,13 +76,14 @@ export const CreateBirth = () => {
           })),
         };
       }
-
       if (section.head === "Permanent Address of Parents" && sameAddressChecked) {
         return null;
       }
       return section;
     }).filter(Boolean);
   };
+
+  // API request configuration for creating birth certificate
   const reqCreate = {
     url: "/birth-death-services/common/savebirthimport",
     params: { tenantId: Digit.ULBService.getCurrentTenantId() },
@@ -86,60 +91,48 @@ export const CreateBirth = () => {
     config: { enabled: true },
   };
 
+  // Mutation hook for API call
   const mutation = Digit.Hooks.useCustomAPIMutationHook(reqCreate);
 
+  // Convert date string to epoch
   const toEpoch = (dateStr) => (dateStr ? Math.floor(new Date(dateStr).getTime() / 1000) : undefined);
 
+  // Transform form data to API payload structure
   const transformFormData = (formData) => {
-    // Address fields based on input data
-    const address = {
+    const presentAddress = {
       buildingno: formData?.birth_building_number || "",
       houseno: formData?.birth_house_no || "",
-      district: formData?.birth_district || "",
       streetname: formData?.birth_street_name || "",
-      tehsil: formData?.birth_tehsil || "",
-      city: formData?.birth_city || "",
-      country: formData?.birth_country || "",
       locality: formData?.birth_locality || "",
-      pinno: formData?.birth_pincode || "",
+      tehsil: formData?.birth_tehsil || "",
+      district: formData?.birth_district || "",
+      city: formData?.birth_city || "",
       state: formData?.birth_state || "",
+      country: formData?.birth_country || "",
+      pinno: formData?.birth_pincode || "",
     };
-    const permanentAddrr = {
+
+    const permanentAddress = {
       buildingno: formData?.permanent_building_number || "",
       houseno: formData?.permanent_house_no || "",
-      district: formData?.permanent_district || "",
       streetname: formData?.permanent_street_name || "",
-      tehsil: formData?.permanent_tehsil || "",
-      city: formData?.permanent_city || "",
-      country: formData?.permanent_country || "",
       locality: formData?.permanent_locality || "",
-      pinno: formData?.permanent_pincode || "",
+      tehsil: formData?.permanent_tehsil || "",
+      district: formData?.permanent_district || "",
+      city: formData?.permanent_city || "",
       state: formData?.permanent_state || "",
+      country: formData?.permanent_country || "",
+      pinno: formData?.permanent_pincode || "",
     };
 
-    // // If "same_as_permanent_address" is true, we will use the permanent address fields
-    // if (formData?.same_as_permanent_address) {
-    //   address.buildingno = formData?.birth_building_number || formData?.permanent_building_number;
-    //   address.houseno = formData?.birth_house_no || formData?.permanent_house_no;
-    //   address.district = formData?.birth_district || formData?.permanent_district;
-    //   address.streetname = formData?.birth_street_name || formData?.permanent_street_name;
-    //   address.tehsil = formData?.birth_tehsil || formData?.permanent_tehsil;
-    //   address.city = formData?.birth_city || formData?.permanent_city;
-    //   address.country = formData?.birth_country || formData?.permanent_country;
-    //   address.locality = formData?.birth_locality || formData?.permanent_locality;
-    //   address.pinno = formData?.birth_pincode || formData?.permanent_pincode;
-    //   address.state = formData?.birth_state || formData?.permanent_state;
-    // }
+    const isSameAddress = !!formData?.same_as_permanent_address;
 
     return {
- 
       dateofbirthepoch: toEpoch(formData?.date_of_birth),
       dateofreportepoch: toEpoch(formData?.date_of_registration),
       firstname: formData?.child_first_name || "",
-      lastname: formData?.child_last_name || "",
       genderStr: formData?.gender?.code || "",
-      checkboxforaddress: formData?.same_as_permanent_address | "",
-
+      checkboxforaddress: isSameAddress,
       birthFatherInfo: {
         firstname: formData?.father_first_name || "",
         middlename: formData?.father_middle_name || "",
@@ -152,7 +145,6 @@ export const CreateBirth = () => {
         nationality: formData?.father_nationality || "",
         religion: formData?.father_religion || "",
       },
-
       birthMotherInfo: {
         firstname: formData?.mother_first_name || "",
         middlename: formData?.mother_middle_name || "",
@@ -165,27 +157,20 @@ export const CreateBirth = () => {
         nationality: formData?.mother_nationality || "",
         religion: formData?.mother_religion || "",
       },
-
       placeofbirth: formData?.birth_place || "",
       registrationno: formData?.registration_number || "",
-      tenantid: Digit.ULBService.getCurrentTenantId(),
-      birthPermaddr: address,
-      informantsname: formData?.informant_name || "",
-      informantsaddress: formData?.informant_address || "",
-
-      birthPresentaddr: formData?.same_as_permanent_address ? address : permanentAddrr,
-      hospitalname: formData?.hospital_name.code || "Unknown",
-      nationality: formData?.father_nationality || formData?.mother_nationality || "",
+      birthPresentaddr: presentAddress,
+      birthPermaddr: isSameAddress ? presentAddress : permanentAddress,
+      hospitalname: formData?.hospital_name?.code || "Unknown",
       isLegacyRecord: !!formData?.checkbox_legacy,
       excelrowindex: -1,
-      counter: 1,
+      counter: 0,
       tenantid: Digit.ULBService.getCurrentTenantId(),
     };
   };
 
+  // Handle form submission and API call
   const onSubmit = async (formData) => {
-    console.log("Form submitted with data:", formData);
-
     const payload = {
       RequestInfo: {
         apiId: "Mihy",
@@ -200,7 +185,7 @@ export const CreateBirth = () => {
       birthCerts: [transformFormData(formData)],
     };
 
-    console.log("Payload:.................", payload);
+    console.log("Payload being sent:", JSON.stringify(payload, null, 2));
 
     await mutation.mutate(
       {
@@ -211,10 +196,15 @@ export const CreateBirth = () => {
       },
       {
         onSuccess: (response) => {
-          console.log("API Response:", response);
-          setShowToast({ key: "success", label: "Birth Certificate Created Successfully" });
+          // Show success or error toast based on API response
+          if (response?.serviceError) {
+             setShowToast({ key: "error", label: `Failed: ${response.serviceError}` });
+          } else {
+             setShowToast({ key: "success", label: "Birth Certificate Created Successfully" });
+          }
         },
         onError: (error) => {
+          // Show error toast on API failure
           console.error("API Error:", error);
           setShowToast({ key: "error", label: "Failed to Create Birth Certificate" });
         },
@@ -222,6 +212,7 @@ export const CreateBirth = () => {
     );
   };
 
+  // Reset form config to initial config on mount
   useEffect(() => {
     setFormConfig(BirthConfig);
   }, []);
@@ -240,13 +231,13 @@ export const CreateBirth = () => {
         label="SUBMIT"
         onSubmit={onSubmit}
         showSecondaryLabel={true}
+        // Handle form value changes for checkboxes and update config accordingly
         onFormValueChange={(setValue, formData) => {
           setValueRef.current = setValue;
-
           const isLegacy = !!formData["checkbox_legacy"];
           const isSameAddressChecked = !!formData["same_as_permanent_address"];
-          console.log("UPDATEING THE FORM", isLegacy, "*****", isSameAddressChecked);
 
+          // Update config if "Same as Permanent Address" checkbox changes
           if (prevCheckboxRef.current !== isSameAddressChecked) {
             prevCheckboxRef.current = isSameAddressChecked;
             setSameAddressChecked(isSameAddressChecked);
@@ -254,16 +245,13 @@ export const CreateBirth = () => {
             const updatedConfig = updateConfigBasedOnCheckbox(isSameAddressChecked);
             setFormConfig(updatedConfig);
           }
+          // Update config if "Legacy Record" checkbox changes
           if (prevLegacyCheckboxRef.current !== isLegacy) {
             prevLegacyCheckboxRef.current = isLegacy;
-
             const updatedForm = formConfig.map((section) => ({
               ...section,
-
               body: section.body.map((field) => {
-                console.log("update form is called", field.populators?.name);
                 if (field.populators?.name === "registration_number") {
-                  console.log("update Registration Number form is called");
                   return {
                     ...field,
                     disable: !isLegacy,
@@ -274,15 +262,14 @@ export const CreateBirth = () => {
                     },
                   };
                 }
-
                 return field;
               }),
             }));
-
             setFormConfig(updatedForm);
           }
         }}
         secondaryLabel="Reset"
+        // Reset all form fields on secondary action
         onSecondayActionClick={() => {
           if (setValueRef.current) {
             const allNames = formConfig.flatMap((section) => section.body.map((field) => field.populators?.name).filter(Boolean));
@@ -292,6 +279,7 @@ export const CreateBirth = () => {
           }
         }}
       />
+      {/* Show toast notification for success or error */}
       {showToast && (
         <Toast
           style={{ zIndex: 10001 }}
