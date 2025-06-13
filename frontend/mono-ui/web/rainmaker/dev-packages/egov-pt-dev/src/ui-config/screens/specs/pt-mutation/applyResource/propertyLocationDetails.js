@@ -180,7 +180,6 @@ export const propertyLocationDetails = getCommonCard(
             moduleName: "TENANT",
             masterName: "TENANTS",
           },
-          optionLabel: "name",
           placeholder: {
             labelName: "Select City",
             labelKey: "NOC_PROPERTY_CITY_PLACEHOLDER",
