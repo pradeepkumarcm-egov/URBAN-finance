@@ -10,6 +10,9 @@ import BirthCard from "./components/BirthCard";
 import Address from "./pages/employee/createBirth/components/Address";
 import EditButton from "./components/EditButton";
 import { usePdfDownloader } from "./components/usePdfDownloader.JS";
+import { DownloadButton } from "./components/DownloadButton";
+import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
+import useBirthDownload from "./components/useBirthDownload";
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -39,6 +42,9 @@ const componentsToRegister = {
   BirthCard,
   EditButton,
   usePdfDownloader: usePdfDownloader,
+  useBirthDownload: useBirthDownload,
+  DownloadButton: DownloadButton,
+  PayAndDownloadButton: PayAndDownloadButton,
 };
 export const initBirthComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
