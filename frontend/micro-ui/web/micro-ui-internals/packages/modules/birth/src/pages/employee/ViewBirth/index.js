@@ -74,7 +74,7 @@ const ViewBirth = () => {
   const actionButton = showPayAndDownload ? (
     <Button
       key="pay-download-btn"
-      label={t("BND_PAY_AND_DOWNLOAD_BUTTON_LABEL", "Pay and Download")}
+      label={t("PAY_AND_DOWNLOAD", "Pay and Download")}
       onClick={handlePayAndDownload}
       className={"employee-pay-download-btn-className"}
       variation="secondary"
@@ -83,7 +83,7 @@ const ViewBirth = () => {
   ) : (
     <Button
       key="download-btn"
-      label={t("BND_FREE_DOWNLOAD_BUTTON_LABEL", "Download")}
+      label={t("BND_DOWNLOAD_CERTIFICATE")}
       onClick={handleFreeDownload}
       className={"employee-download-btn-className"}
       variation="secondary"

@@ -1,6 +1,6 @@
 export const BirthConfig = [
   {
-    head: "Registration Details",
+    head: "BND_REGISTRATION",
     body: [
       {
         inline: true,
@@ -15,7 +15,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Registration Number",
+        label: "BND_REG_NO_PLACEHOLDER",
         type: "text",
         isMandatory: false,
         disable: true,
@@ -34,7 +34,7 @@ export const BirthConfig = [
         isMandatory: false,
         key: "Hospital Name",
         type: "dropdown",
-        label: "Enter Hospital Name",
+        label: "BND_HOSPITALNAME_LABEL",
         disable: false,
         populators: {
           name: "hospital_name",
@@ -46,7 +46,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Date of Registration",
+        label: "BND_DEATH_DOR",
         isMandatory: true,
         key: "doRegistration",
         type: "date",
@@ -63,11 +63,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Information of Child",
+    head: "BND_INFO_OF_CHILD",
     body: [
       {
         inline: true,
-        label: "Date of Birth",
+        label: "BND_BIRTH_DOB",
         isMandatory: true,
         key: "dob",
         type: "date",
@@ -77,7 +77,7 @@ export const BirthConfig = [
           error: "Required",
           validation: {
             required: true,
-            max: new Date().toISOString().split("T")[0], // Cannot be future date
+            max: new Date().toISOString().split("T")[0], 
           },
         },
       },
@@ -85,7 +85,7 @@ export const BirthConfig = [
         isMandatory: true,
         key: "Gender",
         type: "dropdown",
-        label: "Enter Gender Name",
+        label: "BND_GENDER_PLACEHOLDER",
         disable: false,
         populators: {
           name: "gender",
@@ -101,7 +101,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "First Name",
@@ -117,7 +117,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
@@ -133,7 +133,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Last Name",
@@ -150,11 +150,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Birth Place",
+    head: "BND_BIRTH_PLACE",
     body: [
       {
         inline: true,
-        label: "Birth Place",
+        label: "BND_BIRTH_PLACE",
         type: "text",
         isMandatory: true,
         placeholder: "Birth Place",
@@ -171,11 +171,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Father's Information",
+    head: "BND_FATHERS_INFO",
     body: [
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
@@ -192,7 +192,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
@@ -208,7 +208,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
@@ -225,7 +225,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "text",
         placeholder: "Aadhar Number",
         populators: {
@@ -240,7 +240,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Email ID",
+        label: "BND_EMAIL_ID",
         type: "text",
         placeholder: "Email ID",
         populators: {
@@ -253,7 +253,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Mobile Number",
+        label: "CORE_COMMON_PROFILE_MOBILE_NUMBER",
         type: "number",
         placeholder: "Mobile Number",
         populators: {
@@ -268,7 +268,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Education",
+        label: "BND_EDUCATION",
         type: "text",
         placeholder: "Education",
         populators: {
@@ -282,7 +282,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Profession",
+        label: "BND_PROFESSION",
         type: "text",
         placeholder: "Profession",
         isMandatory: true,
@@ -297,7 +297,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Nationality",
+        label: "BND_NATIONALITY",
         type: "text",
         isMandatory: true,
         placeholder: "Nationality",
@@ -313,7 +313,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Religion",
+        label: "BND_RELIGION",
         type: "text",
         isMandatory: true,
         placeholder: "Religion",
@@ -330,11 +330,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Mother's Information",
+    head: "BND_MOTHERS_INFO",
     body: [
       {
         inline: true,
-        label: "First Name",
+        label: "BND_FIRSTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "First Name",
@@ -351,7 +351,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Middle Name",
+        label: "BND_MIDDLENAME_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Middle Name",
@@ -367,7 +367,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Last Name",
+        label: "BND_LASTNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Last Name",
@@ -384,7 +384,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Aadhar Number",
+        label: "BND_AADHAR_NO",
         type: "text",
         placeholder: "Aadhar Number",
         populators: {
@@ -399,7 +399,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Email ID",
+        label: "BND_EMAIL_ID",
         type: "text",
         placeholder: "Email ID",
         populators: {
@@ -412,7 +412,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Mobile Number",
+        label: "CORE_COMMON_PROFILE_MOBILE_NUMBER",
         type: "number",
         placeholder: "Mobile Number",
         populators: {
@@ -427,7 +427,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Education",
+        label: "BND_EDUCATION",
         type: "text",
         placeholder: "Education",
         populators: {
@@ -441,7 +441,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Profession",
+        label: "BND_PROFESSION",
         type: "text",
         isMandatory: true,
         placeholder: "Profession",
@@ -456,7 +456,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Nationality",
+        label: "BND_NATIONALITY",
         type: "text",
         isMandatory: true,
         placeholder: "Nationality",
@@ -472,7 +472,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Religion",
+        label: "BND_RELIGION",
         type: "text",
         isMandatory: true,
         placeholder: "Religion",
@@ -489,11 +489,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Address of Parents at the Time of Birth",
+    head: "BND_PRESENT_ADDR_DURING_BIRTH",
     body: [
       {
         inline: true,
-        label: "Building Number",
+        label: "BND_BUILDINGNO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "Building Number",
@@ -509,7 +509,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "House No",
+        label: "BND_HOUSENO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "House No",
@@ -525,7 +525,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Street Name",
+        label: "BND_STREETNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Street Name",
@@ -541,7 +541,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Locality",
+        label: "BND_LOCALITY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Locality",
@@ -557,7 +557,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Tehsil",
+        label: "BND_TEHSIL_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Tehsil",
@@ -573,7 +573,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "District",
+        label: "BND_DISTRICT_LABE",
         type: "text",
         isMandatory: true,
         placeholder: "District",
@@ -589,7 +589,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "City",
+        label: "BND_CITY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "City",
@@ -605,7 +605,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "State",
+        label: "BND_STATE_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "State",
@@ -621,7 +621,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Country",
+        label: "BND_COUNTRY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Country",
@@ -637,7 +637,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Pincode",
+        label: "BND_PINNO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "Pincode",
@@ -666,11 +666,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Permanent Address of Parents",
+    head: "BND_BIRTH_ADDR_PERM",
     body: [
       {
         inline: true,
-        label: "Building Number",
+        label: "BND_BUILDINGNO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "Building Number",
@@ -686,7 +686,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "House No",
+        label: "BND_HOUSENO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "House No",
@@ -702,7 +702,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Street Name",
+        label: "BND_STREETNAME_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Street Name",
@@ -718,7 +718,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Locality",
+        label: "BND_LOCALITY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Locality",
@@ -734,7 +734,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Tehsil",
+        label: "BND_TEHSIL_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Tehsil",
@@ -750,7 +750,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "District",
+        label: "BND_DISTRICT_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "District",
@@ -766,7 +766,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "City",
+        label: "BND_CITY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "City",
@@ -782,7 +782,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "State",
+        label: "BND_STATE_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "State",
@@ -798,7 +798,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Country",
+        label: "BND_COUNTRY_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "Country",
@@ -814,7 +814,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Pincode",
+        label: "BND_PINNO_LABEL",
         type: "number",
         isMandatory: true,
         placeholder: "Pincode",
@@ -832,11 +832,11 @@ export const BirthConfig = [
     ],
   },
   {
-    head: "Informant's Information",
+    head: "BND_INFORMANTS_INFO",
     body: [
       {
         inline: true,
-        label: "Name",
+        label: "BND_COMMON_NAME",
         type: "text",
         isMandatory: true,
         placeholder: "Name",
@@ -853,7 +853,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "Address",
+        label: "BND_ADDRESS",
         type: "text",
         isMandatory: true,
         placeholder: "Address",
@@ -873,7 +873,7 @@ export const BirthConfig = [
     body: [
       {
         inline: true,
-        label: "Remarks",
+        label: "BND_REMARKS_LABEL",
         type: "text",
         isMandatory: false,
         placeholder: "Remarks",

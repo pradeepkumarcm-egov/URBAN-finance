@@ -1,6 +1,6 @@
 export const searchAndDownloadConfig = (t) => {
     return {
-        label: t("BND_SEARCH_BIRTH_REGISTRY"), 
+        label: t("BND_SEARCH_BUTTON"), 
         type: "search",
         apiDetails: {
             serviceName: "/birth-death-services/birth/_search",
@@ -79,7 +79,7 @@ export const searchAndDownloadConfig = (t) => {
                             },
                         },
                         {
-                            label: t("BND_CHILD_NAME_LABEL"),
+                            label: t("BND_MOTHER_NAME"),
                             key: "childName",
                             type: "text",
                             isMandatory: false,

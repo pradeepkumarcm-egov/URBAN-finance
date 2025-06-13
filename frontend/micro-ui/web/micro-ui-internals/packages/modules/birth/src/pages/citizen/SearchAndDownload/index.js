@@ -114,7 +114,7 @@ const SearchAndDownload = () => {
   return (
     <React.Fragment>
       <div className="digit-inbox-search-wrapper" style={{ padding: "16px", width: "100%" }}>
-        <Header styles={{ fontSize: "32px" }}>{t(baseSearchConfigTemplate.label || "BND_SEARCH_BIRTH_REGISTRY")}</Header>
+        <Header styles={{ fontSize: "32px" }}>{t(baseSearchConfigTemplate.label || "BND_SEARCH_BUTTON")}</Header>
         <Card style={{ marginBottom: "16px", padding: "10px" }}>
           <CardLabel styles={{ fontWeight: "bold", marginBottom: "8px" }}>{t("City")}*</CardLabel>
           <Dropdown

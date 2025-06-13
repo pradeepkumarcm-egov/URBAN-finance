@@ -22,7 +22,6 @@ const EmployeeApp = ({ path, url, userType }) => {
         <div className="ground-container">
           <Route exact path={path}>
             <AppContainer>
-              <BackButton style={{ top: "55px" }}>Back</BackButton>
               <BirthCard userType={userType} />
             </AppContainer>
           </Route>

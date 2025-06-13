@@ -4,7 +4,7 @@
 export const inboxConfig = () => {
   const id = Digit.ULBService.getCurrentTenantId();
   return {
-    label: "Search Registry",
+    label: "BND_SEARCH_BUTTON",
     type: "search",
     apiDetails: {
       serviceName: "/birth-death-services/birth/_search",
@@ -32,7 +32,7 @@ export const inboxConfig = () => {
           },
           fields: [
             {
-              label: "From",
+              label: "BND_FROM_DATE",
               type: "date",
               isMandatory: false,
               disable: false,
@@ -43,7 +43,7 @@ export const inboxConfig = () => {
               },
             },
             {
-              label: "To ",
+              label: "BND_TO_DATE",
               type: "date",
               isMandatory: false,
               disable: false,
@@ -65,7 +65,7 @@ export const inboxConfig = () => {
               isMandatory: true,
               type: "dropdown",
               key: "gender",
-              label: "Gender",
+              label: "BND_GENDER",
               disable: false,
               populators: {
                 name: "gender",
@@ -81,14 +81,14 @@ export const inboxConfig = () => {
               
             },
             {
-              label: "Registration Number",
+              label: "BND_REG_NO_LABEL",
               key: "registrationno",
               type: "text",
               isMandatory: false,
               populators: { name: "registrationno" },
             },
             {
-              label: "Father's Name",
+              label: "BND_COMMON_FATHERSNAME",
               key: "FatherName",
               type: "text",
               isMandatory: false,
@@ -97,7 +97,7 @@ export const inboxConfig = () => {
               },
             },
             {
-              label: "Mother's Name",
+              label: "BND_COMMON_MOTHERSNAME",
               key: "MotherName",
               type: "text",
               isMandatory: false,
@@ -122,23 +122,23 @@ export const inboxConfig = () => {
           columns: [
             {
               key: "registrationno",
-              label: "Registration No.",
+              label: "BND_COMMON_TABLE_REGNO",
               jsonPath: "registrationno",
             },
             {
               key: "fromDate",
-              label: "Birth Date",
+              label: "BND_BIRTH_DATE",
               jsonPath: "dateofbirth",
               additionalCustomization: true,
             },
             {
               key: "MotherName",
-              label: "Mother's Name",
+              label: "BND_COMMON_MOTHERSNAME",
               jsonPath: "birthMotherInfo.fullName",
             },
             {
               key: "FatherName",
-              label: "Father's Name",
+              label: "BND_COMMON_FATHERSNAME",
               jsonPath: "birthFatherInfo.fullName",
             },
           

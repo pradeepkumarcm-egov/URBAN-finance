@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { FormComposerV2, Header, Toast, Loader } from "@egovernments/digit-ui-components";
 import {BirthConfig} from "../createBirth/config/BirthConfig";
+import { useTranslation } from "react-i18next";
 
 // Main component for updating a birth certificate
 const UpdateBirth = () => {
     const location = useLocation();
     const history = useHistory();
+    const {t}=useTranslation();
     // Get data passed from previous page (edit data and certificate id)
     const editData = location.state?.editdata;
     const certificateId = location.state?.certificateId;
@@ -434,7 +436,7 @@ const UpdateBirth = () => {
     // Render form
     return (
         <React.Fragment>
-            <Header>Update Birth Certificate</Header>
+            <Header>{t("BND_NEW_REGISTRATION")}</Header>
             <FormComposerV2
                 config={formConfig}
                 onSubmit={onSubmit}

@@ -110,27 +110,27 @@ export const viewBirthApplicationConfig = (applicationsArray, t, props = {}) => 
 
         const cardValues = [
             {
-                key: t("BND_APPL_DATE", "Application Date"),
+                key: t("BND_APPL_DATE"),
                 value: formatDate(appData.applicationDate),
             },
             {
-                key: t("BND_DATE_OF_BIRTH", "Date of Birth"),
+                key: t("BND_BIRTH_DOB"),
                 value: formatDate(appData.dateOfBirth),
             },
             {
-                key: t("BND_CERT_REG_NO", "Registration No."),
+                key: t("BND_COMMON_TABLE_REGNO"),
                 value: getValue(appData.regNo, t),
             },
             {
-                key: t("BND_CHILD_NAME", "Child's Name"),
+                key: t("BND_COMMON_NAME"),
                 value: getValue(appData.childName, t),
             },
             {
-                key: t("BND_MOTHER_NAME", "Mother's Name"),
+                key: t("BND_COMMON_MOTHERSNAME"),
                 value: getValue(appData.mother?.name, t),
             },
             {
-                key: t("BND_FATHER_NAME", "Father's Name"),
+                key: t("BND_COMMON_FATHERSNAME"),
                 value: getValue(appData.father?.name, t),
             },
             {
@@ -153,7 +153,7 @@ export const viewBirthApplicationConfig = (applicationsArray, t, props = {}) => 
             
         if (shouldShowDownloadButton) {
             cardValues.push({
-                key: t("BND_ACTIONS_LABEL", "Actions"),
+                key: t("BND_COMMON_TABLE_ACTION"),
                 value: (
                     <DownloadButton
                         tenantId={tenantIdForButton}             

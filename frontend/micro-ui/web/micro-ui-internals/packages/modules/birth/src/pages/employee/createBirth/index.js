@@ -3,6 +3,7 @@ import { Header, Toast } from "@egovernments/digit-ui-react-components";
 import { FormComposerV2 } from "@egovernments/digit-ui-components";
 import { BirthConfig } from "./config/BirthConfig";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // Main component for creating birth certificates
 export const CreateBirth = () => {
@@ -14,6 +15,7 @@ export const CreateBirth = () => {
   const [showToast, setShowToast] = useState(null);
   const history = useHistory();
   const prevCheckboxRef = useRef(false);
+  const { t } = useTranslation();
 
   // Fetch current tenant ID for hospital list
   const hospitalTenantId = Digit.ULBService.getCurrentTenantId();
@@ -67,7 +69,7 @@ export const CreateBirth = () => {
   // Update form config based on "Same as Permanent Address" checkbox
   const updateConfigBasedOnCheckbox = (sameAddressChecked) => {
     return BirthConfig.map((section) => {
-      if (section.head === "Address of Parents at the Time of Birth") {
+      if (section.head === "BND_PRESENT_ADDR_DURING_BIRTH") {
         return {
           ...section,
           body: section.body.map((field) => ({
@@ -76,7 +78,7 @@ export const CreateBirth = () => {
           })),
         };
       }
-      if (section.head === "Permanent Address of Parents" && sameAddressChecked) {
+      if (section.head === "BND_BIRTH_ADDR_PERM" && sameAddressChecked) {
         return null;
       }
       return section;
@@ -198,9 +200,9 @@ export const CreateBirth = () => {
         onSuccess: (response) => {
           // Show success or error toast based on API response
           if (response?.serviceError) {
-             setShowToast({ key: "error", label: `Failed: ${response.serviceError}` });
+            setShowToast({ key: "error", label: `Failed: ${response.serviceError}` });
           } else {
-             setShowToast({ key: "success", label: "Birth Certificate Created Successfully" });
+            setShowToast({ key: "success", label: "Birth Certificate Created Successfully" });
           }
         },
         onError: (error) => {
@@ -219,7 +221,7 @@ export const CreateBirth = () => {
 
   return (
     <React.Fragment>
-      <Header>Create Birth Certificates</Header>
+      <Header>{t("BND_NEW_REGISTRATION")}</Header>
       <FormComposerV2
         config={formConfig.map((conf, i) => ({
           head: conf.head,
@@ -279,7 +281,7 @@ export const CreateBirth = () => {
           }
         }}
       />
-      {/* Show toast notification for success or error */}
+
       {showToast && (
         <Toast
           style={{ zIndex: 10001 }}

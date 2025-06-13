@@ -16,7 +16,7 @@ import useBirthDownload from "./components/useBirthDownload";
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["birth", "common", "workflow"];
+  const moduleCode = ["birth", "common", "workflow","bnd"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,
