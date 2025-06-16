@@ -16,6 +16,8 @@
     "packages/modules/firenoc",
     "packages/modules/obps",
     "packages/modules/pt",
+    "packages/modules/bills",
+    "packages/modules/engagement",
     "packages/modules/commonPt"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",

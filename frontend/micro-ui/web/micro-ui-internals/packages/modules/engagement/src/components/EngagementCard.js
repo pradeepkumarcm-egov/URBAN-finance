@@ -13,12 +13,17 @@ import {
 const EngagementCard = () => {
   const userRoles = Digit.SessionStorage.get("User")?.info?.roles;
   const isEmployee = userRoles.find((role) => role.code === "EMPLOYEE");
+  const isSyAdmin = userRoles.length === 1 && userRoles[0].code === "SY_ADMIN";
+
+  
 
   useEffect(() => {
     Digit.SessionStorage.set("CITIZENSURVEY.INBOX", null);
   }, []);
 
-  if (!isEmployee) return null;
+  if (!isSyAdmin && !isEmployee) {
+    return null;
+  }
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const { data: documentsCount, isLoading: isLoadingDocs } = Digit.Hooks.engagement.useDocSearch(
     { tenantIds: tenantId },
@@ -152,15 +157,26 @@ const EngagementCard = () => {
   };
 
   const engagementSubModulesProps = [propsForDocumentModuleCard, propsForEventsModuleCard, propsForPMBModuleCard, propsForSurveyModuleCard];
-
-  if (isEmployee)
+  const surveyModulesProps = [propsForSurveyModuleCard];
+  if (isSyAdmin) {
     result = (
       <>
-        {engagementSubModulesProps.map((propsForModuleCard, index) => (
+        {surveyModulesProps.map((propsForModuleCard, index) => (
           <EmployeeModuleCard key={index} longModuleName={true} {...propsForModuleCard} />
         ))}
       </>
     );
+
+    return result;
+  }
+  else if (isEmployee)
+      result = (
+        <>
+          {engagementSubModulesProps.map((propsForModuleCard, index) => (
+            <EmployeeModuleCard key={index} longModuleName={true} {...propsForModuleCard} />
+          ))}
+        </>
+      );
 
   return result;
 };
