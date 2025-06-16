@@ -228,4 +228,32 @@ export const BillDetailsKeyNoteConfig = () => ({
       },
     ],
   },
+  BIRTH_CERT: {
+    heading: "COMMON_PAY_SCREEN_HEADER",
+    details: [
+      {
+        keyValue: "BND_APPLICATION_NO",
+        keyPath: ["consumerCode"],
+        fallback: "",
+      },
+      {
+        keyValue: "CS_BILL_NO",
+        keyPath: ["billNumber"],
+        fallback: "N/A",
+      },
+      {
+        keyValue: "CS_BILL_DUEDATE",
+        keyPath: [
+          "billDetails",
+          (d) => {
+            const { expiryDate } = d[0] || {};
+            if (expiryDate) {
+              return new Date(expiryDate).toLocaleDateString();
+            } else return "N/A";
+          },
+        ],
+        fallback: "N/A",
+      },
+    ],
+  },
 });

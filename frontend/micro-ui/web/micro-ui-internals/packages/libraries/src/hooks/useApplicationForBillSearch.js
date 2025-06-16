@@ -63,6 +63,11 @@ const refObj = (tenantId, filters) => {
       key: "consumerCode",
       label: "REFERENCE_NO",
     },
+    birth_cert: {
+      searchFn: () => advtApplications(tenantId, filters),
+      key: "consumerCode",
+      label: "PAYMENT_BND_CONSUMER_CODE",
+    },
   };
 };
 
@@ -73,12 +78,12 @@ export const useApplicationsForBusinessServiceSearch = ({ tenantId, businessServ
   }
   if (window.location.href.includes("TL")) {
     _key = "TL";
-  } 
+  }
   if (window.location.href.includes("BPAREG")) {
-    _key = businessService
+    _key = businessService;
   }
   if (window.location.href.includes("BPA.")) {
-    _key = "BPA"
+    _key = "BPA";
   }
 
   /* key from application ie being used as consumer code in bill */
