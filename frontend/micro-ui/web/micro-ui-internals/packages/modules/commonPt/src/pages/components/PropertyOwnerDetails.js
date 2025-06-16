@@ -280,7 +280,7 @@ const PropertyOwnerDetails = ({ t, config, onSelect, userType, formData, formSta
                         }}
                         render={({ value, onChange, onBlur }) => (
                           <Dropdown
-                            selected={institutionTypeMenu?.length === 1 ? Menu1[0] : value}
+                            selected={institutionTypeMenu?.length === 1 ? institutionTypeMenu[0] : value}
                             disable={institutionTypeMenu?.length === 1 || editScreen}
                             option={institutionTypeMenu ? institutionTypeMenu.sort((a, b) => a.name.localeCompare(b.name)) : []}
                             select={(value) => {
@@ -474,6 +474,19 @@ const PropertyOwnerDetails = ({ t, config, onSelect, userType, formData, formSta
 
                 </ React.Fragment> :
                 <React.Fragment>
+                  {!isMobile && (
+                    <div style={{ display: "flex", justifyContent: "flex-end", alignSelf: "flex-start" }}>
+                      {ismultiple && (
+                        <LinkButton
+                          label={<DeleteIcon style={{ bottom: "0px" }} fill={!(ownerDetails.length == 1) ? "#494848" : "#FAFAFA"} />}
+                          style={{ margin: "0px" }}
+                          onClick={(e) => {
+                            setOwnerDetails([...ownerDetails.filter((own, ind) => ind != index)]);
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
                   <LabelFieldPair>
                     <CardLabel>{`${t("PT_FORM3_MOBILE_NUMBER")}*`}</CardLabel>
 
@@ -502,19 +515,6 @@ const PropertyOwnerDetails = ({ t, config, onSelect, userType, formData, formSta
                         )}
                       />
                     </div>
-                    {!isMobile && (
-                      <div style={{ display: "flex", justifyContent: "flex-end", width: "20%", alignSelf: "flex-start" }}>
-                        {ismultiple && (
-                          <LinkButton
-                            label={<DeleteIcon style={{ bottom: "0px" }} fill={!(ownerDetails.length == 1) ? "#494848" : "#FAFAFA"} />}
-                            style={{ margin: "0px" }}
-                            onClick={(e) => {
-                              setOwnerDetails([...ownerDetails.filter((own, ind) => ind != index)]);
-                            }}
-                          />
-                        )}
-                      </div>
-                    )}
                   </LabelFieldPair>
                   <CardLabelError style={errorStyle}>{touched?.["mobileNumber" + index] ? errors?.["mobileNumber" + index]?.message : ""}</CardLabelError>
 
