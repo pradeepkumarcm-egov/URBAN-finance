@@ -17,6 +17,7 @@ import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
 import { ViewLinkButton } from "./components/ViewLinkButton";
 
 
+
 export const DeathModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const moduleCode = ["death", "common", "workflow","bnd"];
