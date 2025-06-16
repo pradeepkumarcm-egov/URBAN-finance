@@ -102,18 +102,38 @@ const ViewDeath = () => {
 
   
   const handlePayAndDownload = async () => {
-  let consumerCode;
+  // let consumerCode;
   
-  try {
-    consumerCode = await downloadApi(tenantId, id);
-  } catch (error) {
-    console.error("Error fetching consumer code:", error);
-    consumerCode = `DT-FALLBACK-${Date.now()}`; // Example fallback
-  }
+  // try {
+  //   consumerCode = await downloadApi(tenantId, id);
+  // } catch (error) {
+  //   console.error("Error fetching consumer code:", error);
+  //   consumerCode = `DT-FALLBACK-${Date.now()}`; // Example fallback
+  // }
 
 
+  // const businessService = "DEATH_CERT";
+  // history.push(`/digit-ui/employee/payment/collect/${businessService}/${consumerCode}/tenantId=${tenantId}?workflow=death`);
+   const fallbackConsumerCode = `DT-${id}-${Date.now()}`;
+  
+  // Try to get the real consumer code (but don't wait for it)
+  const apiPromise = downloadApi(tenantId, id)
+    .then(realCode => realCode || fallbackConsumerCode)
+    .catch(() => fallbackConsumerCode);
+
+  // Navigate immediately with fallback code
   const businessService = "DEATH_CERT";
-  history.push(`/digit-ui/employee/payment/collect/${businessService}/${consumerCode}/tenantId=${tenantId}?workflow=death`);
+  history.push(
+    `/digit-ui/employee/payment/collect/${businessService}/${fallbackConsumerCode}/tenantId=${tenantId}?workflow=death`
+  );
+
+  // If we get a different code from API, update the URL
+  const finalConsumerCode = await apiPromise;
+  if (finalConsumerCode !== fallbackConsumerCode) {
+    history.replace(
+      `/digit-ui/employee/payment/collect/${businessService}/${finalConsumerCode}/tenantId=${tenantId}?workflow=death`
+    );
+  }
 };
 
 
