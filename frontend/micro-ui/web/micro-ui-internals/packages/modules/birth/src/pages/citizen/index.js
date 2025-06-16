@@ -5,6 +5,7 @@ import SearchBirth from "./SearchAndDownload";
 import MyApplications from "./MyApplication";
 import BirthCard from "../../components/BirthCard";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
+
 // import SearchChallanComponent from "./SearchChallan";
 // import SearchResultsComponent from "./SearchResults";
 // import MyChallanResultsComponent from "./MyChallan";
@@ -23,6 +24,7 @@ const CitizenApp = ({ path, url, userType }) => {
         </Route>
 
         <PrivateRoute path={`${path}/birth-common/getCertificate`} component={MyApplications} />
+
         <PrivateRoute path={`${path}/birth-citizen/myApplications`} component={SearchBirth} />
       </Switch>
     </span>

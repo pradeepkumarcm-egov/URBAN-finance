@@ -4,9 +4,9 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Button as ButtonNew} from "@egovernments/digit-ui-components";
 
 export const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) => {
-  const useDeathDownload= Digit.ComponentRegistryService.getComponent("useDeathDownload");
+  const useBirthDownload= Digit.ComponentRegistryService.getComponent("useBirthDownload");
   const history = useHistory();
-  const { consumerCode } = useDeathDownload(tenantId, certificateId);
+  const { consumerCode } = useBirthDownload(tenantId, certificateId);
   const handleClick = async () => {
   const businessService = "BIRTH_CERT";
     const encodedConsumerCode = encodeURIComponent(consumerCode);

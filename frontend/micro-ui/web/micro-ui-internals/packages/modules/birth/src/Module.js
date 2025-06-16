@@ -13,10 +13,11 @@ import { usePdfDownloader } from "./components/usePdfDownloader.JS";
 import { DownloadButton } from "./components/DownloadButton";
 import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
 import useBirthDownload from "./components/useBirthDownload";
+import { overrideHooks, updateCustomConfigs } from "./utils";
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["birth", "common", "workflow","bnd"];
+  const moduleCode = ["birth", "common", "workflow", "bnd"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,
@@ -47,6 +48,8 @@ const componentsToRegister = {
   PayAndDownloadButton: PayAndDownloadButton,
 };
 export const initBirthComponents = () => {
+  overrideHooks();
+  updateCustomConfigs();
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);
   });
