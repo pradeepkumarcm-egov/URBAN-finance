@@ -16,7 +16,8 @@
     "packages/modules/firenoc",
     "packages/modules/obps",
     "packages/modules/pt",
-    "packages/modules/bills"
+    "packages/modules/bills",
+    "packages/modules/engagement"
   ],
   "author": "Abhinav Kushwaha <abhinav.kushwaha@egovernments.org>",
   "license": "MIT",
