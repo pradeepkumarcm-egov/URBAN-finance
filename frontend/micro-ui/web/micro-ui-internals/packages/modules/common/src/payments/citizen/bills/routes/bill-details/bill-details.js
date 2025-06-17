@@ -15,6 +15,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const { consumerCode: encodedConsumerCode } = useParams();
   const consumerCode = decodeURIComponent(encodedConsumerCode);
   const { workflow: wrkflow, tenantId: _tenantId, authorization, ConsumerName } = Digit.Hooks.useQueryParams();
+  console.log(state,"@@@@@",pathname);
   const [bill, setBill] = useState(state?.bill);
   const tenantId = state?.tenantId || _tenantId || Digit.UserService.getUser().info?.tenantId;
   const propertyId = state?.propertyId;
@@ -58,7 +59,8 @@ const BillDetails = ({ paymentRules, businessService }) => {
   //     ?.sort((a, b) => b.fromPeriod - a.fromPeriod)
   //     ?.reduce((total, current, index) => (index === 0 ? total : total + current.amount), 0) || 0;
 
-  const billDetails = useMemo(() => bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {}, [bill]); // Ensured it's an object
+  const billDetails = useMemo(() => bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {}, [bill]); 
+  console.log(billDetails,"#######");
   const Arrears = useMemo(() =>
     bill?.billDetails
       ?.sort((a, b) => b.fromPeriod - a.fromPeriod)
@@ -77,6 +79,8 @@ const BillDetails = ({ paymentRules, businessService }) => {
           " " +
           new Date(fromPeriod).getFullYear().toString();
         to = new Date(toPeriod).getDate() + " " + Digit.Utils.date.monthNames[new Date(toPeriod).getMonth()] + " " + new Date(toPeriod).getFullYear();
+        
+        console.log(from+"_"+to+"ddsds");
         return from + " - " + to;
       }
       from = new Date(billDetails.fromPeriod).getFullYear().toString();
@@ -183,6 +187,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
     }
     
   };
+  console.log(getBillingPeriod(),"*********");
  
 
   const onSubmit = () => {

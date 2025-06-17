@@ -272,6 +272,8 @@ const pgr = {
   useComplaintStatusCount,
   useTradeLicenseBillingslab,
   useMDMS: usePGRMDMS,
+  useWorkflowDetailsV2,
+  useUpdateCustom,
 };
 
 const fsm = {
