@@ -18,7 +18,8 @@
     "micro-ui-internals/packages/modules/bills",
     "micro-ui-internals/packages/modules/engagement",
     "micro-ui-internals/packages/modules/commonPt",
-    "micro-ui-internals/packages/modules/finance"
+    "micro-ui-internals/packages/modules/finance",
+    "micro-ui-internals/packages/modules/common"
   ],
   "engines": {
     "node": ">=14"
