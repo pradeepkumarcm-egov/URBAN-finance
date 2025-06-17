@@ -573,7 +573,7 @@ export const BirthConfig = [
       },
       {
         inline: true,
-        label: "BND_DISTRICT_LABE",
+        label: "BND_DISTRICT_LABEL",
         type: "text",
         isMandatory: true,
         placeholder: "District",

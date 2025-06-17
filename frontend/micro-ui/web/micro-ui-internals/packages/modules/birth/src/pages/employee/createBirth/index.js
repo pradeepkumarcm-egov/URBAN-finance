@@ -162,6 +162,9 @@ export const CreateBirth = () => {
       placeofbirth: formData?.birth_place || "",
       registrationno: formData?.registration_number || "",
       birthPresentaddr: presentAddress,
+      informantname: formData?.informant_name || "",
+      informantaddress: formData?.informant_address || "",
+
       birthPermaddr: isSameAddress ? presentAddress : permanentAddress,
       hospitalname: formData?.hospital_name?.code || "Unknown",
       isLegacyRecord: !!formData?.checkbox_legacy,
