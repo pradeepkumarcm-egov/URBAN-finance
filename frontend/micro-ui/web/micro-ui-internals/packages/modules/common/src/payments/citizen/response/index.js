@@ -427,3 +427,176 @@ export const FailedPayment = (props) => {
     </Card>
   );
 };
+
+export const SuccessPayment = (props) => {
+//   if(localStorage.getItem("BillPaymentEnabled")!=="true"){
+//     window.history.forward();
+//    return null;
+//  }
+ return <PaymentComponent {...props}/>
+}
+
+const PaymentComponent = (props) => {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { eg_pg_txnid: egId, workflow: workflw, propertyId } = Digit.Hooks.useQueryParams();
+  const [printing, setPrinting] = useState(false);
+  const [allowFetchBill, setallowFetchBill] = useState(false);
+  const { businessService: business_service, consumerCode, tenantId } = useParams();
+  const { data: bpaData = {}, isLoading: isBpaSearchLoading, isSuccess: isBpaSuccess, error: bpaerror } = Digit.Hooks.obps.useOBPSSearch(
+    "", {}, tenantId, { applicationNo: consumerCode }, {}, {enabled:(window.location.href.includes("bpa") || window.location.href.includes("BPA"))}
+  );
+
+  // Retrieve stored payment data
+  const storedPaymentData = JSON.parse(sessionStorage.getItem("PaymentResponse"));
+
+  console.log("storedPaymentData:", storedPaymentData);
+
+  const { isLoading, data, isError } = Digit.Hooks.usePaymentUpdate({ egId }, business_service, {
+    retry: false,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  const { label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService: business_service }, { enabled: false });
+
+  const { data: reciept_data, isLoading: recieptDataLoading } = Digit.Hooks.useRecieptSearch(
+    {
+      tenantId,
+      businessService: business_service,
+      receiptNumbers: data?.payments?.Payments?.[0]?.paymentDetails[0].receiptNumber,
+    },
+    {
+      retry: false,
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      select: (dat) => {
+        return dat.Payments[0];
+      },
+      enabled: allowFetchBill,
+    }
+  );
+
+  const { data: generatePdfKey } = Digit.Hooks.useCommonMDMS(tenantId, "common-masters", "ReceiptKey", {
+    select: (data) =>
+      data["common-masters"]?.uiCommonPay?.filter(({ code }) => business_service?.includes(code))[0]?.receiptKey || "consolidatedreceipt",
+    retry: false,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+console.log("data",data)
+  const payments = data?.payments;
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem("BillPaymentEnabled","false")
+      queryClient.clear();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (data && data.txnStatus && data.txnStatus !== "FAILURE") {
+      setallowFetchBill(true);
+    }
+  }, [data]);
+
+  if (isLoading || recieptDataLoading) {
+    return <Loader />;
+  }
+
+  const applicationNo = data?.applicationNo;
+
+  const isMobile = window.Digit.Utils.browser.isMobile();
+
+
+  if (!storedPaymentData || !storedPaymentData.Payments || storedPaymentData.Payments.length === 0) {
+    console.log("failure")
+    return (
+      <Card>
+        <Banner
+          message={t("CITIZEN_FAILURE_COMMON_PAYMENT_MESSAGE")}
+          info={t("CS_PAYMENT_TRANSANCTION_ID")}
+          applicationNumber={egId}
+          successful={false}
+        />
+        <CardText>{t("CS_PAYMENT_FAILURE_MESSAGE")}</CardText>
+        {!(business_service?.includes("PT")) ? (
+          <Link to={`/digit-ui/citizen`}>
+            <SubmitBar label={t("CORE_COMMON_GO_TO_HOME")} />
+          </Link>
+        ) : (
+          <React.Fragment>
+            <Link to={(applicationNo && `/digit-ui/citizen/payment/my-bills/${business_service}/${applicationNo}`) || "/digit-ui/citizen"}>
+              <SubmitBar label={t("CS_PAYMENT_TRY_AGAIN")} />
+            </Link>
+            {/* {business_service?.includes("PT") &&<div style={{marginTop:"10px"}}><Link to={`/digit-ui/citizen/feedback?redirectedFrom=${"digit-ui/citizen/payment/success"}&propertyId=${consumerCode? consumerCode : ""}&acknowldgementNumber=${egId ? egId : ""}&tenantId=${tenantId}&creationReason=${business_service?.split(".")?.[1]}`}>
+              <SubmitBar label={t("CS_REVIEW_AND_FEEDBACK")} />
+            </Link></div>} */}
+            <div className="link" style={isMobile ? { marginTop: "8px", width: "100%", textAlign: "center" } : { marginTop: "8px" }}>
+              <Link to={`/digit-ui/citizen`}>{t("CORE_COMMON_GO_TO_HOME")}</Link>
+            </div>
+          </React.Fragment>
+        )}
+      </Card>
+    );
+  }
+
+  const paymentData = data?.payments?.Payments[0];
+  const amount = reciept_data?.paymentDetails?.[0]?.totalAmountPaid;
+  const transactionDate = paymentData?.transactionDate;
+  const printCertificate = async () => {
+    //const tenantId = Digit.ULBService.getCurrentTenantId();
+    const state = tenantId;
+    const applicationDetails = await Digit.TLService.search({ applicationNumber: consumerCode, tenantId });
+    const generatePdfKeyForTL = "tlcertificate";
+
+    if (applicationDetails) {
+      let response = await Digit.PaymentService.generatePdf(state, { Licenses: applicationDetails?.Licenses }, generatePdfKeyForTL);
+      const fileStore = await Digit.PaymentService.printReciept(state, { fileStoreIds: response.filestoreIds[0] });
+      window.open(fileStore[response.filestoreIds[0]], "_blank");
+    }
+  };
+
+
+  let bannerText;
+  if (workflw) {
+    bannerText = `CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE`;
+  } else {
+    if (paymentData?.paymentDetails?.[0]?.businessService && paymentData?.paymentDetails?.[0]?.businessService?.includes("BPA")) {
+      let nameOfAchitect = sessionStorage.getItem("BPA_ARCHITECT_NAME");
+      let parsedArchitectName = nameOfAchitect ? JSON.parse(nameOfAchitect) : "ARCHITECT";
+      bannerText = `CITIZEN_SUCCESS_${paymentData?.paymentDetails[0]?.businessService.replace(/\./g, "_")}_${parsedArchitectName}_PAYMENT_MESSAGE`;
+    } else if (business_service?.includes("WS") || business_service?.includes("SW")) {
+      bannerText = t(`CITIZEN_SUCCESS_${paymentData?.paymentDetails[0].businessService.replace(/\./g, "_")}_WS_PAYMENT_MESSAGE`);
+    } else {
+      bannerText = paymentData?.paymentDetails[0]?.businessService ? `CITIZEN_SUCCESS_${paymentData?.paymentDetails[0]?.businessService.replace(/\./g, "_")}_PAYMENT_MESSAGE` : t("CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE");
+    }
+  }
+  const rowContainerStyle = {
+    padding: "4px 0px",
+    justifyContent: "space-between",
+  };
+
+  const ommitRupeeSymbol = ["PT"].includes(business_service);
+
+  if ((window.location.href.includes("bpa") || window.location.href.includes("BPA")) && isBpaSearchLoading) return <Loader />
+  return (
+    <Card>
+      <Banner
+        svg={
+          <svg className="payment-svg" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path
+              d="M20 0C8.96 0 0 8.96 0 20C0 31.04 8.96 40 20 40C31.04 40 40 31.04 40 20C40 8.96 31.04 0 20 0ZM16 30L6 20L8.82 17.18L16 24.34L31.18 9.16L34 12L16 30Z"
+              fill="white"
+            />
+          </svg>
+        }
+        message={t("CS_COMMON_PAYMENT_COMPLETE")}
+        info={t("CS_COMMON_RECIEPT_NO")}
+        applicationNumber={storedPaymentData?.Payments[0]?.paymentDetails[0]?.receiptNumber}
+        successful={true}
+      />
+      <CardText>{t(`${bannerText}_DETAIL`)}</CardText>
+    </Card>
+  );
+};

@@ -55,6 +55,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
       ?.reduce((total, current, index) => (index === 0 ? total : total + current.amount), 0) || 0;
 
   const { key, label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService }, { enabled: false });
+
   const getBillingPeriod = () => {
     const { fromPeriod, toPeriod } = billDetails;
     if (fromPeriod && toPeriod) {
@@ -137,18 +138,48 @@ const BillDetails = ({ paymentRules, businessService }) => {
     }
   }, [isLoading]);
 
-  const onSubmit = () => {
+  const onSubmit = async() => {
     let paymentAmount =
       paymentType === t("CS_PAYMENT_FULL_AMOUNT")
         ? getTotal()
         : amount || businessService === "FSM.TRIP_CHARGES"
         ? application?.pdfData?.advanceAmount
         : amount;
+
+    let recieptRequest = {
+      Payment: {
+        mobileNumber: bill.mobileNumber,
+        paymentDetails: [
+          {
+            businessService,
+            billId: bill.id,
+            totalDue: bill.totalAmount,
+            totalAmountPaid: bill.totalAmount,
+          },
+        ],
+        tenantId: bill.tenantId,
+        totalDue: bill.totalAmount,
+        totalAmountPaid: bill.totalAmount,
+        paymentMode: "CASH",
+        payerName: bill.payerName,
+        paidBy: "OWNER",
+      },
+    };
+
+        try {
+          const resposne = await Digit.PaymentService.createReciept(bill.tenantId, recieptRequest);
+          sessionStorage.setItem("PaymentResponse", JSON.stringify(resposne));
+          history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=mcollect`);
+        } catch (error) {
+          console.log("Error while creating receipt", error);
+          // setToast({ key: "error", action: error?.response?.data?.Errors?.map((e) => t(e.code)) })?.join(" , ");
+          // setTimeout(() => setToast(null), 5000);
+          return;
+        }
+
+
     if (window.location.href.includes("mcollect")) {
-      history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=mcollect`, {
-        paymentAmount,
-        tenantId: billDetails.tenantId,
-      });
+      history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=mcollect`)
     } else if (wrkflow === "WNS") {
       history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=WNS&ConsumerName=${ConsumerName}`, {
         paymentAmount,

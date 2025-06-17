@@ -5,7 +5,7 @@ import PayersDetails from "./payers-details";
 
 import { MyBills } from "./bills";
 import { SelectPaymentType } from "./payment-type/index";
-import { SuccessfulPayment, FailedPayment } from "./response";
+import { SuccessPayment, FailedPayment } from "./response";
 
 const CitizenPayment = ({ stateCode, cityCode, moduleCode }) => {
   const { path: currentPath } = useRouteMatch();
@@ -25,7 +25,7 @@ const CitizenPayment = ({ stateCode, cityCode, moduleCode }) => {
             <SelectPaymentType {...commonProps} stateCode={stateCode} basePath={currentPath} />
           </Route>
           <Route path={`${currentPath}/success/:businessService/:consumerCode/:tenantId`}>
-            <SuccessfulPayment {...commonProps} />
+            <SuccessPayment {...commonProps} />
           </Route>
           <Route path={`${currentPath}/failure`}>
             <FailedPayment {...commonProps} />
