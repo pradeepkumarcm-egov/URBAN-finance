@@ -20,7 +20,7 @@ class EGFFinance extends Component {
     domainurl,
     finEnv,
     hostname = loc.hostname,
-    winheight = window.innerHeight - 275,
+    winheight = window.innerHeight - 200,
     erp_url,
     tenantId = Digit.ULBService.getCurrentTenantId();
     //Reading domain name from the request url
