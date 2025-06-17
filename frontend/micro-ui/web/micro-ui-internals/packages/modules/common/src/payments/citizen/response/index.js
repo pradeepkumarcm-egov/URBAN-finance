@@ -597,6 +597,13 @@ console.log("data",data)
         successful={true}
       />
       <CardText>{t(`${bannerText}_DETAIL`)}</CardText>
+      {business_service && (
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Link to={`/digit-ui/citizen`}>
+          <SubmitBar label={t("CORE_COMMON_GO_TO_HOME")} />
+        </Link>
+      </div>
+      )}
     </Card>
   );
 };
