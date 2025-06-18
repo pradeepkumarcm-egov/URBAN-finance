@@ -38,8 +38,8 @@ import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents } from "@egovernments/digit-ui-module-bills";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
 import { initDeathComponents } from "@egovernments/digit-ui-module-death";
-
-
+import { initBirthComponents } from "@egovernments/digit-ui-module-birth";
+import { UICustomizations } from "./Customisations/UICustomizations";
 initLibraries();
 
 const enabledModules = [
@@ -64,7 +64,9 @@ const enabledModules = [
   "SW",
   "BillAmendment",
   "Death",
+  "Birth"
 ];
+
 window.Digit.ComponentRegistryService.setupRegistry({
   ...paymentConfigs,
   PTModule,
@@ -79,6 +81,10 @@ window.Digit.ComponentRegistryService.setupRegistry({
   TLLinks,
   // ReceiptsModule
 });
+
+window.Digit.Customizations = {
+    commonUiConfig: UICustomizations,
+};
 
 initPGRComponents();
 initFSMComponents();
@@ -96,6 +102,8 @@ initBillsComponents();
 // initReportsComponents();
 initCustomisationComponents();
 initDeathComponents();
+initBirthComponents();
+
 
 
 const moduleReducers = (initData) => ({
