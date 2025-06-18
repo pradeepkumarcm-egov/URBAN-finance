@@ -5,12 +5,13 @@ import { initLibraries } from "@egovernments/digit-ui-libraries";
 import "./index.css";
 import App from './App';
 import { TLCustomisations } from './Customisations/tl/TLCustomisation';
+import { UICustomizations } from './Customisations/UICustomizations';
 
 
 initLibraries();
 
 
-window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations};
+window.Digit.Customizations = { PGR: {} ,TL:TLCustomisations, commonUiConfig: UICustomizations};
 
 const user = window.Digit.SessionStorage.get("User");
 
@@ -60,4 +61,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
