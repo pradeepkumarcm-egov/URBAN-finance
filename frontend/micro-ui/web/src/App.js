@@ -100,7 +100,7 @@ initWSComponents();
 initCommonPTComponents();
 initBillsComponents();
 // initReportsComponents();
-initCustomisationComponents();
+// initCustomisationComponents();
 initDeathComponents();
 initBirthComponents();
 
