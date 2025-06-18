@@ -61,7 +61,7 @@ const LandingPageSubMenuCard = ({ t, Icon, moduleName, menuDict = {}}) => {
           <span className="text removeHeight">{t(moduleName)}</span>
           <span className="logo removeBorderRadiusLogo">{Icon}</span>
         </div>
-        <div className="body" style={{ margin: "0px", padding: "0px" }}>
+        <div className="body" style={{ margin: "0px", padding: "0px", maxHeight: "30rem", overflowY: "auto"}}>
           <div className="links-wrapper" style={{ width: "90%" }}>
             <RenderMenuDict t={t} tree={menuDict} />
           </div>
