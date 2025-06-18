@@ -5,9 +5,11 @@
   "author": "JaganKumar <jagan.kumar@egov.org.in>",
   "homepage": "/digit-ui",
   "workspaces": [
-    "micro-ui-internals/packages/libraries",
+   "micro-ui-internals/packages/libraries",
     "micro-ui-internals/packages/css",
-    "micro-ui-internals/packages/react-components"
+    "micro-ui-internals/packages/react-components",
+    "micro-ui-internals/example",
+    "micro-ui-internals/packages/modules/*" 
   ],
   "engines": {
     "node": ">=14"
