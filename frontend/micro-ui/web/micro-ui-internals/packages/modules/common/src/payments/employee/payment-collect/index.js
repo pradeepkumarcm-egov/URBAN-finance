@@ -192,7 +192,7 @@ export const CollectPayment = (props) => {
         }?IsDisconnectionFlow=${IsDisconnectionFlow}`
       );
     } catch (error) {
-      setToast({ key: "error", action: error?.response?.data?.Errors?.map((e) => t(e.code)) })?.join(" , ");
+      setToast({ key: "error", action: error?.response?.data?.Errors?.map((e) => t(e.code)).join(" , ") });
       setTimeout(() => setToast(null), 5000);
       return;
     }

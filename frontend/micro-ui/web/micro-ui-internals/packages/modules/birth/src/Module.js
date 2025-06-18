@@ -9,7 +9,7 @@ import CitizenApp from "./pages/citizen";
 import BirthCard from "./components/BirthCard";
 import Address from "./pages/employee/createBirth/components/Address";
 import EditButton from "./components/EditButton";
-import { usePdfDownloader } from "./components/usePdfDownloader.JS";
+import { usePdfDownloader } from "./components/usePdfDownloader.js";
 import { DownloadButton } from "./components/DownloadButton";
 import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
 import useBirthDownload from "./components/useBirthDownload";

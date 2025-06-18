@@ -8,7 +8,7 @@ export const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) 
   const history = useHistory();
   const { consumerCode } = useBirthDownload(tenantId, certificateId);
   const handleClick = async () => {
-  const businessService = "BIRTH_CERT";
+    const businessService = "BIRTH_CERT";
     const encodedConsumerCode = encodeURIComponent(consumerCode);
     history.push(`/${window.contextPath}/citizen/payment/my-bills/${businessService}/${encodedConsumerCode}?workflow=birth`);
   };
