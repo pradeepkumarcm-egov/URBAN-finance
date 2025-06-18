@@ -177,8 +177,8 @@ const getDetailsFromProperty = async (state, dispatch) => {
             if (payload.Properties[0].address.pincode === null) {
               payload.Properties[0].address.pincode = "";              
             }
-            if (payload.Properties[0].address.builidingName === null) {
-              payload.Properties[0].address.builidingName = "";              
+            if (payload.Properties[0].address.buildingName === null) {
+              payload.Properties[0].address.buildingName = "";              
             }
           }
           dispatch(
