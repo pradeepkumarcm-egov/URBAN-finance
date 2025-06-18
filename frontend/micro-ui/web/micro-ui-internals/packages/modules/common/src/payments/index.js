@@ -13,6 +13,7 @@ export const PaymentModule = ({ deltaConfig = {}, stateCode, cityCode, moduleCod
 
   if (Object.keys(store).length === 0) {
     return <Loader />;
+    
   }
 
   const getPaymentHome = () => {
