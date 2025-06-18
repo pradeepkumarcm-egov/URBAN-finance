@@ -196,7 +196,7 @@ const Address = {
       description: "more address detail as may be needed"
     },
     buildingName: {
-      "type": ["string", "null"],
+      type: ["string", "null"],
       description: "Name of the building",
       valid_htmlData: true,
       maxLength: 64,
