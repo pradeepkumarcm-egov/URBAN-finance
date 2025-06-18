@@ -557,6 +557,21 @@ console.log("data",data)
     }
   };
 
+  const printReciept = async () => {
+    if (printing) return;
+    setPrinting(true);
+    const tenantId = storedPaymentData.Payments[0]?.tenantId;
+    const state = Digit.ULBService.getStateId();
+    let response = { filestoreIds: [storedPaymentData.Payments[0]?.fileStoreId] };
+    if (!paymentData?.fileStoreId) {
+      response = await Digit.PaymentService.generatePdf(state, { Payments: [storedPaymentData.Payments[0]] }, generatePdfKey);
+    }
+    const fileStore = await Digit.PaymentService.printReciept(state, { fileStoreIds: response.filestoreIds[0] });
+    if (fileStore && fileStore[response.filestoreIds[0]]) {
+      window.open(fileStore[response.filestoreIds[0]], "_blank");
+    }
+    setPrinting(false);
+  };
 
   let bannerText;
   if (workflw) {
@@ -597,6 +612,17 @@ console.log("data",data)
         successful={true}
       />
       <CardText>{t(`${bannerText}_DETAIL`)}</CardText>
+      {generatePdfKey ? (
+                <div style={{ display: "flex" }}>
+                  <div className="primary-label-btn d-grid" style={{ marginLeft: "unset", marginRight: "20px" }} onClick={printReciept}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" />
+                    </svg>
+                    {t("CS_COMMON_PRINT_RECEIPT")}
+                  </div>
+                </div>
+              ) : null}
       {business_service && (
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Link to={`/digit-ui/citizen`}>
