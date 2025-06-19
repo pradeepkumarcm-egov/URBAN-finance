@@ -1,6 +1,5 @@
-import { AppContainer, BackButton, Header, PrivateRoute } from "@egovernments/digit-ui-react-components";
-import React from "react";
-import { Redirect, Switch, useRouteMatch } from "react-router-dom";
+import { AppContainer, PrivateRoute } from "@egovernments/digit-ui-react-components";
+import { Switch } from "react-router-dom";
 import SearchBirth from "./SearchAndDownload";
 import MyApplications from "./MyApplication";
 import BirthCard from "../../components/BirthCard";

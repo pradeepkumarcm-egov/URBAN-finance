@@ -1,6 +1,5 @@
-import { CitizenHomeCard, FormComposerV2, Loader } from "@egovernments/digit-ui-react-components";
-import { BirthConfig } from "./pages/employee/createBirth/config/BirthConfig";
-import React from "react";
+import { Loader } from "@egovernments/digit-ui-react-components";
+
 import { useTranslation } from "react-i18next";
 import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
