@@ -4,7 +4,7 @@ import SearchBirth from "./SearchAndDownload";
 import MyApplications from "./MyApplication";
 import BirthCard from "../../components/BirthCard";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
-
+import React from "react";
 
 
 const CitizenApp = ({ path, url, userType }) => {

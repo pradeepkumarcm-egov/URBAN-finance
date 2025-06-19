@@ -2,7 +2,7 @@ import { Loader } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
-
+import React from "react";
 import CitizenApp from "./pages/citizen";
 import BirthCard from "./components/BirthCard";
 import Address from "./pages/employee/createBirth/components/Address";
