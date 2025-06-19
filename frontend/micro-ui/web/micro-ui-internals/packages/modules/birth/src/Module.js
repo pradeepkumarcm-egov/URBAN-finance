@@ -1,3 +1,4 @@
+import React from "react";
 import { CitizenHomeCard, FormComposerV2, Loader } from "@egovernments/digit-ui-react-components";
 import { BirthConfig } from "./pages/employee/createBirth/config/BirthConfig";
 
