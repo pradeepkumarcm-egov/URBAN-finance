@@ -188,8 +188,8 @@ const Address = {
     buildingName: {
       type: "string",
       description: "Name of the building",
-      maxLength: 64,
-      minLength: 2
+      maxLength: 64
+      //minLength: 2
     },
     street: {
       type: "string",
