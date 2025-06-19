@@ -1,62 +1,27 @@
-import { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
-const useBirthDownload = (tenantId, id) => {
+const useBirthDownload = () => {
   const [consumerCode, setConsumerCode] = useState(null);
-  const history = useHistory();
-  const location = useLocation();
 
   const downloadMutation = Digit.Hooks.useCustomAPIMutationHook({
     url: "/birth-death-services/birth/_download",
-    params: {
-      tenantId: tenantId,
-      id: id,
-      source: "web"
-    },
-    body: {},
-    config: {
-      enabled: true
-    }
+    method: "POST",
   });
 
-  const downloadApi = async () => {
-    await downloadMutation.mutate(
-      {
+  const downloadApi = async (tenantId, id) => {
+    try {
+      // console.log("Calling download API with tenantId:", tenantId, "and id:", id);
+      const response = await downloadMutation.mutateAsync({
         url: "/birth-death-services/birth/_download",
-        params: {
-          tenantId: tenantId,
-          id: id,
-          source: "web"
-        }
-      },
-      {
-        onSuccess: (response) => {
-          const code = response?.consumerCode;
-          if (code) {
-            setConsumerCode(code);
-            history.replace({
-              ...location,
-              state: {
-                ...location.state,
-                consumerCode: code
-              }
-            });
-          }
-          return code; // Return the consumerCode
-        },
-        onError: (error) => {
-          console.error("API Error:", error);
-          return null;
-        }
-      }
-    );
-  };
-
-  useEffect(() => {
-    if (!consumerCode && id && tenantId) {
-      downloadApi();
+        params: { tenantId, id, source: "web" },
+      });
+      // console.log("Download API response:", response),"@@@@@@";
+      return response?.consumerCode || null;
+    } catch (error) {
+      console.error("Download API error:", error);
+      return null;
     }
-  }, [id, tenantId, consumerCode]);
+  };
 
   return { consumerCode, downloadApi };
 };

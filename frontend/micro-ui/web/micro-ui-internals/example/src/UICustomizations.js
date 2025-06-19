@@ -72,7 +72,7 @@ export const UICustomizations = {
         data.params.toDate = `${dd}-${mm}-${yyyy}`;
       }
       data.params.tenantId = tenantId;
-      console.log(data, "data in preProcess of searchDeathConfig");
+      // console.log(data, "data in preProcess of searchDeathConfig");
       if (data?.params?.fromDate || data?.params?.toDate) {
         const createdFrom = data.params?.fromDate;
         const createdTo = data.params?.toDate;
@@ -82,13 +82,13 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      console.log("key", key);
+      // console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
-      console.log("key", key);
-      console.log("value", value);
-      console.log("column", column);
-      console.log("t", t);
-      console.log("searchResult", searchResult);
+      // console.log("key", key);
+      // console.log("value", value);
+      // console.log("column", column);
+      // console.log("t", t);
+      // console.log("searchResult", searchResult);
 
       switch (key) {
         case "view":
@@ -152,7 +152,7 @@ export const UICustomizations = {
         data.params.toDate = `${dd}-${mm}-${yyyy}`;
       }
       data.params.tenantId = tenantId;
-      console.log(data, "data in preProcess of search Birth Ui config");
+      // console.log(data, "data in preProcess of search Birth Ui config");
       if (data?.params?.fromDate || data?.params?.toDate) {
         const createdFrom = data.params?.fromDate;
         const createdTo = data.params?.toDate;
@@ -162,13 +162,13 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      console.log("key", key);
+      // console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
 
-      console.log("value", value);
-      console.log("column", column);
-      console.log("t", t);
-      console.log("searchResult", searchResult);
+      // console.log("value", value);
+      // console.log("column", column);
+      // console.log("t", t);
+      // console.log("searchResult", searchResult);
 
       switch (key) {
         case "view":
@@ -185,7 +185,7 @@ export const UICustomizations = {
         // );
         case "Birth Date":
           const epoch = row?.dateofbirth;
-          console.log(epoch, "changing the format of date");
+          // console.log(epoch, "changing the format of date");
           if (epoch) {
             const date = new Date(epoch);
             const dd = String(date.getDate()).padStart(2, "0");
@@ -214,11 +214,11 @@ export const UICustomizations = {
   searchAndDownloadConfig: {
     // preProcess function to transform form data into API query parameters
     preProcess: (data) => {
-      console.log("BIRTH: UICustomization preProcess START - received data:", JSON.stringify(data, null, 2));
+      // console.log("BIRTH: UICustomization preProcess START - received data:", JSON.stringify(data, null, 2));
 
       const finalApiParams = {};
       const formValues = data.state.searchForm || {};
-      console.log("BIRTH: Form Values (data.state.searchForm):", JSON.stringify(formValues, null, 2));
+      // console.log("BIRTH: Form Values (data.state.searchForm):", JSON.stringify(formValues, null, 2));
 
       // 1. Tenant ID
       const tenantFromForm = formValues.tenantId;
@@ -257,7 +257,7 @@ export const UICustomizations = {
 
       // 5. Hospital ID (from placeofbirth field) (CHANGED from placeofdeath)
       const placeOfBirthRawValue = formValues.placeofbirth; // <-- CHANGED
-      console.log("Raw value of formValues.placeofbirth:", JSON.stringify(placeOfBirthRawValue));
+      // console.log("Raw value of formValues.placeofbirth:", JSON.stringify(placeOfBirthRawValue));
 
       let placeOfBirthCode = null;
       if (typeof placeOfBirthRawValue === "string" && placeOfBirthRawValue.trim() !== "") {
@@ -265,12 +265,12 @@ export const UICustomizations = {
       } else if (typeof placeOfBirthRawValue === "object" && placeOfBirthRawValue !== null && placeOfBirthRawValue.code) {
         placeOfBirthCode = String(placeOfBirthRawValue.code).trim();
       } else {
-        console.log("placeofbirth is not a usable string or object with a code property.");
+        // console.log("placeofbirth is not a usable string or object with a code property.");
       }
 
       if (placeOfBirthCode) {
         finalApiParams.hospitalId = placeOfBirthCode;
-        console.log(`PreProcess: Hospital ID set to: ${finalApiParams.hospitalId}`);
+        // console.log(`PreProcess: Hospital ID set to: ${finalApiParams.hospitalId}`);
       } else {
         delete finalApiParams.hospitalId;
       }
@@ -294,7 +294,7 @@ export const UICustomizations = {
       }
 
       data.params = finalApiParams;
-      console.log("BIRTH: UICustomization preProcess END - final data.params being sent:", JSON.stringify(data.params, null, 2));
+      // console.log("BIRTH: UICustomization preProcess END - final data.params being sent:", JSON.stringify(data.params, null, 2));
       return data;
     },
 
