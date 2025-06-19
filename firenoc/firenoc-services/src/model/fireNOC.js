@@ -196,18 +196,11 @@ const Address = {
       description: "more address detail as may be needed"
     },
     buildingName: {
-        description: "Name of the building",
-        oneOf: [
-          {
-            type: "string",
-            minLength: 2,
-            maxLength: 64
-          },
-          {
-            type: "null"
-          }
-        ]
-      },
+    type: ["string", "null"],
+    description: "Name of the building",
+    maxLength: 64,
+    minLength: 2
+    },
     street: {
       type: "string",
       description: "Street Name",
