@@ -173,14 +173,6 @@ const getDetailsFromProperty = async (state, dispatch) => {
             )
           );
         } else {
-          if (payload.Properties[0].address) {
-            if (payload.Properties[0].address.pincode === null) {
-              payload.Properties[0].address.pincode = "";              
-            }
-            if (payload.Properties[0].address.buildingName === null) {
-              payload.Properties[0].address.buildingName = "";              
-            }
-          }
           dispatch(
             handleField(
               "apply",
