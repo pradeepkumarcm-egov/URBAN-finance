@@ -1,15 +1,15 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
+import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 
 import CitizenApp from "./pages/citizen";
+import BirthCard from "./components/BirthCard";
 import Address from "./pages/employee/createBirth/components/Address";
 import EditButton from "./components/EditButton";
 import { usePdfDownloader } from "./components/usePdfDownloader.js";
 import { DownloadButton } from "./components/DownloadButton";
 import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
-import EmployeeApp from "../src/pages/employee/index";
-import BirthCard from "./components/BirthCard";
 import useBirthDownload from "./components/useBirthDownload";
 import { overrideHooks, updateCustomConfigs } from "./utils";
 
@@ -51,5 +51,4 @@ export const initBirthComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);
   });
-};
 };
