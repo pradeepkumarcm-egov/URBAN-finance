@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, useLocation, Link } from "react-router-dom";
+import { Switch, useLocation } from "react-router-dom";
 import { AppContainer, PrivateRoute } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { CreateBirth } from "./createBirth";

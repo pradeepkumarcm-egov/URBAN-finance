@@ -5,11 +5,6 @@ import MyApplications from "./MyApplication";
 import BirthCard from "../../components/BirthCard";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 
-// import SearchChallanComponent from "./SearchChallan";
-// import SearchResultsComponent from "./SearchResults";
-// import MyChallanResultsComponent from "./MyChallan";
-//import BillInfo from "./SearchResults/BillInfo";
-
 const CitizenApp = ({ path, url, userType }) => {
   console.log(userType, "****");
   console.log(path);
@@ -26,6 +21,11 @@ const CitizenApp = ({ path, url, userType }) => {
 
         <PrivateRoute path={`${path}/birth-citizen/myApplications`} component={SearchBirth} />
       </Switch>
+    </span>
+  );
+};
+
+export default CitizenApp;
     </span>
   );
 };
