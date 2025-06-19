@@ -199,9 +199,8 @@ const Address = {
       type: "string",
       description: "Name of the building",
       valid_htmlData: true,
-      maxLength: 64,
-      minLength: 0
-    },
+      maxLength: 64
+     },
     street: {
       type: "string",
       description: "Street Name",
