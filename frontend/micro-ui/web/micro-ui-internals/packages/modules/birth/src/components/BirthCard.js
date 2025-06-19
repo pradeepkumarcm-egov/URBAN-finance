@@ -1,3 +1,4 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { EmployeeModuleCard } from "@egovernments/digit-ui-react-components";
 const BirthCard = ({ userType }) => {
