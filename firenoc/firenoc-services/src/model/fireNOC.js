@@ -197,7 +197,6 @@ const Address = {
     },
     buildingName: {
         description: "Name of the building",
-        valid_htmlData: true,
         oneOf: [
           {
             type: "string",
