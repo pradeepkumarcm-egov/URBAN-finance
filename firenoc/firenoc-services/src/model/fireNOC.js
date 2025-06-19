@@ -195,11 +195,12 @@ const Address = {
       valid_htmlData: true,
       description: "more address detail as may be needed"
     },
-    buildingName: {
-    type: ["string", "null"],
-    description: "Name of the building",
-    maxLength: 64,
-    minLength: 2
+     buildingName: {Add commentMore actions
+      type: "string",
+      description: "Name of the building",
+      valid_htmlData: true,
+      maxLength: 64,
+      minLength: 0
     },
     street: {
       type: "string",
