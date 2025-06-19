@@ -195,7 +195,7 @@ const Address = {
       valid_htmlData: true,
       description: "more address detail as may be needed"
     },
-     buildingName: {Add commentMore actions
+     buildingName: {
       type: "string",
       description: "Name of the building",
       valid_htmlData: true,
