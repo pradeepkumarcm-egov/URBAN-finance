@@ -17,17 +17,24 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const { workflow: wrkflow, tenantId: _tenantId, authorization, ConsumerName } = Digit.Hooks.useQueryParams();
   const [bill, setBill] = useState(state?.bill);
   const tenantId = state?.tenantId || _tenantId || Digit.UserService.getUser().info?.tenantId;
+  console.log("tenantid of billdetails", tenantId);
   const propertyId = state?.propertyId;
   if (wrkflow === "WNS" && consumerCode.includes("?")) consumerCode = consumerCode.substring(0, consumerCode.indexOf("?"));
   const { data, isLoading } = state?.bill
     ? { isLoading: false }
     : Digit.Hooks.useFetchPayment({
-        tenantId,
+        tenantId: tenantId,
         businessService,
         consumerCode: wrkflow === "WNS" ? stringReplaceAll(consumerCode, "+", "/") : consumerCode,
       });
 
+     
+
   let Useruuid = data?.Bill?.[0]?.userId || "";
+  //  const isUserSearchEnabled = 
+  //   (wrkflow !== 'death' && !!Useruuid) || 
+  //   (wrkflow === 'death' && !!Useruuid && bill?.mobileNumber?.includes('*'));
+  const isUserSearchEnabled = wrkflow !== 'death' && businessService !== 'DEATH_CERT' && !!Useruuid;
   let requestCriteria = [
     "/user/_search",
     {},
@@ -35,7 +42,8 @@ const BillDetails = ({ paymentRules, businessService }) => {
     { recordId: Useruuid, plainRequestFields: ["mobileNumber"] },
     {
       // enabled: Useruuid ? true : false,
-       enabled: !!Useruuid,
+      //  enabled: !!Useruuid && wrkflow !== "death",
+      enabled: isUserSearchEnabled,
       cacheTime: 100,
     },
   ];
@@ -113,13 +121,13 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const [formError, setError] = useState("");
 
 
-   const paidByOptions = useMemo(() => [
-    { code: "OWNER", name: t("COMMON_OWNER") },
-    { code: "OTHER", name: t("COMMON_OTHER") },
-  ], [t]);
-  const [paidBy, setPaidBy] = useState(paidByOptions[0]); // Default to Owner
-  const [payerNameInput, setPayerNameInput] = useState("");
-  const [payerMobileInput, setPayerMobileInput] = useState("");
+  //  const paidByOptions = useMemo(() => [
+  //   { code: "OWNER", name: t("COMMON_OWNER") },
+  //   { code: "OTHER", name: t("COMMON_OTHER") },
+  // ], [t]);
+  // const [paidBy, setPaidBy] = useState(paidByOptions[0]); // Default to Owner
+  // const [payerNameInput, setPayerNameInput] = useState("");
+  // const [payerMobileInput, setPayerMobileInput] = useState("");
 
   if (authorization === "true" && !userInfo?.access_token) {
     localStorage.clear();
@@ -156,36 +164,49 @@ const BillDetails = ({ paymentRules, businessService }) => {
     }
   }, [isLoading, data, bill, consumerCode, wrkflow]);
 
-  useEffect(() => {
-    if (bill && wrkflow === "death") {
-        const billPayerName = bill.payerName || "";
-        let originalBillMobileNumber = bill.mobileNumber || "";
+  // useEffect(() => {
+  //   if (bill && wrkflow === "death") {
+  //       const billPayerName = bill.payerName || "";
+  //       let originalBillMobileNumber = bill.mobileNumber || "";
 
-        if (paidBy.code === "OWNER") {
-            let resolvedMobileNumber = originalBillMobileNumber;
-            if (originalBillMobileNumber && originalBillMobileNumber.includes("*")) {
-                const loggedInUserUuid = Digit.UserService.getUser()?.info?.uuid;
-                if (loggedInUserUuid === Useruuid && userData?.user?.[0]?.mobileNumber) {
-                    resolvedMobileNumber = userData.user[0].mobileNumber;
-                }
-            }
-            setPayerNameInput(billPayerName);
-            setPayerMobileInput(resolvedMobileNumber.substring(0,10)); 
-        }
-    }
-  }, [bill, wrkflow, paidBy, Useruuid, userData, t]);
+  //       if (paidBy.code === "OWNER") {
+  //           let resolvedMobileNumber = originalBillMobileNumber;
+  //           if (originalBillMobileNumber && originalBillMobileNumber.includes("*")) {
+  //               const loggedInUserUuid = Digit.UserService.getUser()?.info?.uuid;
+  //               if (loggedInUserUuid === Useruuid && userData?.user?.[0]?.mobileNumber) {
+  //                   resolvedMobileNumber = userData.user[0].mobileNumber;
+  //               }
+  //           }
+  //           setPayerNameInput(billPayerName);
+  //           setPayerMobileInput(resolvedMobileNumber.substring(0,10)); 
+  //       }
+  //   }
+  // }, [bill, wrkflow, paidBy, Useruuid, userData, t]);
 
-  const handlePaidByChange = (selectedOption) => {
-    setPaidBy(selectedOption);
-    if (selectedOption.code === "OTHER") {
-        setPayerNameInput("");
-        setPayerMobileInput("");
-    }
-    
-  };
+            // useEffect(() => {
+            //   // This effect now simplifies. It no longer needs `userData`.
+            //   // It will pre-fill the form with whatever is available in the bill.
+            //   if (bill && (wrkflow === "death" || businessService === "DEATH_CERT")) {
+            //       if (paidBy.code === "OWNER") {
+            //           setPayerNameInput(bill.payerName || "");
+            //           // Note: If the bill.mobileNumber is masked, it will show the masked number.
+            //           // The user must select "Other" to input the correct number in that case.
+            //           setPayerMobileInput((bill.mobileNumber || "").substring(0,10)); 
+            //       }
+            //   }
+            // }, [bill, wrkflow, businessService, paidBy]);
+  
+            // const handlePaidByChange = (selectedOption) => {
+            //   setPaidBy(selectedOption);
+            //   if (selectedOption.code === "OTHER") {
+            //       setPayerNameInput("");
+            //       setPayerMobileInput("");
+            //   }
+              
+            // };
  
 
-  const onSubmit = () => {
+  const onSubmit =async () => {
     let paymentAmount =
       paymentType === t("CS_PAYMENT_FULL_AMOUNT")
         ? getTotal()
@@ -198,19 +219,38 @@ const BillDetails = ({ paymentRules, businessService }) => {
         paymentAmount,
         tenantId: billDetails.tenantId,
       });
-    } else if (wrkflow === "death") { 
-        history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=death`, {
+    } 
+    else if (wrkflow === "death" || businessService === "DEATH_CERT") { 
+        console.log("bill",bill,billDetails)
+        history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=death`, {
           paymentAmount,
-          tenantId: billDetails.tenantId,
+          name: bill.payerName,
+          mobileNumber: bill.mobileNumber && bill.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill.mobileNumber,
+          bill: bill, 
+          tenantId: state?.tenantId || billDetails.tenantId,
+        //payment
+    // history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`)
         });
-    } else if (wrkflow === "WNS") {
+    // --- END OF CHANGE 2 ---
+    } 
+    // else if (wrkflow === "death") { 
+    //     // const encodedConsumerCode = encodeURIComponent(consumerCode);
+    //     history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=death`, {
+    //       paymentAmount,
+    //       bill: bill,
+    //       name: bill.payerName,
+    //       mobileNumber: bill.mobileNumber && bill.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill.mobileNumber,
+    //     });
+    // }
+     else if (wrkflow === "WNS") {
       history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=WNS&ConsumerName=${ConsumerName}`, {
         paymentAmount,
         tenantId: billDetails.tenantId,
         name: bill.payerName,
         mobileNumber: bill.mobileNumber && bill.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill.mobileNumber,
       });
-    } else if (businessService === "PT") { 
+    } else if (businessService === "PT") {
+      console.log("inside pt", bill, billDetails, businessService, consumerCode, paymentAmount);
       history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}`, {
         paymentAmount,
         tenantId: billDetails.tenantId,
@@ -236,7 +276,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
 
   if (isLoading || isFSMLoading) return <Loader />;
 // return <div>hi</div>
-console.log(businessService, wrkflow,consumerCode, "businessService");
+console.log(businessService, wrkflow,consumerCode,ConsumerName,state,bill,billDetails, "businessService");
   return (
     <React.Fragment>
       <Header>{t("CS_PAYMENT_BILL_DETAILS")}</Header>
@@ -266,7 +306,7 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               <KeyNote keyValue={t("CS_BILL_DUEDATE")} note={new Date(billDetails?.currentExpiryDate).toLocaleDateString()} />
             ))}
 
-        {wrkflow === "death" && bill && ( 
+        {/* {wrkflow === "death" && bill && ( 
           <div style={{ marginTop: "16px" }}>
             <hr className="underline" style={{ marginBottom: "16px" }}/>
             <CardSubHeader>{t("Payer Details")}</CardSubHeader>
@@ -323,7 +363,7 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               </div>
             </LabelFieldPair>
           </div>
-        )}
+        )} */}
           {businessService === "FSM.TRIP_CHARGES" ? (
             <div style={{ marginTop: "50px" }} className="bill-payment-amount">
               <KeyNote keyValue={t("ES_PAYMENT_DETAILS_TOTAL_AMOUNT")} note={application?.pdfData?.totalAmount} />
@@ -381,8 +421,9 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               <span className="card-label-error">{t(formError)}</span>
             )}
           </div>
-          <SubmitBar disabled={!paymentAllowed || getTotal() === 0 || 
-                (wrkflow === 'death' && (!payerNameInput || payerMobileInput.length !== 10))} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} />
+          <SubmitBar disabled={!paymentAllowed || getTotal() === 0} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} />
+          {/* <SubmitBar disabled={!paymentAllowed || getTotal() === 0 || 
+                (wrkflow === 'death' && (!payerNameInput || payerMobileInput.length !== 10))} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} /> */}
         </div>
       </Card>
     </React.Fragment>

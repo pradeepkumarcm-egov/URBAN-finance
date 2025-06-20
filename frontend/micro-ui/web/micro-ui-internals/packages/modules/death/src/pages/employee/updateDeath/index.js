@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { FormComposerV2, Header, Toast, Loader } from "@egovernments/digit-ui-components";
+import { FormComposerV2, Toast, Loader } from "@egovernments/digit-ui-components";
 import createDeathConfig from "../createDeath/createDeathConfig";
-
+import { useTranslation } from "react-i18next";
+import { Header } from "@egovernments/digit-ui-react-components";
 const UpdateDeath = () => {
   const location = useLocation();
   const history = useHistory();
   const editData = location.state?.editdata;
   const certificateId = location.state?.certificateId;
+  const { t } = useTranslation();
 
   const [formConfig, setFormConfig] = useState(() => JSON.parse(JSON.stringify(createDeathConfig)));
   const [initialValues, setInitialValues] = useState(null);
@@ -374,13 +376,13 @@ const UpdateDeath = () => {
   }
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <Header>Update Death Certificate</Header>
       <FormComposerV2
         config={formConfig} 
         onSubmit={onSubmit}
         defaultValues={initialValues}
-        label="UPDATE"
+        label={t("CORE_COMMON_UPDATE")}
         onFormValueChange={onFormValueChange}
         noBreakPoint 
       />

@@ -32,12 +32,16 @@ const SelectPaymentType = (props) => {
   const userInfo = Digit.UserService.getUser()?.info;
   const payersActiveName = userInfo?.name;
   const payersActiveMobileNumber = userInfo?.mobileNumber;
+  console.log("ikik",userInfo,payersActiveName, payersActiveMobileNumber);
 
   const { t } = useTranslation();
   const history = useHistory();
   const { state, ...location } = useLocation();
   const { consumerCode, businessService, paymentAmt } = useParams();
+  // const { consumerCode:encodedConsumerCode } = useParams();
+  // const consumerCode = decodeURIComponent(encodedConsumerCode);
   const { workflow: wrkflow, tenantId: _tenantId, ConsumerName } = Digit.Hooks.useQueryParams();
+  console.log("consumername:",ConsumerName);
   const [bill, setBill] = useState(state?.bill);
   const tenantId = state?.tenantId || _tenantId || Digit.UserService.getUser().info?.tenantId;
   const isLoggedIn = Digit.UserService.getUser()
@@ -141,7 +145,38 @@ const SelectPaymentType = (props) => {
     value.length !== 0 && mobileNumberError != "CORE_COMMON_PHONENO_INVALIDMSG" && payersName != "" && payersMobileNumber != "" ? setCanSubmit(true) : setCanSubmit(false);
   };
 
-  const onSubmit = () => {
+  console.log("billDetails: ", state?.bill,bill);
+  const onSubmit = async() => {
+    let recieptRequest = {
+          Payment: {
+            mobileNumber: bill.mobileNumber,
+            paymentDetails: [
+              {
+                businessService,
+                billId: bill.id,
+                totalDue: bill.totalAmount,
+                totalAmountPaid: bill.totalAmount,
+              },
+            ],
+            tenantId: bill.tenantId,
+            totalDue: bill.totalAmount,
+            totalAmountPaid: bill.totalAmount,
+            paymentMode: "CASH",
+            payerName: bill.payerName,
+            paidBy: "OWNER",
+          },
+        };
+    console.log("recieptRequest", recieptRequest);
+            try {
+              const resposne = await Digit.PaymentService.createReciept(bill.tenantId, recieptRequest);
+              sessionStorage.setItem("PaymentResponse", JSON.stringify(resposne));
+              history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`);
+            } catch (error) {
+              console.log("Error while creating receipt", error);
+              // setToast({ key: "error", action: error?.response?.data?.Errors?.map((e) => t(e.code)) })?.join(" , ");
+              // setTimeout(() => setToast(null), 5000);
+              return;
+            }
     if(wrkflow === "WNS")
     {
       history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=WNS&consumerCode=${stringReplaceAll(consumerCode, "+", "/")}`, {
@@ -151,7 +186,25 @@ const SelectPaymentType = (props) => {
         mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber ) : userInfo ? payersActiveMobileNumber : payersMobileNumber,
       });
     }
+    else if(wrkflow === "death"){
+    //  console.log("billDetails inside: ",paymentAmt,billDetails.tenantId);
+    //  console.log( paymentType?.code );
+    //  console.log( paymentType?.code !== optionSecound?.code ? bill?.payerName : userInfo ? payersActiveName : payersName);
+    //  console.log(paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber )  : userInfo ? payersActiveMobileNumber : payersMobileNumber);
+    //   history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=death`, {
+    //     bill:bill,
+    //     paymentAmount:  paymentAmt,
+    //     tenantId:billDetails.tenantId,
+    //    name: paymentType?.code !== optionSecound?.code ? bill?.payerName : userInfo ? payersActiveName : payersName,
+    //   mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber )  : userInfo ? payersActiveMobileNumber : payersMobileNumber,
+    //   });
+    //payment
+    history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`)
+    }
     else{
+       console.log("billDetails inside: ",paymentAmt,billDetails.tenantId);
+       console.log(  paymentType?.code !== optionSecound?.code ? bill?.payerName : userInfo ? payersActiveName : payersName);
+       console.log(paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber ) : userInfo ? payersActiveMobileNumber : payersMobileNumber);
     history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}`, {
       paymentAmount: paymentAmt,
       tenantId: billDetails.tenantId,
@@ -164,7 +217,7 @@ const SelectPaymentType = (props) => {
    if (isLoading || isUserLoading || citizenConcentFormLoading) {
     return <Loader />;
   } 
-
+console.log("consumerCode: ",state?.bill, consumerCode);
   return (
     <React.Fragment>
       <BackButton>{t("CS_COMMON_BACK")}</BackButton>

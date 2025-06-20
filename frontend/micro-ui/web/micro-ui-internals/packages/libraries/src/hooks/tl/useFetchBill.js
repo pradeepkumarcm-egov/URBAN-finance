@@ -2,6 +2,7 @@ import React from "react"
 import { useFetchCitizenBillsForBuissnessService } from "../payment"
 
 const useFetchBill = ({params, config}) => {
+    console.log("usefetch bill 1",params,config);
     return useFetchCitizenBillsForBuissnessService({ businessService: "TL", ...params },{
         ...config,
         select: (data) => {

@@ -33,11 +33,16 @@ export const SelectPaymentType = (props) => {
   const propertyId = state?.propertyId;
   const stateTenant = Digit.ULBService.getStateId();
   const { control, handleSubmit } = useForm();
+
+  console.log("consumer code:",businessService,consumerCode,wrkflow);
+  //  console.log("selectpaymenttype: ", state?.paymentAmount ,state?.tenantId, state?.name, state?.mobileNumber);
   const { data: menu, isLoading } = Digit.Hooks.useCommonMDMS(stateTenant, "DIGIT-UI", "PaymentGateway");
   const { data: paymentdetails, isLoading: paymentLoading } = Digit.Hooks.useFetchPayment(
     { tenantId: tenantId, consumerCode: wrkflow === "WNS" ? connectionNo : consumerCode, businessService },
     {}
   );
+  
+  console.log("paymentdetails",state?.bill,paymentdetails );
   if (window.location.href.includes("ISWSCON") || wrkflow === "WNS") consumerCode = decodeURIComponent(consumerCode);
   if( wrkflow === "WNS") consumerCode = stringReplaceAll(consumerCode,"+","/")
   useEffect(() => {
@@ -74,7 +79,7 @@ export const SelectPaymentType = (props) => {
           tenantId: billDetails?.tenantId,
         },
         // success
-        callbackUrl: window.location.href.includes("mcollect") || wrkflow === "WNS"
+        callbackUrl: window.location.href.includes("mcollect") || wrkflow === "WNS" 
           ? `${window.location.protocol}//${window.location.host}/digit-ui/citizen/payment/success/${businessService}/${wrkflow === "WNS"? encodeURIComponent(consumerCode):consumerCode}/${tenantId}?workflow=${wrkflow === "WNS"? wrkflow : "mcollect"}`
           : `${window.location.protocol}//${window.location.host}/digit-ui/citizen/payment/success/${businessService}/${wrkflow === "WNS"? encodeURIComponent(consumerCode):consumerCode}/${tenantId}?propertyId=${propertyId}`,
         additionalDetails: {
@@ -107,6 +112,8 @@ export const SelectPaymentType = (props) => {
     return <Loader />;
   }
 
+  console.log(isLoading, paymentLoading, "isLoading, paymentLoading");
+  console.log("selectpaymenttype: ", state?.paymentAmount ,state?.tenantId, state?.name, state?.mobileNumber);
   return (
     <React.Fragment>
       <BackButton>{t("CS_COMMON_BACK")}</BackButton>

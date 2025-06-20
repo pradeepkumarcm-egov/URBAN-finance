@@ -9,6 +9,7 @@ export const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) 
   const [isLoading, setIsLoading] = useState(false);
   // const { consumerCode } = useDeathDownload(tenantId, certificateId);
   const { downloadApi } = useDeathDownload();
+  console.log("tenantId of PayAndDownloadButton", tenantId);
   const handleClick = async () => {
      setIsLoading(true); 
     try {
@@ -19,7 +20,11 @@ export const PayAndDownloadButton = ({ tenantId, certificateId, hospitalName }) 
         const businessService = "DEATH_CERT";
        
         const encodedConsumerCode = encodeURIComponent(fetchedConsumerCode);
-        history.push(`/${window.contextPath}/citizen/payment/my-bills/${businessService}/${encodedConsumerCode}?workflow=death`);
+        history.push(`/${window.contextPath}/citizen/payment/my-bills/${businessService}/${encodedConsumerCode}?workflow=death`,
+          {
+            tenantId: tenantId,
+          }
+        );
       } else {
         
         console.error("Could not retrieve consumer code. Cannot proceed to payment.");

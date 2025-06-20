@@ -202,6 +202,7 @@ const ViewDeath = () => {
           actionButton, 
         ]}
         className=""
+        style={{ paddingLeft: "70px" }} // Add some space above the footer
       />
     </div>
   );

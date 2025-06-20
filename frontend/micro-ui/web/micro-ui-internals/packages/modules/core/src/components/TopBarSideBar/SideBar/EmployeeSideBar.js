@@ -156,6 +156,7 @@ const EmployeeSideBar = () => {
     return "";
   }
 
+  
   const renderSearch = () => {
     return (
       <div className="submenu-container">
