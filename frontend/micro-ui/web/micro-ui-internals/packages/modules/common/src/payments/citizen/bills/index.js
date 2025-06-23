@@ -25,22 +25,28 @@ export const MyBills = ({ stateCode }) => {
   }
 
   const { isLoading, data } = Digit.Hooks.useFetchCitizenBillsForBuissnessService(
-    { businessService },
+    { tenantId, businessService },
     { refetchOnMount: true, enabled: !location?.state?.fromSearchResults }
   );
+
+
   const { isLoading: mdmsLoading, data: mdmsBillingData } = Digit.Hooks.useGetPaymentRulesForBusinessServices(tenantId);
 
   const billsList = data?.Bill || [];
 
   const getPaymentRestrictionDetails = () => {
     const payRestrictiondetails = mdmsBillingData?.MdmsRes?.BillingService?.BusinessService;
-    let updatedBussinessService = ((businessService === "WS" || businessService === "SW") && isDisoconnectFlow === "true") ? "DISCONNECT" : businessService;
-    if (payRestrictiondetails?.length) return payRestrictiondetails.filter((e) => e.code == updatedBussinessService)?.[0]||{
-      isAdvanceAllowed: false,
-      isVoucherCreationEnabled: true,
-      minAmountPayable: 100,
-      partPaymentAllowed: false,
-    };
+    let updatedBussinessService =
+      (businessService === "WS" || businessService === "SW") && isDisoconnectFlow === "true" ? "DISCONNECT" : businessService;
+    if (payRestrictiondetails?.length)
+      return (
+        payRestrictiondetails.filter((e) => e.code == updatedBussinessService)?.[0] || {
+          isAdvanceAllowed: false,
+          isVoucherCreationEnabled: true,
+          minAmountPayable: 100,
+          partPaymentAllowed: false,
+        }
+      );
     else
       return {
         // isAdvanceAllowed: false,

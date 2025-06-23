@@ -53,28 +53,38 @@ export const useFetchBillsForBuissnessService = ({ tenantId, businessService, ..
 export const useFetchPayment = ({ tenantId, consumerCode, businessService }, config) => {
   const queryClient = useQueryClient();
 
+
   const fetchBill = async () => {
     /*  Currently enabled the logic to get bill no and expiry date for PT Module  */
-    if (businessService?.includes("PT") || businessService?.includes("SW") || businessService?.includes("WS")) {
+    if (
+      businessService?.includes("PT") ||
+      businessService?.includes("SW") ||
+      businessService?.includes("WS") ||
+      businessService?.includes("BIRTH_CERT.BIRTH_CERT")
+    ) {
+
       const fetchedBill = await Digit.PaymentService.fetchBill(tenantId, { consumerCode, businessService });
-      const billdetail = fetchedBill?.Bill?.[0]?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {};
-      fetchedBill.Bill[0].billDetails = fetchedBill?.Bill[0]?.billDetails?.map((ele) => ({
-        ...ele,
-        currentBillNo: fetchedBill?.Bill?.[0]?.billNumber,
-        currentExpiryDate: billdetail?.expiryDate,
-      }));
-      if (fetchedBill && fetchedBill?.Bill?.[0]?.billDetails?.length > 1) {
-        fetchedBill?.Bill?.[0]?.billDetails?.map(async (billdet) => {
-          const searchBill = await Digit.PaymentService.searchBill(tenantId, {
-            consumerCode,
-            fromPeriod: billdet?.fromPeriod,
-            toPeriod: billdet?.toPeriod,
-            service: businessService,
-            retrieveOldest: true,
+      // Defensive: check if Bill and Bill[0] exist
+      if (fetchedBill?.Bill && fetchedBill.Bill.length > 0 && fetchedBill.Bill[0]) {
+        const billdetail = fetchedBill.Bill[0].billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {};
+        fetchedBill.Bill[0].billDetails = fetchedBill.Bill[0].billDetails?.map((ele) => ({
+          ...ele,
+          currentBillNo: fetchedBill.Bill[0].billNumber,
+          currentExpiryDate: billdetail?.expiryDate,
+        })) || [];
+        if (fetchedBill.Bill[0].billDetails && fetchedBill.Bill[0].billDetails.length > 1) {
+          fetchedBill.Bill[0].billDetails.forEach(async (billdet) => {
+            const searchBill = await Digit.PaymentService.searchBill(tenantId, {
+              consumerCode,
+              fromPeriod: billdet?.fromPeriod,
+              toPeriod: billdet?.toPeriod,
+              service: businessService,
+              retrieveOldest: true,
+            });
+            billdet.expiryDate = searchBill?.Bill?.[0]?.billDetails?.[0]?.expiryDate;
+            billdet.billNumber = searchBill?.Bill?.[0]?.billNumber;
           });
-          billdet.expiryDate = searchBill?.Bill?.[0]?.billDetails?.[0]?.expiryDate;
-          billdet.billNumber = searchBill?.Bill?.[0]?.billNumber;
-        });
+        }
       }
       return fetchedBill;
     } else {

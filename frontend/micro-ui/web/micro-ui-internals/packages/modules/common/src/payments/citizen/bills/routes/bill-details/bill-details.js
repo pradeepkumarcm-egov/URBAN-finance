@@ -15,7 +15,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const { consumerCode: encodedConsumerCode } = useParams();
   const consumerCode = decodeURIComponent(encodedConsumerCode);
   const { workflow: wrkflow, tenantId: _tenantId, authorization, ConsumerName } = Digit.Hooks.useQueryParams();
-  console.log(state,"@@@@@",pathname);
+
   const [bill, setBill] = useState(state?.bill);
   const tenantId = state?.tenantId || _tenantId || Digit.UserService.getUser().info?.tenantId;
   const propertyId = state?.propertyId;
@@ -23,7 +23,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const { data, isLoading } = state?.bill
     ? { isLoading: false }
     : Digit.Hooks.useFetchPayment({
-        tenantId,
+       tenantId: tenantId,
         businessService,
         consumerCode: wrkflow === "WNS" ? stringReplaceAll(consumerCode, "+", "/") : consumerCode,
       });
@@ -41,7 +41,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
     },
   ];
 
-  console.log( Useruuid,userInfo,"QWERTY")
+
   const { isLoading: isUserLoading, data: userData, revalidate } = Digit.Hooks.useCustomAPIHook(...requestCriteria);
   
   const { isLoading: isFSMLoading, isError, error, data: application, error: errorApplication } = Digit.Hooks.fsm.useApplicationDetail(
@@ -53,14 +53,8 @@ const BillDetails = ({ paymentRules, businessService }) => {
   );
   let { minAmountPayable, isAdvanceAllowed } = paymentRules;
   minAmountPayable = wrkflow === "WNS" ? 100 : minAmountPayable;
-  // const billDetails = bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || [];
-  // const Arrears =
-  //   bill?.billDetails
-  //     ?.sort((a, b) => b.fromPeriod - a.fromPeriod)
-  //     ?.reduce((total, current, index) => (index === 0 ? total : total + current.amount), 0) || 0;
-
   const billDetails = useMemo(() => bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {}, [bill]); 
-  console.log(billDetails,"#######");
+
   const Arrears = useMemo(() =>
     bill?.billDetails
       ?.sort((a, b) => b.fromPeriod - a.fromPeriod)
@@ -80,7 +74,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
           new Date(fromPeriod).getFullYear().toString();
         to = new Date(toPeriod).getDate() + " " + Digit.Utils.date.monthNames[new Date(toPeriod).getMonth()] + " " + new Date(toPeriod).getFullYear();
         
-        console.log(from+"_"+to+"ddsds");
+
         return from + " - " + to;
       }
       from = new Date(billDetails.fromPeriod).getFullYear().toString();
@@ -116,14 +110,14 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const [paymentAllowed, setPaymentAllowed] = useState(true);
   const [formError, setError] = useState("");
 
-
-   const paidByOptions = useMemo(() => [
-    { code: "OWNER", name: t("COMMON_OWNER") },
-    { code: "OTHER", name: t("COMMON_OTHER") },
-  ], [t]);
-  const [paidBy, setPaidBy] = useState(paidByOptions[0]); // Default to Owner
-  const [payerNameInput, setPayerNameInput] = useState("");
-  const [payerMobileInput, setPayerMobileInput] = useState("");
+  
+  // const paidByOptions = useMemo(() => [
+  //   { code: "OWNER", name: t("COMMON_OWNER") },
+  //   { code: "OTHER", name: t("COMMON_OTHER") },
+  // ], [t]);
+  // const [paidBy, setPaidBy] = useState(paidByOptions[0]); // Default to Owner
+  // const [payerNameInput, setPayerNameInput] = useState("");
+  // const [payerMobileInput, setPayerMobileInput] = useState("");
 
   if (authorization === "true" && !userInfo?.access_token) {
     localStorage.clear();
@@ -165,32 +159,19 @@ const BillDetails = ({ paymentRules, businessService }) => {
         const billPayerName = bill.payerName || "";
         let originalBillMobileNumber = bill.mobileNumber || "";
 
-        if (paidBy.code === "OWNER") {
-            let resolvedMobileNumber = originalBillMobileNumber;
-            if (originalBillMobileNumber && originalBillMobileNumber.includes("*")) {
-                const loggedInUserUuid = Digit.UserService.getUser()?.info?.uuid;
-                if (loggedInUserUuid === Useruuid && userData?.user?.[0]?.mobileNumber) {
-                    resolvedMobileNumber = userData.user[0].mobileNumber;
-                }
-            }
-            setPayerNameInput(billPayerName);
-            setPayerMobileInput(resolvedMobileNumber.substring(0,10)); 
-        }
+       
     }
-  }, [bill, wrkflow, paidBy, Useruuid, userData, t]);
+  }, [bill, wrkflow, Useruuid, userData, t]);
 
-  const handlePaidByChange = (selectedOption) => {
-    setPaidBy(selectedOption);
-    if (selectedOption.code === "OTHER") {
-        setPayerNameInput("");
-        setPayerMobileInput("");
-    }
-    
-  };
-  console.log(getBillingPeriod(),"*********");
+  console.log("consumercode:"+consumerCode);
+  console.log("encodedConsumerCode"+encodedConsumerCode);
+
+
+
  
 
   const onSubmit = () => {
+
     let paymentAmount =
       paymentType === t("CS_PAYMENT_FULL_AMOUNT")
         ? getTotal()
@@ -204,9 +185,14 @@ const BillDetails = ({ paymentRules, businessService }) => {
         tenantId: billDetails.tenantId,
       });
     } else if (wrkflow === "birth") { 
-        history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=birth`, {
+     history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=birth`, {
           paymentAmount,
-          tenantId: billDetails.tenantId,
+          name: bill.payerName,
+          mobileNumber: bill.mobileNumber && bill.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill.mobileNumber,
+          bill: bill,
+          tenantId: state?.tenantId || billDetails.tenantId,
+        //payment
+    // history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`)
         });
     } else if (wrkflow === "WNS") {
       history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=WNS&ConsumerName=${ConsumerName}`, {
@@ -241,7 +227,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
 
   if (isLoading || isFSMLoading) return <Loader />;
 // return <div>hi</div>
-console.log(businessService, wrkflow,consumerCode, "businessService");
+
   return (
     <React.Fragment>
       <Header>{t("CS_PAYMENT_BILL_DETAILS")}</Header>
@@ -271,7 +257,7 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               <KeyNote keyValue={t("CS_BILL_DUEDATE")} note={new Date(billDetails?.currentExpiryDate).toLocaleDateString()} />
             ))}
 
-        {wrkflow === "birth" && bill && ( 
+        {/* {wrkflow === "birth" && bill && ( 
           <div style={{ marginTop: "16px" }}>
             <hr className="underline" style={{ marginBottom: "16px" }}/>
             <CardSubHeader>{t("Payer Details")}</CardSubHeader>
@@ -328,7 +314,7 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               </div>
             </LabelFieldPair>
           </div>
-        )}
+        )} */}
           {businessService === "FSM.TRIP_CHARGES" ? (
             <div style={{ marginTop: "50px" }} className="bill-payment-amount">
               <KeyNote keyValue={t("ES_PAYMENT_DETAILS_TOTAL_AMOUNT")} note={application?.pdfData?.totalAmount} />
@@ -386,8 +372,9 @@ console.log(businessService, wrkflow,consumerCode, "businessService");
               <span className="card-label-error">{t(formError)}</span>
             )}
           </div>
-          <SubmitBar disabled={!paymentAllowed || getTotal() === 0 || 
-                (wrkflow === 'birth' && (!payerNameInput || payerMobileInput.length !== 10))} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} />
+           <SubmitBar disabled={!paymentAllowed || getTotal() === 0} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} />
+          {/* <SubmitBar disabled={!paymentAllowed || getTotal() === 0 || 
+                (wrkflow === 'birth' && (!payerNameInput || payerMobileInput.length !== 10))} onSubmit={onSubmit} label={t("CS_COMMON_PROCEED_TO_PAY")} /> */}
         </div>
       </Card>
     </React.Fragment>

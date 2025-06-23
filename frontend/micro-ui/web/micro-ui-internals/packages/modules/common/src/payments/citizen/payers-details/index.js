@@ -17,6 +17,13 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import { stringReplaceAll } from "../bills/routes/bill-details/utils";
 
 const SelectPaymentType = (props) => {
+  const { t } = useTranslation();
+  const history = useHistory();
+  const { state } = useLocation();
+  const { consumerCode: encodedConsumerCode, businessService, paymentAmt } = useParams();
+  const consumerCode = decodeURIComponent(encodedConsumerCode);
+  const { workflow: wrkflow, tenantId: _tenantId, ConsumerName } = Digit.Hooks.useQueryParams();
+
   const optionFirst = {
     code: "PAY_BY_OWNER",
     i18nKey: "PT_PAY_BY_OWNER",
@@ -29,150 +36,180 @@ const SelectPaymentType = (props) => {
     name: "I am making the payment on behalf of the owner/ consumer of the service",
   };
 
+  // User Info and State
   const userInfo = Digit.UserService.getUser()?.info;
   const payersActiveName = userInfo?.name;
   const payersActiveMobileNumber = userInfo?.mobileNumber;
-
-  const { t } = useTranslation();
-  const history = useHistory();
-  const { state, ...location } = useLocation();
-  const { consumerCode, businessService, paymentAmt } = useParams();
-  const { workflow: wrkflow, tenantId: _tenantId, ConsumerName } = Digit.Hooks.useQueryParams();
-  const [bill, setBill] = useState(state?.bill);
+  const isLoggedIn = Digit.UserService.getUser();
   const tenantId = state?.tenantId || _tenantId || Digit.UserService.getUser().info?.tenantId;
-  const isLoggedIn = Digit.UserService.getUser()
 
-
-  const { data, isLoading } = state?.bill ? { isLoading: false } : Digit.Hooks.useFetchPayment({ tenantId, businessService, consumerCode });
-
-  let Useruuid = data?.Bill?.[0]?.userId || "";
-  let requestCriteria = [
-    "/user/_search",
-    {},
-    {data : {uuid:[Useruuid]}},
-    { recordId: Useruuid, plainRequestFields: ["mobileNumber"] },
-    {
-        enabled: Useruuid ? true : false,
-        cacheTime: 100,
-      }
-  ]
-  const { isLoading : isUserLoading, data: userData, revalidate } = Digit.Hooks.useCustomAPIHook(...requestCriteria);
-
-  const billDetails = bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || [];
-  const Arrears =
-    bill?.billDetails
-      ?.sort((a, b) => b.fromPeriod - a.fromPeriod)
-      ?.reduce((total, current, index) => (index === 0 ? total : total + current.amount), 0) || 0;
-
+  const [bill, setBill] = useState(state?.bill);
   const [paymentType, setPaymentType] = useState(optionFirst);
   const [payersName, setPayersName] = useState("");
   const [payersMobileNumber, setPayersMobileNumber] = useState("");
-  const { control, handleSubmit } = useForm();
   const [canSubmit, setCanSubmit] = useState(false);
   const [mobileNumberError, setmobileNumberError] = useState(null);
+  
+  // Citizen Consent Form State
   const [isCheckBox, setIsCheckBox] = useState(false);
   const [isCCFEnabled, setisCCFEnabled] = useState(false);
   const [mdmsConfig, setMdmsConfig] = useState("");
+
+  const { handleSubmit } = useForm();
   
-  const { isLoading: citizenConcentFormLoading, data:ccfData } = Digit.Hooks.useCustomMDMS(Digit.ULBService.getStateId(), "common-masters", [{ name: "CitizenConsentForm" }]);
+  // Data Fetching Hooks
+  const { data, isLoading } = state?.bill
+    ? { isLoading: false }
+    : (businessService
+        ? Digit.Hooks.useFetchPayment({ tenantId, businessService, consumerCode })
+        : { isLoading: false, data: undefined });
+  const Useruuid = data?.Bill?.[0]?.userId || "";
+  
+  const { isLoading: isUserLoading, data: userData } = Digit.Hooks.useCustomAPIHook({
+    url: "/user/_search",
+    method: "POST",
+    body: { uuid: [Useruuid] },
+    config: { enabled: !!Useruuid, cacheTime: 100 },
+  });
 
-  function setTermsAndPolicyDetails(e) {
-    setIsCheckBox(e.target.checked)
-  }
+  const { isLoading: citizenConcentFormLoading, data: ccfData } = Digit.Hooks.useCustomMDMS(
+    Digit.ULBService.getStateId(), "common-masters", [{ name: "CitizenConsentForm" }]
+  );
 
-  const checkDisbaled = () => {
-    if (isCCFEnabled?.isCitizenConsentFormEnabled && !isLoggedIn?.access_token) {
-      const isData = paymentType?.code !== optionSecound?.code ? false : userInfo ? false : !canSubmit;
-      let isEnabled = false
-      if (!isData && isCheckBox) isEnabled = false;
-      else isEnabled = true;
-      return isEnabled;
-    } else {
-      return paymentType?.code !== optionSecound?.code ? false : userInfo ? false : !canSubmit
+  useEffect(() => {
+    if (!bill && data && data?.Bill) {
+      const requiredBill = data.Bill.find((e) => e.consumerCode === consumerCode);
+      setBill(requiredBill);
     }
-  }
-
+  }, [isLoading, data, bill, consumerCode]);
+  
   useEffect(()=> {
     if (ccfData?.["common-masters"]?.CitizenConsentForm?.[0]?.isCitizenConsentFormEnabled) {
       setisCCFEnabled(ccfData?.["common-masters"]?.CitizenConsentForm?.[0])
     }
   }, [ccfData]);
 
-  const onLinkClick = (e) => {
-    setMdmsConfig(e.target.id)
-}
+  const billDetails = bill?.billDetails?.sort((a, b) => b.fromPeriod - a.fromPeriod)?.[0] || {};
 
-  const checkLabels = () => {
-    return <span>
-      {isCCFEnabled?.checkBoxLabels?.map((data, index) => {
-        return <span>
-          {/* {index == 0 && "CCF"} */}
-          {data?.linkPrefix && <span>{t(`${data?.linkPrefix}_`)}</span>}
-          {data?.link && <span id={data?.linkId} onClick={(e) => { onLinkClick(e) }} style={{ color: "#F47738", cursor: "pointer" }}>{t(`${data?.link}_`)}</span>}
-          {data?.linkPostfix && <span>{t(`${data?.linkPostfix}_`)}</span>}
-          {(index == isCCFEnabled?.checkBoxLabels?.length - 1) && t("LABEL")}
-        </span>
-      })}
-    </span>
-  }
+  // --- Event Handlers ---
   
-
-  useEffect(() => {
-    if (!bill && data) {
-      let requiredBill = data?.Bill?.filter((e) => e.consumerCode == consumerCode)[0];
-      setBill(requiredBill);
-    }
-  }, [isLoading]);
-
-  const onChangePayersMobileNumber = (e) => {
-    setmobileNumberError(null);
-    let validation = "^\\d{10}$";
-    if (!e.match(validation)) {
+  const onChangePayersMobileNumber = (value) => {
+    setPayersMobileNumber(value);
+    const validation = /^\d{10}$/;
+    if (!validation.test(value)) {
       setmobileNumberError("CORE_COMMON_PHONENO_INVALIDMSG");
       setCanSubmit(false);
+    } else {
+      setmobileNumberError(null);
+      if (payersName) setCanSubmit(true);
     }
-    setPayersMobileNumber(e);
-
-    e.length == 10 && payersName != "" ? setCanSubmit(true) : setCanSubmit(false);
   };
 
   const onChangePayersName = (value) => {
     setPayersName(value);
-    value.length !== 0 && mobileNumberError != "CORE_COMMON_PHONENO_INVALIDMSG" && payersName != "" && payersMobileNumber != "" ? setCanSubmit(true) : setCanSubmit(false);
+    if (value && mobileNumberError === null && payersMobileNumber) {
+      setCanSubmit(true);
+    } else {
+      setCanSubmit(false);
+    }
   };
 
-  const onSubmit = () => {
-    if(wrkflow === "WNS")
-    {
+  const setTermsAndPolicyDetails = (e) => {
+    setIsCheckBox(e.target.checked);
+  }
+
+
+
+  const onSubmit = async () => {
+
+    if (wrkflow === "birth") {
+      const recieptRequest = {
+        Payment: {
+          mobileNumber: bill.mobileNumber,
+          paymentDetails: [{
+              businessService,
+              billId: bill.id,
+              totalDue: bill.totalAmount,
+              totalAmountPaid: bill.totalAmount,
+          }],
+          tenantId: bill.tenantId,
+          totalDue: bill.totalAmount,
+          totalAmountPaid: bill.totalAmount,
+          paymentMode: "CASH", // Special logic for this flow
+          payerName: bill.payerName,
+          paidBy: paymentType?.code === optionFirst.code ? "OWNER" : "OTHER",
+        },
+      };
+      
+      try {
+        const response = await Digit.PaymentService.createReciept(bill.tenantId, recieptRequest);
+        sessionStorage.setItem("PaymentResponse", JSON.stringify(response));
+        history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=birth`);
+      } catch (error) {
+        console.error("Error while creating receipt for birth workflow:", error);
+      }
+    }
+    // Logic for WNS workflow
+    else if (wrkflow === "WNS") {
       history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}?workflow=WNS&consumerCode=${stringReplaceAll(consumerCode, "+", "/")}`, {
         paymentAmount: paymentAmt,
         tenantId: billDetails.tenantId,
-        name: paymentType?.code !== optionSecound?.code && ConsumerName !== "undefined" ? ConsumerName : userInfo ? payersActiveName : payersName,
-        mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber ) : userInfo ? payersActiveMobileNumber : payersMobileNumber,
+        name: paymentType?.code !== optionSecound?.code && ConsumerName !== "undefined" ? ConsumerName : (userInfo ? payersActiveName : payersName),
+        mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber) : (userInfo ? payersActiveMobileNumber : payersMobileNumber),
       });
     }
-    else{
-    history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}`, {
-      paymentAmount: paymentAmt,
-      tenantId: billDetails.tenantId,
-      name: paymentType?.code !== optionSecound?.code ? bill?.payerName : userInfo ? payersActiveName : payersName,
-      mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber )  : userInfo ? payersActiveMobileNumber : payersMobileNumber,
-    });
-  }
+    // Default Logic for all other workflows
+    else {
+      history.push(`/digit-ui/citizen/payment/collect/${businessService}/${consumerCode}`, {
+        paymentAmount: paymentAmt,
+        tenantId: billDetails.tenantId,
+        name: paymentType?.code !== optionSecound?.code ? bill?.payerName : (userInfo ? payersActiveName : payersName),
+        mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber) : (userInfo ? payersActiveMobileNumber : payersMobileNumber),
+      });
+    }
   };
+  
+  // --- UI Rendering ---
 
-   if (isLoading || isUserLoading || citizenConcentFormLoading) {
+  if (isLoading || isUserLoading || citizenConcentFormLoading) {
     return <Loader />;
-  } 
+  }
+
+  const checkDisbaled = () => {
+    // If user is not logged in and consent form is enabled, checkbox must be checked
+    if (isCCFEnabled?.isCitizenConsentFormEnabled && !isLoggedIn?.access_token) {
+      if (!isCheckBox) return true;
+    }
+    // If paying on behalf, name and mobile number must be valid
+    if (paymentType?.code === optionSecound.code && !userInfo) {
+      return !canSubmit;
+    }
+    return false;
+  }
+
+  const onLinkClick = (e) => {
+    setMdmsConfig(e.target.id);
+  }
+
+  const checkLabels = () => (
+    <span>
+      {isCCFEnabled?.checkBoxLabels?.map((data, index) => (
+        <span key={index}>
+          {data?.linkPrefix && <span>{t(`${data?.linkPrefix}_`)}</span>}
+          {data?.link && <span id={data?.linkId} onClick={onLinkClick} style={{ color: "#F47738", cursor: "pointer" }}>{t(`${data?.link}_`)}</span>}
+          {data?.linkPostfix && <span>{t(`${data?.linkPostfix}_`)}</span>}
+          {(index === isCCFEnabled?.checkBoxLabels?.length - 1) && t("LABEL")}
+        </span>
+      ))}
+    </span>
+  );
 
   return (
     <React.Fragment>
       <BackButton>{t("CS_COMMON_BACK")}</BackButton>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/*  <Header>{t("PAYMENT_CS_HEADER")}</Header> */}
         <Header>{t("PT_PAYERS_DETAILS_HEADER")}</Header>
         <Card>
-          <span className="card-label-error">{t(mobileNumberError)}</span>
           <RadioButtons
             selectedOption={paymentType}
             onSelect={setPaymentType}
@@ -181,57 +218,41 @@ const SelectPaymentType = (props) => {
             inputStyle={{ marginTop: "11px" }}
             innerStyles={{ display: "flex" }}
           />
-          <div style={{ position: "relative" }}>
-            {paymentType?.code !== optionFirst?.code && !userInfo ? (
-              <div style={{ position: "relative" }}>
-                <span>
-                  <span>{t("PT_PAYERS_MOBILE_NO")}</span>
-                  <MobileNumber
-                    // className="text-indent-xl"
-                    onChange={onChangePayersMobileNumber}
-                    value={payersMobileNumber}
-                  />
-                </span>
-                <span>
-                  <span>{t("PT_PAYERS_NAME")}</span>
-                  <TextInput
-                    //style={{ width: "40%" }}
-
-                    onChange={(e) => onChangePayersName(e.target.value)}
-                    value={payersName}
-                  />
-                </span>
+          {paymentType?.code === optionSecound.code && !userInfo && (
+            <div style={{ position: "relative", marginTop: "1rem" }}>
+              <span className="card-label-error">{t(mobileNumberError)}</span>
+              <div>
+                <p>{t("PT_PAYERS_MOBILE_NO")}</p>
+                <MobileNumber onChange={onChangePayersMobileNumber} value={payersMobileNumber} />
               </div>
-            ) : null}
-          </div>
+              <div style={{ marginTop: "1rem" }}>
+                <p>{t("PT_PAYERS_NAME")}</p>
+                <TextInput onChange={(e) => onChangePayersName(e.target.value)} value={payersName} />
+              </div>
+            </div>
+          )}
 
-          {isCCFEnabled?.isCitizenConsentFormEnabled && !isLoggedIn?.access_token && <div>
-            <CheckBox
-              className="form-field"
-              label={checkLabels()}
-              value={isCheckBox}
-              checked={isCheckBox}
-              style={{ marginTop: "5px", marginLeft: "55px" }}
-              styles={{marginBottom: "30px"}}
-              onChange={setTermsAndPolicyDetails}
-            />
+          {isCCFEnabled?.isCitizenConsentFormEnabled && !isLoggedIn?.access_token && 
+            <div>
+              <CheckBox
+                className="form-field"
+                label={checkLabels()}
+                value={isCheckBox}
+                checked={isCheckBox}
+                onChange={setTermsAndPolicyDetails}
+                styles={{ marginBottom: "30px", marginTop: "1.5rem" }}
+              />
+              <CitizenConsentForm
+                t={t}
+                isCheckBoxChecked={setTermsAndPolicyDetails}
+                labels={isCCFEnabled?.checkBoxLabels}
+                mdmsConfig={mdmsConfig}
+                setMdmsConfig={setMdmsConfig}
+              />
+            </div>
+          }
 
-            <CitizenConsentForm
-              styles={{}}
-              t={t}
-              isCheckBoxChecked={setTermsAndPolicyDetails}
-              labels={isCCFEnabled?.checkBoxLabels}
-              mdmsConfig={mdmsConfig}
-              setMdmsConfig={setMdmsConfig}
-            />
-          </div>}
-
-          <SubmitBar
-            label={t("CS_COMMON_NEXT")}
-            disabled={checkDisbaled()}
-            // disabled={paymentType?.code !== optionSecound?.code ? false : userInfo ? false : !canSubmit}
-            submit={true}
-          />
+          <SubmitBar label={t("CS_COMMON_NEXT")} disabled={checkDisbaled()} submit={true} />
         </Card>
       </form>
     </React.Fragment>
