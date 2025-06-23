@@ -66,7 +66,7 @@ const ViewDeath = () => {
       setConfig(viewConfig);
 
       // Determine which button to show based on counter
-      if (certData.counter === 1) {
+      if (certData.counter >= 1) {
         console.log("ViewDeath: Counter is 1, showing Pay and Download button.");
         setShowPayAndDownload(true);
       } else {
