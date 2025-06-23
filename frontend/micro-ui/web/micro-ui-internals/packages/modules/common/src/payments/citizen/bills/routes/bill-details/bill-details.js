@@ -179,7 +179,7 @@ const BillDetails = ({ paymentRules, businessService }) => {
 
 
     if (window.location.href.includes("mcollect")) {
-      history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=mcollect`)
+      history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}`)
     } else if (wrkflow === "WNS") {
       history.push(`/digit-ui/citizen/payment/billDetails/${businessService}/${consumerCode}/${paymentAmount}?workflow=WNS&ConsumerName=${ConsumerName}`, {
         paymentAmount,
