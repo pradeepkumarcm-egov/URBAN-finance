@@ -25,7 +25,7 @@ const CitizenPayment = ({ stateCode, cityCode, moduleCode }) => {
             <SelectPaymentType {...commonProps} stateCode={stateCode} basePath={currentPath} />
           </Route>
           <Route path={`${currentPath}/success/:businessService/:consumerCode(.*)/:tenantId`}>
-            <SuccessPayment {...commonProps} />
+            <SuccessfulPayment{...commonProps} />
           </Route>
           <Route path={`${currentPath}/failure`}>
             <FailedPayment {...commonProps} />
