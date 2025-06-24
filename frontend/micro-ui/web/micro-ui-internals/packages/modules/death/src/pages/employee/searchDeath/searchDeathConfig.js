@@ -39,7 +39,7 @@ export const searchDeathConfig = (t) => {
               populators: {
                 name: "fromDate",
                 max: "currentDate",
-                error: "DATE_VALIDATION_MSG"
+                error: "From Date is required !",
               },
             },
             {
@@ -50,7 +50,7 @@ export const searchDeathConfig = (t) => {
               key: "toDate",
               populators: {
                 name: "toDate",
-                error: "DATE_VALIDATION_MSG",
+                error: "To Date is required !",
                 max: "currentDate",
               },
               additionalValidations: {

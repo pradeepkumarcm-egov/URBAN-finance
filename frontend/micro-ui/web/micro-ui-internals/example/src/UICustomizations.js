@@ -27,6 +27,17 @@ const GetSlaCell = (value) => {
 
 export const UICustomizations = {
  searchDeathConfig: {
+     customValidationCheck: (data) => {
+    const { fromDate, toDate } = data;
+
+    console.log("customValidationCheck called with data:", data);
+
+        if (fromDate && toDate && new Date(toDate) < new Date(fromDate)) {
+          console.log("Validation error: To date before From date");
+          return {warning: true, label:"DATE_VALIDATION_MSG" };
+        }
+        return false;
+    },
     preProcess: (data) => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
       const gender = data?.state?.searchForm?.gender?.code;
@@ -154,17 +165,7 @@ export const UICustomizations = {
         return data.fromDate && data.toDate ? () => new Date(data.fromDate).getTime() < new Date(data.toDate).getTime() : true;
       }
     },
-    customValidationCheck: (data) => {
-   const { fromDate, toDate } = data;
-
-   console.log("customValidationCheck called with data:", data);
-
-      if (fromDate && toDate && new Date(toDate) < new Date(fromDate)) {
-        console.log("Validation error: To date before From date");
-        return { error: true, label: "TO_DATE_CANNOT_BE_BEFORE_FROM_DATE" };
-      }
-      return false;
-    },
+   
  },
 
 

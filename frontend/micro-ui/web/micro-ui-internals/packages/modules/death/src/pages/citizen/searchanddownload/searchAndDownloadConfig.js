@@ -68,7 +68,7 @@ export const searchAndDownloadConfig = (t) => {
               populators: {
                 name: "dateOfDeath",
                 max: "currentDate",
-                error: t("DATE_VALIDATION_MSG")
+                error: t("Death Date is required !"),
               },
             },
             {
@@ -80,7 +80,7 @@ export const searchAndDownloadConfig = (t) => {
               populators: {
                 name: "gender",
                 optionsKey: "name",
-                error: "gender is required !",
+                error: "Gender is required !",
                 required: true,
                 mdmsConfig: {
                   masterName: "GenderType",
