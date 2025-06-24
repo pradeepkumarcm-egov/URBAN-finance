@@ -440,46 +440,19 @@ export const SuccessPayment = (props) => {
 const PaymentComponent = (props) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { eg_pg_txnid: egId, workflow: workflw, propertyId } = Digit.Hooks.useQueryParams();
+  const { eg_pg_txnid: egId, workflow: workflw } = Digit.Hooks.useQueryParams();
   const [printing, setPrinting] = useState(false);
-  const [allowFetchBill, setallowFetchBill] = useState(false);
   const { businessService: business_service, consumerCode, tenantId } = useParams();
-  const { data: bpaData = {}, isLoading: isBpaSearchLoading, isSuccess: isBpaSuccess, error: bpaerror } = Digit.Hooks.obps.useOBPSSearch(
-    "", {}, tenantId, { applicationNo: consumerCode }, {}, {enabled:(window.location.href.includes("bpa") || window.location.href.includes("BPA"))}
-  );
 
-  // Retrieve stored payment data
+  // 1. CRITICAL CHANGE: Get payment response from sessionStorage (like the Death module does)
   const storedPaymentData = JSON.parse(sessionStorage.getItem("PaymentResponse"));
 
-  console.log("storedPaymentData:", storedPaymentData);
-
-  console.log("qwerty",egId,business_service,workflw,consumerCode,tenantId)
+  // This API call will still run in the background to update the server, but we won't rely on it for the UI.
   const { isLoading, data, isError } = Digit.Hooks.usePaymentUpdate({ egId }, business_service, {
     retry: false,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
-
-  console.log("data", data);
-
-  const { label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService: business_service }, { enabled: false });
-
-  const { data: reciept_data, isLoading: recieptDataLoading } = Digit.Hooks.useRecieptSearch(
-    {
-      tenantId,
-      businessService: business_service,
-      receiptNumbers: data?.payments?.Payments?.[0]?.paymentDetails[0].receiptNumber,
-    },
-    {
-      retry: false,
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-      select: (dat) => {
-        return dat.Payments[0];
-      },
-      enabled: allowFetchBill,
-    }
-  );
 
   const { data: generatePdfKey } = Digit.Hooks.useCommonMDMS(tenantId, "common-masters", "ReceiptKey", {
     select: (data) =>
@@ -488,33 +461,22 @@ const PaymentComponent = (props) => {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
-console.log("data",data)
-  const payments = data?.payments;
 
   useEffect(() => {
     return () => {
-      localStorage.setItem("BillPaymentEnabled","false")
+      // Clear the session storage item if you want to prevent re-showing this page on refresh
+      // sessionStorage.removeItem("PaymentResponse");
       queryClient.clear();
     };
   }, []);
 
-  useEffect(() => {
-    if (data && data.txnStatus && data.txnStatus !== "FAILURE") {
-      setallowFetchBill(true);
-    }
-  }, [data]);
-
-  if (isLoading || recieptDataLoading) {
+  // Show a loader while the background API call is happening, but don't fail if it's slow.
+  if (isLoading) {
     return <Loader />;
   }
 
-  const applicationNo = data?.applicationNo;
-
-  const isMobile = window.Digit.Utils.browser.isMobile();
-
-
+  // 2. CRITICAL CHANGE: Use the reliable stored data for the failure check.
   if (!storedPaymentData || !storedPaymentData.Payments || storedPaymentData.Payments.length === 0) {
-    console.log("failure")
     return (
       <Card>
         <Banner
@@ -524,66 +486,40 @@ console.log("data",data)
           successful={false}
         />
         <CardText>{t("CS_PAYMENT_FAILURE_MESSAGE")}</CardText>
-        {!(business_service?.includes("PT")) ? (
-          <Link to={`/digit-ui/citizen`}>
-            <SubmitBar label={t("CORE_COMMON_GO_TO_HOME")} />
-          </Link>
-        ) : (
-          <React.Fragment>
-            <Link to={(applicationNo && `/digit-ui/citizen/payment/my-bills/${business_service}/${applicationNo}`) || "/digit-ui/citizen"}>
-              <SubmitBar label={t("CS_PAYMENT_TRY_AGAIN")} />
-            </Link>
-            {/* {business_service?.includes("PT") &&<div style={{marginTop:"10px"}}><Link to={`/digit-ui/citizen/feedback?redirectedFrom=${"digit-ui/citizen/payment/success"}&propertyId=${consumerCode? consumerCode : ""}&acknowldgementNumber=${egId ? egId : ""}&tenantId=${tenantId}&creationReason=${business_service?.split(".")?.[1]}`}>
-              <SubmitBar label={t("CS_REVIEW_AND_FEEDBACK")} />
-            </Link></div>} */}
-            <div className="link" style={isMobile ? { marginTop: "8px", width: "100%", textAlign: "center" } : { marginTop: "8px" }}>
-              <Link to={`/digit-ui/citizen`}>{t("CORE_COMMON_GO_TO_HOME")}</Link>
-            </div>
-          </React.Fragment>
-        )}
+        <Link to={`/digit-ui/employee/payment/collect/${business_service}/${consumerCode}`}>
+            <SubmitBar label={t("CS_PAYMENT_TRY_AGAIN")} />
+        </Link>
       </Card>
     );
   }
 
-  const paymentData = data?.payments?.Payments[0];
-  const amount = reciept_data?.paymentDetails?.[0]?.totalAmountPaid;
-  const transactionDate = paymentData?.transactionDate;
-  const printCertificate = async () => {
-    //const tenantId = Digit.ULBService.getCurrentTenantId();
-    const state = tenantId;
-    const applicationDetails = await Digit.TLService.search({ applicationNumber: consumerCode, tenantId });
-    const generatePdfKeyForTL = "tlcertificate";
-
-    if (applicationDetails) {
-      let response = await Digit.PaymentService.generatePdf(state, { Licenses: applicationDetails?.Licenses }, generatePdfKeyForTL);
-      const fileStore = await Digit.PaymentService.printReciept(state, { fileStoreIds: response.filestoreIds[0] });
+  // 3. CRITICAL CHANGE: Create the printReciept function using the stored data.
+  const printReciept = async () => {
+    if (printing) return;
+    setPrinting(true);
+    const tenantId = storedPaymentData.Payments[0]?.tenantId;
+    const state = Digit.ULBService.getStateId();
+    // We use the filestoreId from the payment response if it exists, otherwise we generate a new PDF.
+    let response = { filestoreIds: [storedPaymentData.Payments[0]?.fileStoreId] };
+    if (!response.filestoreIds[0]) {
+      response = await Digit.PaymentService.generatePdf(state, { Payments: [storedPaymentData.Payments[0]] }, generatePdfKey);
+    }
+    const fileStore = await Digit.PaymentService.printReciept(state, { fileStoreIds: response.filestoreIds[0] });
+    if (fileStore && fileStore[response.filestoreIds[0]]) {
       window.open(fileStore[response.filestoreIds[0]], "_blank");
     }
+    setPrinting(false);
   };
 
-
+  // 4. CRITICAL CHANGE: Define the banner text for Birth Certificates.
   let bannerText;
-  if (workflw) {
-    bannerText = `CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE`;
+  if (storedPaymentData?.Payments?.[0]?.paymentDetails?.[0]?.businessService?.includes("BIRTH_CERT")) {
+    bannerText = `CITIZEN_SUCCESS_BIRTH_CERT_PAYMENT_MESSAGE`;
   } else {
-    if (paymentData?.paymentDetails?.[0]?.businessService && paymentData?.paymentDetails?.[0]?.businessService?.includes("BPA")) {
-      let nameOfAchitect = sessionStorage.getItem("BPA_ARCHITECT_NAME");
-      let parsedArchitectName = nameOfAchitect ? JSON.parse(nameOfAchitect) : "ARCHITECT";
-      bannerText = `CITIZEN_SUCCESS_${paymentData?.paymentDetails[0]?.businessService.replace(/\./g, "_")}_${parsedArchitectName}_PAYMENT_MESSAGE`;
-    } else if (business_service?.includes("WS") || business_service?.includes("SW")) {
-      bannerText = t(`CITIZEN_SUCCESS_${paymentData?.paymentDetails[0].businessService.replace(/\./g, "_")}_WS_PAYMENT_MESSAGE`);
-    } else {
-      bannerText = paymentData?.paymentDetails[0]?.businessService ? `CITIZEN_SUCCESS_${paymentData?.paymentDetails[0]?.businessService.replace(/\./g, "_")}_PAYMENT_MESSAGE` : t("CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE");
-    }
+    // Fallback for other services if this component is ever reused
+    bannerText = t("CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE");
   }
-  const rowContainerStyle = {
-    padding: "4px 0px",
-    justifyContent: "space-between",
-  };
 
-  const ommitRupeeSymbol = ["PT"].includes(business_service);
-
-  if ((window.location.href.includes("bpa") || window.location.href.includes("BPA")) && isBpaSearchLoading) return <Loader />
   return (
     <Card>
       <Banner
@@ -601,13 +537,19 @@ console.log("data",data)
         successful={true}
       />
       <CardText>{t(`${bannerText}_DETAIL`)}</CardText>
-      {business_service && (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Link to={`/digit-ui/citizen`}>
+      
+      {/* 5. CRITICAL CHANGE: Add the Print Receipt and Go Home buttons */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", marginTop: "2rem" }}>
+        {generatePdfKey && (
+          <div className="primary-label-btn d-grid" onClick={printReciept}>
+            <DownloadPrefixIcon />
+            {t("CS_COMMON_DOWNLOAD_RECEIPT")}
+          </div>
+        )}
+        <Link to={`/digit-ui/employee`}>
           <SubmitBar label={t("CORE_COMMON_GO_TO_HOME")} />
         </Link>
       </div>
-      )}
     </Card>
   );
 };
