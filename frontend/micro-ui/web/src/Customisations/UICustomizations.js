@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect,useHistory } from "react";
 import { Button as ButtonNew,Toast,Loader } from "@egovernments/digit-ui-components";
 
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
@@ -212,6 +212,20 @@ export const UICustomizations = {
       if(selectedOrg) {
          data.body.inbox.moduleSearchCriteria.orgId = selectedOrg?.[0]?.applicationNumber;
       }
+
+      const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push(`/${window.contextPath}/employee/birth/viewbirth/${certificateId}`);
+  };
+
+  return (
+    <span className="link" onClick={handleClick} style={{ cursor: "pointer", color: "blue" }}>
+      View
+    </span>
+  );
+};
 
       // let selectedWard =  _.clone(data.body.inbox.moduleSearchCriteria.ward ? data.body.inbox.moduleSearchCriteria.ward : null);
       // delete data.body.inbox.moduleSearchCriteria.ward;
