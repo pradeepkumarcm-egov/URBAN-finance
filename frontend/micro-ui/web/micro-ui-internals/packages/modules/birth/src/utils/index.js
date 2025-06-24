@@ -1,9 +1,6 @@
-
 import _ from "lodash";
 import { CustomisedHooks } from "../Hooks/index";
-import  {UICustomizations}  from "../config/UICustomizations";
-
-
+import { UICustomizations } from "../config/UICustomizations";
 
 export const overrideHooks = () => {
   Object.keys(CustomisedHooks).map((ele) => {
@@ -44,11 +41,11 @@ const setupLibraries = (Library, service, method) => {
 };
 
 /* To Overide any existing config/middlewares  we need to use similar method */
- export const updateCustomConfigs = () => {
-   console.log(UICustomizations,"UICustomizations")
-   console.log(window?.Digit?.Customizations,"qwertyy")
-   setupLibraries("Customizations", "commonUiConfig", { ...window?.Digit?.Customizations?.commonUiConfig,...UICustomizations });
-   // setupLibraries("Utils", "parsingUtils", { ...window?.Digit?.Utils?.parsingUtils, ...parsingUtils });
- };
+export const updateCustomConfigs = () => {
+  console.log(UICustomizations, "UICustomizations");
+  console.log(window?.Digit?.Customizations, "qwertyy");
+  setupLibraries("Customizations", "commonUiConfig", { ...window?.Digit?.Customizations?.commonUiConfig, ...UICustomizations });
+  // setupLibraries("Utils", "parsingUtils", { ...window?.Digit?.Utils?.parsingUtils, ...parsingUtils });
+};
 
 export default {};

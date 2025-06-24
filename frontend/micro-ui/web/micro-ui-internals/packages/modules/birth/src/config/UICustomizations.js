@@ -1,7 +1,6 @@
-import { Link, useHistory } from "react-router-dom";
-import _ from "lodash";
-import React, { useState, Fragment } from "react";
-import { Button as ButtonNew, Toast } from "@egovernments/digit-ui-components";
+import { useHistory } from "react-router-dom";
+
+import React, { Fragment } from "react";
 
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
 //how to call these -> Digit?.Customizations?.[masterName]?.[moduleName]
@@ -328,7 +327,6 @@ export const UICustomizations = {
           return <span>{t("ES_COMMON_NA")}</span>;
 
         default:
-         
           return <span>{t("ES_COMMON_NA")}</span>;
       }
     },

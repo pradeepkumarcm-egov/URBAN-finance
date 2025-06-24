@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import { Button, Footer } from "@egovernments/digit-ui-components";
+
 import { ViewComposer, Loader, Header } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { viewBirthApplicationConfig } from "./config/viewApplicationsConfig.js";
