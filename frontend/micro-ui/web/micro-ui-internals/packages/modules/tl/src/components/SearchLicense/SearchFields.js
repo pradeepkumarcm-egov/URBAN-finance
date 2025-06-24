@@ -19,7 +19,7 @@ const SearchFields = ({register, control, reset, tenantId, t, previousPage }) =>
         {...(validation = {
                 pattern: "[6-9]{1}[0-9]{9}",
                 type: "tel",
-                title: t("CORE_COMMON_APPLICANT_MOBILE_NUMBER_INVALID"),
+                title: t("CORE_COMMON_APPLICANT_MOBILE_NUMBER_FORMAT"),
             })}/>
         </SearchField>
         <SearchField>
