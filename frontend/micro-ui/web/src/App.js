@@ -110,6 +110,7 @@ const moduleReducers = (initData) => ({
   pgr: PGRReducers(initData),
 });
 
+
 function App() {
   window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH") || "digit-ui";
   const stateCode =
