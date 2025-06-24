@@ -26,7 +26,7 @@ const createDeathConfig = [
         disable:true,
         populators: {
           name: "RegistrationNumber",
-          error: "Registration Number is Required!",
+          error: "Registration Number is Required!Minimum 5 characters",
           validation: {
             minLength: 5,
             maxLength: 100,
@@ -126,7 +126,7 @@ const createDeathConfig = [
         label: "BND_AGE",
         type: "text",
         isMandatory: true,
-        placeholder: "Ex: 10 years 6 months 3 days",
+        placeholder: "Age in Years",
         populators: {
           name: "age",
           error: "Age is Required!",
@@ -349,7 +349,7 @@ const createDeathConfig = [
         placeholder: "Email ID",
         populators: {
           name: "EmailID",
-          error: "Email ID is Required!",
+          error: "Valid Email ID is required!",
           validation: {
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Email format
           },
@@ -363,7 +363,7 @@ const createDeathConfig = [
         placeholder: "Mobile Number",
         populators: {
           name: "MobileNumber",
-          error: "Mobile Number is Required!",
+          error: "Valid Mobile Number is Required!Minimum 10 digits required",
           validation: {
             pattern: /^[6-9][0-9]{9}$/, // Valid Indian mobile number
           },
@@ -442,7 +442,7 @@ const createDeathConfig = [
         placeholder: "Email ID",
         populators: {
           name: "EmailID2",
-          error: "Email ID is Required!",
+          error: "Valid Email ID is required!",
           validation: {
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Email format
           },
@@ -455,7 +455,7 @@ const createDeathConfig = [
         placeholder: "Mobile Number",
         populators: {
           name: "MobileNumber2",
-          error: "Mobile Number is Required!",
+          error: "Valid Mobile Number is Required!Minimum 10 digits required",
           validation: {
             pattern: /^[6-9][0-9]{9}$/, // Valid Indian mobile number
           },
@@ -549,7 +549,7 @@ const createDeathConfig = [
         isMandatory: false,
         populators: {
           name: "mobileNumber3",
-          error: "Valid Mobile Number is required!",
+          error: "Valid Mobile Number is required!Minimum 10 digits required",
           validation: {
             minLength: 10,
             maxLength: 10,

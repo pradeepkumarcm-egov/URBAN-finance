@@ -208,7 +208,6 @@ export const CreateDeath = () => {
 
     await mutation.mutate(
       {
-        // url and params are already in reqCreate, but can be overridden here if needed
         body: payload,
       },
       {
