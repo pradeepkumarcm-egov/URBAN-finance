@@ -121,13 +121,6 @@ const BillDetails = ({ paymentRules, businessService }) => {
   const [formError, setError] = useState("");
 
 
-  //  const paidByOptions = useMemo(() => [
-  //   { code: "OWNER", name: t("COMMON_OWNER") },
-  //   { code: "OTHER", name: t("COMMON_OTHER") },
-  // ], [t]);
-  // const [paidBy, setPaidBy] = useState(paidByOptions[0]); // Default to Owner
-  // const [payerNameInput, setPayerNameInput] = useState("");
-  // const [payerMobileInput, setPayerMobileInput] = useState("");
 
   if (authorization === "true" && !userInfo?.access_token) {
     localStorage.clear();
@@ -164,46 +157,6 @@ const BillDetails = ({ paymentRules, businessService }) => {
     }
   }, [isLoading, data, bill, consumerCode, wrkflow]);
 
-  // useEffect(() => {
-  //   if (bill && wrkflow === "death") {
-  //       const billPayerName = bill.payerName || "";
-  //       let originalBillMobileNumber = bill.mobileNumber || "";
-
-  //       if (paidBy.code === "OWNER") {
-  //           let resolvedMobileNumber = originalBillMobileNumber;
-  //           if (originalBillMobileNumber && originalBillMobileNumber.includes("*")) {
-  //               const loggedInUserUuid = Digit.UserService.getUser()?.info?.uuid;
-  //               if (loggedInUserUuid === Useruuid && userData?.user?.[0]?.mobileNumber) {
-  //                   resolvedMobileNumber = userData.user[0].mobileNumber;
-  //               }
-  //           }
-  //           setPayerNameInput(billPayerName);
-  //           setPayerMobileInput(resolvedMobileNumber.substring(0,10)); 
-  //       }
-  //   }
-  // }, [bill, wrkflow, paidBy, Useruuid, userData, t]);
-
-            // useEffect(() => {
-            //   // This effect now simplifies. It no longer needs `userData`.
-            //   // It will pre-fill the form with whatever is available in the bill.
-            //   if (bill && (wrkflow === "death" || businessService === "DEATH_CERT")) {
-            //       if (paidBy.code === "OWNER") {
-            //           setPayerNameInput(bill.payerName || "");
-            //           // Note: If the bill.mobileNumber is masked, it will show the masked number.
-            //           // The user must select "Other" to input the correct number in that case.
-            //           setPayerMobileInput((bill.mobileNumber || "").substring(0,10)); 
-            //       }
-            //   }
-            // }, [bill, wrkflow, businessService, paidBy]);
-  
-            // const handlePaidByChange = (selectedOption) => {
-            //   setPaidBy(selectedOption);
-            //   if (selectedOption.code === "OTHER") {
-            //       setPayerNameInput("");
-            //       setPayerMobileInput("");
-            //   }
-              
-            // };
  
 
   const onSubmit =async () => {
@@ -228,8 +181,6 @@ const BillDetails = ({ paymentRules, businessService }) => {
           mobileNumber: bill.mobileNumber && bill.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill.mobileNumber,
           bill: bill, 
           tenantId: state?.tenantId || billDetails.tenantId,
-        //payment
-    // history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`)
         });
     // --- END OF CHANGE 2 ---
     } 

@@ -460,7 +460,7 @@ const PaymentComponent = (props) => {
     refetchOnWindowFocus: false,
   });
 
-  console.log("data  1st", data);
+  console.log("data  1st usePaymentUpdate ", data);
 
   const { label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService: business_service }, { enabled: false });
 
@@ -481,6 +481,8 @@ const PaymentComponent = (props) => {
     }
   );
 
+  console.log("reciept_data", reciept_data);
+
   const { data: generatePdfKey } = Digit.Hooks.useCommonMDMS(tenantId, "common-masters", "ReceiptKey", {
     select: (data) =>
       data["common-masters"]?.uiCommonPay?.filter(({ code }) => business_service?.includes(code))[0]?.receiptKey || "consolidatedreceipt",
@@ -488,8 +490,10 @@ const PaymentComponent = (props) => {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
-console.log("data 2nd ",data)
+console.log("data 2nd generatePdfKey ",generatePdfKey)
   const payments = data?.payments;
+
+  console.log("payments", payments);
 
   useEffect(() => {
     return () => {
@@ -571,7 +575,7 @@ console.log("data 2nd ",data)
     const tenantId = storedPaymentData.Payments[0]?.tenantId;
     const state = Digit.ULBService.getStateId();
     let response = { filestoreIds: [storedPaymentData.Payments[0]?.fileStoreId] };
-    if (!paymentData?.fileStoreId) {
+    if (!storedPaymentData.Payments[0]?.fileStoreId) {
       response = await Digit.PaymentService.generatePdf(state, { Payments: [storedPaymentData.Payments[0]] }, generatePdfKey);
     }
     const fileStore = await Digit.PaymentService.printReciept(state, { fileStoreIds: response.filestoreIds[0] });

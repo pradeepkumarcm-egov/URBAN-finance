@@ -140,6 +140,7 @@ export const usePdfDownloader = (initialCertificateIdForFilename) => {
   const [filestoreIdToFetch, setFilestoreIdToFetch] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState(null);
+  const [isDownloaded, setIsDownloaded] = useState(false);
   const [currentCertificateIdForFilename, setCurrentCertificateIdForFilename] = useState(initialCertificateIdForFilename);
 
   // Ref to track if a download attempt for the current filestoreId has been made
@@ -198,6 +199,7 @@ export const usePdfDownloader = (initialCertificateIdForFilename) => {
         link.click();
         document.body.removeChild(link);
         setDownloadError(null);
+        setIsDownloaded(true);
         console.log("usePdfDownloader: Download link clicked.");
       } else {
         console.error("usePdfDownloader: Filestore response no URL or missing filename ID.");
@@ -292,9 +294,21 @@ export const usePdfDownloader = (initialCertificateIdForFilename) => {
     // `setIsDownloading(false)` is now primarily handled in the download link effect or error handlers.
   }, [downloadIdMutation.isLoading, filestoreIdToFetch, isFileLinkLoading, isFileLinkFetching, isDownloading]);
 
+
+   useEffect(() => {
+    if (isDownloaded) {
+      const timer = setTimeout(() => {
+        setIsDownloaded(false);
+      }, 3000); // Reset after 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [isDownloaded]);
+
+
   return {
     initiateDownload,
     isDownloading,
     downloadError,
+    isDownloaded,
   };
 };

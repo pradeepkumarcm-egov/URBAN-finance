@@ -108,7 +108,7 @@ const getTranslatedApplicationStatus = (status, t) => {
 export const viewApplicationConfig = (applicationsArray, t, props = {}) => {
   if (!applicationsArray || applicationsArray.length === 0) {
     return {
-      cards: [ { sections: [ { type: "DATA", cardHeader: { value: t("ES_COMMON_NO_RESULTS_FOUND") }, values: [] } ] } ], // Changed message key
+      cards: [ { sections: [ { type: "DATA", cardHeader: { value: t("COMMON_NO_RESULTS_FOUND") }, values: [] } ] } ], // Changed message key
       apiResponse: [],
       additionalDetails: {},
     };

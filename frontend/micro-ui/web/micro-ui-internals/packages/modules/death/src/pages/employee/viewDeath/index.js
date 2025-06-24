@@ -29,6 +29,7 @@ const ViewDeath = () => {
     initiateDownload: initiateFreeDownload, // Rename for clarity
     isDownloading: isFreeDownloading,
     downloadError: freeDownloadError,
+    isDownloaded
   } = usePdfDownloader(id); // 'id' is for filename in hook
 
 
@@ -136,6 +137,14 @@ const ViewDeath = () => {
   }
 };
 
+
+
+ useEffect(() => {
+    if (isDownloaded) {
+      console.log("Download complete, refreshing page...");
+      window.location.reload();
+    }
+  }, [isDownloaded]);
 
   
   useEffect(() => {

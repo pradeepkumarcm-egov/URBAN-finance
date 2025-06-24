@@ -8,21 +8,15 @@ import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import ViewDeath from "./viewDeath";
 import UpdateDeath from "./updateDeath";
 import DeathCard from "../../components/DeathCard";
-import PayandDownload from "./payanddownload";
 
 
-// const deathPaymentRules = {
-//   minAmountPayable: 0,
-//   isAdvanceAllowed: false,
-//   partPaymentAllowed: false, 
-// };
 
 const EmployeeApp = ({ path, url, userType }) => {
     console.log("User Type: ........................", userType);
   const { t } = useTranslation();
   console.log("Path: ", path);
   
-  // const BillDetails = Digit.ComponentRegistryService.getComponent("BillDetails");
+  
 
   return (
     <Switch>
@@ -56,10 +50,6 @@ const EmployeeApp = ({ path, url, userType }) => {
         path={`${path}/death-common/update-death`}
         component={UpdateDeath}
         />
-
-         <PrivateRoute path={`${path}/egov-common/pay`} component={PayandDownload} />
-
-         {/* <PrivateRoute path="/digit-ui/citizen/payment/my-bills/:consumerCode/:businessService" component={() => <BillDetails paymentRules={deathPaymentRules} businessService="DEATH_CERT" />} /> */}
     </Switch>
   );
 };
