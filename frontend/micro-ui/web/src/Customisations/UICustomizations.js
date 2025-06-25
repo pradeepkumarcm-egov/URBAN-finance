@@ -565,7 +565,7 @@ export const UICustomizations = {
             <ViewBirthLinkButton tenantId={tenantId} certificateId={row?.id} />
           );
    
-        case "Birth Date":
+        case "BND_BIRTH_DATE":
           const epoch = row?.dateofbirth;
           console.log(epoch, "changing the format of date");
           if (epoch) {
