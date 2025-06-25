@@ -34,7 +34,7 @@ export const inboxConfig = () => {
             {
               label: "BND_FROM_DATE",
               type: "date",
-              isMandatory: false,
+              isMandatory: true,
               disable: false,
               key: "fromDate",
               populators: {
@@ -45,7 +45,7 @@ export const inboxConfig = () => {
             {
               label: "BND_TO_DATE",
               type: "date",
-              isMandatory: false,
+              isMandatory: true,
               disable: false,
               key: "toDate",
               populators: {

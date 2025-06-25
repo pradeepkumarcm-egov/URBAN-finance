@@ -56,7 +56,7 @@ export const BirthConfig = [
           error: "Required",
           validation: {
             required: true,
-            max: new Date().toISOString().split("T")[0], // Cannot be future date
+            max: new Date().toISOString().split("T")[0], 
           },
         },
       },
@@ -285,7 +285,7 @@ export const BirthConfig = [
         label: "BND_PROFESSION",
         type: "text",
         placeholder: "Profession",
-        isMandatory: true,
+        isMandatory: false,
         populators: {
           name: "father_profession",
           error: "Profession must be 3-100 characters",
@@ -315,7 +315,7 @@ export const BirthConfig = [
         inline: true,
         label: "BND_RELIGION",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Religion",
         populators: {
           name: "father_religion",
@@ -443,7 +443,7 @@ export const BirthConfig = [
         inline: true,
         label: "BND_PROFESSION",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Profession",
         populators: {
           name: "mother_profession",
@@ -474,7 +474,7 @@ export const BirthConfig = [
         inline: true,
         label: "BND_RELIGION",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Religion",
         populators: {
           name: "mother_religion",
@@ -838,7 +838,7 @@ export const BirthConfig = [
         inline: true,
         label: "BND_COMMON_NAME",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Name",
         populators: {
           name: "informant_name",
@@ -855,7 +855,7 @@ export const BirthConfig = [
         inline: true,
         label: "BND_ADDRESS",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Address",
         populators: {
           name: "informant_address",
