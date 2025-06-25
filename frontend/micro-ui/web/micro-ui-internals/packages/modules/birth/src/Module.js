@@ -1,7 +1,6 @@
 import React from "react";
 import { Loader } from "@egovernments/digit-ui-react-components";
 
-
 import { useTranslation } from "react-i18next";
 import EmployeeApp from "../src/pages/employee/index";
 import { useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,6 +14,7 @@ import { DownloadButton } from "./components/DownloadButton";
 import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
 import useBirthDownload from "./components/useBirthDownload";
 import { overrideHooks, updateCustomConfigs } from "./utils";
+import ViewBirthLinkButton from "./components/ViewBirthLinkButton";
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -46,6 +46,7 @@ const componentsToRegister = {
   usePdfDownloader: usePdfDownloader,
   useBirthDownload: useBirthDownload,
   DownloadButton: DownloadButton,
+  ViewBirthLinkButton: ViewBirthLinkButton,
   PayAndDownloadButton: PayAndDownloadButton,
 };
 export const initBirthComponents = () => {

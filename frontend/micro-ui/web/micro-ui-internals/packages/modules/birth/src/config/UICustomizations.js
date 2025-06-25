@@ -14,19 +14,7 @@ const inboxModuleNameMap = {};
 var Digit = window.Digit || {};
 
 
-const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
-  const history = useHistory();
 
-  const handleClick = () => {
-    history.push(`/${window.contextPath}/employee/birth/viewbirth/${certificateId}`);
-  };
-
-  return (
-    <span className="link" onClick={handleClick} style={{ cursor: "pointer", color: "blue" }}>
-      View
-    </span>
-  );
-};
 
 const GetSlaCell = (value) => {
   if (value === "-") return <span className="sla-cell-success">-</span>;
@@ -70,6 +58,8 @@ export const UICustomizations = {
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
       console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
+         const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
+
 
       console.log("value", value);
       console.log("column", column);
