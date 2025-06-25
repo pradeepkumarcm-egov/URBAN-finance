@@ -19,7 +19,7 @@ import { ViewLinkButton } from "./components/ViewLinkButton";
 
 export const DeathModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["death", "common", "workflow","bnd"];
+  const moduleCode = ["death", "common", "workflow","bnd","pt"];
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,

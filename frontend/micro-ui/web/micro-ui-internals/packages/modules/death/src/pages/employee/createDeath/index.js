@@ -217,7 +217,7 @@ export const CreateDeath = () => {
            setTimeout(() => {
               window.location.reload();
             }, 3000);
-          // history.push(...); // Navigate on success if needed
+         
         },
         onError: (error) => {
           console.error("API Error:", error);
@@ -354,7 +354,7 @@ export const CreateDeath = () => {
 
   return (
     <React.Fragment>
-      <Header>Create Death Certificates</Header> {/* Consider using t() for localization */}
+      <Header>Create Death Certificates</Header> 
       <div className="jk-header-btn-wrapper">
         <Header>{t("BND_NEW_REGISTRATION")}</Header>
         <p>{t("BND_NEW_REGISTRATION_SUBTEXT")}</p>

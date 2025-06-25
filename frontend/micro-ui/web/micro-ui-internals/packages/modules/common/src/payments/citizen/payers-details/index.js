@@ -199,7 +199,7 @@ const SelectPaymentType = (props) => {
       mobileNumber: paymentType?.code !== optionSecound?.code ? (bill?.mobileNumber?.includes("*") ? userData?.user?.[0]?.mobileNumber : bill?.mobileNumber )  : userInfo ? payersActiveMobileNumber : payersMobileNumber,
       });
       
-      //payment
+    //   payment
     // history.push(`/digit-ui/citizen/payment/success/${businessService}/${consumerCode}/${tenantId}?workflow=death`)
     }
     else{

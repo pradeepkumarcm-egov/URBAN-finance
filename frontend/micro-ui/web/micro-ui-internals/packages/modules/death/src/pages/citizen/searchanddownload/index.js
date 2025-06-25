@@ -110,7 +110,7 @@ const SearchAndDownload = () => {
 
   return (
     <React.Fragment>
-      <div className="digit-inbox-search-wrapper">
+      <div className="digit-inbox-search-wrapper" style={{margin: "16px"}}>
         <Header styles={{ fontSize: "32px" }}>{t(baseSearchConfigTemplate.label || "BND_SEARCH_REGISTRY")}</Header>
         <Card style={{marginBottom: "16px", padding: "10px"}}>
           <CardLabel styles={{fontWeight: "bold", marginBottom:"8px"}}>{t("City")}*</CardLabel>
