@@ -214,6 +214,9 @@ export const CreateDeath = () => {
         onSuccess: (response) => {
           console.log("API Response:", response);
           setShowToast({ key: "success", label: "Death Certificate Created Successfully" });
+           setTimeout(() => {
+              window.location.reload();
+            }, 3000);
           // history.push(...); // Navigate on success if needed
         },
         onError: (error) => {
