@@ -564,25 +564,7 @@ export const UICustomizations = {
       console.log("column", column);
       console.log("t", t);
       console.log("searchResult", searchResult);
-      const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
-        const history = useHistory();
-
-        const handleClick = () => {
-          history.push(
-            `/${window.contextPath}/employee/birth/viewbirth/${certificateId}`
-          );
-        };
-
-        return (
-          <span
-            className="link"
-            onClick={handleClick}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
-            View
-          </span>
-        );
-      };
+    const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
 
       switch (key) {
         case "view":
