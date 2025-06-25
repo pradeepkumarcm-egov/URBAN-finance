@@ -9,7 +9,6 @@ import CitizenApp from "../src/pages/citizen/index";
 import { overrideHooks,updateCustomConfigs } from "./utils";
 import ViewDeath from "./pages/employee/viewDeath";
 import EditButton from "./pages/employee/customcomponents/EditButton";
-import PaymentCollectionDetailsCard from "./pages/citizen/components/PaymentCollectionDetailsCard";
 import { usePdfDownloader } from "./components/usePdfDownloader";
 import useDeathDownload from "./components/useDeathDownload";
 import { DownloadButton } from "./components/DownloadButton";
@@ -44,7 +43,6 @@ const componentsToRegister = {
   DeathCard,
   ViewDeath,
   EditButton,
-  PaymentCollectionDetailsCard,
   usePdfDownloader:usePdfDownloader,
   useDeathDownload:useDeathDownload,
   DownloadButton: DownloadButton,
