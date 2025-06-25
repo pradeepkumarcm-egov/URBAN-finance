@@ -19,6 +19,26 @@ const useBirthConfig = (birthCertData, applicationNumber, tenantId) => {
     return "NA";
   };
 
+  // Helper to map gender codes to labels
+  const getGenderLabel = (gender) => {
+    switch (gender) {
+      case "1":
+      case 1:
+        return t("MAlE");
+      case "2":
+      case 2:
+        return t("FEMALE");
+      case "3":
+      case 3:
+        return t("TRANSGENDER");
+      case "4":
+      case 4:
+        return t("OTHER");
+      default:
+        return "NA";
+    }
+  };
+
   const config = {
     cards: [
       {
@@ -37,7 +57,7 @@ const useBirthConfig = (birthCertData, applicationNumber, tenantId) => {
             cardHeader: { value: t("BND_INFO_OF_CHILD"), inlineStyles: { marginTop: "2rem" } },
             values: [
               { key: t("BND_BIRTH_DOB"), value: formatDate(birthCertData.BirthCertificate[0].dateofbirth) || "NA" },
-              { key: t("BND_COMMON_GENDER"), value: birthCertData.BirthCertificate[0].gender || "NA" },
+              { key: t("BND_COMMON_GENDER"), value: getGenderLabel(birthCertData.BirthCertificate[0].gender) },
               { key: t("BND_FIRSTNAME_LABEL"), value: birthCertData.BirthCertificate[0].firstname || "NA" },
               { key: t("BND_MIDDLENAME_LABEL"), value: birthCertData.BirthCertificate[0].middlename || "NA" },
               { key: t("BND_LASTNAME_LABEL"), value: birthCertData.BirthCertificate[0].lastname || "NA" },
