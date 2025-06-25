@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import React from "react";
 
 
 var Digit = window.Digit || {};
