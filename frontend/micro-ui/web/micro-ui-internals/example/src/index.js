@@ -23,7 +23,6 @@ import { initWSComponents } from "@egovernments/digit-ui-module-ws";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
 import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-bills";
-import { DeathModule, initDeathComponents } from "@egovernments/digit-ui-module-death";
 import { BirthModule, initBirthComponents } from "@egovernments/digit-ui-module-birth";
 
 // import {initCustomisationComponents} from "./customisations";
@@ -62,7 +61,6 @@ const enabledModules = [
   "Bills",
   "SW",
   "BillAmendment",
-  "Death",
   "Birth",
 ];
 
@@ -108,7 +106,6 @@ const initDigitUI = () => {
     HRMSModule,
     ReceiptsModule,
     BillsModule,
-    DeathModule,
     BirthModule,
 
     // TLModule,
@@ -129,7 +126,6 @@ const initDigitUI = () => {
   initWSComponents();
   initCommonPTComponents();
   initBillsComponents();
-  initDeathComponents();
   initBirthComponents();
 
   // initCustomisationComponents();

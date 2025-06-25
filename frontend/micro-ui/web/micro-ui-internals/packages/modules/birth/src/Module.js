@@ -15,6 +15,7 @@ import { DownloadButton } from "./components/DownloadButton";
 import { PayAndDownloadButton } from "./components/PayAndDownloadButton";
 import useBirthDownload from "./components/useBirthDownload";
 import { overrideHooks, updateCustomConfigs } from "./utils";
+import { ViewLinkButton } from "./components/ViewLinkButton.js";
 
 export const BirthModule = ({ stateCode, userType, tenants }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
