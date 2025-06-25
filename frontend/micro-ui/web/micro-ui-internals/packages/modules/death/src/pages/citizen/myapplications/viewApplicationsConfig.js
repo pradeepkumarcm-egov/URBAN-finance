@@ -6,7 +6,7 @@ import { usePdfDownloader } from "../../../components/usePdfDownloader";
 const DownloadButton = ({ tenantId, idForFilenameAndMutation, directFileStoreId, t }) => {
  
 
-  const { initiateDownload, isDownloading, downloadError } = usePdfDownloader(
+  const { initiateDownload, isDownloading, downloadError ,isDownloaded} = usePdfDownloader(
     idForFilenameAndMutation, 
     directFileStoreId        
   );
@@ -22,6 +22,12 @@ const DownloadButton = ({ tenantId, idForFilenameAndMutation, directFileStoreId,
       console.error(`DownloadButton: Download error for ID ${idForFilenameAndMutation}:`, downloadError);
     }
   }, [downloadError, idForFilenameAndMutation, t]);
+
+   useEffect(() => {
+      if (isDownloaded) {
+        window.location.reload(); // Refresh the page when download is complete
+      }
+    }, [isDownloaded]);
 
   return (
     <ButtonNew
@@ -108,7 +114,7 @@ const getTranslatedApplicationStatus = (status, t) => {
 export const viewApplicationConfig = (applicationsArray, t, props = {}) => {
   if (!applicationsArray || applicationsArray.length === 0) {
     return {
-      cards: [ { sections: [ { type: "DATA", cardHeader: { value: t("COMMON_NO_RESULTS_FOUND") }, values: [] } ] } ], // Changed message key
+      cards: [ { sections: [ { type: "DATA", cardHeader: { value: t("COMMON_NO_RESULTS_FOUND") }, values: [] } ] } ], 
       apiResponse: [],
       additionalDetails: {},
     };
@@ -148,7 +154,7 @@ export const viewApplicationConfig = (applicationsArray, t, props = {}) => {
       },
       {
         key: t("BND_APPL_STATUS"),
-        value: translatedStatusDisplay, // Display the translated status
+        value: translatedStatusDisplay, 
       },
     ];
 
