@@ -562,7 +562,7 @@ export const UICustomizations = {
 
       if (fromDate && toDate && new Date(toDate) < new Date(fromDate)) {
         console.log("Validation error: To date before From date");
-        return {type: "warning", label:"DATE_VALIDATION_MSG"};
+        return {type: "warning",warning: true, label:"DATE_VALIDATION_MSG"};
       }
       return false;
     },
