@@ -39,6 +39,7 @@
     "dev:noc": "cd packages/modules/noc && yarn start",
     "dev:ws": "cd packages/modules/ws && yarn start",
     "dev:bills": "cd packages/modules/bills && yarn start",
+    "dev:birth": "cd packages/modules/birth && yarn start",
     "dev:reports": "cd packages/modules/reports && yarn start",
     "dev:example": "cd example && yarn start",
     "build": "run-p build:**",
@@ -51,6 +52,7 @@
     "build:pgr": "cd packages/modules/pgr && yarn build",
     "build:fsm": "cd packages/modules/fsm && yarn build",
     "build:dss": "cd packages/modules/dss && yarn build",
+    "build:birth": "cd packages/modules/birth && yarn build",
     "build:mcollect": "cd packages/modules/mCollect && yarn build",
     "build:receipts": "cd packages/modules/receipts && yarn build",
     "build:tl": "cd packages/modules/tl && yarn build",
@@ -61,9 +63,7 @@
     "build:ws": "cd packages/modules/ws && yarn build",
     "build:bills": "cd packages/modules/bills && yarn build",
     "build:reports": "cd packages/modules/reports && yarn build",
-    "deploy:jenkins": "./scripts/jenkins.sh",
-    "dev:birth": "cd packages/modules/birth && yarn start",
-    "build:birth": "cd packages/modules/birth && yarn build"
+    "deploy:jenkins": "./scripts/jenkins.sh"
   },
   "devDependencies": {
     "husky": "7.0.4",

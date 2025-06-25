@@ -1,29 +1,19 @@
-import { useHistory } from "react-router-dom";
-
 import React, { Fragment } from "react";
+import { Link, useHistory } from "react-router-dom";
 
-//create functions here based on module name set in mdms(eg->SearchProjectConfig)
-//how to call these -> Digit?.Customizations?.[masterName]?.[moduleName]
-// these functions will act as middlewares
-// var Digit = window.Digit || {};
+// const businessServiceMap = {};
 
-const businessServiceMap = {};
-
-const inboxModuleNameMap = {};
+// const inboxModuleNameMap = {};
 
 var Digit = window.Digit || {};
 
-
-
-
-const GetSlaCell = (value) => {
-  if (value === "-") return <span className="sla-cell-success">-</span>;
-  if (isNaN(value)) return <span className="sla-cell-success">0</span>;
-  return value < 0 ? <span className="sla-cell-error">{value}</span> : <span className="sla-cell-success">{value}</span>;
-};
+// const GetSlaCell = (value) => {
+//   if (value === "-") return <span className="sla-cell-success">-</span>;
+//   if (isNaN(value)) return <span className="sla-cell-success">0</span>;
+//   return value < 0 ? <span className="sla-cell-error">{value}</span> : <span className="sla-cell-success">{value}</span>;
+// };
 
 export const UICustomizations = {
-
   searchBirthConfig: {
     preProcess: (data) => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -58,8 +48,8 @@ export const UICustomizations = {
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
       console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
-         const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
-
+      const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
+      console.log(ViewBirthLinkButton, "*******");
 
       console.log("value", value);
       console.log("column", column);
@@ -69,7 +59,7 @@ export const UICustomizations = {
       switch (key) {
         case "view":
           return <ViewBirthLinkButton tenantId={tenantId} certificateId={row?.id} />;
-     
+
         case "Birth Date":
           const epoch = row?.dateofbirth;
           console.log(epoch, "changing the format of date");
@@ -125,7 +115,7 @@ export const UICustomizations = {
         else if (gender === "TRANSGENDER") finalApiParams.gender = 3;
       }
 
-      // 3. Date of Birth 
+      // 3. Date of Birth
       const dateOfBirth = formValues.dateOfBirth; // <-- CHANGED
       if (dateOfBirth) {
         try {
@@ -142,7 +132,7 @@ export const UICustomizations = {
         finalApiParams.registrationNo = String(registrationNo).trim();
       }
 
-      // 5. Hospital ID 
+      // 5. Hospital ID
       const placeOfBirthRawValue = formValues.placeofbirth; // <-- CHANGED
       console.log("Raw value of formValues.placeofbirth:", JSON.stringify(placeOfBirthRawValue));
 

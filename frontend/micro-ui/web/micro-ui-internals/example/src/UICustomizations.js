@@ -1,24 +1,23 @@
 import { Link, useHistory } from "react-router-dom";
 import _ from "lodash";
-import React, { useState, Fragment } from "react";
-import { Button as ButtonNew, Toast } from "@egovernments/digit-ui-components";
+
 
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
 //how to call these -> Digit?.Customizations?.[masterName]?.[moduleName]
 // these functions will act as middlewares
 // var Digit = window.Digit || {};
 
-const businessServiceMap = {};
+// const businessServiceMap = {};
 
-const inboxModuleNameMap = {};
+// const inboxModuleNameMap = {};
 
 var Digit = window.Digit || {};
 
-const GetSlaCell = (value) => {
-  if (value === "-") return <span className="sla-cell-success">-</span>;
-  if (isNaN(value)) return <span className="sla-cell-success">0</span>;
-  return value < 0 ? <span className="sla-cell-error">{value}</span> : <span className="sla-cell-success">{value}</span>;
-};
+// const GetSlaCell = (value) => {
+//   if (value === "-") return <span className="sla-cell-success">-</span>;
+//   if (isNaN(value)) return <span className="sla-cell-success">0</span>;
+//   return value < 0 ? <span className="sla-cell-error">{value}</span> : <span className="sla-cell-success">{value}</span>;
+// };
 
 export const UICustomizations = {
   searchBirthConfig: {
@@ -53,14 +52,14 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      // console.log("key", key);
+      console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
     
- const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
-      // console.log("value", value);
-      // console.log("column", column);
-      // console.log("t", t);
-      // console.log("searchResult", searchResult);
+      const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
+      console.log("value", value);
+      console.log("column", column);
+      console.log("t", t);
+      console.log("searchResult", searchResult);
 
       switch (key) {
         case "view":

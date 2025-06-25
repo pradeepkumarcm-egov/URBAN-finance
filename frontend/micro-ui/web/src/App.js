@@ -82,9 +82,6 @@ window.Digit.ComponentRegistryService.setupRegistry({
   // ReceiptsModule
 });
 
-window.Digit.Customizations = {
-    commonUiConfig: UICustomizations,
-};
 
 initPGRComponents();
 initFSMComponents();
@@ -105,6 +102,9 @@ initBillsComponents();
 initBirthComponents();
 
 
+window.Digit.Customizations = {
+    commonUiConfig: UICustomizations,
+};
 
 const moduleReducers = (initData) => ({
   pgr: PGRReducers(initData),
