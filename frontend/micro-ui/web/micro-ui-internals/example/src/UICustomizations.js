@@ -14,21 +14,6 @@ const inboxModuleNameMap = {};
 
 var Digit = window.Digit || {};
 
-
-const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
-  const history = useHistory();
-
-  const handleClick = () => {
-    history.push(`/${window.contextPath}/employee/birth/viewbirth/${certificateId}`);
-  };
-
-  return (
-    <span className="link" onClick={handleClick} style={{ cursor: "pointer", color: "blue" }}>
-      View
-    </span>
-  );
-};
-
 const GetSlaCell = (value) => {
   if (value === "-") return <span className="sla-cell-success">-</span>;
   if (isNaN(value)) return <span className="sla-cell-success">0</span>;
@@ -36,7 +21,6 @@ const GetSlaCell = (value) => {
 };
 
 export const UICustomizations = {
-
   searchBirthConfig: {
     preProcess: (data) => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -71,6 +55,19 @@ export const UICustomizations = {
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
       // console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
+      const ViewBirthLinkButton = ({ tenantId, certificateId }) => {
+        const history = useHistory();
+
+        const handleClick = () => {
+          history.push(`/${window.contextPath}/employee/birth/viewbirth/${certificateId}`);
+        };
+
+        return (
+          <span className="link" onClick={handleClick} style={{ cursor: "pointer", color: "blue" }}>
+            View
+          </span>
+        );
+      };
 
       // console.log("value", value);
       // console.log("column", column);
@@ -80,7 +77,7 @@ export const UICustomizations = {
       switch (key) {
         case "view":
           return <ViewBirthLinkButton tenantId={tenantId} certificateId={row?.id} />;
-   
+
         case "Birth Date":
           const epoch = row?.dateofbirth;
           // console.log(epoch, "changing the format of date");
@@ -136,7 +133,7 @@ export const UICustomizations = {
         else if (gender === "TRANSGENDER") finalApiParams.gender = 3;
       }
 
-      // 3. Date of Birth 
+      // 3. Date of Birth
       const dateOfBirth = formValues.dateOfBirth; // <-- CHANGED
       if (dateOfBirth) {
         try {
@@ -153,7 +150,7 @@ export const UICustomizations = {
         finalApiParams.registrationNo = String(registrationNo).trim();
       }
 
-      // 5. Hospital ID 
+      // 5. Hospital ID
       const placeOfBirthRawValue = formValues.placeofbirth; // <-- CHANGED
       // console.log("Raw value of formValues.placeofbirth:", JSON.stringify(placeOfBirthRawValue));
 
@@ -226,7 +223,6 @@ export const UICustomizations = {
           return <span>{t("ES_COMMON_NA")}</span>;
 
         default:
-         
           return <span>{t("ES_COMMON_NA")}</span>;
       }
     },
