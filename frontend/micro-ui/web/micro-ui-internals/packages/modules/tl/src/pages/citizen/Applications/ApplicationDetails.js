@@ -408,7 +408,7 @@ const TLApplicationDetails = () => {
               {application?.status === "PENDINGPAYMENT" ? (
                 <Link
                   to={{
-                    pathname: `/digit-ui/citizen/payment/collect/${application?.businessService}/${application?.applicationNumber}`,
+                    pathname: `/digit-ui/citizen/payment/my-bills/${application?.businessService}/${application?.applicationNumber}`,
                     state: { bill, tenantId: tenantId },
                   }}
                 >
