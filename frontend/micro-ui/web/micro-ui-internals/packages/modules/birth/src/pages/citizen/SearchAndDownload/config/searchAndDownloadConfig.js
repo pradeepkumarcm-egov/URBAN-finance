@@ -79,13 +79,6 @@ export const searchAndDownloadConfig = (t) => {
                             },
                         },
                         {
-                            label: t("BND_MOTHER_NAME"),
-                            key: "childName",
-                            type: "text",
-                            isMandatory: false,
-                            populators: { name: "childName" },
-                        },
-                        {
                             label: t("BND_BIRTH_APPL_HOSP"),
                             key: "placeofbirth",
                             type: "dropdown",
@@ -105,18 +98,18 @@ export const searchAndDownloadConfig = (t) => {
                         },
                         {
                             label: t("BND_REG_NO_LABEL"),
-                            key: "registrationno",
+                            key: "registrationNo",
                             type: "text",
                             isMandatory: false,
-                            populators: { name: "registrationno" },
+                            populators: { name: "registrationNo" },
                         },
                         {
                             label: t("BND_COMMON_FATHERSNAME"),
-                            key: "FatherName",
+                            key: "fatherName",
                             type: "text",
                             isMandatory: false,
                             populators: {
-                                name: "FatherName",
+                                name: "fatherName",
                             },
                         },
                         {
@@ -125,7 +118,7 @@ export const searchAndDownloadConfig = (t) => {
                             type: "text",
                             isMandatory: false,
                             populators: {
-                                name: "MotherName",
+                                name: "motherName",
                             },
                         },
                     ],

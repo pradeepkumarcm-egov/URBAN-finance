@@ -2,7 +2,6 @@ import { Link, useHistory } from "react-router-dom";
 import _ from "lodash";
 import React from "react";
 
-
 //create functions here based on module name set in mdms(eg->SearchProjectConfig)
 //how to call these -> Digit?.Customizations?.[masterName]?.[moduleName]
 // these functions will act as middlewares
@@ -42,6 +41,7 @@ export const UICustomizations = {
         const [yyyy, mm, dd] = toDate.split("-");
         data.params.toDate = `${dd}-${mm}-${yyyy}`;
       }
+
       data.params.tenantId = tenantId;
       // console.log(data, "data in preProcess of search Birth Ui config");
       if (data?.params?.fromDate || data?.params?.toDate) {
@@ -55,7 +55,7 @@ export const UICustomizations = {
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
       console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
-    
+
       const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
       console.log("value", value);
       console.log("column", column);
@@ -99,16 +99,16 @@ export const UICustomizations = {
     preProcess: (data) => {
       // console.log("BIRTH: UICustomization preProcess START - received data:", JSON.stringify(data, null, 2));
 
-      const finalApiParams = {};
+
       const formValues = data.state.searchForm || {};
       // console.log("BIRTH: Form Values (data.state.searchForm):", JSON.stringify(formValues, null, 2));
 
       // 1. Tenant ID
       const tenantFromForm = formValues.tenantId;
       if (tenantFromForm && tenantFromForm.code) {
-        finalApiParams.tenantId = tenantFromForm.code;
+        data.params.tenantId = tenantFromForm.code;
       } else if (typeof tenantFromForm === "string" && tenantFromForm) {
-        finalApiParams.tenantId = tenantFromForm;
+        data.params.tenantId = tenantFromForm;
       } else {
         console.warn("PreProcess: tenantId issue. Value:", tenantFromForm);
       }
@@ -116,17 +116,17 @@ export const UICustomizations = {
       // 2. Gender
       const gender = formValues.gender?.code;
       if (gender) {
-        if (gender === "MALE") finalApiParams.gender = 1;
-        else if (gender === "FEMALE") finalApiParams.gender = 2;
-        else if (gender === "TRANSGENDER") finalApiParams.gender = 3;
+        if (gender === "MALE") data.params.gender = 1;
+        else if (gender === "FEMALE") data.params.gender = 2;
+        else if (gender === "TRANSGENDER") data.params.gender = 3;
       }
 
       // 3. Date of Birth
-      const dateOfBirth = formValues.dateOfBirth; // <-- CHANGED
+      const dateOfBirth = formValues.dateOfBirth;
       if (dateOfBirth) {
         try {
           const [yyyy, mm, dd] = dateOfBirth.split("-");
-          finalApiParams.dateOfBirth = `${dd}-${mm}-${yyyy}`; // <-- CHANGED API param
+          data.params.dateOfBirth = `${dd}-${mm}-${yyyy}`;
         } catch (e) {
           console.error("Error parsing dateOfBirth:", dateOfBirth, e);
         }
@@ -135,7 +135,7 @@ export const UICustomizations = {
       // 4. Registration Number
       const registrationNo = formValues.registrationno;
       if (registrationNo && String(registrationNo).trim() !== "") {
-        finalApiParams.registrationNo = String(registrationNo).trim();
+        data.params.registrationNo = String(registrationNo).trim();
       }
 
       // 5. Hospital ID
@@ -152,32 +152,12 @@ export const UICustomizations = {
       }
 
       if (placeOfBirthCode) {
-        finalApiParams.hospitalId = placeOfBirthCode;
+        data.params.hospitalId = placeOfBirthCode;
         // console.log(`PreProcess: Hospital ID set to: ${finalApiParams.hospitalId}`);
       } else {
-        delete finalApiParams.hospitalId;
+        delete data.params.hospitalId;
       }
 
-      // 6. Mother's Name
-      const motherName = formValues.MotherName;
-      if (motherName && motherName.trim() !== "") {
-        finalApiParams.motherName = motherName.trim();
-      }
-
-      // 7. Father's Name
-      const fatherName = formValues.FatherName;
-      if (fatherName && fatherName.trim !== "") {
-        finalApiParams.fatherName = fatherName.trim();
-      }
-
-      // 8. Child's Name (CHANGED from spouseName & nameofdeceased)
-      const childName = formValues.childName; // <-- CHANGED
-      if (childName && childName.trim() !== "") {
-        finalApiParams.name = childName.trim(); // API likely uses 'name' for the child's name
-      }
-
-      data.params = finalApiParams;
-      // console.log("BIRTH: UICustomization preProcess END - final data.params being sent:", JSON.stringify(data.params, null, 2));
       return data;
     },
 

@@ -24,7 +24,7 @@ const useBirthConfig = (birthCertData, applicationNumber, tenantId) => {
     switch (gender) {
       case "1":
       case 1:
-        return t("MAlE");
+        return t("MALE");
       case "2":
       case 2:
         return t("FEMALE");

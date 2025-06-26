@@ -39,6 +39,7 @@ export const inboxConfig = () => {
               key: "fromDate",
               populators: {
                 name: "fromDate",
+                error: "from date is required",
                 max: "currentDate",
               },
             },
@@ -50,7 +51,7 @@ export const inboxConfig = () => {
               key: "toDate",
               populators: {
                 name: "toDate",
-                error: "DATE_VALIDATION_MSG",
+                error: "toDate is required ",
                 max: "currentDate",
               },
               // additionalValidation: {
@@ -62,7 +63,7 @@ export const inboxConfig = () => {
               // },
             },
             {
-              isMandatory: true,
+              isMandatory: false,
               type: "dropdown",
               key: "gender",
               label: "BND_GENDER",
@@ -70,8 +71,8 @@ export const inboxConfig = () => {
               populators: {
                 name: "gender",
                 optionsKey: "name",
-                error: "gender required !",
-                required: true,
+                error: "gender is required !",
+                required: false,
                 mdmsConfig: {
                   masterName: "GenderType",
                   moduleName: "common-masters",
@@ -82,27 +83,27 @@ export const inboxConfig = () => {
             },
             {
               label: "BND_REG_NO_LABEL",
-              key: "registrationno",
+              key: "registrationNo",
               type: "text",
               isMandatory: false,
-              populators: { name: "registrationno" },
+              populators: { name: "registrationNo" },
             },
             {
               label: "BND_COMMON_FATHERSNAME",
-              key: "FatherName",
+              key: "fatherName",
               type: "text",
               isMandatory: false,
               populators: {
-                name: "FatherName",
+                name: "fatherName",
               },
             },
             {
               label: "BND_COMMON_MOTHERSNAME",
-              key: "MotherName",
+              key: "motherName",
               type: "text",
               isMandatory: false,
               populators: {
-                name: "MotherName",
+                name: "motherName",
               },
             },
        
@@ -126,7 +127,7 @@ export const inboxConfig = () => {
               jsonPath: "registrationno",
             },
             {
-              key: "fromDate",
+              key: "dateofbirth",
               label: "BND_BIRTH_DATE",
               jsonPath: "dateofbirth",
               additionalCustomization: true,

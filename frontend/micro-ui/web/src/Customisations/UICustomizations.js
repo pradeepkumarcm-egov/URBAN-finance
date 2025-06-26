@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 import React from "react";
 
-
 var Digit = window.Digit || {};
 
 const businessServiceMap = {
@@ -557,14 +556,16 @@ export const UICustomizations = {
       console.log("column", column);
       console.log("t", t);
       console.log("searchResult", searchResult);
-    const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
+      const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent(
+        "ViewBirthLinkButton"
+      );
 
       switch (key) {
         case "view":
           return (
             <ViewBirthLinkButton tenantId={tenantId} certificateId={row?.id} />
           );
-   
+
         case "BND_BIRTH_DATE":
           const epoch = row?.dateofbirth;
           console.log(epoch, "changing the format of date");
@@ -604,24 +605,17 @@ export const UICustomizations = {
   searchAndDownloadConfig: {
     // preProcess function to transform form data into API query parameters
     preProcess: (data) => {
-      console.log(
-        "BIRTH: UICustomization preProcess START - received data:",
-        JSON.stringify(data, null, 2)
-      );
+      // console.log("BIRTH: UICustomization preProcess START - received data:", JSON.stringify(data, null, 2));
 
-      const finalApiParams = {};
       const formValues = data.state.searchForm || {};
-      console.log(
-        "BIRTH: Form Values (data.state.searchForm):",
-        JSON.stringify(formValues, null, 2)
-      );
+      // console.log("BIRTH: Form Values (data.state.searchForm):", JSON.stringify(formValues, null, 2));
 
       // 1. Tenant ID
       const tenantFromForm = formValues.tenantId;
       if (tenantFromForm && tenantFromForm.code) {
-        finalApiParams.tenantId = tenantFromForm.code;
+        data.params.tenantId = tenantFromForm.code;
       } else if (typeof tenantFromForm === "string" && tenantFromForm) {
-        finalApiParams.tenantId = tenantFromForm;
+        data.params.tenantId = tenantFromForm;
       } else {
         console.warn("PreProcess: tenantId issue. Value:", tenantFromForm);
       }
@@ -629,17 +623,17 @@ export const UICustomizations = {
       // 2. Gender
       const gender = formValues.gender?.code;
       if (gender) {
-        if (gender === "MALE") finalApiParams.gender = 1;
-        else if (gender === "FEMALE") finalApiParams.gender = 2;
-        else if (gender === "TRANSGENDER") finalApiParams.gender = 3;
+        if (gender === "MALE") data.params.gender = 1;
+        else if (gender === "FEMALE") data.params.gender = 2;
+        else if (gender === "TRANSGENDER") data.params.gender = 3;
       }
 
-      // 3. Date of Birth (CHANGED from dateOfDeath)
-      const dateOfBirth = formValues.dateOfBirth; // <-- CHANGED
+      // 3. Date of Birth
+      const dateOfBirth = formValues.dateOfBirth;
       if (dateOfBirth) {
         try {
           const [yyyy, mm, dd] = dateOfBirth.split("-");
-          finalApiParams.dateOfBirth = `${dd}-${mm}-${yyyy}`; // <-- CHANGED API param
+          data.params.dateOfBirth = `${dd}-${mm}-${yyyy}`;
         } catch (e) {
           console.error("Error parsing dateOfBirth:", dateOfBirth, e);
         }
@@ -648,15 +642,12 @@ export const UICustomizations = {
       // 4. Registration Number
       const registrationNo = formValues.registrationno;
       if (registrationNo && String(registrationNo).trim() !== "") {
-        finalApiParams.registrationNo = String(registrationNo).trim();
+        data.params.registrationNo = String(registrationNo).trim();
       }
 
-      // 5. Hospital ID (from placeofbirth field) (CHANGED from placeofdeath)
+      // 5. Hospital ID
       const placeOfBirthRawValue = formValues.placeofbirth; // <-- CHANGED
-      console.log(
-        "Raw value of formValues.placeofbirth:",
-        JSON.stringify(placeOfBirthRawValue)
-      );
+      // console.log("Raw value of formValues.placeofbirth:", JSON.stringify(placeOfBirthRawValue));
 
       let placeOfBirthCode = null;
       if (
@@ -671,43 +662,16 @@ export const UICustomizations = {
       ) {
         placeOfBirthCode = String(placeOfBirthRawValue.code).trim();
       } else {
-        console.log(
-          "placeofbirth is not a usable string or object with a code property."
-        );
+        // console.log("placeofbirth is not a usable string or object with a code property.");
       }
 
       if (placeOfBirthCode) {
-        finalApiParams.hospitalId = placeOfBirthCode;
-        console.log(
-          `PreProcess: Hospital ID set to: ${finalApiParams.hospitalId}`
-        );
+        data.params.hospitalId = placeOfBirthCode;
+        // console.log(`PreProcess: Hospital ID set to: ${finalApiParams.hospitalId}`);
       } else {
-        delete finalApiParams.hospitalId;
+        delete data.params.hospitalId;
       }
 
-      // 6. Mother's Name
-      const motherName = formValues.MotherName;
-      if (motherName && motherName.trim() !== "") {
-        finalApiParams.motherName = motherName.trim();
-      }
-
-      // 7. Father's Name
-      const fatherName = formValues.FatherName;
-      if (fatherName && fatherName.trim !== "") {
-        finalApiParams.fatherName = fatherName.trim();
-      }
-
-      // 8. Child's Name (CHANGED from spouseName & nameofdeceased)
-      const childName = formValues.childName; // <-- CHANGED
-      if (childName && childName.trim() !== "") {
-        finalApiParams.name = childName.trim(); // API likely uses 'name' for the child's name
-      }
-
-      data.params = finalApiParams;
-      console.log(
-        "BIRTH: UICustomization preProcess END - final data.params being sent:",
-        JSON.stringify(data.params, null, 2)
-      );
       return data;
     },
 
@@ -744,7 +708,7 @@ export const UICustomizations = {
           if (epoch) {
             const date = new Date(epoch);
             const dd = String(date.getDate()).padStart(2, "0");
-            const mm = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
             const yyyy = date.getFullYear();
             return <span>{`${dd}-${mm}-${yyyy}`}</span>;
           }
