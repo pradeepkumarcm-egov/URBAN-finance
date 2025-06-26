@@ -19,7 +19,8 @@
     "micro-ui-internals/packages/modules/engagement",
     "micro-ui-internals/packages/modules/commonPt",
     "micro-ui-internals/packages/modules/finance",
-    "micro-ui-internals/packages/modules/common"
+    "micro-ui-internals/packages/modules/common",
+    "micro-ui-internals/packages/modules/tl"
   ],
   "engines": {
     "node": ">=14"
