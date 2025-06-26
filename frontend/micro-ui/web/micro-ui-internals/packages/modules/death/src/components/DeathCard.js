@@ -13,7 +13,7 @@ const DeathCard = ({userType}) => {
   const isCitizen = window?.location?.pathname?.toLowerCase().includes("citizen");
 
   const propsForModuleCard = {
-    moduleName: isCitizen ? t("ACTION_TEST_DEATH_CERTIFICATE") : t("COMMON_DEATH"),
+    moduleName: isCitizen ? t("ACTION_TEST_DEATH_CERTIFICATE") : t("ACTION_TEST_DEATH_NEW_REGISTRATION"),
     kpis: [],
     links: isCitizen ? [
       {
@@ -26,11 +26,11 @@ const DeathCard = ({userType}) => {
       },
     ] : [
       {
-        label: t("DEATH_REGISTRATION"),
+        label: t("ACTION_TEST_NEW_REGISTRATION"),
         link: `/${window?.contextPath}/employee/death/death-common/create-death`,
       },
       {
-        label: t("SEARCH_DEATH_CERTIFICATE"),
+        label: t("ACTION_TEST_DEATH_SEARCH_CERTIFICATE"),
         link: `/${window?.contextPath}/employee/death/death-common/getCertificate`,
       },
     ],

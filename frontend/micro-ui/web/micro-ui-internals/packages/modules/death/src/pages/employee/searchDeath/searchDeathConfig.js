@@ -28,6 +28,12 @@ export const searchDeathConfig = (t) => {
             fromDate: "",
             toDate: "",
             gender: "",
+            nameofdeceased: "",
+            spouseName: "",
+            placeofdeath: "",
+            registrationNo: "",
+            fatherName: "",
+            motherName: "",
           },
           fields: [
             {
@@ -70,7 +76,7 @@ export const searchDeathConfig = (t) => {
               populators: {
                 name: "gender",
                 optionsKey: "name",
-                error: "gender required !",
+                error: "Gender is required !",
                 required: true,
                 mdmsConfig: {
                   masterName: "GenderType",
@@ -103,7 +109,6 @@ export const searchDeathConfig = (t) => {
                 name: "placeofdeath",
                 "optionsKey": "originalName",
                 "valueKey": "code",
-                "error": "Hospital Name is Required!",
                 "required": false
               },
             },
@@ -112,7 +117,8 @@ export const searchDeathConfig = (t) => {
               key: "registrationno",
               type: "text",
               isMandatory: false,
-              populators: { name: "registrationno" },
+              disable: false,
+              populators: { name: "registrationNo" },
             },
             {
               label: t("BND_COMMON_FATHERSNAME"),
@@ -120,7 +126,7 @@ export const searchDeathConfig = (t) => {
               type: "text",
               isMandatory: false,
               populators: {
-                name: "FatherName",
+                name: "fatherName",
               },
             },
             {
@@ -129,7 +135,7 @@ export const searchDeathConfig = (t) => {
               type: "text",
               isMandatory: false,
               populators: {
-                name: "MotherName",
+                name: "motherName",
               },
             },
           ],

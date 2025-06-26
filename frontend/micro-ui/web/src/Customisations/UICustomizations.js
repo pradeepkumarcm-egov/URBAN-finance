@@ -437,8 +437,11 @@ export const UICustomizations = {
         data.params.gender = 2;
       }else if (gender === "TRANSGENDER") {
       data.params.gender = 3;
-    } else {
-      delete data.params.gender;
+    } else if (gender === "OTHER") {
+      data.params.gender=0;
+    }
+    else{
+        delete data.params.gender;
     }
       const fromDate = data?.state?.searchForm?.fromDate;
       if (fromDate) {
@@ -451,12 +454,12 @@ export const UICustomizations = {
         data.params.toDate = `${dd}-${mm}-${yyyy}`;
       }
 
-      const registrationNo = data?.state?.searchForm?.registrationno;
-      if (registrationNo && registrationNo.trim() !== "") {
-        data.params.registrationNo = registrationNo.trim();
-      } else {
-        delete data.params.registrationNo; 
-      }
+      // const registrationNo = data?.state?.searchForm?.registrationno;
+      // if (registrationNo && registrationNo.trim() !== "") {
+      //   data.params.registrationNo = registrationNo.trim();
+      // } else {
+      //   delete data.params.registrationNo; 
+      // }
       
       const hospitalSelection = data?.state?.searchForm?.placeofdeath;
 
@@ -472,8 +475,10 @@ export const UICustomizations = {
           if (hospitalNameString !== "") {
             console.log("hospitalNameString", hospitalNameString);
               data.params.hospitalId = hospitalNameString;
+              data.params.placeofdeath = hospitalNameString;
           } else {
               delete data.params.hospitalId;
+              delete data.params.placeofdeath;
           }
       } else {
           delete data.params.hospitalId;

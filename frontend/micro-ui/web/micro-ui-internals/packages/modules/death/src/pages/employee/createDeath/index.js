@@ -201,6 +201,7 @@ export const CreateDeath = () => {
     }
     setIsSubmitDisabledByDateError(false);
 
+    console.log("Form Data Before Transformation:", formData);
     const payload = {
       deathCerts: [transformFormData(formData)],
     };
@@ -354,7 +355,7 @@ export const CreateDeath = () => {
 
   return (
     <React.Fragment>
-      <Header>Create Death Certificates</Header> 
+      <Header>Create {t("ACTION_TEST_DEATH_CERTIFICATE")}</Header>
       <div className="jk-header-btn-wrapper">
         <Header>{t("BND_NEW_REGISTRATION")}</Header>
         <p>{t("BND_NEW_REGISTRATION_SUBTEXT")}</p>
@@ -362,22 +363,17 @@ export const CreateDeath = () => {
       <FormComposerV2
         config={formConfig.map((conf) => ({
           ...conf,
-          // Ensure head is translated if it's a localization key
-          // head: conf.head ? t(conf.head) : undefined,
           body: conf.body.map((field) => ({
             ...field,
-            // Ensure label is translated if it's a localization key
-            // label: field.label ? t(field.label) : undefined,
-            // Key for formData should be derived from populators.name for consistency
             key: field.populators?.name || `${conf.head || 'section'}-${field.key || field.label || field.type}`, // More robust key generation
           })),
         }))}
         isDisabled={isSubmitDisabledByDateError} // FormComposerV2 also has its own isDisabled logic for mandatory fields
-        label={"SUBMIT"} // Consider t("SUBMIT")
+        label={t("CORE_COMMON_SUBMIT")} // Consider t("SUBMIT")
         onSubmit={onSubmit}
         showSecondaryLabel={true}
         onFormValueChange={onFormValueChange}
-        secondaryLabel={"Reset"} // Consider t("Reset")
+        secondaryLabel={t("BND_COMMON_NEW")} // Consider t("Reset")
         actionClassName={"actionBarClass microplan-actionbar"}
         onSecondayActionClick={onSecondayActionClick}
        
