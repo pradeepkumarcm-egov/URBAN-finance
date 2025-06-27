@@ -201,7 +201,6 @@ export const CreateDeath = () => {
     }
     setIsSubmitDisabledByDateError(false);
 
-    console.log("Form Data Before Transformation:", formData);
     const payload = {
       deathCerts: [transformFormData(formData)],
     };
