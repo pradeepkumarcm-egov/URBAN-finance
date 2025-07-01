@@ -72,10 +72,16 @@ export const CreateBirth = () => {
       if (section.head === "BND_PRESENT_ADDR_DURING_BIRTH") {
         return {
           ...section,
-          body: section.body.map((field) => ({
-            ...field,
-            isMandatory: sameAddressChecked ? true : field.isMandatory,
-          })),
+          body: section.body.map((field) => {
+           
+            if (field.populators?.name !== "same_as_permanent_address") {
+              return {
+                ...field,
+                isMandatory: sameAddressChecked ? true : false,
+              };
+            }
+            return field;
+          }),
         };
       }
       if (section.head === "BND_BIRTH_ADDR_PERM" && sameAddressChecked) {
@@ -257,6 +263,7 @@ export const CreateBirth = () => {
               ...section,
               body: section.body.map((field) => {
                 if (field.populators?.name === "registration_number") {
+               
                   return {
                     ...field,
                     disable: !isLegacy,

@@ -4,7 +4,7 @@ export const BirthConfig = [
     body: [
       {
         inline: true,
-        isMandatory: true,
+
         type: "checkbox",
 
         withoutLabel: true,
@@ -23,11 +23,6 @@ export const BirthConfig = [
         populators: {
           name: "registration_number",
           error: "Registration Number is Required!",
-          validation: {
-            pattern: /^[A-Za-z0-9-]+$/,
-            minLength: 5,
-            maxLength: 20,
-          },
         },
       },
       {
@@ -41,7 +36,6 @@ export const BirthConfig = [
           optionsKey: "originalName",
           valueKey: "code",
           error: "Hospital Name is Required!",
-          required: false,
         },
       },
       {
@@ -55,8 +49,7 @@ export const BirthConfig = [
           name: "date_of_registration",
           error: "Required",
           validation: {
-            required: true,
-            max: new Date().toISOString().split("T")[0], 
+            max: new Date().toISOString().split("T")[0],
           },
         },
       },
@@ -76,8 +69,7 @@ export const BirthConfig = [
           name: "date_of_birth",
           error: "Required",
           validation: {
-            required: true,
-            max: new Date().toISOString().split("T")[0], 
+            max: new Date().toISOString().split("T")[0],
           },
         },
       },
@@ -91,7 +83,7 @@ export const BirthConfig = [
           name: "gender",
           optionsKey: "name",
           error: "Required",
-          required: true,
+
           mdmsConfig: {
             masterName: "GenderType",
             moduleName: "common-masters",
@@ -162,7 +154,6 @@ export const BirthConfig = [
           name: "birth_place",
           error: "Birth Place must be 5-100 characters",
           validation: {
-            required: true,
             minLength: 5,
             maxLength: 100,
           },
@@ -183,7 +174,6 @@ export const BirthConfig = [
           name: "father_first_name",
           error: "First Name must be 3-50 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 50,
             pattern: /^[A-Za-z\s]+$/,
@@ -216,7 +206,6 @@ export const BirthConfig = [
           name: "father_last_name",
           error: "Last Name must be 3-50 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 50,
             pattern: /^[A-Za-z\s]+$/,
@@ -342,7 +331,6 @@ export const BirthConfig = [
           name: "mother_first_name",
           error: "First Name must be 3-50 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 50,
             pattern: /^[A-Za-z\s]+$/,
@@ -375,7 +363,6 @@ export const BirthConfig = [
           name: "mother_last_name",
           error: "Last Name must be 3-50 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 50,
             pattern: /^[A-Za-z\s]+$/,
@@ -495,13 +482,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_BUILDINGNO_LABEL",
         type: "number",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Building Number",
         populators: {
           name: "birth_building_number",
           error: "Building Number is Required!",
           validation: {
-            required: true,
             min: 1,
             max: 9999,
           },
@@ -511,13 +497,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_HOUSENO_LABEL",
         type: "number",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "House No",
         populators: {
           name: "birth_house_no",
           error: "House No is Required!",
           validation: {
-            required: true,
             min: 1,
             max: 9999,
           },
@@ -527,13 +512,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_STREETNAME_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Street Name",
         populators: {
           name: "birth_street_name",
           error: "Street Name must be 3-100 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 100,
           },
@@ -543,13 +527,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_LOCALITY_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Locality",
         populators: {
           name: "birth_locality",
           error: "Locality must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -559,13 +542,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_TEHSIL_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Tehsil",
         populators: {
           name: "birth_tehsil",
           error: "Tehsil must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -575,13 +557,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_DISTRICT_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "District",
         populators: {
           name: "birth_district",
           error: "District must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -591,13 +572,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_CITY_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "City",
         populators: {
           name: "birth_city",
           error: "City must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -607,13 +587,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_STATE_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "State",
         populators: {
           name: "birth_state",
           error: "State must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -623,13 +602,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_COUNTRY_LABEL",
         type: "text",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Country",
         populators: {
           name: "birth_country",
           error: "Country must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -639,13 +617,12 @@ export const BirthConfig = [
         inline: true,
         label: "BND_PINNO_LABEL",
         type: "number",
-        isMandatory: true,
+        isMandatory: false,
         placeholder: "Pincode",
         populators: {
           name: "birth_pincode",
           error: "Invalid Pincode (6 digits)",
           validation: {
-            required: true,
             pattern: /^\d{6}$/,
             minLength: 6,
             maxLength: 6,
@@ -678,7 +655,6 @@ export const BirthConfig = [
           name: "permanent_building_number",
           error: "Building Number is Required!",
           validation: {
-            required: true,
             min: 1,
             max: 9999,
           },
@@ -694,7 +670,6 @@ export const BirthConfig = [
           name: "permanent_house_no",
           error: "House No is Required!",
           validation: {
-            required: true,
             min: 1,
             max: 9999,
           },
@@ -710,7 +685,6 @@ export const BirthConfig = [
           name: "permanent_street_name",
           error: "Street Name must be 3-100 characters",
           validation: {
-            required: true,
             minLength: 3,
             maxLength: 100,
           },
@@ -726,7 +700,6 @@ export const BirthConfig = [
           name: "permanent_locality",
           error: "Locality must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -742,7 +715,6 @@ export const BirthConfig = [
           name: "permanent_tehsil",
           error: "Tehsil must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -758,7 +730,6 @@ export const BirthConfig = [
           name: "permanent_district",
           error: "District must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -774,7 +745,6 @@ export const BirthConfig = [
           name: "permanent_city",
           error: "City must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -790,7 +760,6 @@ export const BirthConfig = [
           name: "permanent_state",
           error: "State must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -806,7 +775,6 @@ export const BirthConfig = [
           name: "permanent_country",
           error: "Country must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
           },
@@ -822,7 +790,6 @@ export const BirthConfig = [
           name: "permanent_pincode",
           error: "Invalid Pincode (6 digits)",
           validation: {
-            required: true,
             pattern: /^\d{6}$/,
             minLength: 6,
             maxLength: 6,
@@ -844,7 +811,6 @@ export const BirthConfig = [
           name: "informant_name",
           error: "Name must be 2-100 characters",
           validation: {
-            required: true,
             minLength: 2,
             maxLength: 100,
             pattern: /^[A-Za-z\s]+$/,
@@ -861,7 +827,6 @@ export const BirthConfig = [
           name: "informant_address",
           error: "Address must be 5-200 characters",
           validation: {
-            required: true,
             minLength: 5,
             maxLength: 200,
           },

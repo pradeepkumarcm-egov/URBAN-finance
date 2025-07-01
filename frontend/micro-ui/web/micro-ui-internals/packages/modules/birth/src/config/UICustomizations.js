@@ -22,8 +22,12 @@ export const UICustomizations = {
         data.params.gender = 1;
       } else if (gender === "FEMALE") {
         data.params.gender = 2;
-      } else {
+      } else if (gender === "TRANSGENDER") {
         data.params.gender = 3;
+      } else if (gender === "OTHER") {
+        data.params.gender = 4;
+      } else {
+        data.params.gender = 0;
       }
       const fromDate = data?.state?.searchForm?.fromDate;
       if (fromDate) {

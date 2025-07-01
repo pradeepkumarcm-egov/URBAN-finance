@@ -24,12 +24,17 @@ export const UICustomizations = {
     preProcess: (data) => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
       const gender = data?.state?.searchForm?.gender?.code;
-      if (gender === "MALE") {
+        if (gender === "MALE") {
         data.params.gender = 1;
       } else if (gender === "FEMALE") {
         data.params.gender = 2;
-      } else {
+      } else if (gender === "TRANSGENDER") {
         data.params.gender = 3;
+      }else if(gender === "OTHER")
+      {  data.params.gender = 4;
+
+      }else{
+         data.params.gender = 0;
       }
       const fromDate = data?.state?.searchForm?.fromDate;
       if (fromDate) {

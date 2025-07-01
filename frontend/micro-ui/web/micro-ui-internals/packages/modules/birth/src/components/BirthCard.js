@@ -26,13 +26,16 @@ const BirthCard = ({ userType }) => {
         ]
       : [
           {
-            label: t("BIRTH_REGISTRATION"),
-            link: `/${window?.contextPath}/employee/birth/birth-common/getCertificate`,
-          },
-          {
-            label: t("SEARCH_BIRTH_CERTIFICATE"),
+    
+               label: t("BIRTH_REGISTRATION"),
             link: `/${window?.contextPath}/employee/birth/birth-common/create-birth`,
           },
+          {
+           
+                    label: t("SEARCH_BIRTH_CERTIFICATE"),
+            link: `/${window?.contextPath}/employee/birth/birth-common/getCertificate`,
+          }
+        
         ],
   };
   return <EmployeeModuleCard {...propsForModuleCard} />;
