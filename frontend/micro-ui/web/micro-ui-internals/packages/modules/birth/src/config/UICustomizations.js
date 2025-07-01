@@ -117,6 +117,8 @@ export const UICustomizations = {
         if (gender === "MALE") data.params.gender = 1;
         else if (gender === "FEMALE") data.params.gender = 2;
         else if (gender === "TRANSGENDER") data.params.gender = 3;
+        else  if (gender === "OTHER") data.params.gender = 4;
+        else data.params.gender = 0;
       }
 
       // 3. Date of Birth

@@ -24,17 +24,16 @@ export const UICustomizations = {
     preProcess: (data) => {
       const tenantId = Digit.ULBService.getCurrentTenantId();
       const gender = data?.state?.searchForm?.gender?.code;
-        if (gender === "MALE") {
+      if (gender === "MALE") {
         data.params.gender = 1;
       } else if (gender === "FEMALE") {
         data.params.gender = 2;
       } else if (gender === "TRANSGENDER") {
         data.params.gender = 3;
-      }else if(gender === "OTHER")
-      {  data.params.gender = 4;
-
-      }else{
-         data.params.gender = 0;
+      } else if (gender === "OTHER") {
+        data.params.gender = 4;
+      } else {
+        data.params.gender = 0;
       }
       const fromDate = data?.state?.searchForm?.fromDate;
       if (fromDate) {
@@ -104,7 +103,6 @@ export const UICustomizations = {
     preProcess: (data) => {
       // console.log("BIRTH: UICustomization preProcess START - received data:", JSON.stringify(data, null, 2));
 
-
       const formValues = data.state.searchForm || {};
       // console.log("BIRTH: Form Values (data.state.searchForm):", JSON.stringify(formValues, null, 2));
 
@@ -124,6 +122,8 @@ export const UICustomizations = {
         if (gender === "MALE") data.params.gender = 1;
         else if (gender === "FEMALE") data.params.gender = 2;
         else if (gender === "TRANSGENDER") data.params.gender = 3;
+        else if (gender === "OTHER") data.params.gender = 4;
+        else data.params.gender = 0;
       }
 
       // 3. Date of Birth
