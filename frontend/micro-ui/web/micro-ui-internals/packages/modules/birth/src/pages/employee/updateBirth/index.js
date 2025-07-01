@@ -92,7 +92,7 @@ const UpdateBirth = () => {
     useEffect(() => {
         if (editData && hospitalListData?.hospitalListOptions) {
             const transformedApiData = transformApiDataToForm(editData, hospitalListData.hospitalListOptions);
-            console.log("Transformed API Data for Initial Values:", transformedApiData);
+            // console.log("Transformed API Data for Initial Values:", transformedApiData);
             setInitialValues(transformedApiData);
 
             const initialSameAddress = !!transformedApiData.same_as_permanent_address;
@@ -382,17 +382,17 @@ const UpdateBirth = () => {
 
     // Handle form submit
     const onSubmit = async (formData) => {
-        console.log("Form Data before update transformation:", formData);
+        // console.log("Form Data before update transformation:", formData);
         const payload = {
             birthCerts: [transformFormDataForUpdate(formData)],
         };
-        console.log("Submitting Update Payload:", JSON.stringify(payload, null, 2));
+        // console.log("Submitting Update Payload:", JSON.stringify(payload, null, 2));
 
         await mutation.mutate(
             { body: payload },
             {
                 onSuccess: (response) => {
-                    console.log("API Update Response:", response);
+                    // console.log("API Update Response:", response);
                     if (response?.statsMap?.["Sucessful Records"] > 0) {
                         setShowToast({ key: "success", label: "Birth Certificate Updated Successfully" });
                         setTimeout(() => history.push(`/${window.contextPath}/employee/birth/searchbirth`), 1000);

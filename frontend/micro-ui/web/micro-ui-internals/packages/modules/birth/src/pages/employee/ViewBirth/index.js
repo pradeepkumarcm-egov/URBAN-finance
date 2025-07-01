@@ -49,11 +49,11 @@ const ViewBirth = () => {
 
   const { initiateDownload: initiateFreeDownload } = usePdfDownloader(id);
   const useBirthDownload = Digit.ComponentRegistryService.getComponent("useBirthDownload");
-  console.log(useBirthDownload);
+//  console.log(useBirthDownload); 
   const { downloadApi } = useBirthDownload();
   const handlePayAndDownload = () => {
     const api = downloadApi(tenantId, id);
-    console.log(api, "*****");
+    // console.log(api, "*****");
     const businessService = "BIRTH_CERT.BIRTH_CERT";
     history.push(`/digit-ui/employee/payment/collect/${businessService}/${id}/tenantId=${tenantId}?workflow=birth`);
   };
@@ -65,8 +65,8 @@ const ViewBirth = () => {
   const handleEditClick = () => {
     if (data?.BirthCertificate?.length > 0) {
       const certToEdit = { ...data.BirthCertificate[0] };
-      console.log("certToEdit", certToEdit);
-      console.log("id****", id);
+      // console.log("certToEdit", certToEdit);
+      // console.log("id****", id);
       history.push(`/${window.contextPath}/employee/birth/update-birth?action=EDIT&certificateId=${id}&module=birth`, {
         editdata: certToEdit,
         certificateId: id,

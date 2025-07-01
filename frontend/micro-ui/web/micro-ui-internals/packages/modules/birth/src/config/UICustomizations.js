@@ -41,7 +41,7 @@ export const UICustomizations = {
       }
       data.params.tenantId = tenantId;
 
-      console.log(data, "data in preProcess of search Birth Ui config");
+      // console.log(data, "data in preProcess of search Birth Ui config");
       if (data?.params?.fromDate || data?.params?.toDate) {
         const createdFrom = data.params?.fromDate;
         const createdTo = data.params?.toDate;
@@ -51,15 +51,15 @@ export const UICustomizations = {
       return data;
     },
     additionalCustomizations: (row, key, column, value, t, searchResult) => {
-      console.log("key", key);
+      // console.log("key", key);
       const tenantId = Digit.ULBService.getCurrentTenantId();
       const ViewBirthLinkButton = Digit.ComponentRegistryService.getComponent("ViewBirthLinkButton");
       console.log(ViewBirthLinkButton, "*******");
 
-      console.log("value", value);
-      console.log("column", column);
-      console.log("t", t);
-      console.log("searchResult", searchResult);
+      // console.log("value", value);
+      // console.log("column", column);
+      // console.log("t", t);
+      // console.log("searchResult", searchResult);
 
       switch (key) {
         case "view":
