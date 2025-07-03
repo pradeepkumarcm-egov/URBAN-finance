@@ -64,7 +64,7 @@
     <meta name="author" content="eGovernments Foundation"/>
     <title>eGov Urban Portal Login</title>
     <link rel="icon" href="<cdn:url value='/resources/global/images/favicon.png' context='/services/egi'/>" sizes="32x32">
-    <link rel="stylesheet" href="<cdn:url value='/resources/global/css/bootstrap/bootstrap.css' context='/services/egi'/>">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'>
     <link rel="stylesheet" href="<cdn:url value='/resources/global/css/font-icons/font-awesome/css/font-awesome.min.css' context='/services/egi'/>">
     <link rel="stylesheet" href="<cdn:url value='/resources/global/css/egov/custom.css?rnd=${app_release_no}' context='/services/egi'/>">
     <script src="<cdn:url value='/resources/global/js/jquery/jquery.js' context='/services/egi'/>" type="text/javascript"></script>
@@ -79,16 +79,16 @@
 <div class="page-container">
     <header class="navbar navbar-fixed-top">
         <!-- set fixed position by adding class "navbar-fixed-top" -->
-        <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom fixed-top">
             <div class="container-fluid">
-                <div class="navbar-header col-md-10 col-xs-10">
+                <div class="navbar-header col-md-10 col-10">
                     <a class="navbar-brand" href="javascript:void(0);"> <img src="/egi/downloadfile/logo" height="60">
                         <div>
                             <span class="title2">${sessionScope.citymunicipalityname}</span>
                         </div>
                     </a>
                 </div>
-                <div class="nav-right-menu col-md-2 col-xs-2">
+                <div class="nav-right-menu col-md-2 col-2">
                     <ul class="hr-menu text-right">
                         <li class="ico-menu">
                             <a href="http://www.egovernments.org" data-strwindname="egovsite" class="open-popup">
@@ -402,7 +402,7 @@
     </script>
 </c:if>
 
-<script src="<cdn:url value='/resources/global/js/bootstrap/bootstrap.js'/>" type="text/javascript"></script>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
 <script src="<cdn:url value='/resources/global/js/egov/custom.js?rnd=${app_release_no}'/>"
         type="text/javascript"></script>
 <script src="<cdn:url value='/resources/global/js/jquery/plugins/jquery.validate.min.js'/>"></script>
