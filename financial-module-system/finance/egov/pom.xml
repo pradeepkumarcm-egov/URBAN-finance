@@ -252,6 +252,7 @@
     <modules>
         <module>egov-config</module>
         <module>egov-database</module>
+        <module>egov-webresources</module>
         <module>egov-egi</module>
         <module>egov-commons</module>
         <module>egov-eis</module>
