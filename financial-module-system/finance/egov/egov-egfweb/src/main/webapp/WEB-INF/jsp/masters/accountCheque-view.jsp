@@ -61,7 +61,7 @@
 <script type="text/javascript"
 	src="/services/EGF/resources/javascript/dateValidation.js?rnd=${app_release_no}"></script>
 <script type="text/javascript"
-	src="/services/EGF/resources/javascript/jquery.min.js"></script>
+ src="<cdn:url value='/resources/global/js/jquery/jquery.js' context='/services/egi'/>"></script>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1252">
 
