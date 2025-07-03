@@ -115,7 +115,7 @@
 	<link href="<cdn:url value='/resources/global/css/bootstrap/bootstrap-datepicker.css' context='/services/egi'/>"
 	rel="stylesheet" type="text/css" />
 		
-	<script type="text/javascript" src="<cdn:url value='/resources/global/js/jquery/jquery.js' context='/services/egi'/>"> </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
 	<script src="<cdn:url value='/resources/global/js/bootstrap/bootstrap.js' context='/services/egi'/>"></script>
 	
 <script	src="<cdn:url value='/resources/global/js/bootstrap/bootstrap-datepicker.js' context='/services/egi'/>"

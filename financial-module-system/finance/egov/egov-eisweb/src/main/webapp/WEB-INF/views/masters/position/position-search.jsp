@@ -66,7 +66,7 @@
     <link rel="stylesheet"
           href="<cdn:url value='/resources/global/css/egov/custom.css?rnd=${app_release_no}' context='/services/egi'/>">
 
-    <script src="<cdn:url value='/resources/global/js/jquery/jquery.js' context='/services/egi'/>"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="<cdn:url value='/resources/global/js/bootstrap/bootstrap.js' context='/services/egi'/>"></script>
 
 
