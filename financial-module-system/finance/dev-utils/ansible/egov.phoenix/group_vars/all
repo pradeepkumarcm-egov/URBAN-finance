@@ -9,12 +9,12 @@ maven_version: 3.3.9
 maven_home_parent_directory: "{{ANSIBLE_WORKSPACE}}"
 
 # Java Vesion details
-java_version: 8
+java_version: 17
 java_subversion: 131
 java_install_dir: "{{ANSIBLE_WORKSPACE}}"
-java_home: "{{java_install_dir}}/jdk1.{{java_version}}.0_{{java_subversion}}"
+java_home: "{{java_install_dir}}/jdk-{{java_version}}"
 java_download_url: 'https://devops.egovernments.org/downloads/jdk'
-java_archive: 'jdk-{{java_version}}u{{java_subversion}}-linux-x64.tar.gz'
+java_archive: 'jdk-{{java_version}}-linux-x64.tar.gz'
 
 #Postgres Version details
 postgresql_version: 9.4
