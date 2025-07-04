@@ -1113,6 +1113,12 @@
         </dependency>
         <!-- SERVLET SPEC JBOSS DEPENDENCIES END -->
 
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- COMMONS START -->
         <dependency>
             <groupId>commons-beanutils</groupId>
