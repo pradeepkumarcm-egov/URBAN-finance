@@ -1,4 +1,4 @@
-FROM egovio/alpine-maven-builder-jdk-8:gcp AS build
+FROM egovio/alpine-maven-builder-jdk-17 AS build
 ARG WORK_DIR
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN cd ${WORK_DIR} \
 #RUN chmod +x ./${WORK_DIR}/entrypoint.sh && ./${WORK_DIR}/entrypoint.sh
 
 # Create runtime image
-FROM egovio/wildfly:vNA-9371e7becf-6
+FROM egovio/wildfly:jdk17
 
 COPY --from=build /app/egov/egov-ear/target/*.ear /opt/jboss/wildfly/standalone/deployments/
 USER jboss
