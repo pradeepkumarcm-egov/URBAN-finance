@@ -238,7 +238,7 @@ __Note__: Please check in [eGov Tools Repository] for any of the above software 
 
 * Install Intellij
 * Open project
-* In project settings set JDK to 1.8
+* In project settings set JDK to 17
 * Add a run configuration for JBoss and point the JBOSS home to the wildfly unzipped folder
 * Add lombok plugin in Intellij (marketplace -> plugin -> lombok -> install -> restart ide).
 * Run
